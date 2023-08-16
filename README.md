@@ -10,3 +10,5 @@ git push per syncare le modifiche sul repo e git pull per scaricare, prima di sy
 ciao
 
 test dimostrazione sincronizzazione
+
+ciao sono qui

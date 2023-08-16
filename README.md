@@ -8,3 +8,5 @@ non serve scrivere il nome, nella cronologia commit ci sarà l'autore del commit
 con git revert e l'id del commit il commit scelto verrà portato indietro alla revisione precedente al commit in questione.
 git push per syncare le modifiche sul repo e git pull per scaricare, prima di syncare modiche ricordare di pullare sempre
 ciao
+
+test dimostrazione sincronizzazione

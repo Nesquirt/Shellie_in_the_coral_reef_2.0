@@ -11,11 +11,14 @@ public class TurtleController : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     private Vector3 eulerRotationSpeed;
     
+    [SerializeField] private Transform cam;
+    
     // Start is called before the first frame update
     void Start()
     {
         this.rb = GetComponent<Rigidbody>();
         this.eulerRotationSpeed = new Vector3(0, this.maxRotationSpeed, 0);
+       
     }
 
 
@@ -63,7 +66,7 @@ public class TurtleController : MonoBehaviour
         //    lateralRotationSpeed = 0;
 
         //rotazione laterale
-        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, this.transform.eulerAngles.y + lateralRotationSpeed, -lateralRotationSpeed*100);
+        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, this.transform.eulerAngles.y + lateralRotationSpeed*3f, -lateralRotationSpeed*100);
 
         // -------------------------------------------------------------------- //
         //calcolo della rotazione verticale

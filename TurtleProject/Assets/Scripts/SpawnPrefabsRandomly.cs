@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SpawnPrefabsRandomly : MonoBehaviour
 {
-    public GameObject prefabToSpawn;
+    public GameObject prefabToSpawn1;
+    public GameObject prefabToSpawn2;
+    public GameObject prefabToSpawn3;
     public float spawnAreaWidth = 100f; // Larghezza dell'area in cui verranno spawnati i prefabs
     public float spawnAreaLength = 100f; // Lunghezza dell'area in cui verranno spawnati i prefabs
     public int numerodaspawnare =10;
@@ -19,7 +21,16 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         {
             Vector3 randomPosition = new Vector3( Random.Range(-spawnAreaWidth / 2, spawnAreaWidth / 2),Random.Range(80f,100f), Random.Range(-spawnAreaLength / 2, spawnAreaLength / 2 ));
 
-            Instantiate(prefabToSpawn, randomPosition, Quaternion.identity);
+            if (i<3){
+              Instantiate(prefabToSpawn1, randomPosition, Quaternion.identity);  
+            }
+            else if(i>=3&&i<6){
+                Instantiate(prefabToSpawn2, randomPosition, Quaternion.identity);
+            }
+            else{
+                Instantiate(prefabToSpawn3, randomPosition, Quaternion.identity);
+            }
+           
         }
     }
 }

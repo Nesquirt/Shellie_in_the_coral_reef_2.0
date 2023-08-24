@@ -11,8 +11,6 @@ public class TurtleController : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     private Vector3 eulerRotationSpeed;
     
-    [SerializeField] private Transform cam;
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -94,4 +92,27 @@ public class TurtleController : MonoBehaviour
         // -------------------------------------------------------------------- //
 
     }
+
+    // -------------------------------------------------------------------- //
+    //Funzione per eliminare la velocità generata da collisioni
+    public void OnCollisionExit(Collision collision)
+    {
+        Debug.Log("test");
+
+        StartCoroutine(waiter());
+
+        
+    }
+    IEnumerator waiter()
+    {
+        yield return new WaitForSeconds(1);
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        //TODO: con Vector3.zero la velocità si taglia di colpo. Vedi se riesci a trovare un modo di rallentare in maniera graduale.
+        //Intanto, per ora funziona.
+
+        //this.speed = 0;
+    }
+
+    // -------------------------------------------------------------------- //
 }

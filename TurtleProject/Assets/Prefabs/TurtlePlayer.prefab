@@ -336,7 +336,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.2, z: 0.6}
+  m_Size: {x: 0.4, y: 0.2, z: 0.5}
   m_Center: {x: 0, y: 0.05, z: 0.06}
 --- !u!54 &4293944288522900233
 Rigidbody:
@@ -371,7 +371,6 @@ MonoBehaviour:
   speed: 0
   maxRotationSpeed: 45
   rb: {fileID: 4293944288522900233}
-  cam: {fileID: 0}
 --- !u!1 &6229277400757579858
 GameObject:
   m_ObjectHideFlags: 0

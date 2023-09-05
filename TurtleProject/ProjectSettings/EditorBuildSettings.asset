@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Matteo_Terrain.unity
     guid: 786af831c8cf95a4ca8e5d578bc8eaee
+  - enabled: 1
+    path: Assets/Scenes/Simone_impostazioni.unity
+    guid: 0b621279206a83842841e6d61b178b53
   m_configObjects: {}

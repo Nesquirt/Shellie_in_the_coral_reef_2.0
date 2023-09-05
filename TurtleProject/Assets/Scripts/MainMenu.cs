@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,8 +9,6 @@ public class MainMenu : MonoBehaviour
     public Button quitButton;
     public Button aboutButton;
 
-    public GameObject optionsPanel;
-
     void Start()
     {
         // Associa le funzioni ai pulsanti
@@ -20,27 +16,18 @@ public class MainMenu : MonoBehaviour
         optionsButton.onClick.AddListener(OpenOptions);
         quitButton.onClick.AddListener(QuitGame);
         aboutButton.onClick.AddListener(OpenAbout);
-
-        // Nascondi il pannello delle opzioni all'avvio
-        optionsPanel.SetActive(false);
     }
 
     // Funzione per avviare una nuova partita
     public void StartGame()
     {
-        SceneManager.LoadScene("Matteo_Terrain"); 
+        SceneManager.LoadScene("Matteo_Terrain");
     }
 
-    // Funzione per aprire le opzioni
+    // Funzione per aprire il menu delle impostazioni (la scena SettingsMenu)
     public void OpenOptions()
     {
-        optionsPanel.SetActive(true);
-    }
-
-    // Funzione per chiudere il pannello delle opzioni
-    public void CloseOptions()
-    {
-        optionsPanel.SetActive(false);
+        SceneManager.LoadScene("Simone_impostazioni");
     }
 
     // Funzione per chiudere il gioco

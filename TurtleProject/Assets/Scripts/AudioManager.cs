@@ -32,12 +32,14 @@ public class AudioManager : MonoBehaviour
     {
         musicAudioSource.volume = volume;
         PlayerPrefs.SetFloat("MusicVolume", volume);
+        Debug.Log(volume);
     }
 
     public void SetSoundEffectsVolume(float volume)
     {
         soundEffectsAudioSource.volume = volume;
         PlayerPrefs.SetFloat("SoundEffectsVolume", volume);
+        Debug.Log("Effetti");
     }
 
     public void PlayMusic(AudioClip musicClip)

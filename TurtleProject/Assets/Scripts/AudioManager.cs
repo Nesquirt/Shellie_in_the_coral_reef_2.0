@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
@@ -57,3 +57,5 @@ public class AudioManager : MonoBehaviour
         soundEffectsAudioSource.PlayOneShot(soundEffectClip);
     }
 }
+
+// made with love from Assassin's script ♥

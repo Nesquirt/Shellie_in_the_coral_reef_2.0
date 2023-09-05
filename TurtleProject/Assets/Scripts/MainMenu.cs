@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -42,3 +42,5 @@ public class MainMenu : MonoBehaviour
         Application.OpenURL("https://coralreefrescueinitiative.org/");
     }
 }
+
+// made with love from Assassin's script ♥

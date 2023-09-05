@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -44,3 +44,5 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetFloat("SoundEffectsVolume", volume);
     }
 }
+
+// made with love from Assassin's script ♥

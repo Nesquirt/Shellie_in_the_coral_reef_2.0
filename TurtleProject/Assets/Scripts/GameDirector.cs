@@ -31,7 +31,7 @@ public class GameDirector : MonoBehaviour
 
         corals = GameObject.FindGameObjectsWithTag("Corallo");
 
-        InvokeRepeating("tick", 0, 30);
+        InvokeRepeating("tick", 0, 3);
     }
 
     public void tick()                                          //Funzione che viene chiamata una volta ogni minuto, e aggiorna i valori delle statistiche di gioco
@@ -55,10 +55,18 @@ public class GameDirector : MonoBehaviour
 
         if (pollution < 0)
             pollution = 0;
+        if (pollution > 100)
+            pollution = 100;
+
         if (biodiversity < 0)
             biodiversity = 0;
+        if (biodiversity > 100)
+            biodiversity = 100;
+
         if (oxygenLevel < 0)
             oxygenLevel = 0;
+        if (oxygenLevel > 100)
+            oxygenLevel = 100;
         // -------------------------------------------------------------------- //
         //Calcolo del cambio di vita della barriera corallina
         if (reefHealth >= 0 && reefHealth <= 100)

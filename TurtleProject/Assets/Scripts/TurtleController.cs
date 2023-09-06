@@ -85,7 +85,6 @@ public class TurtleController : MonoBehaviour
             else
                 verticalRotationSpeed += acceleration * Time.deltaTime * 0.2f;
         }
-        Debug.Log("verticalRotationSpeed: " + verticalRotationSpeed);
         //rotazione verticale
         this.transform.eulerAngles = new Vector3(-verticalRotationSpeed*100, this.transform.eulerAngles.y, this.transform.eulerAngles.z);
 
@@ -95,10 +94,10 @@ public class TurtleController : MonoBehaviour
 
     // -------------------------------------------------------------------- //
     //Funzione per rallentare in caso di collisione, principalmente per prevenire movimenti fuori controllo e passaggi attraverso il terreno
-    public void OnCollisionEnter(Collision collision)
+    public void OnCollisionStay(Collision collision)
     {
-        if(speed >= maxSpeed/5)
-            speed = maxSpeed / 5;
+        if(speed >= maxSpeed/6)
+            speed = maxSpeed/6;
     }
     //Funzione per eliminare la velocità generata da collisioni
     public void OnCollisionExit(Collision collision)

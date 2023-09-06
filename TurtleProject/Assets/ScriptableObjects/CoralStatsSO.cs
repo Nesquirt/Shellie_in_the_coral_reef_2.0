@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class CoralStats : MonoBehaviour
+[CreateAssetMenu(fileName = "New Coral", menuName = "Coral/Plant")]
+public class CoralStatsSO : ScriptableObject
 {
-    [SerializeField] private int pollutionChange, oxygenLevelChange, biodiversityChange;
+    [SerializeField] private int pollutionChange, oxygenLevelChange, biodiversityChange, cost;
+    /*
     public void Awake()
     {
         //Inizializzazione di variabili di default; vengono modificate nell'inspector
@@ -12,7 +13,7 @@ public class CoralStats : MonoBehaviour
         oxygenLevelChange = 0;
         biodiversityChange = 0;
     }
-
+    */
     public int getPollutionChange()
     {
         return pollutionChange;
@@ -26,6 +27,11 @@ public class CoralStats : MonoBehaviour
     public int getBiodiversityChange()
     {
         return biodiversityChange;
+    }
+
+    public int getCost()
+    {
+        return cost;
     }
 
 }

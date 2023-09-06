@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.504717, g: 0.8696846, b: 1, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.015
+  m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -471,7 +471,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 136056400}
-  m_LocalRotation: {x: 1e-45, y: -3.78245e-10, z: 2.220446e-16, w: 1}
+  m_LocalRotation: {x: -1e-45, y: -3.78245e-10, z: 2.220446e-16, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1411,7 +1411,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1106191074}
-  - component: {fileID: 1106191073}
+  - component: {fileID: 1106191075}
   m_Layer: 0
   m_Name: Director
   m_TagString: Untagged
@@ -1419,23 +1419,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1106191073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1106191072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5874bbe54b129d14cbb65acf062ca875, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reefHealthSlider: {fileID: 165478357}
-  pollutionSlider: {fileID: 997124888}
-  biodiversitySlider: {fileID: 816549155}
-  oxygenLevelSlider: {fileID: 1014270954}
-  currentGameState: 0
 --- !u!4 &1106191074
 Transform:
   m_ObjectHideFlags: 0
@@ -1451,6 +1434,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1106191075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106191072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7f8d70f31711e49abf56cd50693c6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reefHealthSlider: {fileID: 165478357}
+  pollutionSlider: {fileID: 997124888}
+  biodiversitySlider: {fileID: 816549155}
+  oxygenLevelSlider: {fileID: 1014270954}
+  currentGameState: 0
 --- !u!1 &1107938577
 GameObject:
   m_ObjectHideFlags: 3
@@ -1628,6 +1628,10 @@ PrefabInstance:
     - target: {fileID: 4293944288522900233, guid: d2e49869989351f429bdec8d8be2273e, type: 3}
       propertyPath: m_Interpolate
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293944288522900233, guid: d2e49869989351f429bdec8d8be2273e, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4694448735803553071, guid: d2e49869989351f429bdec8d8be2273e, type: 3}
       propertyPath: m_RootOrder
@@ -2550,7 +2554,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884043788}
-  m_LocalRotation: {x: -0.03632495, y: 0.0000000017713819, z: 6.438809e-11, w: 0.99934006}
+  m_LocalRotation: {x: -0.03632495, y: 0.0000000017713828, z: 6.438812e-11, w: 0.99934006}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

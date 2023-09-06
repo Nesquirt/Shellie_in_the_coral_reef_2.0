@@ -29,13 +29,17 @@ public class GameDirector : MonoBehaviour
         biodiversity = 24;
         oxygenLevel = 50;
 
-        tick(); //TODO: temporaneo per testing
+        corals = GameObject.FindGameObjectsWithTag("Corallo");
+
+        InvokeRepeating("tick", 0, 30);
     }
 
     public void tick()                                          //Funzione che viene chiamata una volta ogni minuto, e aggiorna i valori delle statistiche di gioco
     {
+        
         //Controlla tutti gli oggetti con tag "Corallo", e li mette nell'array
-        Array.Clear(corals, 0, corals.Length);
+        if(corals.Length != 0)
+            Array.Clear(corals, 0, corals.Length);
         corals = GameObject.FindGameObjectsWithTag("Corallo");
         // -------------------------------------------------------------------- //
         //Calcolo del cambio dei parametri
@@ -48,6 +52,13 @@ public class GameDirector : MonoBehaviour
 
         oxygenLevel += CalculateOxygenLevelChange();           //Calcolo del cambio di livello di ossigeno
         oxygenLevelSlider.value = oxygenLevel;
+
+        if (pollution < 0)
+            pollution = 0;
+        if (biodiversity < 0)
+            biodiversity = 0;
+        if (oxygenLevel < 0)
+            oxygenLevel = 0;
         // -------------------------------------------------------------------- //
         //Calcolo del cambio di vita della barriera corallina
         if (reefHealth >= 0 && reefHealth <= 100)
@@ -59,16 +70,25 @@ public class GameDirector : MonoBehaviour
             reefHealth = 100;
         else if(reefHealth<=0)
         {
+            reefHealth = 0;
             //TODO: gameOver
         }
 
         reefHealthSlider.value = reefHealth;
         // -------------------------------------------------------------------- //
+
+        /*
+        Debug.Log("Tick");
+        Debug.Log("Biodiversity: " + biodiversity);
+        Debug.Log("Pollution: " + pollution);
+        Debug.Log("Oxygen Level: " + oxygenLevel);
+        Debug.Log("Total Reef Health: " + reefHealth);
+        */
     }
 
     public int CalculatePollutionChange()
     {
-        int totalChange = -5;   //valore di default se non ci sono coralli
+        int totalChange = +5;   //valore di default se non ci sono coralli
         foreach (GameObject coral in corals)
         {
             totalChange += coral.GetComponent<CoralStats>().getPollutionChange();

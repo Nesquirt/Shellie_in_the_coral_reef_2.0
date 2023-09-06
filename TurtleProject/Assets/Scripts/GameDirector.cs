@@ -91,7 +91,7 @@ public class GameDirector : MonoBehaviour
         int totalChange = +5;   //valore di default se non ci sono coralli
         foreach (GameObject coral in corals)
         {
-            totalChange += coral.GetComponent<CoralStats>().getPollutionChange();
+            //totalChange += coral.GetComponent<CoralStats>().getPollutionChange();
         }
         return totalChange;
     }
@@ -101,7 +101,7 @@ public class GameDirector : MonoBehaviour
         int totalChange = -3;   //valore di default se non ci sono coralli
         foreach (GameObject coral in corals)
         {
-            totalChange += coral.GetComponent<CoralStats>().getBiodiversityChange();
+            //totalChange += coral.GetComponent<CoralStats>().getBiodiversityChange();
         }
         return totalChange;
     }
@@ -111,7 +111,7 @@ public class GameDirector : MonoBehaviour
         int totalChange = -4;   //valore di default se non ci sono coralli
         foreach (GameObject coral in corals)
         {
-            totalChange += coral.GetComponent<CoralStats>().getOxygenLevelChange();
+            //totalChange += coral.GetComponent<CoralStats>().getOxygenLevelChange();
         }
         return totalChange;
     }

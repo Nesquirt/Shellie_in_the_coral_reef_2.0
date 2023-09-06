@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "New Coral", menuName = "Coral/Plant")]
-public class CoralStatsSO : ScriptableObject
+
+[CreateAssetMenu(fileName = "New Coral", menuName = "Coral", order = 1)]
+public class CoralSO : ScriptableObject
 {
     [SerializeField] private int pollutionChange, oxygenLevelChange, biodiversityChange, cost;
     /*
@@ -33,5 +34,4 @@ public class CoralStatsSO : ScriptableObject
     {
         return cost;
     }
-
 }

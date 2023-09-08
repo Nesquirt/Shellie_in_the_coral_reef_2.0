@@ -302,6 +302,7 @@ GameObject:
   - component: {fileID: 5111418946360640699}
   - component: {fileID: 4293944288522900233}
   - component: {fileID: 7803231290325262265}
+  - component: {fileID: 284972076}
   m_Layer: 0
   m_Name: TurtlePlayer
   m_TagString: Player
@@ -318,7 +319,7 @@ Transform:
   m_GameObject: {fileID: 5727278125756551695}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5199677797953954116}
@@ -351,9 +352,9 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!114 &7803231290325262265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,11 +367,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf98728729ad49adaa457ddf96d8f78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 3
-  maxSpeed: 10
+  acceleration: 15
+  maxSpeed: 25
   speed: 0
-  maxRotationSpeed: 45
+  maxRotationSpeed: 90
   rb: {fileID: 4293944288522900233}
+--- !u!114 &284972076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5727278125756551695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af398fa9c27facc4c80ad7c408be1008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ringPoints: 0
+  ringText: {fileID: 0}
 --- !u!1 &6229277400757579858
 GameObject:
   m_ObjectHideFlags: 0

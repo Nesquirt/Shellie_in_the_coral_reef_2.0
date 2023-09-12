@@ -74,7 +74,7 @@ public class GameDirector : MonoBehaviour
 
         if (reefHealth >= 0 && reefHealth <= 100)
         {
-            reefHealth += ((pollution / 10) - 4) + (-Mathf.Abs(biodiversity-24)+5)+ ((oxygenLevel / 10) - 4);
+            reefHealth += ((pollution / 10) - 4) + ((biodiversity / 10) - 4)+ ((oxygenLevel / 10) - 4);
             //
         }
         else if (reefHealth >= 100)

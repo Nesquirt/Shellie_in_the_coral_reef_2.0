@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Questo è lo script associato a ogni roccia su cui potrà crescere un corallo
 public class CoralHandler : MonoBehaviour
 {
     public enum Coral
@@ -12,7 +13,7 @@ public class CoralHandler : MonoBehaviour
         ElkhornCoral
     }
     public GameObject PillarCoral;
-    private Vector3 spawnPoint1, spawnPoint2, spawnPoint3, spawnPoint4;
+    private Vector3 spawnPoint1, spawnPoint2, spawnPoint3, spawnPoint4, spawnPoint5;
     private int growthCounter;
 
     private void Start()
@@ -22,7 +23,7 @@ public class CoralHandler : MonoBehaviour
         spawnPoint2 = new Vector3(this.transform.position.x + 7.6f, this.transform.position.y + 4.3f, this.transform.position.z - 6f);
         spawnPoint3 = new Vector3(this.transform.position.x + 5f, this.transform.position.y + 2.2f, this.transform.position.z -12.3f);
         spawnPoint4 = new Vector3(this.transform.position.x -4.3f, this.transform.position.y + 5.9f, this.transform.position.z + 11.7f);
-
+        spawnPoint5 = new Vector3(this.transform.position.x -7.6f, this.transform.position.y + 4.2f, this.transform.position.z -8);
         growthCounter = 0;
     }
 
@@ -33,36 +34,50 @@ public class CoralHandler : MonoBehaviour
         switch (coralChoice)
         {
             case Coral.PillarCoral:
-                Instantiate(PillarCoral, spawnPoint1, Quaternion.identity);
-                Instantiate(PillarCoral, spawnPoint2, Quaternion.identity);
-                Instantiate(PillarCoral, spawnPoint3, Quaternion.identity);
-                Instantiate(PillarCoral, spawnPoint4, Quaternion.identity);
+                var newCoral1 = Instantiate(PillarCoral, spawnPoint1, Quaternion.identity);
+                newCoral1.transform.parent = this.transform;
+                var newCoral2 = Instantiate(PillarCoral, spawnPoint2, Quaternion.identity);
+                newCoral2.transform.parent = this.transform;
+                var newCoral3 = Instantiate(PillarCoral, spawnPoint3, Quaternion.identity);
+                newCoral3.transform.parent = this.transform;
+                var newCoral4 = Instantiate(PillarCoral, spawnPoint4, Quaternion.identity);
+                newCoral4.transform.parent = this.transform;
+                var newCoral5 = Instantiate(PillarCoral, spawnPoint5, Quaternion.identity);
+                newCoral5.transform.parent = this.transform;
                 break;
 
         }
 
         // -------------------------------------------------------------------- //
         //Coroutine per far crescere i coralli nell'arco di un minuto
-        StartCoroutine(CoralGrow());
+            StartCoroutine(CoralGrow());
 
-        if (growthCounter >= 60)
-            StopCoroutine(CoralGrow());
         // -------------------------------------------------------------------- //
     }
 
     IEnumerator CoralGrow()
     {
         GameObject[] corals = GameObject.FindGameObjectsWithTag("Coral");
-        foreach(GameObject coral in corals)
+        while(growthCounter<=600)
         {
-            Vector3 scaleChange = new Vector3(0.1f, 0.1f, 0.1f);
-            coral.transform.localScale += scaleChange;
-
+            foreach (GameObject coral in corals)
+            {
+                Vector3 scaleChange = new Vector3(0.005f, 0.005f, 0.005f);
+                coral.transform.localScale += scaleChange;
+            }
             growthCounter++;
+            yield return new WaitForSeconds(0.1f); 
         }
-        yield return new WaitForSeconds(1); //aspetta 5 secondi prima di ripartire;
+        
     }
 
-
+    public void OnTriggerEnter(Collider collider)
+    {
+        if(collider.gameObject.tag == "Player")
+        {
+            //TODO: test function temporanea, da eliminare
+            SpawnCorals(Coral.PillarCoral);
+        }
+    }
 
 }

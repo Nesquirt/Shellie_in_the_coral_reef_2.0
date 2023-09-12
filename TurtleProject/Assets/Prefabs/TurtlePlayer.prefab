@@ -302,7 +302,6 @@ GameObject:
   - component: {fileID: 5111418946360640699}
   - component: {fileID: 4293944288522900233}
   - component: {fileID: 7803231290325262265}
-  - component: {fileID: 284972076}
   m_Layer: 0
   m_Name: TurtlePlayer
   m_TagString: Player
@@ -372,20 +371,6 @@ MonoBehaviour:
   speed: 0
   maxRotationSpeed: 90
   rb: {fileID: 4293944288522900233}
---- !u!114 &284972076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5727278125756551695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af398fa9c27facc4c80ad7c408be1008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ringPoints: 0
-  ringText: {fileID: 0}
 --- !u!1 &6229277400757579858
 GameObject:
   m_ObjectHideFlags: 0

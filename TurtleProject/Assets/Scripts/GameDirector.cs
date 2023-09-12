@@ -29,18 +29,20 @@ public class GameDirector : MonoBehaviour
         biodiversity = 24;
         oxygenLevel = 50;
 
-        corals = GameObject.FindGameObjectsWithTag("Corallo");
+        corals = GameObject.FindGameObjectsWithTag("Coral");
 
         InvokeRepeating("tick", 0, 3);
     }
 
     public void tick()                                          //Funzione che viene chiamata una volta ogni minuto, e aggiorna i valori delle statistiche di gioco
     {
-        
+        // -------------------------------------------------------------------- //
         //Controlla tutti gli oggetti con tag "Corallo", e li mette nell'array
-        if(corals.Length != 0)
+
+        if (corals.Length != 0)
             Array.Clear(corals, 0, corals.Length);
-        corals = GameObject.FindGameObjectsWithTag("Corallo");
+
+        corals = GameObject.FindGameObjectsWithTag("Coral");
         // -------------------------------------------------------------------- //
         //Calcolo del cambio dei parametri
 
@@ -69,6 +71,7 @@ public class GameDirector : MonoBehaviour
             oxygenLevel = 100;
         // -------------------------------------------------------------------- //
         //Calcolo del cambio di vita della barriera corallina
+
         if (reefHealth >= 0 && reefHealth <= 100)
         {
             reefHealth += ((pollution / 10) - 4) + (-Mathf.Abs(biodiversity-24)+5)+ ((oxygenLevel / 10) - 4);
@@ -84,7 +87,6 @@ public class GameDirector : MonoBehaviour
 
         reefHealthSlider.value = reefHealth;
         // -------------------------------------------------------------------- //
-
         /*
         Debug.Log("Tick");
         Debug.Log("Biodiversity: " + biodiversity);

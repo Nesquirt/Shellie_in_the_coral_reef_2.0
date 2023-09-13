@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class SpawnPrefabsRandomly : MonoBehaviour
 { 
     
@@ -19,16 +19,20 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     public List<GameObject> spazzature = new List<GameObject>();
     public Rigidbody rb ;
     public float upwardForce;
-    
-   // public Text testo;
-    public float totalTime = 60f; // Il tempo totale del timer in secondi.
+    public int a ;
+    public TextMeshProUGUI testo;
+    public float totalTime = 60f;
+    public float totalTime2;// Il tempo totale del timer in secondi.
     private float currentTime;
+    private float currentTime2;
     
     void Start()
     { 
-       
+        a=0;
+           totalTime2=totalTime+10f;
            oggettiNelPiano = 0;
            currentTime = totalTime;
+           currentTime2=totalTime2;
           Transform tp = GetComponent<Transform>();
           originepianox=tp.position.x;
           originepianoz=tp.position.z;
@@ -38,17 +42,27 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     void Update(){
         // Debug.Log(oggettiNelPiano);
          currentTime -= Time.deltaTime;
-       // testo.text = Mathf.Round(currentTime).ToString();
+         currentTime2 -=Time.deltaTime;
+         testo.text = Mathf.Round(currentTime).ToString();
          /*if (oggettiNelPiano==numerodaspawnare||a==1){
              a=1;
             rb.AddForce(Vector3.up * upwardForce);
          }*/
-         if (currentTime <= 0)
+         if (currentTime <= 0 && a==0)
         {
             currentTime = 0;
              rb.AddForce(Vector3.up * upwardForce);
             // Esegui azioni quando il timer scade.
             // Ad esempio, puoi terminare il gioco o attivare un'altra logica.
+        }
+        if (currentTime2<=0){
+
+          foreach (GameObject spazzatura in spazzature)
+            {
+                Destroy(spazzatura);
+            }
+           a=1;
+           currentTime2=0;
         }
 
           /*  if (oggettiNelPiano==numerodaspawnare)

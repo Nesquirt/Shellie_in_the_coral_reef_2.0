@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PillarCoral: {fileID: 5496174565807994253, guid: 1bba7ce585e8d04449322bd9765b7511, type: 3}
+  canvas: {fileID: 0}
 --- !u!65 &1830775193052505734
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -58,8 +59,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 41.976135, y: 14.166524, z: 62.403442}
-  m_Center: {x: 0.16303253, y: 6.583263, z: 0.7472267}
+  m_Size: {x: 41.976135, y: 25.83, z: 62.403442}
+  m_Center: {x: 0.16303253, y: 13.3, z: 0.7472267}
 --- !u!1001 &3469543482410236807
 PrefabInstance:
   m_ObjectHideFlags: 0

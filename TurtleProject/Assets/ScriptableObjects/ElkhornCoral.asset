@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87dc7ed9285f2044ca5ede0311ff4157, type: 3}
   m_Name: ElkhornCoral
   m_EditorClassIdentifier: 
-  pollutionChange: 0
-  oxygenLevelChange: 0
-  biodiversityChange: 0
-  cost: 0
-  coralName: 
-  coralDesc: 
+  pollutionChange: -2
+  oxygenLevelChange: 3
+  biodiversityChange: 1
+  cost: 30
+  coralName: "Acropora palmata (\u201CCorallo a corno d\u2019alce\u201D)"
+  coralDesc: "Questi coralli hanno larghe strutture ramificate che gli permettono
+    di assorbire pi\xF9 luce solare, e produrre ottime quantit\xE0 di ossigeno. Sono
+    anche in grado di ospitare una buona quantit\xE0 di forme di vita, ma fanno fatica
+    a riprodursi e a crescere in acque inquinate."

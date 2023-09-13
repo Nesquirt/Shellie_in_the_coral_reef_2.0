@@ -63,8 +63,6 @@ public class TurtleController : MonoBehaviour
         //if (Mathf.Abs(lateralRotationSpeed) < 0.01)
         //    lateralRotationSpeed = 0;
 
-        
-
         // -------------------------------------------------------------------- //
         //calcolo della rotazione verticale
         verticalRotationSpeed = 0;
@@ -81,15 +79,10 @@ public class TurtleController : MonoBehaviour
             else
                 verticalRotationSpeed += acceleration * Time.deltaTime * 0.2f;
         }
-        
+
         // -------------------------------------------------------------------- //
-
-    }
-
-    public void Update()        //In questo metodo vanno le funzioni dedicate allo spostamento
-    {
         //rotazione laterale
-        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, this.transform.eulerAngles.y + lateralRotationSpeed * 0.7f, -lateralRotationSpeed * 140);
+        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, this.transform.eulerAngles.y + lateralRotationSpeed * 4f, -lateralRotationSpeed * 140);
 
         //rotazione verticale
         this.transform.eulerAngles = new Vector3(-verticalRotationSpeed * 100, this.transform.eulerAngles.y, this.transform.eulerAngles.z);
@@ -97,6 +90,11 @@ public class TurtleController : MonoBehaviour
         //movimento frontale
         if (speed > 0)
             this.rb.MovePosition(this.rb.position + this.transform.forward * (speed * Time.deltaTime));
+    }
+
+    public void Update()        //In questo metodo vanno le funzioni dedicate allo spostamento
+    {
+        
     }
 
     // -------------------------------------------------------------------- //

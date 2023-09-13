@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: SoftCoral
   m_EditorClassIdentifier: 
   pollutionChange: 0
-  oxygenLevelChange: 0
-  biodiversityChange: 0
-  cost: 0
-  coralName: 
-  coralDesc: 
+  oxygenLevelChange: 1
+  biodiversityChange: 1
+  cost: 10
+  coralName: "Alcyonacea (\u201Ccorallo mollo\u201D)"
+  coralDesc: Questi coralli spesso presentano le sembianze di piante ed alberi. Non
+    hanno uno scheletro duro, e di conseguenza sono morbidi e flessibili. I vari
+    colori aiutano ad attirare specie diverse, ma non producono molto ossigeno e
+    non sono particolarmente resistenti ad acque inquinate.

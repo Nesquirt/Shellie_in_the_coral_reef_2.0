@@ -11,19 +11,10 @@ public class GameDirector : MonoBehaviour
 
     private GameObject[] corals;
     public Slider reefHealthSlider, pollutionSlider, biodiversitySlider, oxygenLevelSlider;
-    public enum gameState
-    {
-        Intro,
-        FreeRoam,
-        ObstacleRace,
-        TrashGathering
-    }
 
-    public gameState currentGameState;
-
+    public GameObject currentCoralSpot;
     private void Awake()
     {
-        currentGameState = gameState.Intro;
         reefHealth = 50;
         pollution = 70;
         biodiversity = 24;

@@ -5,10 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Corallo
+<<<<<<< Updated upstream
   - Gabbia
   - Chiave
   - Coral
   - CoralSpot
+=======
+  - spazzatura
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX

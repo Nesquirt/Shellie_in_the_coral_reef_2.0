@@ -17,14 +17,14 @@ public class CagesHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //se tartaruga è vicino alla chiave
+        //quando tartaruga è vicino alla chiave
         if(nearKey == true)
         {
             //Debug.Log("vicino chiave");
-
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && hasKey == false)
             {
                 Debug.Log("chiave presa");
+
                 this.hasKey = true;
             }
 
@@ -38,6 +38,7 @@ public class CagesHandler : MonoBehaviour
                 if(Input.GetKeyDown(KeyCode.E))
                 {
                     Debug.Log("libera pesce");
+                    this.hasKey = false;
                 }
             }
             else

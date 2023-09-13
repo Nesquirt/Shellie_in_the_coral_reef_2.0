@@ -5,29 +5,29 @@ using UnityEngine.UIElements;
 
 public class SpawnKey : MonoBehaviour
 {
-    [SerializeField] private GameObject gabbia;
-    [SerializeField] private GameObject chiave;
-    //[SerializeField] private GameObject turtle;
-    public int numGabbie;
-    //public int 
+    [SerializeField] private GameObject cage;
+    [SerializeField] private GameObject key;
+    [SerializeField] private Transform cages;
+    [SerializeField] private Transform keys;
+    private int numGabbie = 4;
 
     // Start is called before the first frame update
     void Start()
     {
         Transform transform = GetComponent<Transform>();
-        //float size = transform.position.x - transform.localScale.x/2;
-        //Debug.Log("x: " + transform.localPosition.x );
-        //Debug.Log("y: " + transform.localScale.y);
 
         for(int i=0; i<numGabbie; i++)
         {
             Vector3 v = new Vector3( Random.Range(transform.position.x - 50, transform.position.x + 50), transform.position.y + 1.2f, Random.Range(transform.position.z - 50, transform.position.z + 50));
-            //Debug.Log(v);
-            Instantiate(gabbia, v, Quaternion.identity);
+            var newCage = Instantiate(cage, v, Quaternion.identity);
+            newCage.transform.SetParent(cages);
+
+            Vector3 v1 = new Vector3(Random.Range(transform.position.x - 50, transform.position.x + 50), transform.position.y + 1.2f, Random.Range(transform.position.z - 50, transform.position.z + 50));
+            var newKey = Instantiate(key, v1, Quaternion.identity);
+            newKey.transform.SetParent(keys);
+
         }
 
-        //Vector3 v = new Vector3(Random.Range(transform.position.x - 50, transform.position.x + 50), transform.position.y + 1.2f, Random.Range(transform.position.z - 50, transform.position.z + 50));
-        //Instantiate(gabbia, v, Quaternion.identity);
     }
 
     // Update is called once per frame

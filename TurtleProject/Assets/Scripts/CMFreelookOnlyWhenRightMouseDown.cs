@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class CMFreelookOnlyWhenRightMouseDown : MonoBehaviour
 {
-    [SerializeField] private CinemachineFreeLook cm;
+    private CinemachineFreeLook cm;
     void Start()
     {
         CinemachineCore.GetInputAxis = GetAxisCustom;

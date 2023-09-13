@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.038935136, g: 0.12987123, b: 0.17838746, a: 1}
+  m_IndirectSpecularColor: {r: 0.008730666, g: 0.029125668, b: 0.040002875, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -270,7 +270,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288273299}
-  m_LocalRotation: {x: 1.009742e-28, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -2.524355e-29, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -290,6 +290,7 @@ GameObject:
   - component: {fileID: 291041285}
   - component: {fileID: 291041284}
   - component: {fileID: 291041283}
+  - component: {fileID: 291041286}
   m_Layer: 0
   m_Name: CameraBrain
   m_TagString: Untagged
@@ -343,7 +344,7 @@ MonoBehaviour:
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
     m_InputAxisValue: 0
-    m_InvertInput: 0
+    m_InvertInput: 1
     m_MinValue: 0
     m_MaxValue: 1
     m_Wrap: 0
@@ -354,7 +355,7 @@ MonoBehaviour:
       m_LegacyHeadingDefinition: -1
       m_LegacyVelocityFilterStrength: -1
   m_YAxisRecentering:
-    m_enabled: 0
+    m_enabled: 1
     m_WaitTime: 1
     m_RecenteringTime: 2
     m_LegacyHeadingDefinition: -1
@@ -367,7 +368,7 @@ MonoBehaviour:
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
-    m_InvertInput: 1
+    m_InvertInput: 0
     m_MinValue: -180
     m_MaxValue: 180
     m_Wrap: 1
@@ -427,6 +428,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &291041286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291041282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582a58a63c1478b44a69403d8ea447ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &389171372
 GameObject:
   m_ObjectHideFlags: 3
@@ -496,7 +509,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389171372}
-  m_LocalRotation: {x: -0.018189488, y: -0.000000001075221, z: -1.9560954e-11, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189488, y: -0.00000001720354, z: -3.129753e-10, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1119,7 +1132,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871624303}
-  m_LocalRotation: {x: -0.018189494, y: -0.0000000021504423, z: -3.9121924e-11, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189494, y: -0.000000034407073, z: -6.2595074e-10, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 8.9, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2068,7 +2081,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906760335}
-  m_LocalRotation: {x: -0.036324956, y: 0.000000002149378, z: 7.812763e-11, w: 0.99934006}
+  m_LocalRotation: {x: -0.03632495, y: -0.0000000021392372, z: -7.7759015e-11, w: 0.99934006}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

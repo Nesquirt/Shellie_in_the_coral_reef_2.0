@@ -29,7 +29,7 @@ public class GameDirector : MonoBehaviour
         biodiversity = 24;
         oxygenLevel = 50;
 
-        corals = GameObject.FindGameObjectsWithTag("Coral");
+        corals = GameObject.FindGameObjectsWithTag("CoralSpot");
 
         InvokeRepeating("tick", 0, 3);
     }
@@ -42,7 +42,7 @@ public class GameDirector : MonoBehaviour
         if (corals.Length != 0)
             Array.Clear(corals, 0, corals.Length);
 
-        corals = GameObject.FindGameObjectsWithTag("Coral");
+        corals = GameObject.FindGameObjectsWithTag("CoralSpot");
         // -------------------------------------------------------------------- //
         //Calcolo del cambio dei parametri
 

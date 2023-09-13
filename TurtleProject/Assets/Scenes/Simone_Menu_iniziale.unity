@@ -1148,7 +1148,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 16.00708
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -1242,6 +1242,7 @@ MonoBehaviour:
   EFX_VOLUME: 1
   MUSIC_MIXER: {fileID: 24300002, guid: 6abac69ff87a55a41b1e9e2ba11a384e, type: 2}
   EFX_MIXER: {fileID: 24300002, guid: 11f455faf4d8bcb44b62d72c1ff396f7, type: 2}
+  slider: {fileID: 0}
 --- !u!4 &1026425383
 Transform:
   m_ObjectHideFlags: 0

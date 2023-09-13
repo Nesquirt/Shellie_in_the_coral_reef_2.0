@@ -5,16 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Coral", menuName = "Coral", order = 1)]
 public class CoralSO : ScriptableObject
 {
-    [SerializeField] private int pollutionChange, oxygenLevelChange, biodiversityChange, cost;
-    /*
-    public void Awake()
-    {
-        //Inizializzazione di variabili di default; vengono modificate nell'inspector
-        pollutionChange = 0;
-        oxygenLevelChange = 0;
-        biodiversityChange = 0;
-    }
-    */
+    public int pollutionChange, oxygenLevelChange, biodiversityChange, cost;
+    public string coralName, coralDesc;
+
     public int getPollutionChange()
     {
         return pollutionChange;

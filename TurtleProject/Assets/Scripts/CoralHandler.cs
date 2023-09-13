@@ -16,6 +16,8 @@ public class CoralHandler : MonoBehaviour
     private Vector3 spawnPoint1, spawnPoint2, spawnPoint3, spawnPoint4, spawnPoint5;
     private int growthCounter;
 
+    [SerializeField] private Canvas canvas;
+
     private void Start()
     {   
         //Creo i vettori con le posizioni in cui deve instanziare i nuovi coralli relativi alla roccia
@@ -75,8 +77,32 @@ public class CoralHandler : MonoBehaviour
     {
         if(collider.gameObject.tag == "Player")
         {
+            //Attiva il prompt "Premi E per piantare un corallo"
+            canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(true);
+
             //TODO: test function temporanea, da eliminare
-            SpawnCorals(Coral.PillarCoral);
+            //SpawnCorals(Coral.PillarCoral);
+        }
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if(Input.GetKey(KeyCode.E))
+        {
+            canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(true);
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        //Uscito dalla zona del CoralSpot, chiude gli elementi dell'UI
+        if(canvas.transform.Find("CoralSpotPrompt").gameObject.activeSelf)
+        {
+            canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(false);
+        }
+        if(canvas.transform.Find("CoralChoicePanel").gameObject.activeSelf)
+        {
+            canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(false);
         }
     }
 

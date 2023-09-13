@@ -6,11 +6,11 @@ public class TurtleController : MonoBehaviour
 {
     [SerializeField] private float acceleration = 3;
     [SerializeField] private float maxSpeed = 10;
-    [SerializeField] private float speed; //Serializzato per testing, DO NOT TOUCH IN EDITOR
     [SerializeField] private float maxRotationSpeed = 90;
     [SerializeField] private Rigidbody rb;
-    private float verticalRotationSpeed, lateralRotationSpeed;
+    private float speed, verticalRotationSpeed, lateralRotationSpeed;
     private Vector3 eulerRotationSpeed;
+    private float h, v, j;
     
     // Start is called before the first frame update
     void Start()
@@ -21,11 +21,11 @@ public class TurtleController : MonoBehaviour
     }
 
 
-    private void FixedUpdate()
+    private void FixedUpdate()      //In questa funzione vanno i calcoli delle velocità, che verranno passati ad Update
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        float j = Input.GetAxis("Jump");
+        h = Input.GetAxis("Horizontal");
+        v = Input.GetAxis("Vertical");
+        j = Input.GetAxis("Jump");
 
         // -------------------------------------------------------------------- //
         //calcolo della velocità frontale
@@ -38,11 +38,7 @@ public class TurtleController : MonoBehaviour
         if (speed > maxSpeed)
             speed = maxSpeed;
 
-        //movimento frontale
-        if(speed>0)
-        {
-            this.rb.MovePosition(this.rb.position + this.transform.forward * (speed*Time.deltaTime));
-        }
+        
 
         //rallentamento se non è premuta W
         
@@ -52,7 +48,8 @@ public class TurtleController : MonoBehaviour
         lateralRotationSpeed = 0;
         if(Mathf.Abs(lateralRotationSpeed) <= maxRotationSpeed && h != 0)
         {
-            lateralRotationSpeed += acceleration * h * Time.deltaTime * 1.4f; //TODO: forse è meglio mettere un'accelerazione di rotazione separata
+            lateralRotationSpeed += acceleration * h * Time.deltaTime; 
+            //TODO: forse è meglio mettere un'accelerazione di rotazione separata
         }
 
         //Se non sono premuti tasti laterali, la rotazione rallenta fino a tornare dritti
@@ -66,8 +63,7 @@ public class TurtleController : MonoBehaviour
         //if (Mathf.Abs(lateralRotationSpeed) < 0.01)
         //    lateralRotationSpeed = 0;
 
-        //rotazione laterale
-        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, this.transform.eulerAngles.y + lateralRotationSpeed*3f, -lateralRotationSpeed*100);
+        
 
         // -------------------------------------------------------------------- //
         //calcolo della rotazione verticale
@@ -85,11 +81,22 @@ public class TurtleController : MonoBehaviour
             else
                 verticalRotationSpeed += acceleration * Time.deltaTime * 0.2f;
         }
-        //rotazione verticale
-        this.transform.eulerAngles = new Vector3(-verticalRotationSpeed*100, this.transform.eulerAngles.y, this.transform.eulerAngles.z);
-
+        
         // -------------------------------------------------------------------- //
 
+    }
+
+    public void Update()        //In questo metodo vanno le funzioni dedicate allo spostamento
+    {
+        //rotazione laterale
+        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, this.transform.eulerAngles.y + lateralRotationSpeed * 0.7f, -lateralRotationSpeed * 140);
+
+        //rotazione verticale
+        this.transform.eulerAngles = new Vector3(-verticalRotationSpeed * 100, this.transform.eulerAngles.y, this.transform.eulerAngles.z);
+
+        //movimento frontale
+        if (speed > 0)
+            this.rb.MovePosition(this.rb.position + this.transform.forward * (speed * Time.deltaTime));
     }
 
     // -------------------------------------------------------------------- //
@@ -99,14 +106,14 @@ public class TurtleController : MonoBehaviour
         if(speed >= maxSpeed/6)
             speed = maxSpeed/6;
     }
+
     //Funzione per eliminare la velocità generata da collisioni
     public void OnCollisionExit(Collision collision)
     {
-        StartCoroutine(waiter()); //Questa coroutine aspetta un secondo dopo che si esce da una collisione, e poi resetta le velocità causate dalla spinta
+        StartCoroutine(stopForces()); //Questa coroutine aspetta un secondo dopo che si esce da una collisione, e poi resetta le velocità causate dalla spinta
 
-        
     }
-    IEnumerator waiter()
+    IEnumerator stopForces()
     {
         yield return new WaitForSeconds(1);
         rb.velocity = Vector3.zero;

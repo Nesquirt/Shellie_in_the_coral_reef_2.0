@@ -5,9 +5,11 @@ using Cinemachine;
 
 public class CMFreelookOnlyWhenRightMouseDown : MonoBehaviour
 {
+    [SerializeField] private CinemachineFreeLook cm;
     void Start()
     {
         CinemachineCore.GetInputAxis = GetAxisCustom;
+        cm = GetComponent<CinemachineFreeLook>();
     }
     public float GetAxisCustom(string axisName)
     {
@@ -19,6 +21,10 @@ public class CMFreelookOnlyWhenRightMouseDown : MonoBehaviour
                     Cursor.visible = false;
                 if (Cursor.lockState == CursorLockMode.None)
                     Cursor.lockState = CursorLockMode.Locked;
+
+                //Disabilita il ricentramento automatico della telecamera finché tieni premuto tasto destro
+                cm.m_RecenterToTargetHeading.m_enabled = false;
+                cm.m_YAxisRecentering.m_enabled = false;
                 return UnityEngine.Input.GetAxis("Mouse X");
             }
             else
@@ -27,6 +33,9 @@ public class CMFreelookOnlyWhenRightMouseDown : MonoBehaviour
                     Cursor.visible = true;
                 if (Cursor.lockState == CursorLockMode.Locked)
                     Cursor.lockState = CursorLockMode.None;
+
+                cm.m_RecenterToTargetHeading.m_enabled = true;
+                cm.m_YAxisRecentering.m_enabled = true;
                 return 0;
             }
         }

@@ -15,4 +15,8 @@ MonoBehaviour:
   pollutionChange: -1
   oxygenLevelChange: 3
   biodiversityChange: 3
-  cost: 100
+  cost: 25
+  coralName: Dendrogyra (corallo a pilastro)
+  coralDesc: "I coralli a pilastro formano alte strutture cilindriche che offrono
+    un habitat ideale per varie specie marine. Sono eccellenti per produrre ossigeno,
+    e sono moderatamente resistenti all\u2019inquinamento."

@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 1075526046954516646}
   - component: {fileID: 1075526046954516647}
   - component: {fileID: 1075526046954516648}
+  - component: {fileID: -470808703640397506}
   m_Layer: 0
   m_Name: 'Gabbia '
   m_TagString: Gabbia
@@ -195,3 +196,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.7310236, y: 1.6204249, z: 2.7923448}
   m_Center: {x: 0.038778257, y: 0.31021264, z: -0.09990572}
+--- !u!114 &-470808703640397506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075526046954516649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d563d62abca192d4fb335d65f3e72484, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

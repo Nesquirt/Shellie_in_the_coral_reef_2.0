@@ -14,9 +14,11 @@ public class OpenCagesHandler : MonoBehaviour
     private bool nearCage = false;
 
     private bool gameOver = false;
+    private bool currentClosed;
 
     private Collider currentKey;
-    private GameObject currentCage;
+    //public GameObject currentCage;
+    public Collider currentCage;
 
     private int countKey;
     private int openCages;
@@ -25,6 +27,7 @@ public class OpenCagesHandler : MonoBehaviour
     {
         this.currentKey = null;
         this.currentCage = null;
+        this.currentClosed = true;
 
         //prendo valore variabile tot da script SpawnCages
         this.leggi = piano.GetComponent<SpawnCages>();
@@ -39,7 +42,7 @@ public class OpenCagesHandler : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(IsGameOver())
         {
@@ -76,16 +79,20 @@ public class OpenCagesHandler : MonoBehaviour
         }
 
         //quando tartaruga è vicino alla gabbia
-        if(nearCage == true)
+        if (nearCage == true)
         {
-
-            if (Input.GetKeyDown(KeyCode.E))   //AGGIUNGERE controllo: SOLO se la gabbia è ancora chiusa
+            if (Input.GetKeyDown(KeyCode.E))   
             {
-                if (this.hasKey == true)
+                //Debug.Log(currentClosed);
+                //this.currentClosed = this.currentCage.GetComponent<Cage>().closed;
+
+                if (this.hasKey == true /*&& this.currentCage.GetComponent<Cage>().closed == true*/)
                 {
                     //Destroy(currentCage);
                     //oppure
-
+                    //                    
+                    //this.currentClosed = false;
+                    this.currentCage.GetComponent<Cage>().closed = false;
                     Debug.Log("libera granchio");
                     //ANIMAZIONE apertura gabbia
                     this.openCages++;
@@ -94,7 +101,7 @@ public class OpenCagesHandler : MonoBehaviour
                 }
                 else
                     Debug.Log("non hai la chiave");
-  
+
             }
 
         }
@@ -112,7 +119,12 @@ public class OpenCagesHandler : MonoBehaviour
         if(other.gameObject.tag == "Gabbia")
         {
             this.nearCage = true;
-            this.currentCage = other.GetComponent<GameObject>();
+            //this.currentCage = other.GetComponent<GameObject>();
+            if (currentCage != other)
+            {
+                this.currentCage = other;
+            }
+            //this.currentClosed = currentCage.GetComponent<Cage>().closed;
 
         }
     }

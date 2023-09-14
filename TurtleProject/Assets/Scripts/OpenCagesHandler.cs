@@ -3,35 +3,55 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-public class CagesHandler : MonoBehaviour
+public class OpenCagesHandler : MonoBehaviour
 {
+    [SerializeField] private GameObject piano;
+
+    private SpawnCages leggi;
+
     private bool hasKey = false;
     private bool nearKey = false;
     private bool nearCage = false;
 
-    [SerializeField] private Collider currentKey = null;
-    [SerializeField] private GameObject currentCage = null;
+    private bool gameOver = false;
+
+    private Collider currentKey;
+    private GameObject currentCage;
 
     private int countKey;
-
+    private int openCages;
 
     void Awake()
     {
-        this.countKey = SpawnCages.totCages;
+        this.currentKey = null;
+        this.currentCage = null;
+
+        //prendo valore variabile tot da script SpawnCages
+        this.leggi = piano.GetComponent<SpawnCages>();
+        this.countKey = leggi.tot;   
+        
+        this.openCages = 0;
+
         Debug.Log("CHIAVI: " + countKey);
 
         /*GameObject[] keys = GameObject.FindGameObjectsWithTag("Chiave");
-        this.countKey = keys.Length;           --> mi da 0, poco dopo mi da 4 */
+        this.countKey = keys.Length;                   --> mi da 0, poco dopo mi da 4 */
 
     }
 
     void Update()
     {
+        if(IsGameOver())
+        {
+            //finisce il minigioco
+            //tutte le gabbie risalgono
+        }
 
         //quando tartaruga è vicino alla chiave
         if (nearKey == true)
         {
             //Debug.Log("vicino chiave");
+
             if (Input.GetKeyDown(KeyCode.E))
             {
                  if (hasKey == false)
@@ -41,6 +61,11 @@ public class CagesHandler : MonoBehaviour
                     this.hasKey = true;
                     this.countKey--;
                     Debug.Log("CHIAVI: " + countKey);
+                    if(countKey == 0)
+                    {
+                        //togli immagine chiave da UI
+                    }
+
                 }
                  else
                 {
@@ -48,23 +73,28 @@ public class CagesHandler : MonoBehaviour
                 }
                 
             }
-
         }
 
         //quando tartaruga è vicino alla gabbia
         if(nearCage == true)
         {
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E))   //AGGIUNGERE controllo: SOLO se la gabbia è ancora chiusa
             {
                 if (this.hasKey == true)
                 {
-                    Debug.Log("libera pesce");
+                    //Destroy(currentCage);
+                    //oppure
+
+                    Debug.Log("libera granchio");
+                    //ANIMAZIONE apertura gabbia
+                    this.openCages++;
+                    Debug.Log("GABBIE: " + openCages);
                     this.hasKey = false;
                 }
                 else
                     Debug.Log("non hai la chiave");
-
+  
             }
 
         }
@@ -98,6 +128,24 @@ public class CagesHandler : MonoBehaviour
         {
             this.nearCage = false;
         }
+    }
+
+    private bool IsGameOver()
+    {
+       if(this.openCages == this.countKey)
+        {
+            return true;
+        }
+      /* else if           //se finisce il timer
+          {
+
+          } */
+       else
+        { 
+            return false; 
+        }
+       
+
     }
 
 }

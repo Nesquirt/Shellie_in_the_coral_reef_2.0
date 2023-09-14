@@ -10,7 +10,7 @@ public class SpawnCages : MonoBehaviour
     [SerializeField] private Transform cages;
     [SerializeField] private Transform keys;
 
-    public static int totCages = 4;
+    [SerializeField] public int tot = 4;
     //private int timer = 180f;
 
     // Start is called before the first frame update
@@ -18,7 +18,7 @@ public class SpawnCages : MonoBehaviour
     {
         Transform transform = GetComponent<Transform>();
 
-        for(int i=0; i<totCages; i++)
+        for(int i=0; i<tot; i++)
         {
             Vector3 v = new Vector3( Random.Range(transform.position.x - 50, transform.position.x + 50), transform.position.y + 1.2f, Random.Range(transform.position.z - 50, transform.position.z + 50));
             GameObject newCage = Instantiate(cage, v, Quaternion.identity);

@@ -11,6 +11,7 @@ public class SpawnCages : MonoBehaviour
     [SerializeField] private Transform keys;
 
     public static int totCages = 4;
+    //private int timer = 180f;
 
     // Start is called before the first frame update
     void Start()

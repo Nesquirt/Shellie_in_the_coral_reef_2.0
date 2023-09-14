@@ -41,9 +41,15 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     }
     void Update(){
         // Debug.Log(oggettiNelPiano);
-         currentTime -= Time.deltaTime;
-         currentTime2 -=Time.deltaTime;
-         testo.text = Mathf.Round(currentTime).ToString();
+        if(currentTime>0){
+            testo.text = Mathf.Round(currentTime).ToString();
+            currentTime -= Time.deltaTime;
+        }
+        if (currentTime2>0){
+             currentTime2 -=Time.deltaTime;
+        }
+         //currentTime2 -=Time.deltaTime;
+        
          /*if (oggettiNelPiano==numerodaspawnare||a==1){
              a=1;
             rb.AddForce(Vector3.up * upwardForce);

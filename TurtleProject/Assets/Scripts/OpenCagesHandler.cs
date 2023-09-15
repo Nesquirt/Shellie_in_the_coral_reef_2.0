@@ -8,16 +8,24 @@ public class OpenCagesHandler : MonoBehaviour
     [SerializeField] private GameObject piano;
 
     private bool hasKey = false;
+    private int openCages = 0;
+    private int totCages;
 
     void Awake()
     {
+        this.totCages = this.piano.GetComponent<SpawnCages>().totalCages;
         //this.openCages = 0;
-
-        //Debug.Log("CHIAVI: " + countKey);
-
         /*GameObject[] keys = GameObject.FindGameObjectsWithTag("Chiave");
         this.countKey = keys.Length;                   --> mi da 0, poco dopo mi da 4 */
 
+    }
+
+    private void Update()
+    {
+        if(IsFinished())   //--> se gioco finito
+        {
+            //ANIMAZIONE gabbie che salgono
+        }
     }
 
     /*
@@ -117,12 +125,19 @@ public class OpenCagesHandler : MonoBehaviour
                 Debug.Log("chiave presa");
                 this.hasKey = true;
                 Destroy(other.gameObject);
+                Debug.Log("ho la chiave");
             }
         }
 
         if (other.CompareTag("Gabbia"))
         {
-
+            if (Input.GetKeyDown(KeyCode.E) && this.hasKey == true && other.GetComponent<CageScript>().isLocked)
+            {
+                Debug.Log("apro gabbia");
+                other.GetComponent<CageScript>().OpenCage();
+                this.hasKey = false;
+                this.openCages++;
+            }
         }
            
     }
@@ -140,22 +155,23 @@ public class OpenCagesHandler : MonoBehaviour
         }
     }
 
-    /*private bool IsGameOver()
+    private bool IsFinished()
     {
-        if(this.openCages == this.countKey)
+        if(this.openCages == this.totCages)
          {
              return true;
          }
-        else if           //se finisce il timer
+        /*else if           //se finisce il timer
            {
 
-           } 
+           } */
         else
          { 
              return false; 
          }
+        
 
 
-    }*/
+    }
 
 }

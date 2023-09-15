@@ -49,7 +49,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
          Debug.Log("oggetti raccolti"+rifiutiraccolti);
         if(currentTime>0){
             testo.text = Mathf.Round(currentTime).ToString();
-            testo1.text = oggettiNelPiano.ToString();
+            testo1.text = oggettiNelPiano.ToString();a
              
             currentTime -= Time.deltaTime;
         }

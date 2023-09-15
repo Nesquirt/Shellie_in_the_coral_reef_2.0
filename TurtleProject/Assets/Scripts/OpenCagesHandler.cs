@@ -48,12 +48,7 @@ public class OpenCagesHandler : MonoBehaviour
         }
     }
 
-    
 
-    /*private void CollectKey()
-    {
-
-    }*/
 
     private void OnTriggerStay(Collider other)
     {
@@ -61,8 +56,9 @@ public class OpenCagesHandler : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E) && this.hasKey == false)
             {
-                this.hasKey = true;
+                
                 Destroy(other.gameObject);
+                this.hasKey = true;
                 Debug.Log("ho la chiave");
             }
         }

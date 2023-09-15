@@ -54,7 +54,7 @@ public class OpenCagesHandler : MonoBehaviour
     {
         if (other.CompareTag("Chiave"))
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKey(KeyCode.E))
             {
                 if (!hasKey)
                 {
@@ -69,7 +69,7 @@ public class OpenCagesHandler : MonoBehaviour
 
         if (other.CompareTag("Gabbia"))
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKey(KeyCode.E))
             {
                 if (hasKey && other.GetComponent<CageScript>().isLocked)
                 {

@@ -24,7 +24,7 @@ public class CageScript : MonoBehaviour
 
     //
 
-
+    /*
     public bool closed
     {
         get { return closed; }

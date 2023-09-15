@@ -25,16 +25,11 @@ public class CageScript : MonoBehaviour
             this._isLocked = false;
         }
     }
-           
-
 
     public bool isLocked
-    /*
-    public bool closed
     {
         get { return _isLocked; }
         set { _isLocked = value; }
     }
-    */
 
 }

@@ -54,12 +54,16 @@ public class OpenCagesHandler : MonoBehaviour
     {
         if (other.CompareTag("Chiave"))
         {
-            if (Input.GetKeyDown(KeyCode.E) && this.hasKey == false)
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                
-                Destroy(other.gameObject);
-                this.hasKey = true;
-                Debug.Log("ho la chiave");
+                if (!hasKey)
+                {
+                    Destroy(other.gameObject);
+                    this.hasKey = true;
+                    Debug.Log("ho la chiave");
+                }
+                else
+                    return;
             }
         }
 

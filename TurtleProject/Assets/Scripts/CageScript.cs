@@ -15,7 +15,7 @@ public class CageScript : MonoBehaviour
 
     }
 
-    //se è chiusa la apre, altrimenti non fa nulla
+    //se ï¿½ chiusa la apre, altrimenti non fa nulla
     public void OpenCage()
     {
         if(_isLocked)
@@ -29,10 +29,12 @@ public class CageScript : MonoBehaviour
 
 
     public bool isLocked
+    /*
+    public bool closed
     {
         get { return _isLocked; }
         set { _isLocked = value; }
     }
-    
+    */
 
 }

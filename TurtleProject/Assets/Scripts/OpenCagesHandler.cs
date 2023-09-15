@@ -10,6 +10,7 @@ public class OpenCagesHandler : MonoBehaviour
     [SerializeField] private GameObject piano;
 
     [SerializeField] public TextMeshProUGUI timer_text;
+    [SerializeField] public TextMeshProUGUI crub_text;
 
     private float timeRemaining = 60f;
     private float seconds;
@@ -22,6 +23,8 @@ public class OpenCagesHandler : MonoBehaviour
     {
         this.totCages = this.piano.GetComponent<SpawnCages>().totalCages;
         this.seconds = Mathf.Round(timeRemaining);
+
+        this.crub_text.SetText(openCages.ToString() + "/" + totCages.ToString());
         //this.openCages = 0;
 
         /*GameObject[] keys = GameObject.FindGameObjectsWithTag("Chiave");
@@ -73,6 +76,7 @@ public class OpenCagesHandler : MonoBehaviour
                 this.hasKey = false;
                 this.openCages++;
                 Debug.Log("GABBIE APERTE: " + this.openCages);
+                this.crub_text.SetText(openCages.ToString() + "/" + totCages.ToString());
             }
         }
            

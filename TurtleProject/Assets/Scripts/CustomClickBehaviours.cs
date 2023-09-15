@@ -5,11 +5,11 @@ using UnityEngine.UI;
 using TMPro;
 public class CustomClickBehaviours : MonoBehaviour
 {
-    public Button PillarCoralButton;
+    public Button pillarCoralButton, fireCoralButton;
     public Button[] coralButtons;
     public Button ConfirmButton, CancelButton;
 
-    public CoralSO pillarCoral; //, fireCoral, ...
+    public CoralSO pillarCoral, fireCoral; //, fireCoral, ...
     private CoralSO[] corals;
 
     private int selectedCoral;
@@ -21,23 +21,25 @@ public class CustomClickBehaviours : MonoBehaviour
     {
         selectedCoral = -1;
         coralButtons = new Button[4];
-        coralButtons[0] = PillarCoralButton;
+        coralButtons[0] = pillarCoralButton;
+        coralButtons[1] = fireCoralButton;
 
         corals = new CoralSO[4];
         corals[0] = pillarCoral;
-        //corals[1] = fireCoral;
+        corals[1] = fireCoral;
+        
 
         //Se lasciato attivo, nasconde il pannello all'accensione
         transform.Find("CoralChoicePanel").gameObject.SetActive(false);
 
-        /* STRUTTURA CORRETTA
-        for(int i = 0; i<coralButtons.Length;i++)
+        
+        for(int i = 0; i<2;i++)// coralButtons.Length;i++)
         {
             coralButtons[i].onClick.AddListener(delegate { CoralButton_onClick(i); });
         }
-        */
+        
         //STRUTTURA TEMPORANEA
-        coralButtons[0].onClick.AddListener(delegate { CoralButton_onClick(0); });
+        //coralButtons[0].onClick.AddListener(delegate { CoralButton_onClick(0); });
 
         ConfirmButton.onClick.AddListener(delegate { Confirm_onClick(); });
 

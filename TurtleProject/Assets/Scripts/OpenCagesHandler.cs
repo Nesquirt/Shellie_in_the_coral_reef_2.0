@@ -17,7 +17,6 @@ public class OpenCagesHandler : MonoBehaviour
     private bool currentClosed;
 
     private Collider currentKey;
-    //public GameObject currentCage;
     public Collider currentCage;
 
     private int countKey;
@@ -60,7 +59,10 @@ public class OpenCagesHandler : MonoBehaviour
                  if (hasKey == false)
                 {
                     Debug.Log("chiave presa");
-                    Destroy(currentKey.gameObject);
+                    if(currentKey != null)
+                    {
+                        Destroy(currentKey.gameObject);
+                    }
                     this.hasKey = true;
                     this.countKey--;
                     Debug.Log("CHIAVI: " + countKey);
@@ -86,13 +88,10 @@ public class OpenCagesHandler : MonoBehaviour
                 //Debug.Log(currentClosed);
                 //this.currentClosed = this.currentCage.GetComponent<Cage>().closed;
 
-                if (this.hasKey == true /*&& this.currentCage.GetComponent<Cage>().closed == true*/)
-                {
-                    //Destroy(currentCage);
-                    //oppure
-                    //                    
+                if (this.hasKey == true)
+                {             
                     //this.currentClosed = false;
-                    this.currentCage.GetComponent<Cage>().closed = false;
+                    //this.currentCage.GetComponent<Cage>().closed = false;
                     Debug.Log("libera granchio");
                     //ANIMAZIONE apertura gabbia
                     this.openCages++;
@@ -109,7 +108,7 @@ public class OpenCagesHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Chiave")
+        if(other.CompareTag("Chiave"))
         {
             this.nearKey = true;
             this.currentKey = other;
@@ -118,13 +117,15 @@ public class OpenCagesHandler : MonoBehaviour
 
         if(other.gameObject.tag == "Gabbia")
         {
-            this.nearCage = true;
-            //this.currentCage = other.GetComponent<GameObject>();
             if (currentCage != other)
             {
+                this.nearCage = true;
                 this.currentCage = other;
+                Debug.Log("ciao");
+                //this.currentClosed = currentCage.GetComponent<Cage>().closed;
+                
             }
-            //this.currentClosed = currentCage.GetComponent<Cage>().closed;
+
 
         }
     }

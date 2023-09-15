@@ -8,10 +8,14 @@ public class GameDirector : MonoBehaviour
 {
 
     private int reefHealth, pollution, biodiversity, oxygenLevel;
-
+    private int pollutionChange, biodiversityChange, oxygenLevelChange, reefHealthChange;
     private GameObject[] corals;
     public Slider reefHealthSlider, pollutionSlider, biodiversitySlider, oxygenLevelSlider;
+    public Image reefHealthArrow, pollutionArrow, biodiversityArrow, oxygenLevelArrow;
+    //TODO: aggiungi un'immagine per quando il cambiamento di parametri è 0
 
+    public Sprite upArrow, downArrow;
+    
     public GameObject currentCoralSpot;
     private void Awake()
     {
@@ -20,9 +24,13 @@ public class GameDirector : MonoBehaviour
         biodiversity = 24;
         oxygenLevel = 50;
 
+        pollutionChange = +5;
+        biodiversityChange = -4;
+        oxygenLevelChange = -3;
+
         corals = GameObject.FindGameObjectsWithTag("CoralSpot");
 
-        InvokeRepeating("tick", 0, 3);
+        InvokeRepeating("tick", 0, 10);
     }
 
     public void tick()                                          //Funzione che viene chiamata una volta ogni minuto, e aggiorna i valori delle statistiche di gioco
@@ -37,13 +45,16 @@ public class GameDirector : MonoBehaviour
         // -------------------------------------------------------------------- //
         //Calcolo del cambio dei parametri
 
-        pollution += CalculatePollutionChange();               //Calcolo del cambio di inquinamento
+        //pollution += CalculatePollutionChange();               //Calcolo del cambio di inquinamento
+        pollution += pollutionChange;
         pollutionSlider.value = pollution;
 
-        biodiversity += CalculateBiodiversityChange();         //Calcolo del cambio di biodiversità
+        //biodiversity += CalculateBiodiversityChange();         //Calcolo del cambio di biodiversità
+        biodiversity += biodiversityChange;
         biodiversitySlider.value = biodiversity;
 
-        oxygenLevel += CalculateOxygenLevelChange();           //Calcolo del cambio di livello di ossigeno
+        //oxygenLevel += CalculateOxygenLevelChange();           //Calcolo del cambio di livello di ossigeno
+        oxygenLevel += oxygenLevelChange;
         oxygenLevelSlider.value = oxygenLevel;
 
         if (pollution < 0)
@@ -65,8 +76,13 @@ public class GameDirector : MonoBehaviour
 
         if (reefHealth >= 0 && reefHealth <= 100)
         {
-            reefHealth += ((pollution / 10) - 4) + ((biodiversity / 10) - 4)+ ((oxygenLevel / 10) - 4);
-            //
+            reefHealthChange = ((pollution / 10) - 4) + ((biodiversity / 10) - 4) + ((oxygenLevel / 10) - 4);
+            reefHealth += reefHealthChange;
+            if (reefHealthChange >= 0)
+                reefHealthArrow.sprite = upArrow;
+            else
+                reefHealthArrow.sprite = downArrow;
+            
         }
         else if (reefHealth >= 100)
             reefHealth = 100;
@@ -87,6 +103,32 @@ public class GameDirector : MonoBehaviour
         */
     }
 
+    public void modifyPollutionChange(int value)
+    {
+        pollutionChange += value;
+        if (pollutionChange >= 0)
+            pollutionArrow.sprite = downArrow;
+        else
+            pollutionArrow.sprite = upArrow;
+    }
+    public void modifyBiodiversityChange(int value)
+    {
+        biodiversityChange += value;
+        if (biodiversityChange >= 0)
+            biodiversityArrow.sprite = upArrow;
+        else
+            biodiversityArrow.sprite = downArrow;
+    }
+    public void modifyOxygenLevelChange(int value)
+    {
+        oxygenLevelChange += value;
+        if (oxygenLevelChange >= 0)
+            oxygenLevelArrow.sprite = upArrow;
+        else
+            oxygenLevelArrow.sprite = downArrow;
+    }
+
+    /*
     public int CalculatePollutionChange()
     {
         int totalChange = +5;   //valore di default se non ci sono coralli
@@ -116,6 +158,6 @@ public class GameDirector : MonoBehaviour
         }
         return totalChange;
     }
-
+    */
 
 }

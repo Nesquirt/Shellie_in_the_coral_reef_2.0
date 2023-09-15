@@ -69,14 +69,20 @@ public class OpenCagesHandler : MonoBehaviour
 
         if (other.CompareTag("Gabbia"))
         {
-            if (Input.GetKeyDown(KeyCode.E) && this.hasKey == true && other.GetComponent<CageScript>().isLocked)
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("apro gabbia");
-                other.GetComponent<CageScript>().OpenCage();
-                this.hasKey = false;
-                this.openCages++;
-                Debug.Log("GABBIE APERTE: " + this.openCages);
-                this.crub_text.SetText(openCages.ToString() + "/" + totCages.ToString());
+                if (hasKey && other.GetComponent<CageScript>().isLocked)
+                {
+                    Debug.Log("apro gabbia");
+                    other.GetComponent<CageScript>().OpenCage();
+                    this.hasKey = false;
+                    this.openCages++;
+                    Debug.Log("GABBIE APERTE: " + this.openCages);
+                    this.crub_text.SetText(openCages.ToString() + "/" + totCages.ToString());
+                }
+                else
+                    return;
+                
             }
         }
            

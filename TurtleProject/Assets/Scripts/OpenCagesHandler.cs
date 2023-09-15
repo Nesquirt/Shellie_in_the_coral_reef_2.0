@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OpenCagesHandler : MonoBehaviour
 {
     [SerializeField] private GameObject piano;
+
+    [SerializeField] public TextMeshProUGUI timer_text;
+
+    private float timeRemaining = 60f;
+    private float seconds;
 
     private bool hasKey = false;
     private int openCages = 0;
@@ -14,7 +21,9 @@ public class OpenCagesHandler : MonoBehaviour
     void Awake()
     {
         this.totCages = this.piano.GetComponent<SpawnCages>().totalCages;
+        this.seconds = Mathf.Round(timeRemaining);
         //this.openCages = 0;
+
         /*GameObject[] keys = GameObject.FindGameObjectsWithTag("Chiave");
         this.countKey = keys.Length;                   --> mi da 0, poco dopo mi da 4 */
 
@@ -22,99 +31,26 @@ public class OpenCagesHandler : MonoBehaviour
 
     private void Update()
     {
+        if (this.timeRemaining > 0)
+        {
+            this.timeRemaining -= Time.deltaTime;
+            this.seconds = Mathf.Round(timeRemaining);
+            this.timer_text.SetText(seconds.ToString());
+        }
+
         if(IsFinished())   //--> se gioco finito
         {
+            Debug.Log("THE END");
             //ANIMAZIONE gabbie che salgono
         }
     }
 
-    /*
-    void FixedUpdate()
-    {
-        if(IsGameOver())
-        {
-            //finisce il minigioco
-            //tutte le gabbie risalgono
-        }
+    
 
-        //quando tartaruga è vicino alla chiave
-        if (nearKey == true)
-        {
-            //Debug.Log("vicino chiave");
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                 if (hasKey == false)
-                {
-                    Debug.Log("chiave presa");
-                    if(currentKey != null)
-                    {
-                        Destroy(currentKey.gameObject);
-                    }
-                    this.hasKey = true;
-                    this.countKey--;
-                    Debug.Log("CHIAVI: " + countKey);
-                    if(countKey == 0)
-                    {
-                        //togli immagine chiave da UI
-                    }
-
-                }
-                 else
-                {
-                    Debug.Log("hai già la chiave");   //solo una chiave alla volta
-                }
-                
-            }
-        }
-
-        //quando tartaruga è vicino alla gabbia
-        if (nearCage == true)
-        {
-            if (Input.GetKeyDown(KeyCode.E))   
-            {
-                if (this.hasKey == true)
-                {             
-                    Debug.Log("libera granchio");
-                    //ANIMAZIONE apertura gabbia
-                    //this.openCages++;
-                    //Debug.Log("GABBIE: " + openCages);
-                    this.hasKey = false;
-                }
-                else
-                    Debug.Log("non hai la chiave");
-
-            }
-
-        }
-    } */
-
-    private void CollectKey()
+    /*private void CollectKey()
     {
 
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Chiave"))
-        {
-            //other.gameObject.SetActive(false);
-            //this.nearKey = true;
-            //this.currentKey = other;
-            //Debug.Log(currentKey.gameObject);
-        }
-
-        if(other.CompareTag("Gabbia"))
-        {
-            //this.nearCage = true;
-            //this.currentCage = other;
-            Debug.Log("sono Gabbia");
-            //this.currentClosed = currentCage.GetComponent<Cage>().closed;
-          
-
-
-        }
-    }
+    }*/
 
     private void OnTriggerStay(Collider other)
     {
@@ -122,7 +58,6 @@ public class OpenCagesHandler : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E) && this.hasKey == false)
             {
-                Debug.Log("chiave presa");
                 this.hasKey = true;
                 Destroy(other.gameObject);
                 Debug.Log("ho la chiave");
@@ -137,41 +72,22 @@ public class OpenCagesHandler : MonoBehaviour
                 other.GetComponent<CageScript>().OpenCage();
                 this.hasKey = false;
                 this.openCages++;
+                Debug.Log("GABBIE APERTE: " + this.openCages);
             }
         }
            
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Chiave")
-        {
-            //this.nearKey = false;
-        }
-
-        if (other.gameObject.tag == "Gabbia")
-        {
-            //this.nearCage = false;
-        }
-    }
-
     private bool IsFinished()
     {
-        if(this.openCages == this.totCages)
+        if(this.openCages == this.totCages || this.seconds == 0)
          {
              return true;
          }
-        /*else if           //se finisce il timer
-           {
-
-           } */
         else
          { 
              return false; 
          }
-        
-
-
     }
 
 }

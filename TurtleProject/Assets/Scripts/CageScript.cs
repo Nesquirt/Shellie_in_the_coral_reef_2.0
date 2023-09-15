@@ -5,23 +5,22 @@ using UnityEngine;
 public class CageScript : MonoBehaviour
 {
     private bool _isLocked = true;
-    [SerializeField] private GameObject door;
-    //private Animator anim;
+    private GameObject door;
+    private Animator anim;
 
     void Start()
     {
-        this.door = transform.GetChild(0).gameObject;
-        //this.anim = door.GetComponent<Animator>();
+        this.door = transform.GetChild(1).gameObject;
+        this.anim = this.door.GetComponent<Animator>();
 
     }
 
-    //se � chiusa la apre, altrimenti non fa nulla
+    //se chiusa la apre, altrimenti non fa nulla
     public void OpenCage()
     {
         if(_isLocked)
         {
-            //AGGIUNGERE animazione porta che si apre
-            //this.anim.SetTrigger("open");
+            this.anim.SetTrigger("openCage");
             this._isLocked = false;
         }
     }

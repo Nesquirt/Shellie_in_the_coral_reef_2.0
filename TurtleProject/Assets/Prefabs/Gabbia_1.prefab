@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 1075526046954516648}
   - component: {fileID: -470808703640397506}
   m_Layer: 0
-  m_Name: 'Gabbia '
+  m_Name: Gabbia_1
   m_TagString: Gabbia
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

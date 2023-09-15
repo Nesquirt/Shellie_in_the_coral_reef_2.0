@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 public class SpawnPrefabsRandomly : MonoBehaviour
 { 
     
@@ -19,16 +20,20 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     public List<GameObject> spazzature = new List<GameObject>();
     public Rigidbody rb ;
     public float upwardForce;
-    public int a ;
+    public int a ,b;
     public TextMeshProUGUI testo;
+     public TextMeshProUGUI testo1;
+     public TextMeshProUGUI testo2;
+     public Image img;
     public float totalTime = 60f;
     public float totalTime2;// Il tempo totale del timer in secondi.
     private float currentTime;
     private float currentTime2;
-    
+    public int rifiutiraccolti;
     void Start()
     { 
         a=0;
+        b=0;
            totalTime2=totalTime+10f;
            oggettiNelPiano = 0;
            currentTime = totalTime;
@@ -40,12 +45,16 @@ public class SpawnPrefabsRandomly : MonoBehaviour
           SpawnPrefabs();
     }
     void Update(){
-        // Debug.Log(oggettiNelPiano);
+         Debug.Log("oggetti nel paino"+oggettiNelPiano);
+         Debug.Log("oggetti raccolti"+rifiutiraccolti);
         if(currentTime>0){
             testo.text = Mathf.Round(currentTime).ToString();
+            testo1.text = oggettiNelPiano.ToString();
+             
             currentTime -= Time.deltaTime;
         }
         if (currentTime2>0){
+             testo1.text = oggettiNelPiano.ToString();
              currentTime2 -=Time.deltaTime;
         }
          //currentTime2 -=Time.deltaTime;
@@ -55,7 +64,16 @@ public class SpawnPrefabsRandomly : MonoBehaviour
             rb.AddForce(Vector3.up * upwardForce);
          }*/
          if (currentTime <= 0 && a==0)
-        {
+        {    
+            if (b==0){
+               rifiutiraccolti=oggettiNelPiano; 
+               b=1;
+            }
+            
+            testo.text = " ";
+            testo1.text = " ";
+            testo2.text = " ";
+            img.gameObject.SetActive(false);
             currentTime = 0;
              rb.AddForce(Vector3.up * upwardForce);
             // Esegui azioni quando il timer scade.
@@ -67,6 +85,8 @@ public class SpawnPrefabsRandomly : MonoBehaviour
             {
                 Destroy(spazzatura);
             }
+            //testo.text = " ";
+            //testo1.text = " ";
            a=1;
            currentTime2=0;
         }

@@ -41,6 +41,10 @@ public class CoralHandler : MonoBehaviour
                     var newCoral = Instantiate(PillarCoral, spawnPoints[i], Quaternion.identity);
                     newCoral.transform.parent = this.transform;
                 }
+                //TODO: vedi se è possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
+                gameDirector.GetComponent<GameDirector>().modifyBiodiversityChange(3);
+                gameDirector.GetComponent<GameDirector>().modifyPollutionChange(1);
+                gameDirector.GetComponent<GameDirector>().modifyOxygenLevelChange(3);
                 break;
 
         }

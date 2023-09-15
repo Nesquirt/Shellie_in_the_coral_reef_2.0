@@ -46,9 +46,11 @@ public class CoralHandler : MonoBehaviour
                 gameDirector.GetComponent<GameDirector>().modifyPollutionChange(1);
                 gameDirector.GetComponent<GameDirector>().modifyOxygenLevelChange(3);
                 break;
-            case 1:
+            case 1: //FireCoral
+                  
                 for (int i = 0; i < spawnPoints.Length; i++)
                 {
+                    Debug.Log("Test fireCoral");
                     var newCoral = Instantiate(FireCoral, spawnPoints[i], Quaternion.identity);
                     newCoral.transform.parent = this.transform;
                 }

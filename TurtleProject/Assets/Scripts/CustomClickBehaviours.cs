@@ -28,18 +28,20 @@ public class CustomClickBehaviours : MonoBehaviour
         corals[0] = pillarCoral;
         corals[1] = fireCoral;
         
+        
 
         //Se lasciato attivo, nasconde il pannello all'accensione
         transform.Find("CoralChoicePanel").gameObject.SetActive(false);
 
-        
+        /*
         for(int i = 0; i<2;i++)// coralButtons.Length;i++)
         {
             coralButtons[i].onClick.AddListener(delegate { CoralButton_onClick(i); });
         }
-        
+        */
         //STRUTTURA TEMPORANEA
-        //coralButtons[0].onClick.AddListener(delegate { CoralButton_onClick(0); });
+        coralButtons[0].onClick.AddListener(delegate { CoralButton_onClick(0); });
+        coralButtons[1].onClick.AddListener(delegate { CoralButton_onClick(1); });
 
         ConfirmButton.onClick.AddListener(delegate { Confirm_onClick(); });
 
@@ -57,6 +59,7 @@ public class CustomClickBehaviours : MonoBehaviour
 
     public void CoralButton_onClick(int index)
     {
+        Debug.Log("Index: " + index);
         coralTitle.SetText(corals[index].coralName);
         coralDesc.SetText(corals[index].coralDesc);
         coralStats.SetText("Caratteristiche:" +

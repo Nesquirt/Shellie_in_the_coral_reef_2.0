@@ -5,12 +5,13 @@ using UnityEngine.UIElements;
 
 public class SpawnCages : MonoBehaviour
 {
-    [SerializeField] private GameObject cage;
-    [SerializeField] private GameObject key;
-    [SerializeField] private Transform cages;
-    [SerializeField] private Transform keys;
+    [SerializeField] private GameObject cagePrefab;
+    [SerializeField] private GameObject keyPrefab;
 
-    [SerializeField] public int tot = 4;
+    [SerializeField] private Transform cagesParent;
+    [SerializeField] private Transform keysParent;
+
+    [SerializeField] public int totalCages = 4;
     //private int timer = 180f;
 
     // Start is called before the first frame update
@@ -18,23 +19,18 @@ public class SpawnCages : MonoBehaviour
     {
         Transform transform = GetComponent<Transform>();
 
-        for(int i=0; i<tot; i++)
+        for(int i=0; i<totalCages; i++)
         {
             Vector3 v = new Vector3( Random.Range(transform.position.x - 50, transform.position.x + 50), transform.position.y + 1.2f, Random.Range(transform.position.z - 50, transform.position.z + 50));
-            GameObject newCage = Instantiate(cage, v, Quaternion.identity);
-            newCage.transform.SetParent(cages);
+            GameObject newCage = Instantiate(cagePrefab, v, Quaternion.identity);
+            newCage.transform.SetParent(cagesParent);
 
             Vector3 v1 = new Vector3(Random.Range(transform.position.x - 50, transform.position.x + 50), transform.position.y + 0.5f, Random.Range(transform.position.z - 50, transform.position.z + 50));
-            GameObject newKey = Instantiate(key, v1, Quaternion.identity);
-            newKey.transform.SetParent(keys);
+            GameObject newKey = Instantiate(keyPrefab, v1, Quaternion.identity);
+            newKey.transform.SetParent(keysParent);
 
         }
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

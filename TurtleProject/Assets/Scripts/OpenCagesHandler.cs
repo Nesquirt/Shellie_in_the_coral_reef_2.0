@@ -27,6 +27,11 @@ public class OpenCagesHandler : MonoBehaviour
 
         this.hasKey = false;
         this.openCages = 0;
+
+        this.timer_text.enabled = true;
+        this.timer_text.SetText(seconds.ToString());
+
+        this.crub_text.enabled = true;
         this.crub_text.SetText(openCages.ToString() + "/" + totCages.ToString());
 
         /*GameObject[] keys = GameObject.FindGameObjectsWithTag("Chiave");
@@ -43,9 +48,12 @@ public class OpenCagesHandler : MonoBehaviour
             this.timer_text.SetText(seconds.ToString());
         }
 
+        //DISATTIVARE COLLIDER OGGETTI
         if(IsFinished())   //--> se gioco finito
         {
             Debug.Log("THE END");
+            this.timer_text.enabled = false;
+            this.crub_text.enabled = false;
             //ANIMAZIONE gabbie che salgono
         }
     }

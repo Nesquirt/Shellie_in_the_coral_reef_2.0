@@ -5,8 +5,8 @@ using UnityEngine;
 //Questo è lo script associato a ogni roccia su cui potrà crescere un corallo
 public class CoralHandler : MonoBehaviour
 {
-    public GameObject gameDirector;
-    public GameObject PillarCoral, FireCoral;
+    [SerializeField] private GameObject gameDirector;
+    [SerializeField] private GameObject PillarCoral, FireCoral, SoftCoral, ElkhornCoral;
     private Vector3 spawnPoint1, spawnPoint2, spawnPoint3, spawnPoint4, spawnPoint5;
     private Vector3[] spawnPoints;
     private int growthCounter;
@@ -50,7 +50,6 @@ public class CoralHandler : MonoBehaviour
                   
                 for (int i = 0; i < spawnPoints.Length; i++)
                 {
-                    Debug.Log("Test fireCoral");
                     var newCoral = Instantiate(FireCoral, spawnPoints[i], Quaternion.identity);
                     newCoral.transform.parent = this.transform;
                 }
@@ -59,6 +58,29 @@ public class CoralHandler : MonoBehaviour
                 gameDirector.GetComponent<GameDirector>().modifyPollutionChange(0);
                 gameDirector.GetComponent<GameDirector>().modifyOxygenLevelChange(3);
                 break;
+            case 2: //SoftCoral
+                for (int i = 0; i < spawnPoints.Length; i++)
+                {
+                    var newCoral = Instantiate(SoftCoral, spawnPoints[i], Quaternion.identity);
+                    newCoral.transform.parent = this.transform;
+                }
+                //TODO: vedi se è possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
+                gameDirector.GetComponent<GameDirector>().modifyBiodiversityChange(2);
+                gameDirector.GetComponent<GameDirector>().modifyPollutionChange(0);
+                gameDirector.GetComponent<GameDirector>().modifyOxygenLevelChange(3);
+                break;
+            case 3: //ElkhornCoral
+                for (int i = 0; i < spawnPoints.Length; i++)
+                {
+                    var newCoral = Instantiate(ElkhornCoral, spawnPoints[i], Quaternion.identity);
+                    newCoral.transform.parent = this.transform;
+                }
+                //TODO: vedi se è possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
+                gameDirector.GetComponent<GameDirector>().modifyBiodiversityChange(2);
+                gameDirector.GetComponent<GameDirector>().modifyPollutionChange(0);
+                gameDirector.GetComponent<GameDirector>().modifyOxygenLevelChange(3);
+                break;
+
 
         }
 

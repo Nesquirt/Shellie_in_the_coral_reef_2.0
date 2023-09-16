@@ -5,43 +5,43 @@ using UnityEngine.UI;
 using TMPro;
 public class CustomClickBehaviours : MonoBehaviour
 {
-    public Button pillarCoralButton, fireCoralButton;
-    public Button[] coralButtons;
-    public Button ConfirmButton, CancelButton;
-
-    public CoralSO pillarCoral, fireCoral; //, fireCoral, ...
-    private CoralSO[] corals;
-
-    private int selectedCoral;
-
-    public GameObject gameDirector;
-
-    TextMeshProUGUI coralTitle, coralDesc, coralStats, coralCost;
+    [SerializeField] private Button pillarCoralButton, fireCoralButton, softCoralButton, elkhornCoralButton; //Bottoni di selezione del corallo
+    [SerializeField] private Button[] coralButtons;                                                          //Array di bottoni   
+    [SerializeField] private Button ConfirmButton, CancelButton;                                             //Bottone di conferma e annulla
+    [SerializeField] private CoralSO pillarCoral, fireCoral, softCoral, elkhornCoral;                        //Scriptable Objects contenenti le informazioni da mostrare su ogni corallo
+    private CoralSO[] corals;                                                                                //Array di Scriptable Objects
+    private int selectedCoral;                          
+    [SerializeField] private GameObject gameDirector;
+    private TextMeshProUGUI coralTitle, coralDesc, coralStats, coralCost;
     private void Awake()
     {
         selectedCoral = -1;
         coralButtons = new Button[4];
         coralButtons[0] = pillarCoralButton;
         coralButtons[1] = fireCoralButton;
+        coralButtons[2] = softCoralButton;
+        coralButtons[3] = elkhornCoralButton;
 
         corals = new CoralSO[4];
         corals[0] = pillarCoral;
         corals[1] = fireCoral;
-        
-        
+        corals[2] = softCoral;
+        corals[3] = elkhornCoral;
 
         //Se lasciato attivo, nasconde il pannello all'accensione
         transform.Find("CoralChoicePanel").gameObject.SetActive(false);
 
-        /*
-        for(int i = 0; i<2;i++)// coralButtons.Length;i++)
+        /* Nota: questo for, per qualche motivo, non funziona bene. Per ora lascio la scrittura estesa
+        for(int i = 0; i<coralButtons.Length;i++)
         {
             coralButtons[i].onClick.AddListener(delegate { CoralButton_onClick(i); });
         }
         */
-        //STRUTTURA TEMPORANEA
+        // STRUTTURA TEMPORANEA
         coralButtons[0].onClick.AddListener(delegate { CoralButton_onClick(0); });
         coralButtons[1].onClick.AddListener(delegate { CoralButton_onClick(1); });
+        coralButtons[2].onClick.AddListener(delegate { CoralButton_onClick(2); });
+        coralButtons[3].onClick.AddListener(delegate { CoralButton_onClick(3); });
 
         ConfirmButton.onClick.AddListener(delegate { Confirm_onClick(); });
 
@@ -59,7 +59,7 @@ public class CustomClickBehaviours : MonoBehaviour
 
     public void CoralButton_onClick(int index)
     {
-        Debug.Log("Index: " + index);
+        Debug.Log(index);
         coralTitle.SetText(corals[index].coralName);
         coralDesc.SetText(corals[index].coralDesc);
         coralStats.SetText("Caratteristiche:" +

@@ -46,7 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f7c4a8e7f8a8947b09ef3df9353b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameDirector: {fileID: 0}
   PillarCoral: {fileID: 5496174565807994253, guid: 1bba7ce585e8d04449322bd9765b7511, type: 3}
+  FireCoral: {fileID: 8457164561413952165, guid: b4b6a7339df6fdd45b5d93ada64d0aba, type: 3}
+  SoftCoral: {fileID: 6248881581487960445, guid: 3f6d04dde10cdb147857f30548685ebf, type: 3}
+  ElkhornCoral: {fileID: 8921926105476488118, guid: b48d9b16004fb724e8f415b48cf3c215, type: 3}
   canvas: {fileID: 0}
 --- !u!65 &1830775193052505734
 BoxCollider:

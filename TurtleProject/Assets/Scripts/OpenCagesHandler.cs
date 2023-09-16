@@ -12,20 +12,22 @@ public class OpenCagesHandler : MonoBehaviour
     [SerializeField] public TextMeshProUGUI timer_text;
     [SerializeField] public TextMeshProUGUI crub_text;
 
-    private float timeRemaining = 60f;
+    private float timeRemaining;
     private float seconds;
 
-    private bool hasKey = false;
-    private int openCages = 0;
+    private bool hasKey;
+    private int openCages;
     private int totCages;
 
     void Awake()
     {
         this.totCages = this.piano.GetComponent<SpawnCages>().totalCages;
+        this.timeRemaining = 60f;
         this.seconds = Mathf.Round(timeRemaining);
 
+        this.hasKey = false;
+        this.openCages = 0;
         this.crub_text.SetText(openCages.ToString() + "/" + totCages.ToString());
-        //this.openCages = 0;
 
         /*GameObject[] keys = GameObject.FindGameObjectsWithTag("Chiave");
         this.countKey = keys.Length;                   --> mi da 0, poco dopo mi da 4 */

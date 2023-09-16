@@ -5033,7 +5033,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884043788}
-  m_LocalRotation: {x: -0.036324956, y: 0.0000000017713828, z: 6.438813e-11, w: 0.99934006}
+  m_LocalRotation: {x: -0.036324956, y: -0.0000000025273734, z: -9.186714e-11, w: 0.99934006}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5893,6 +5893,18 @@ PrefabInstance:
     - target: {fileID: 1085389188166156444, guid: 784c2eac317491c408f51eb9761aba32, type: 3}
       propertyPath: m_Name
       value: Map
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937831379325076517, guid: 784c2eac317491c408f51eb9761aba32, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937831379325076518, guid: 784c2eac317491c408f51eb9761aba32, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937831379325076518, guid: 784c2eac317491c408f51eb9761aba32, type: 3}
+      propertyPath: m_EnableTreeColliders
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7937831379776682879, guid: 784c2eac317491c408f51eb9761aba32, type: 3}
       propertyPath: m_Convex

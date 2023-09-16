@@ -9,8 +9,9 @@ public class OpenCagesHandler : MonoBehaviour
 {
     [SerializeField] private GameObject piano;
 
-    [SerializeField] public TextMeshProUGUI timer_text;
-    [SerializeField] public TextMeshProUGUI crub_text;
+    [SerializeField] private TextMeshProUGUI timer_text;
+    [SerializeField] private TextMeshProUGUI crub_text;
+    [SerializeField] private Image crub_icon; 
 
     private float timeRemaining;
     private float seconds;
@@ -22,7 +23,7 @@ public class OpenCagesHandler : MonoBehaviour
     void Awake()
     {
         this.totCages = this.piano.GetComponent<SpawnCages>().totalCages;
-        this.timeRemaining = 60f;
+        this.timeRemaining = 6f;
         this.seconds = Mathf.Round(timeRemaining);
 
         this.hasKey = false;
@@ -32,6 +33,7 @@ public class OpenCagesHandler : MonoBehaviour
         this.timer_text.SetText(seconds.ToString());
 
         this.crub_text.enabled = true;
+        this.crub_icon.enabled = true;
         this.crub_text.SetText(openCages.ToString() + "/" + totCages.ToString());
 
         /*GameObject[] keys = GameObject.FindGameObjectsWithTag("Chiave");
@@ -48,13 +50,28 @@ public class OpenCagesHandler : MonoBehaviour
             this.timer_text.SetText(seconds.ToString());
         }
 
-        //DISATTIVARE COLLIDER OGGETTI
+        //DISATTIVARE COLLIDER gabbie
         if(IsFinished())   //--> se gioco finito
         {
             Debug.Log("THE END");
             this.timer_text.enabled = false;
             this.crub_text.enabled = false;
-            //ANIMAZIONE gabbie che salgono
+            this.crub_icon.enabled = false;
+
+            //faccio scomparire le chiavi
+            GameObject[] arr_keys = GameObject.FindGameObjectsWithTag("Chiave");
+            for(int i = 0; i<arr_keys.Length; i++)
+            {
+                Destroy(arr_keys[i]);
+            }
+
+            //ANIMAZIONE gabbie che salgono 
+            GameObject[] arr_cages = GameObject.FindGameObjectsWithTag("Gabbia");
+            for(int i = 0; i<arr_cages.Length; i++)
+            {
+                arr_cages[i].GetComponent<CageScript>().GoUp();
+            }
+
         }
     }
 

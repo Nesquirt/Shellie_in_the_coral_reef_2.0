@@ -23,7 +23,7 @@ public class OpenCagesHandler : MonoBehaviour
     void Awake()
     {
         this.totCages = this.piano.GetComponent<SpawnCages>().totalCages;
-        this.timeRemaining = 6f;
+        this.timeRemaining = 60f;
         this.seconds = Mathf.Round(timeRemaining);
 
         this.hasKey = false;

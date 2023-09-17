@@ -76,7 +76,7 @@ public class GameDirector : MonoBehaviour
 
         if (reefHealth >= 0 && reefHealth <= 100)
         {
-            reefHealthChange = ((pollution / 10) - 4) + ((biodiversity / 10) - 4) + ((oxygenLevel / 10) - 4);
+            reefHealthChange = (4 - (pollution / 10)) + ((biodiversity / 10) - 4) + ((oxygenLevel / 10) - 4);
             reefHealth += reefHealthChange;
             if (reefHealthChange >= 0)
                 reefHealthArrow.sprite = upArrow;

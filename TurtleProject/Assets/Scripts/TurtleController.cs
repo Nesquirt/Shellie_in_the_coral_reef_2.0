@@ -86,10 +86,21 @@ public class TurtleController : MonoBehaviour
         if (speed > 0)
             this.rb.MovePosition(this.rb.position + this.transform.forward * (speed * Time.deltaTime));
     }
-
+    /*
     public void Update()        //In questo metodo vanno le funzioni dedicate allo spostamento
     {
         
+    }*/
+
+
+    // -------------------------------------------------------------------- //
+    //Metodo che invia il nome del target attraversato alla funzione principale, nel minigioco di corsa ad ostacoli
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Target")
+        { 
+            other.GetComponentInParent<TargetHandler>().TargetCollision(other.name);
+        }
     }
 
     // -------------------------------------------------------------------- //

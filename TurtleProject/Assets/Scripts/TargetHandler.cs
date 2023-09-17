@@ -8,7 +8,6 @@ public class TargetHandler : MonoBehaviour
     [SerializeField] private GameObject directorObject;
     private GameDirector director;
     private GameObject[] targets;
-    private bool[] isActive;
     [SerializeField] private Material activeMaterial, inactiveMaterial;
     private int currentTime;        //Tempo attuale del timer in millisecondi
 
@@ -21,12 +20,6 @@ public class TargetHandler : MonoBehaviour
     {
         director = directorObject.GetComponent<GameDirector>();
         targets = GameObject.FindGameObjectsWithTag("Target");
-
-        isActive = new bool[28];
-        for(int i = 0; i < isActive.Length; i++)
-        {
-            isActive[i] = false;
-        }
 
         raceStart(); //TODO: rimuovi e mettilo come prompt
     }
@@ -56,7 +49,6 @@ public class TargetHandler : MonoBehaviour
         //Resetta il numero di targets e rende il primo target attivo
         targetNumber = 0;
         GameObject.Find("Target0").GetComponent<MeshRenderer>().material = activeMaterial;
-        isActive[0] = true;
     }
 
     IEnumerator Timer()
@@ -78,12 +70,14 @@ public class TargetHandler : MonoBehaviour
             //return;
 
             //Imposta il target successivo come attivo
-            if(targetNumber < isActive.Length)
+            if(targetNumber < 28)
             {
+                if (targetName != "Target" + targetNumber)
+                return;
+
                 string nextTargetName = "Target" + (targetNumber + 1);
-                Debug.Log(nextTargetName);
+                GameObject.Find(targetName).gameObject.SetActive(false);
                 GameObject.Find(nextTargetName).GetComponent<MeshRenderer>().material = activeMaterial;
-                //Aumenta il numero di targets attraversati
                 targetNumber++;
                 
             }

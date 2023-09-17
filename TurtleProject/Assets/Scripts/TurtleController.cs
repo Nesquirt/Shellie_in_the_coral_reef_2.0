@@ -100,7 +100,6 @@ public class TurtleController : MonoBehaviour
         if(other.tag == "Target")
         { 
             other.GetComponentInParent<TargetHandler>().TargetCollision(other.name);
-            other.gameObject.SetActive(false);
         }
     }
 

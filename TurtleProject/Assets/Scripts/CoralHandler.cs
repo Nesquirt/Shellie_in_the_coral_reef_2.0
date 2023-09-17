@@ -123,40 +123,47 @@ public class CoralHandler : MonoBehaviour
         }
     }
 
-    public void OnTriggerStay(Collider other)
+    public void OnTriggerStay(Collider collider)
     {
-        if(isGrowing)
+        if (collider.gameObject.tag == "Player")
         {
-            canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(false);
-            canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(false);
-            return;
-        }
-        if(Input.GetKey(KeyCode.E))
-        {
-            gameDirector.GetComponent<GameDirector>().currentCoralSpot = this.gameObject;
-            canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(true);
-            canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(false);
-        }
-        if(Input.GetKey(KeyCode.Escape))
-        {
-            canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(false);
-        }
-        if(!canvas.transform.Find("CoralChoicePanel").gameObject.activeSelf)
-        {
-            canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(true);
+            if (isGrowing)
+            {
+                canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(false);
+                canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(false);
+                return;
+            }
+            if (Input.GetKey(KeyCode.E))
+            {
+                gameDirector.GetComponent<GameDirector>().currentCoralSpot = this.gameObject;
+                canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(true);
+                canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(false);
+            }
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(false);
+            }
+            if (!canvas.transform.Find("CoralChoicePanel").gameObject.activeSelf)
+            {
+                canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(true);
+            }
         }
     }
 
-    public void OnTriggerExit(Collider other)
+    public void OnTriggerExit(Collider collider)
     {
-        //Uscito dalla zona del CoralSpot, chiude gli elementi dell'UI
-        if(canvas.transform.Find("CoralSpotPrompt").gameObject.activeSelf)
+        if (collider.gameObject.tag == "Player")
         {
-            canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(false);
-        }
-        if(canvas.transform.Find("CoralChoicePanel").gameObject.activeSelf)
-        {
-            canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(false);
+
+            //Uscito dalla zona del CoralSpot, chiude gli elementi dell'UI
+            if (canvas.transform.Find("CoralSpotPrompt").gameObject.activeSelf)
+            {
+                canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(false);
+            }
+            if (canvas.transform.Find("CoralChoicePanel").gameObject.activeSelf)
+            {
+                canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(false);
+            }
         }
     }
 

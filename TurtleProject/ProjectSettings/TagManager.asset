@@ -9,6 +9,7 @@ TagManager:
   - CoralSpot
   - Coral
   - Granchio
+  - Target
   layers:
   - Default
   - TransparentFX

@@ -36,9 +36,6 @@ public class OpenCagesHandler : MonoBehaviour
         this.crub_icon.enabled = true;
         this.crub_text.SetText(openCages.ToString() + "/" + totCages.ToString());
 
-        /*GameObject[] keys = GameObject.FindGameObjectsWithTag("Chiave");
-        this.countKey = keys.Length;                   --> mi da 0, poco dopo mi da 4 */
-
     }
 
     private void Update()
@@ -50,13 +47,14 @@ public class OpenCagesHandler : MonoBehaviour
             this.timer_text.SetText(seconds.ToString());
         }
 
-        //DISATTIVARE COLLIDER gabbie
+
         if(IsFinished())   //--> se gioco finito
         {
             Debug.Log("THE END");
             this.timer_text.enabled = false;
             this.crub_text.enabled = false;
             this.crub_icon.enabled = false;
+            this.hasKey = false;
 
             //faccio scomparire le chiavi
             GameObject[] arr_keys = GameObject.FindGameObjectsWithTag("Chiave");
@@ -67,10 +65,24 @@ public class OpenCagesHandler : MonoBehaviour
 
             //ANIMAZIONE gabbie che salgono 
             GameObject[] arr_cages = GameObject.FindGameObjectsWithTag("Gabbia");
-            for(int i = 0; i<arr_cages.Length; i++)
+
+            if(arr_cages != null)
             {
-                arr_cages[i].GetComponent<CageScript>().GoUp();
+                for (int i = 0; i < arr_cages.Length; i++)
+                {
+                    if (arr_cages[i] != null)
+                    {
+                        arr_cages[i].GetComponent<CageScript>().GoUp();
+                        if(arr_cages[i].transform.position.y > 50f)
+                        {
+                            //arr_cages[i].GetComponent<Rigidbody>().isKinematic = true;      //ho già disabilitato la fisica per l'oggetto
+                            Destroy(arr_cages[i]);
+                        }
+                    }
+
+                }
             }
+
 
         }
     }

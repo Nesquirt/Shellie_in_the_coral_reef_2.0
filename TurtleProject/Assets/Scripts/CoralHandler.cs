@@ -42,7 +42,7 @@ public class CoralHandler : MonoBehaviour
                     newCoral.transform.parent = this.transform;
                 }
                 //TODO: vedi se è possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
-                gameDirector.GetComponent<GameDirector>().modifyBiodiversityChange(3);
+                gameDirector.GetComponent<GameDirector>().modifyBiodiversityChange(2);
                 gameDirector.GetComponent<GameDirector>().modifyPollutionChange(1);
                 gameDirector.GetComponent<GameDirector>().modifyOxygenLevelChange(3);
                 break;
@@ -54,9 +54,9 @@ public class CoralHandler : MonoBehaviour
                     newCoral.transform.parent = this.transform;
                 }
                 //TODO: vedi se è possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
-                gameDirector.GetComponent<GameDirector>().modifyBiodiversityChange(2);
-                gameDirector.GetComponent<GameDirector>().modifyPollutionChange(0);
-                gameDirector.GetComponent<GameDirector>().modifyOxygenLevelChange(3);
+                gameDirector.GetComponent<GameDirector>().modifyBiodiversityChange(-1);
+                gameDirector.GetComponent<GameDirector>().modifyPollutionChange(-3);
+                gameDirector.GetComponent<GameDirector>().modifyOxygenLevelChange(-1);
                 break;
             case 2: //SoftCoral
                 for (int i = 0; i < spawnPoints.Length; i++)
@@ -65,9 +65,9 @@ public class CoralHandler : MonoBehaviour
                     newCoral.transform.parent = this.transform;
                 }
                 //TODO: vedi se è possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
-                gameDirector.GetComponent<GameDirector>().modifyBiodiversityChange(2);
+                gameDirector.GetComponent<GameDirector>().modifyBiodiversityChange(1);
                 gameDirector.GetComponent<GameDirector>().modifyPollutionChange(0);
-                gameDirector.GetComponent<GameDirector>().modifyOxygenLevelChange(3);
+                gameDirector.GetComponent<GameDirector>().modifyOxygenLevelChange(1);
                 break;
             case 3: //ElkhornCoral
                 for (int i = 0; i < spawnPoints.Length; i++)
@@ -77,7 +77,7 @@ public class CoralHandler : MonoBehaviour
                 }
                 //TODO: vedi se è possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
                 gameDirector.GetComponent<GameDirector>().modifyBiodiversityChange(2);
-                gameDirector.GetComponent<GameDirector>().modifyPollutionChange(0);
+                gameDirector.GetComponent<GameDirector>().modifyPollutionChange(1);
                 gameDirector.GetComponent<GameDirector>().modifyOxygenLevelChange(3);
                 break;
 

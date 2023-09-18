@@ -56,7 +56,6 @@ public class SpawnCages : MonoBehaviour
     {
         this.min = 0;
         this.max = mazeSpawnPoints.Count;
-        Debug.Log(max);
 
         for (int i = 0; i < totalCages * 2; i++)
         {

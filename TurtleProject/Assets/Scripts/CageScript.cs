@@ -11,20 +11,29 @@ public class CageScript : MonoBehaviour
 
     void Start()
     {
-        this.door = transform.GetChild(1).gameObject;
+        this.door = transform.GetChild(0).gameObject;
         this.anim = this.door.GetComponent<Animator>();
 
     }
 
-    //se chiusa la apre, altrimenti non fa nulla
+
     public void OpenCage()
     {
         if(_isLocked)
         {
-            this.anim.SetTrigger("openCage");
+            StartCoroutine(openCageAnimation());
             this._isLocked = false;
         }
     }
+
+    IEnumerator openCageAnimation()
+    {
+        this.anim.SetTrigger("openDoor");
+        yield return new WaitForSeconds(3);
+        Destroy(transform.GetChild(1).gameObject);
+        StopCoroutine(openCageAnimation());
+    }
+
 
     public bool isLocked
     {

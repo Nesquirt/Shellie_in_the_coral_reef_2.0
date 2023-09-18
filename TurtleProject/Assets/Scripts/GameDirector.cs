@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class GameDirector : MonoBehaviour
 {
     public enum GameState
@@ -147,6 +147,7 @@ public class GameDirector : MonoBehaviour
     public void addPearls(int value)
     {
         currentPearls += value;
+        GameObject.Find("Canvas/PearlsText").gameObject.GetComponent<TextMeshProUGUI>().SetText("Perle: " + getCurrentPearls());
     }
     public void addPollution(int value)
     {

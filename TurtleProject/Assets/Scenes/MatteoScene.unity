@@ -881,7 +881,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 136056400}
-  m_LocalRotation: {x: -1e-45, y: -3.78245e-10, z: 2.220446e-16, w: 1}
+  m_LocalRotation: {x: 1e-45, y: -3.78245e-10, z: 2.220446e-16, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7793,18 +7793,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea6dd6e11248f98409a110d9c0bdf198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pillarCoralButton: {fileID: 325298413}
-  fireCoralButton: {fileID: 1515722903}
-  softCoralButton: {fileID: 195240141}
-  elkhornCoralButton: {fileID: 585107205}
-  coralButtons: []
-  ConfirmButton: {fileID: 962887944}
-  CancelButton: {fileID: 99492608}
   pillarCoral: {fileID: 11400000, guid: fe0cf995df1dd634b854e3d6bc017ca5, type: 2}
   fireCoral: {fileID: 11400000, guid: 15ec3b61695c4a74d9cbe83bec0f59fa, type: 2}
   softCoral: {fileID: 11400000, guid: c3dd92fa78e840540b00e8b8a6f47f72, type: 2}
   elkhornCoral: {fileID: 11400000, guid: 503289e566e2dc345beed15ba51ead6b, type: 2}
-  gameDirector: {fileID: 1106191072}
 --- !u!1001 &1558192149
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8821,7 +8813,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884043788}
-  m_LocalRotation: {x: -0.03632495, y: 0.0000000017713826, z: 6.438811e-11, w: 0.99934006}
+  m_LocalRotation: {x: -0.03632495, y: -0.0000000025273734, z: -9.186713e-11, w: 0.99934006}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8843,7 +8835,7 @@ GameObject:
   - component: {fileID: 1887737450}
   - component: {fileID: 1887737451}
   m_Layer: 5
-  m_Name: Perle
+  m_Name: PearlsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

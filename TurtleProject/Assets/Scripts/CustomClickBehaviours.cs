@@ -5,45 +5,47 @@ using UnityEngine.UI;
 using TMPro;
 public class CustomClickBehaviours : MonoBehaviour
 {
-    [SerializeField] private Button pillarCoralButton, fireCoralButton, softCoralButton, elkhornCoralButton; //Bottoni di selezione del corallo
-    [SerializeField] private Button[] coralButtons;                                                          //Array di bottoni   
-    [SerializeField] private Button ConfirmButton, CancelButton;                                             //Bottone di conferma e annulla
-    [SerializeField] private CoralSO pillarCoral, fireCoral, softCoral, elkhornCoral;                        //Scriptable Objects contenenti le informazioni da mostrare su ogni corallo
-    private CoralSO[] corals;                                                                                //Array di Scriptable Objects
-    private int selectedCoral;                          
-    [SerializeField] private GameObject gameDirector;
+    private Button[] coralButtons;  
+    private Button ConfirmButton;
     private TextMeshProUGUI coralTitle, coralDesc, coralStats, coralCost;
+
+    [SerializeField] private CoralSO pillarCoral, fireCoral, softCoral, elkhornCoral;
+    private CoralSO[] corals;                                                                                
+    private int selectedCoral;
+    
+    private GameObject gameDirector;
+    
     private void Awake()
     {
+        // -------------------------------------------------------------------- //
+        //Trova il gameDirector
+        gameDirector = GameObject.Find("Director");
+        //Trova tutti i bottoni dei coralli e li salva in un array
         selectedCoral = -1;
         coralButtons = new Button[4];
-        coralButtons[0] = pillarCoralButton;
-        coralButtons[1] = fireCoralButton;
-        coralButtons[2] = softCoralButton;
-        coralButtons[3] = elkhornCoralButton;
+        coralButtons[0] = transform.Find("CoralChoicePanel/IconsPanel/PillarCoralButton").GetComponent<Button>();
+        coralButtons[1] = transform.Find("CoralChoicePanel/IconsPanel/FireCoralButton").GetComponent<Button>();
+        coralButtons[2] = transform.Find("CoralChoicePanel/IconsPanel/SoftCoralButton").GetComponent<Button>();
+        coralButtons[3] = transform.Find("CoralChoicePanel/IconsPanel/ElkhornCoralButton").GetComponent<Button>();
 
-        corals = new CoralSO[4];
-        corals[0] = pillarCoral;
-        corals[1] = fireCoral;
-        corals[2] = softCoral;
-        corals[3] = elkhornCoral;
-
-        //Se lasciato attivo, nasconde il pannello all'accensione
-        transform.Find("CoralChoicePanel").gameObject.SetActive(false);
-
-        /* Nota: questo for, per qualche motivo, non funziona bene. Per ora lascio la scrittura estesa
-        for(int i = 0; i<coralButtons.Length;i++)
-        {
-            coralButtons[i].onClick.AddListener(delegate { CoralButton_onClick(i); });
-        }
-        */
-        // STRUTTURA TEMPORANEA
+        //Aggiunge i listener ai bottoni dei coralli
         coralButtons[0].onClick.AddListener(delegate { CoralButton_onClick(0); });
         coralButtons[1].onClick.AddListener(delegate { CoralButton_onClick(1); });
         coralButtons[2].onClick.AddListener(delegate { CoralButton_onClick(2); });
         coralButtons[3].onClick.AddListener(delegate { CoralButton_onClick(3); });
 
+        //Trova il bottone di conferma, e aggiunge il listener
+        ConfirmButton = transform.Find("CoralChoicePanel/ChoicePanel/ConfirmButton").GetComponent<Button>();
         ConfirmButton.onClick.AddListener(delegate { Confirm_onClick(); });
+        //Nota: il bottone annulla ha il default listener, perché deve solo disattivare il pannello
+
+        //Inserisce gli scriptable objects con le info dei coralli in un array
+        //TODO: vedi se riesci a ricavarli tramite resources.findobjectsoftypeall()
+        corals = new CoralSO[4];
+        corals[0] = pillarCoral;
+        corals[1] = fireCoral;
+        corals[2] = softCoral;
+        corals[3] = elkhornCoral;
 
         //Prende i campi di testo del pannello
         coralTitle = transform.Find("CoralChoicePanel/InfoPanel/TitlePanel/CoralTitle").gameObject.GetComponent<TextMeshProUGUI>();
@@ -55,11 +57,21 @@ public class CustomClickBehaviours : MonoBehaviour
         coralDesc.SetText("");
         coralStats.SetText("");
         coralCost.SetText("");
+
+        //Se lasciato attivo, nasconde il pannello all'accensione
+        if (transform.Find("CoralChoicePanel").gameObject.activeSelf)
+            transform.Find("CoralChoicePanel").gameObject.SetActive(false);
+
+        /* Nota: questo for, per qualche motivo, non funziona bene. Per ora lascio la scrittura estesa
+        for(int i = 0; i<coralButtons.Length;i++)
+        {
+            coralButtons[i].onClick.AddListener(delegate { CoralButton_onClick(i); });
+        }
+        */
     }
 
     public void CoralButton_onClick(int index)
     {
-        Debug.Log(index);
         coralTitle.SetText(corals[index].coralName);
         coralDesc.SetText(corals[index].coralDesc);
         coralStats.SetText("Caratteristiche:" +

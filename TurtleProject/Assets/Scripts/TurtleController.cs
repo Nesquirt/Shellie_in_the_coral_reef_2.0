@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class TurtleController : MonoBehaviour
 {
-    [SerializeField] private float acceleration = 3;
-    [SerializeField] private float maxSpeed = 10;
-    [SerializeField] private float maxRotationSpeed = 90;
-    [SerializeField] private Rigidbody rb;
+    [SerializeField] private float acceleration;
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float maxRotationSpeed;
+    private Rigidbody rb;
     private float speed, verticalRotationSpeed, lateralRotationSpeed;
     private Vector3 eulerRotationSpeed;
     private float h, v, j;
@@ -77,7 +77,7 @@ public class TurtleController : MonoBehaviour
 
         // -------------------------------------------------------------------- //
         //rotazione laterale
-        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, this.transform.eulerAngles.y + lateralRotationSpeed * lateralRotationFactor, -lateralRotationSpeed * 140);
+        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, this.transform.eulerAngles.y + lateralRotationSpeed * lateralRotationFactor, -lateralRotationSpeed * 30 * lateralRotationFactor);
 
         //rotazione verticale
         this.transform.eulerAngles = new Vector3(-verticalRotationSpeed * 100, this.transform.eulerAngles.y, this.transform.eulerAngles.z);

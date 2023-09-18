@@ -7,11 +7,11 @@ using UnityEngine.UI;
 
 public class OpenCagesHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject piano;
+    [SerializeField] private GameObject container;
 
     [SerializeField] private TextMeshProUGUI timer_text;
     [SerializeField] private TextMeshProUGUI crub_text;
-    [SerializeField] private Image crub_icon; 
+    [SerializeField] private Image crub_icon;
 
     private float timeRemaining;
     private float seconds;
@@ -22,7 +22,7 @@ public class OpenCagesHandler : MonoBehaviour
 
     void Awake()
     {
-        this.totCages = this.piano.GetComponent<SpawnCages>().totalCages;
+        this.totCages = this.container.GetComponent<SpawnCages>().totalCages;  //prendo il numero di casse
         this.timeRemaining = 60f;
         this.seconds = Mathf.Round(timeRemaining);
 

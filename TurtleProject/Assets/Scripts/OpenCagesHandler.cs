@@ -89,11 +89,11 @@ public class OpenCagesHandler : MonoBehaviour
                     if (arr_cages[i] != null)
                     {
                         arr_cages[i].GetComponent<CageScript>().GoUp();
-                        /*if(arr_cages[i].transform.position.y > 50f)
+                        if(arr_cages[i].transform.position.y > 50f)
                         {
                             //arr_cages[i].GetComponent<Rigidbody>().isKinematic = true;      //ho già disabilitato la fisica per l'oggetto
                             Destroy(arr_cages[i]);
-                        }*/
+                        }
                     }
 
                 }

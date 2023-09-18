@@ -9,6 +9,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     [SerializeField] private GameObject prefabToSpawn1;
     [SerializeField] private GameObject prefabToSpawn2;
     [SerializeField] private GameObject prefabToSpawn3;
+    [SerializeField] private GameObject sostegno;
     [SerializeField] private float spawnAreaWidth = 100f; // Larghezza dell'area in cui verranno spawnati i prefabs
     [SerializeField] private float spawnAreaLength = 100f; // Lunghezza dell'area in cui verranno spawnati i prefabs
     [SerializeField] private int numerodaspawnare =10;
@@ -39,6 +40,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
            // totalTime=60f;
            // rifiutiraccolti=0;
             //numerodaspawnare=5;
+            sostegno.gameObject.SetActive(false);
             testo.gameObject.SetActive(true);
             testo1.gameObject.SetActive(true);
             testo2.gameObject.SetActive(true);
@@ -101,7 +103,9 @@ public class SpawnPrefabsRandomly : MonoBehaviour
             //testo1.text = " ";
            a=1;
            currentTime2=0;
+           sostegno.gameObject.SetActive(true);
            this.gameObject.SetActive(false);
+
            
           
         }

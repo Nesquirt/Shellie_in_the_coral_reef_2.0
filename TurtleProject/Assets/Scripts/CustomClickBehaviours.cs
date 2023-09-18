@@ -72,12 +72,11 @@ public class CustomClickBehaviours : MonoBehaviour
     }
     public void Confirm_onClick()
     {
-        if(selectedCoral != -1)
+        if(selectedCoral != -1 && gameDirector.GetComponent<GameDirector>().getCurrentPearls() >= corals[selectedCoral].getCost())
         {
+            gameDirector.GetComponent<GameDirector>().addPearls(-corals[selectedCoral].getCost());
             gameDirector.GetComponent<GameDirector>().currentCoralSpot.GetComponent<CoralHandler>().SpawnCorals(selectedCoral);
         }
-            
 
-        //TODO: impostare condizione di prezzo, e diminuzione delle perle
     }
 }

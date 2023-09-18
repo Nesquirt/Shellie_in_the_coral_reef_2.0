@@ -25,14 +25,18 @@ public class SpawnCages : MonoBehaviour
     private int num;
 
     private void Awake()
-    {
-
-        //this.mazeSpawnPoints = new Vector3[15];
+    {        
         this.mazeSpawnPoints = new List<Vector3>();
         this.posx = this.transform.position.x;
         this.posy = this.transform.position.y;
         this.posz = this.transform.position.z;
 
+        restartGame();
+        Spawn();
+    }
+
+    public void restartGame()
+    {
         mazeSpawnPoints.Add(new Vector3(posx - 54.8f, posy + 10f, posz - 302.6f));
         mazeSpawnPoints.Add(new Vector3(posx + 3.6f, posy + 10f, posz - 298.6f));
         mazeSpawnPoints.Add(new Vector3(posx - 116.8f, posy + 10f, posz - 213.5f));
@@ -48,9 +52,7 @@ public class SpawnCages : MonoBehaviour
         mazeSpawnPoints.Add(new Vector3(posx - 109.9f, posy + 10f, posz - 295.9f));
         mazeSpawnPoints.Add(new Vector3(posx - 4.8f, posy + 10f, posz - 158.6f));
         mazeSpawnPoints.Add(new Vector3(posx, posy + 10f, posz));
-
-        Spawn();
-    }
+    }    
 
     private void Spawn()
     {

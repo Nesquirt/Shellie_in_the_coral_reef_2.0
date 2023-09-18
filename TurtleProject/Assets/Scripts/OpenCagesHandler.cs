@@ -7,11 +7,11 @@ using UnityEngine.UI;
 
 public class OpenCagesHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject container;
+    [SerializeField] private GameObject container;  //è l'oggetto stesso
 
-    [SerializeField] private TextMeshProUGUI timer_text;
-    [SerializeField] private TextMeshProUGUI crub_text;
-    [SerializeField] private Image crub_icon;
+    private GameObject canvas;
+    private TextMeshProUGUI timer_text, crub_text;
+    private Image crub_icon;
 
     private float timeRemaining;
     private float seconds;
@@ -22,6 +22,12 @@ public class OpenCagesHandler : MonoBehaviour
 
     void Awake()
     {
+        restartMazeGame();
+    }
+
+    //TODO: richiama ogni volta che parte minigame MazeExploring
+    public void restartMazeGame()
+    {
         this.totCages = this.container.GetComponent<SpawnCages>().totalCages;  //prendo il numero di casse
         this.timeRemaining = 60f;
         this.seconds = Mathf.Round(timeRemaining);
@@ -29,17 +35,26 @@ public class OpenCagesHandler : MonoBehaviour
         this.hasKey = false;
         this.openCages = 0;
 
-        this.timer_text.enabled = true;
-        this.timer_text.SetText(seconds.ToString());
+        this.canvas = GameObject.Find("Canvas");
 
-        this.crub_text.enabled = true;
-        this.crub_icon.enabled = true;
-        this.crub_text.SetText(openCages.ToString() + "/" + totCages.ToString());
+        this.timer_text = canvas.transform.Find("TimerText").gameObject.GetComponent<TextMeshProUGUI>();
+        timer_text.enabled = true;
+        timer_text.SetText(seconds.ToString());
 
+        this.crub_icon = canvas.transform.Find("CrubIcon").gameObject.GetComponent<Image>();
+        crub_icon.enabled = true;
+
+        this.crub_text = canvas.transform.Find("FreedCrub").gameObject.GetComponent<TextMeshProUGUI>();
+        crub_text.enabled = true;
+        crub_text.SetText(openCages.ToString() + "/" + totCages.ToString());
     }
 
+    //TODO: elimina metodo Update, NON è necessario --> sistema codice altrove (Coroutines ogni 0.1f)
     private void Update()
     {
+        //if (GameObject.Find("Director").GetComponent<GameDirector>().getGameState() != GameDirector.GameState.MazeExploring)
+            //return;
+
         if (this.timeRemaining > 0)
         {
             this.timeRemaining -= Time.deltaTime;
@@ -89,7 +104,46 @@ public class OpenCagesHandler : MonoBehaviour
 
 
 
-    private void OnTriggerStay(Collider other)
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Chiave"))
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                if (!hasKey)
+                {
+                    Destroy(other.gameObject);
+                    this.hasKey = true;
+                    Debug.Log("ho la chiave");
+                }
+                else
+                    return;
+            }
+        }
+       
+        if (other.CompareTag("Gabbia"))
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                if (hasKey && other.GetComponent<CageScript>().isLocked)
+                {
+                    Debug.Log("apro gabbia");
+                    other.GetComponent<CageScript>().OpenCage();
+                    this.hasKey = false;
+                    this.openCages++;
+                    Debug.Log("GABBIE APERTE: " + this.openCages);
+                    this.crub_text.SetText(openCages.ToString() + "/" + totCages.ToString());
+                }
+                else
+                    return;
+                
+            }
+        }
+           
+    }
+
+    //TODO: temporaneo
+    public void TriggerMethod(Collider other)
     {
         if (other.CompareTag("Chiave"))
         {
@@ -121,12 +175,10 @@ public class OpenCagesHandler : MonoBehaviour
                 }
                 else
                     return;
-                
+
             }
         }
-           
     }
-
     private bool IsFinished()
     {
         if(this.openCages == this.totCages || this.seconds == 0)

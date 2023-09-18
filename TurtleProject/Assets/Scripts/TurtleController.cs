@@ -108,6 +108,8 @@ public class TurtleController : MonoBehaviour
         {
             other.GetComponentInParent<TargetHandler>().raceStartPrompt();
         }
+        //else if (other.tag == "chiave" || other.tag == "gabbia")
+        //    GameObject.Find("Posizioni_CageKey").GetComponent<OpenCagesHandler>().TriggerMethod(other);
     }
     public void OnTriggerExit(Collider other)
     {

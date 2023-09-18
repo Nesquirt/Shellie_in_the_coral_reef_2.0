@@ -6,19 +6,29 @@ using UnityEngine.UI;
 
 public class GameDirector : MonoBehaviour
 {
+    public enum GameState
+    {
+        FreeRoaming,        //Non attualmente in un minigioco
+        ObstacleCourse,     //Percorso ad ostacoli
+        TrashCollecting,    //Raccolta della spazzatura nella rete
+        MazeExploring       //Esplorazione del labirinto per liberare i granchi
+    }
+
+    public GameState currentState;
 
     private int reefHealth, pollution, biodiversity, oxygenLevel;
     private int pollutionChange, biodiversityChange, oxygenLevelChange, reefHealthChange;
     private GameObject[] corals;
-    public Slider reefHealthSlider, pollutionSlider, biodiversitySlider, oxygenLevelSlider;
-    public Image reefHealthArrow, pollutionArrow, biodiversityArrow, oxygenLevelArrow;
-    //TODO: aggiungi un'immagine per quando il cambiamento di parametri è 0
 
+    public Slider reefHealthSlider, pollutionSlider, biodiversitySlider, oxygenLevelSlider;
+    public Image reefHealthArrow, pollutionArrow, biodiversityArrow, oxygenLevelArrow;  //TODO: aggiungi un'immagine per quando il cambiamento di parametri è 0
     public Sprite upArrow, downArrow;
     
     public GameObject currentCoralSpot;
     private void Awake()
     {
+        currentState = GameState.FreeRoaming;
+
         reefHealth = 50;
         pollution = 70;
         biodiversity = 24;
@@ -76,7 +86,7 @@ public class GameDirector : MonoBehaviour
 
         if (reefHealth >= 0 && reefHealth <= 100)
         {
-            reefHealthChange = ((pollution / 10) - 4) + ((biodiversity / 10) - 4) + ((oxygenLevel / 10) - 4);
+            reefHealthChange = (4 - (pollution / 10)) + ((biodiversity / 10) - 4) + ((oxygenLevel / 10) - 4);
             reefHealth += reefHealthChange;
             if (reefHealthChange >= 0)
                 reefHealthArrow.sprite = upArrow;
@@ -159,5 +169,15 @@ public class GameDirector : MonoBehaviour
         return totalChange;
     }
     */
+
+    public void setGameState(GameState newState)
+    {
+        currentState = newState;
+    }
+
+    public GameState getGameState()
+    {
+        return currentState;
+    }
 
 }

@@ -31,17 +31,12 @@ public class TurtleController : MonoBehaviour
         //calcolo della velocità frontale
         if(speed>=0 && speed<=maxSpeed)
             speed += acceleration * v * Time.deltaTime;
-        if (v == 0)
-            speed += acceleration * v * Time.deltaTime * 0.5f;
+        if (v == 0 && speed >= 0) //se non è premuta W, la tartaruga rallenta
+            speed -= acceleration * Time.deltaTime * 0.5f;
         if (speed < 0)
             speed = 0;
         if (speed > maxSpeed)
             speed = maxSpeed;
-
-        
-
-        //rallentamento se non è premuta W
-        
 
         // -------------------------------------------------------------------- //
         //calcolo della rotazione laterale
@@ -56,13 +51,13 @@ public class TurtleController : MonoBehaviour
         else if (h == 0 && lateralRotationSpeed != 0) 
         {           
             if (lateralRotationSpeed > 0)
-                lateralRotationSpeed -= acceleration * Time.deltaTime * 0.2f;
+                lateralRotationSpeed -= acceleration * Time.deltaTime * 0.2f ;
             else
-                lateralRotationSpeed += acceleration * Time.deltaTime * 0.2f; 
+                lateralRotationSpeed += acceleration * Time.deltaTime * 0.2f * (maxSpeed / speed); 
         }
-        //if (Mathf.Abs(lateralRotationSpeed) < 0.01)
-        //    lateralRotationSpeed = 0;
 
+        //Fattore di rotazione relativo alla velocità (più la tartaruga è lenta, più può ruotare veloce
+        float lateralRotationFactor = 7f - (speed/(maxSpeed))*3f;
         // -------------------------------------------------------------------- //
         //calcolo della rotazione verticale
         verticalRotationSpeed = 0;
@@ -82,7 +77,7 @@ public class TurtleController : MonoBehaviour
 
         // -------------------------------------------------------------------- //
         //rotazione laterale
-        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, this.transform.eulerAngles.y + lateralRotationSpeed * 4f, -lateralRotationSpeed * 140);
+        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, this.transform.eulerAngles.y + lateralRotationSpeed * lateralRotationFactor, -lateralRotationSpeed * 140);
 
         //rotazione verticale
         this.transform.eulerAngles = new Vector3(-verticalRotationSpeed * 100, this.transform.eulerAngles.y, this.transform.eulerAngles.z);
@@ -91,10 +86,21 @@ public class TurtleController : MonoBehaviour
         if (speed > 0)
             this.rb.MovePosition(this.rb.position + this.transform.forward * (speed * Time.deltaTime));
     }
-
+    /*
     public void Update()        //In questo metodo vanno le funzioni dedicate allo spostamento
     {
         
+    }*/
+
+
+    // -------------------------------------------------------------------- //
+    //Metodo che invia il nome del target attraversato alla funzione principale, nel minigioco di corsa ad ostacoli
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Target")
+        { 
+            other.GetComponentInParent<TargetHandler>().TargetCollision(other.name);
+        }
     }
 
     // -------------------------------------------------------------------- //

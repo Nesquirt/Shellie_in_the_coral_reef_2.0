@@ -7,6 +7,7 @@ public class CageScript : MonoBehaviour
     private bool _isLocked = true;
     private GameObject door;
     private Animator anim;
+    private Rigidbody rb;
 
     void Start()
     {
@@ -30,5 +31,12 @@ public class CageScript : MonoBehaviour
         get { return _isLocked; }
         set { _isLocked = value; }
     }
+
+    public void GoUp()
+    {
+        this.rb = this.GetComponent<Rigidbody>();
+        rb.AddForce(Vector3.up * 10);
+    }
+
 
 }

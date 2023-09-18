@@ -58,71 +58,19 @@ public class SpawnCages : MonoBehaviour
         this.max = mazeSpawnPoints.Count;
         Debug.Log(max);
 
-        for (int i = 0; i < totalCages * 2 - 1; i++)
-        {
-            this.num = Random.Range(0, mazeSpawnPoints.Count);
-
-
-
-        }
-
-    }
-}
-
-    /*
-    private void SpawnARRAY()
-    {
-        this.min = 0;
-        this.max = mazeSpawnPoints.Length;
-
         for (int i = 0; i < totalCages * 2; i++)
         {
-            this.num = Random.Range(min, max);       //numero random tra 0 e 14
-            Debug.Log(num);
-            Debug.Log("min: " + min + "; MAX: " + max);
-            Instantiate(cagePrefab, mazeSpawnPoints[num], Quaternion.identity, cagesParent);
-            for(int j=num; j<mazeSpawnPoints.Length - 1; j++)
+            this.num = Random.Range(0, mazeSpawnPoints.Count);
+            if(i % 2 == 0)
             {
-                mazeSpawnPoints[num] = mazeSpawnPoints[num + 1];
+                Instantiate(cagePrefab, mazeSpawnPoints[num], Quaternion.identity, cagesParent);
             }
-            mazeSpawnPoints.RemoveAt(mazeSpawnPoints.Length); 
-            max--;
+            else
+            {
+                Instantiate(keyPrefab, mazeSpawnPoints[num], Quaternion.identity, keysParent);
+            }
+            this.mazeSpawnPoints.RemoveAt(num);
         }
 
     }
-    */
-
-    /*
-    private void SpawnPROVA()
-    {
-        for(int i=0; i<mazeSpawnPoints.Length; i++)
-        {
-            Instantiate(cagePrefab, mazeSpawnPoints[i], Quaternion.identity, cagesParent);
-        }
-    }
-
-
-    }
-    */
-
-
-/*
-* void Start()
-{
-
- Transform transform = GetComponent<Transform>();
-
-for(int i=0; i<totalCages; i++)
-{
-    Vector3 v = new Vector3( Random.Range(transform.position.x - 50, transform.position.x + 50), transform.position.y + 3f, Random.Range(transform.position.z - 50, transform.position.z + 50));
-    GameObject newCage = Instantiate(cagePrefab, v, Quaternion.identity);
-    newCage.transform.SetParent(cagesParent);
-
-    Vector3 v1 = new Vector3(Random.Range(transform.position.x - 50, transform.position.x + 50), transform.position.y + 1f, Random.Range(transform.position.z - 50, transform.position.z + 50));
-    GameObject newKey = Instantiate(keyPrefab, v1, Quaternion.identity);
-    newKey.transform.SetParent(keysParent);
-
 }
-
-}
-*/

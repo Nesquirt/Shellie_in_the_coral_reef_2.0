@@ -7,7 +7,7 @@ public class TargetHandler : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject directorObject;
     private GameDirector director;
-    private GameObject[] targets;
+    //private GameObject[] targets;
     [SerializeField] private Material activeMaterial, inactiveMaterial;
     private int currentTime;        //Tempo attuale del timer in millisecondi
 
@@ -19,7 +19,7 @@ public class TargetHandler : MonoBehaviour
     private void Awake()
     {
         director = directorObject.GetComponent<GameDirector>();
-        targets = GameObject.FindGameObjectsWithTag("Target");
+        //targets = GameObject.FindGameObjectsWithTag("Target");
 
         raceStart(); //TODO: rimuovi e mettilo come prompt
     }
@@ -48,7 +48,15 @@ public class TargetHandler : MonoBehaviour
         //TARGETS
         //Resetta il numero di targets e rende il primo target attivo
         targetNumber = 0;
-        GameObject.Find("Target0").GetComponent<MeshRenderer>().material = activeMaterial;
+        for(int i = 0; i<=28; i++)
+        {
+            string targetName = "Target" + i;
+            GameObject.Find(targetName).gameObject.SetActive(true);
+            if(i==0)
+                GameObject.Find(targetName).GetComponent<MeshRenderer>().material = activeMaterial;
+            else
+                GameObject.Find(targetName).GetComponent<MeshRenderer>().material = inactiveMaterial;
+        }
     }
 
     IEnumerator Timer()
@@ -70,8 +78,13 @@ public class TargetHandler : MonoBehaviour
             //return;
 
             //Imposta il target successivo come attivo
-            if(targetNumber < 28)
+            if(targetNumber <= 28)
             {
+                if(targetNumber == 28)
+            {
+                Victory();
+                return;
+            }
                 if (targetName != "Target" + targetNumber)
                 return;
 
@@ -81,8 +94,14 @@ public class TargetHandler : MonoBehaviour
                 targetNumber++;
                 
             }
-            
-        
+    }
+
+    public void Victory()
+    {
+        director.setGameState(GameDirector.GameState.FreeRoaming);
+
+        //TODO: temporaneo per testing
+        raceStart();
     }
 
 }

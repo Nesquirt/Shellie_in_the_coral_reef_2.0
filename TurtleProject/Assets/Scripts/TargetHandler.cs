@@ -20,8 +20,7 @@ public class TargetHandler : MonoBehaviour
     private Rigidbody rb;
 
     private Transform obstacleRacePrompt;
-    private TextMeshProUGUI NPCName;
-    private TextMeshProUGUI dialogueText;
+    private TextMeshProUGUI NPCName, dialogueText, rewardsText, timer;
     private Button confirmButton, cancelButton;
     private void Awake()
     {
@@ -33,6 +32,7 @@ public class TargetHandler : MonoBehaviour
         canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
         confirmButton = canvas.transform.Find("DialoguePanel/ConfirmButton").gameObject.GetComponent<Button>();
         cancelButton = canvas.transform.Find("DialoguePanel/CancelButton").gameObject.GetComponent<Button>();
+        timer = canvas.transform.Find("Timer").gameObject.GetComponent<TextMeshProUGUI>();
 
         confirmButton.onClick.AddListener(ConfirmButton_onClick);
         cancelButton.onClick.AddListener(CancelButton_onClick);
@@ -48,13 +48,13 @@ public class TargetHandler : MonoBehaviour
     //Funzioni chiamate all'interno di TurtleController per gestire il dialogo con l'anguilla
     public void raceStartPrompt()
     {
+        if (director.getGameState() != GameDirector.GameState.FreeRoaming)
+            return;
         if(!canvas.transform.Find("DialoguePanel").gameObject.activeSelf)
             obstacleRacePrompt.gameObject.SetActive(true);
-        Debug.Log("Entrato nella trigger zone");
         if(Input.GetKey(KeyCode.E))
         {
             canvas.transform.Find("BarsPanel").gameObject.SetActive(false);
-            Debug.Log("Premuto tasto E");
             obstacleRacePrompt.gameObject.SetActive(false);
             canvas.transform.Find("DialoguePanel").gameObject.SetActive(true);
             NPCName.SetText("Anguilla");
@@ -77,6 +77,7 @@ public class TargetHandler : MonoBehaviour
         raceStart();
         canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
         obstacleRacePrompt.gameObject.SetActive(false);
+        canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
     }
     public void CancelButton_onClick()
     {
@@ -101,7 +102,8 @@ public class TargetHandler : MonoBehaviour
 
         // -------------------------------------------------------------------- //
         //TIMER
-        //Resetta il timer (riparte appena si supera il primo ostacolo
+        //Resetta il timer (riparte appena si supera il primo ostacolo)
+        timer.gameObject.SetActive(true);
         currentTenths = 0;
 
         // -------------------------------------------------------------------- //
@@ -126,17 +128,15 @@ public class TargetHandler : MonoBehaviour
     }
     IEnumerator Timer()
     {
-        for (currentTenths = 0; currentTenths < 1800; currentTenths++) //600 = 1 minuto
+        for (currentTenths = 0; currentTenths < 18000; currentTenths++)
         {
-            if (currentTenths % 10 == 0)
-            {
-                //TODO: interfaccia timer
-            }
+            timer.SetText(TimeToString());
             yield return new WaitForSeconds(.1f);
         }
     }
     public void TargetCollision(string targetName) //Metodo chiamato da TurtleController
     {
+        Debug.Log(TimeToString());
         //Check del gamestate, per vedere se è iniziato il minigioco (TODO: disabilitato finché non implemento il prompt, altrimenti va in conflitto con l'awake del gamedirector
         if (director.getGameState() != GameDirector.GameState.ObstacleCourse)
             return;
@@ -158,7 +158,8 @@ public class TargetHandler : MonoBehaviour
                 {
                     Victory();
                     StopCoroutine(Timer());
-                    return;
+                    timer.gameObject.SetActive(false);
+                return;
                 }
                 GameObject.Find(nextTargetName).GetComponent<MeshRenderer>().material = activeMaterial;
                 targetNumber++;
@@ -169,10 +170,30 @@ public class TargetHandler : MonoBehaviour
     {
         director.setGameState(GameDirector.GameState.FreeRoaming);
 
-        int earnedPearls = 10 + (10 * (600/currentTenths)); //da più gemme se il percorso è completato entro un minuto
+        float earnedPearlsFloat = 10 + 10 * (float)(800/currentTenths); //da più gemme se il percorso è completato entro un minuto e venti
+        int earnedPearls = (int)earnedPearlsFloat;
         //current range di perle: 20 max, 13 min
         director.addPearls(earnedPearls);
         director.addOxygenLevel(20);
+
+        canvas.transform.Find("VictoryPanel").gameObject.SetActive(true);
+        rewardsText = canvas.transform.Find("VictoryPanel/RewardsPanel/RewardsText").GetComponent<TextMeshProUGUI>();
+        rewardsText.SetText("Tempo impiegato: " + TimeToString() + "\n" +
+                            "Perle guadagnate: " + earnedPearls + "\n" + 
+                            "Livello di ossigeno aumentato del 20%");
+    }
+
+    private string TimeToString()
+    {
+        int minutes = currentTenths / 600;
+        int seconds = (currentTenths % 600) / 10;
+        int tenths = currentTenths % 10;
+
+        if(seconds<10)
+            return minutes + ":0" + seconds + ":" + tenths + "0";
+        else
+            return minutes + ":" + seconds + ":" + tenths + "0";
+
     }
 
 }

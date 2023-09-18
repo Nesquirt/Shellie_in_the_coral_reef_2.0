@@ -50,7 +50,7 @@ public class OpenCagesHandler : MonoBehaviour
 
         if(IsFinished())   //--> se gioco finito
         {
-            Debug.Log("THE END");
+            //Debug.Log("THE END");
             this.timer_text.enabled = false;
             this.crub_text.enabled = false;
             this.crub_icon.enabled = false;
@@ -73,11 +73,11 @@ public class OpenCagesHandler : MonoBehaviour
                     if (arr_cages[i] != null)
                     {
                         arr_cages[i].GetComponent<CageScript>().GoUp();
-                        if(arr_cages[i].transform.position.y > 50f)
+                        /*if(arr_cages[i].transform.position.y > 50f)
                         {
                             //arr_cages[i].GetComponent<Rigidbody>().isKinematic = true;      //ho già disabilitato la fisica per l'oggetto
                             Destroy(arr_cages[i]);
-                        }
+                        }*/
                     }
 
                 }

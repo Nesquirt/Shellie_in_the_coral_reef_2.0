@@ -35,7 +35,8 @@ public class CageScript : MonoBehaviour
     public void GoUp()
     {
         this.rb = this.GetComponent<Rigidbody>();
-        rb.AddForce(Vector3.up * 10);
+        this.rb.AddForce(Vector3.up * 10);
+        Debug.Log("saleeeee");
     }
 
 

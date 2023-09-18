@@ -22,31 +22,32 @@ public class OpenCagesHandler : MonoBehaviour
 
     void Awake()
     {
+        this.totCages = this.container.GetComponent<SpawnCages>().totalCages;  //prendo il numero di casse
+        this.canvas = GameObject.Find("Canvas");
+        this.timer_text = canvas.transform.Find("MazeCanvas/TimerText").gameObject.GetComponent<TextMeshProUGUI>();
+        this.crub_icon = canvas.transform.Find("MazeCanvas/CrubIcon").gameObject.GetComponent<Image>();
+        this.crub_text = canvas.transform.Find("MazeCanvas/FreedCrub").gameObject.GetComponent<TextMeshProUGUI>();
         restartMazeGame();
     }
 
     //TODO: richiama ogni volta che parte minigame MazeExploring
     public void restartMazeGame()
     {
-        this.totCages = this.container.GetComponent<SpawnCages>().totalCages;  //prendo il numero di casse
         this.timeRemaining = 60f;
         this.seconds = Mathf.Round(timeRemaining);
 
         this.hasKey = false;
         this.openCages = 0;
 
-        this.canvas = GameObject.Find("Canvas");
-
-        this.timer_text = canvas.transform.Find("TimerText").gameObject.GetComponent<TextMeshProUGUI>();
         timer_text.enabled = true;
         timer_text.SetText(seconds.ToString());
 
-        this.crub_icon = canvas.transform.Find("CrubIcon").gameObject.GetComponent<Image>();
         crub_icon.enabled = true;
 
-        this.crub_text = canvas.transform.Find("FreedCrub").gameObject.GetComponent<TextMeshProUGUI>();
         crub_text.enabled = true;
         crub_text.SetText(openCages.ToString() + "/" + totCages.ToString());
+
+        //TODO: fai partire Coroutine(?)
     }
 
     //TODO: elimina metodo Update, NON è necessario --> sistema codice altrove (Coroutines ogni 0.1f)
@@ -62,7 +63,7 @@ public class OpenCagesHandler : MonoBehaviour
             this.timer_text.SetText(seconds.ToString());
         }
 
-
+        //TODO: metti dentro Coroutine
         if(IsFinished())   //--> se gioco finito
         {
             //Debug.Log("THE END");
@@ -142,7 +143,7 @@ public class OpenCagesHandler : MonoBehaviour
            
     }
 
-    //TODO: temporaneo
+    //TODO: temporaneo (metodo chiamato da TurtleController
     public void TriggerMethod(Collider other)
     {
         if (other.CompareTag("Chiave"))

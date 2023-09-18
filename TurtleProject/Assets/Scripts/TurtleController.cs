@@ -97,9 +97,23 @@ public class TurtleController : MonoBehaviour
     //Metodo che invia il nome del target attraversato alla funzione principale, nel minigioco di corsa ad ostacoli
     public void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Target")
-        { 
+        if (other.tag == "Target")
+        {
             other.GetComponentInParent<TargetHandler>().TargetCollision(other.name);
+        }
+    }
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.name == "Anguilla_collider")
+        {
+            other.GetComponentInParent<TargetHandler>().raceStartPrompt();
+        }
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.name == "Anguilla_collider")
+        {
+            other.GetComponentInParent<TargetHandler>().AnguillaTriggerExit();
         }
     }
 

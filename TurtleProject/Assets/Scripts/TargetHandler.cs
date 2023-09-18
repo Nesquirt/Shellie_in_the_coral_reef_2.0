@@ -48,10 +48,16 @@ public class TargetHandler : MonoBehaviour
         //TARGETS
         //Resetta il numero di targets e rende il primo target attivo
         targetNumber = 0;
-        for(int i = 0; i<=28; i++)
+        Transform[] targets = GameObject.Find("Targets").GetComponentsInChildren<Transform>(true);
+        for (int i = 0; i < targets.Length; i++)
+        {
+            //Riattiva tutti i target (Nota: GameObject.Find() funziona solo con oggetti attivi.
+            //Li ho dovuti riattivare tramite GetComponentsInChildren().
+            targets[i].gameObject.SetActive(true);
+        }
+        for(int i = 0;i <= 28; i++)
         {
             string targetName = "Target" + i;
-            GameObject.Find(targetName).gameObject.SetActive(true);
             if(i==0)
                 GameObject.Find(targetName).GetComponent<MeshRenderer>().material = activeMaterial;
             else
@@ -61,7 +67,7 @@ public class TargetHandler : MonoBehaviour
 
     IEnumerator Timer()
     {
-        for (currentTenths = 0; currentTenths < 1800; currentTenths++)
+        for (currentTenths = 0; currentTenths < 1800; currentTenths++) //600 = 1 minuto
         {
             if (currentTenths % 10 == 0)
             {
@@ -80,16 +86,17 @@ public class TargetHandler : MonoBehaviour
             //Imposta il target successivo come attivo
             if(targetNumber <= 28)
             {
-                if(targetNumber == 28)
-            {
-                Victory();
-                return;
-            }
+                
                 if (targetName != "Target" + targetNumber)
-                return;
+                    return;
 
                 string nextTargetName = "Target" + (targetNumber + 1);
                 GameObject.Find(targetName).gameObject.SetActive(false);
+                if(targetNumber == 28)
+                {
+                    Victory();
+                    return;
+                }
                 GameObject.Find(nextTargetName).GetComponent<MeshRenderer>().material = activeMaterial;
                 targetNumber++;
                 
@@ -99,9 +106,8 @@ public class TargetHandler : MonoBehaviour
     public void Victory()
     {
         director.setGameState(GameDirector.GameState.FreeRoaming);
-
-        //TODO: temporaneo per testing
-        raceStart();
+        director.addPearls(15);
+        director.addOxygenLevel(20);
     }
 
 }

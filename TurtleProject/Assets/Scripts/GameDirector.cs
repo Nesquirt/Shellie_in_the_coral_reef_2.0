@@ -16,6 +16,7 @@ public class GameDirector : MonoBehaviour
 
     public GameState currentState;
 
+    private int currentPearls;
     private int reefHealth, pollution, biodiversity, oxygenLevel;
     private int pollutionChange, biodiversityChange, oxygenLevelChange, reefHealthChange;
     private GameObject[] corals;
@@ -28,6 +29,8 @@ public class GameDirector : MonoBehaviour
     private void Awake()
     {
         currentState = GameState.FreeRoaming;
+
+        currentPearls = 0;
 
         reefHealth = 50;
         pollution = 70;
@@ -113,6 +116,8 @@ public class GameDirector : MonoBehaviour
         */
     }
 
+    // -------------------------------------------------------------------- //
+    //Metodi per modificare la velocità dei parametri; usati dai coralli
     public void modifyPollutionChange(int value)
     {
         pollutionChange += value;
@@ -137,39 +142,46 @@ public class GameDirector : MonoBehaviour
         else
             oxygenLevelArrow.sprite = downArrow;
     }
-
-    /*
-    public int CalculatePollutionChange()
+    // -------------------------------------------------------------------- //
+    //Metodi per modificare direttamente i parametri; usati dai minigiochi
+    public void addPearls(int value)
     {
-        int totalChange = +5;   //valore di default se non ci sono coralli
-        foreach (GameObject coral in corals)
-        {
-            //totalChange += coral.GetComponent<CoralStats>().getPollutionChange();
-        }
-        return totalChange;
+        currentPearls += value;
+    }
+    public void addPollution(int value)
+    {
+        pollution += value;
+        pollutionSlider.value = pollution;
+    }
+    public void addOxygenLevel(int value)
+    {
+        oxygenLevel += value;
+        oxygenLevelSlider.value = oxygenLevel;
+    }
+    public void addBiodiversity(int value)
+    {
+        biodiversity += value;
+        biodiversitySlider.value = biodiversity;
     }
 
-    public int CalculateBiodiversityChange()
+    public int getCurrentPearls()
     {
-        int totalChange = -3;   //valore di default se non ci sono coralli
-        foreach (GameObject coral in corals)
-        {
-            //totalChange += coral.GetComponent<CoralStats>().getBiodiversityChange();
-        }
-        return totalChange;
+        return currentPearls;
     }
-
-    public int CalculateOxygenLevelChange()
+    public int getPollution()
     {
-        int totalChange = -4;   //valore di default se non ci sono coralli
-        foreach (GameObject coral in corals)
-        {
-            //totalChange += coral.GetComponent<CoralStats>().getOxygenLevelChange();
-        }
-        return totalChange;
+        return pollution;
     }
-    */
-
+    public int getOxygenLevel()
+    {
+        return oxygenLevel;
+    }
+    public int getBiodiversity()
+    {
+        return biodiversity;
+    }
+    // -------------------------------------------------------------------- //
+    //Metodi per interagire con il GameState; usati dai minigiochi
     public void setGameState(GameState newState)
     {
         currentState = newState;
@@ -179,5 +191,6 @@ public class GameDirector : MonoBehaviour
     {
         return currentState;
     }
+    // -------------------------------------------------------------------- //
 
 }

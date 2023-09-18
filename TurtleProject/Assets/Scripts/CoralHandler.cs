@@ -113,7 +113,8 @@ public class CoralHandler : MonoBehaviour
 
     public void OnTriggerEnter(Collider collider)
     {
-        if(collider.gameObject.tag == "Player")
+        if(collider.gameObject.tag == "Player" && 
+            gameDirector.GetComponent<GameDirector>().getGameState() == GameDirector.GameState.FreeRoaming)
         {
             //Attiva il prompt "Premi E per piantare un corallo"
             canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(true);
@@ -125,7 +126,8 @@ public class CoralHandler : MonoBehaviour
 
     public void OnTriggerStay(Collider collider)
     {
-        if (collider.gameObject.tag == "Player")
+        if (collider.gameObject.tag == "Player" &&
+            gameDirector.GetComponent<GameDirector>().getGameState() == GameDirector.GameState.FreeRoaming)
         {
             if (isGrowing)
             {
@@ -152,7 +154,8 @@ public class CoralHandler : MonoBehaviour
 
     public void OnTriggerExit(Collider collider)
     {
-        if (collider.gameObject.tag == "Player")
+        if (collider.gameObject.tag == "Player" &&
+            gameDirector.GetComponent<GameDirector>().getGameState() == GameDirector.GameState.FreeRoaming)
         {
 
             //Uscito dalla zona del CoralSpot, chiude gli elementi dell'UI

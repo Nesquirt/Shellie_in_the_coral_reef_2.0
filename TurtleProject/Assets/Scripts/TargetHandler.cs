@@ -40,9 +40,9 @@ public class TargetHandler : MonoBehaviour
 
         // -------------------------------------------------------------------- //
         //TIMER
-        //Resetta il timer e lo fa ripartire
+        //Resetta il timer (riparte appena si supera il primo ostacolo
         currentTenths = 0;
-        StartCoroutine(Timer());
+        
 
         // -------------------------------------------------------------------- //
         //TARGETS
@@ -71,7 +71,7 @@ public class TargetHandler : MonoBehaviour
         {
             if (currentTenths % 10 == 0)
             {
-
+                //TODO: interfaccia timer
             }
             yield return new WaitForSeconds(.1f);
         }
@@ -92,9 +92,14 @@ public class TargetHandler : MonoBehaviour
 
                 string nextTargetName = "Target" + (targetNumber + 1);
                 GameObject.Find(targetName).gameObject.SetActive(false);
+                if(targetNumber == 0)
+                {
+                    StartCoroutine(Timer());
+                }
                 if(targetNumber == 28)
                 {
                     Victory();
+                    StopCoroutine(Timer());
                     return;
                 }
                 GameObject.Find(nextTargetName).GetComponent<MeshRenderer>().material = activeMaterial;
@@ -106,7 +111,10 @@ public class TargetHandler : MonoBehaviour
     public void Victory()
     {
         director.setGameState(GameDirector.GameState.FreeRoaming);
-        director.addPearls(15);
+
+        int earnedPearls = 10 + (10 * (600/currentTenths)); //da più gemme se il percorso è completato entro un minuto
+        //current range di perle: 20 max, 13 min
+        director.addPearls(earnedPearls);
         director.addOxygenLevel(20);
     }
 

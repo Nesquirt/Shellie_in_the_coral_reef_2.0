@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class SpawnPrefabsRandomly : MonoBehaviour
 { 
     
-    public GameObject prefabToSpawn1;
-    public GameObject prefabToSpawn2;
-    public GameObject prefabToSpawn3;
-    public float spawnAreaWidth = 100f; // Larghezza dell'area in cui verranno spawnati i prefabs
-    public float spawnAreaLength = 100f; // Lunghezza dell'area in cui verranno spawnati i prefabs
-    public int numerodaspawnare =10;
-    public float originepianox;
-    public  float originepianoz;
+    [SerializeField] private GameObject prefabToSpawn1;
+    [SerializeField] private GameObject prefabToSpawn2;
+    [SerializeField] private GameObject prefabToSpawn3;
+    [SerializeField] private float spawnAreaWidth = 100f; // Larghezza dell'area in cui verranno spawnati i prefabs
+    [SerializeField] private float spawnAreaLength = 100f; // Lunghezza dell'area in cui verranno spawnati i prefabs
+    [SerializeField] private int numerodaspawnare =10;
+    private float originepianox;
+    private  float originepianoz;
     public float lunghezzapiano;
     public float larghezzapiano;
     private static int oggettiNelPiano ;
@@ -22,19 +22,28 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     public float upwardForce;
     public int a ,b;
     public TextMeshProUGUI testo;
-     public TextMeshProUGUI testo1;
-     public TextMeshProUGUI testo2;
+    public TextMeshProUGUI testo1;
+    public TextMeshProUGUI testo2;
      public Image img;
     public float totalTime = 60f;
     public float totalTime2;// Il tempo totale del timer in secondi.
     private float currentTime;
     private float currentTime2;
     public int rifiutiraccolti;
-    void Start()
+   
+    void Start1()
     { 
-        a=0;
-        b=0;
-           totalTime2=totalTime+10f;
+            a=0;
+            b=0;
+         
+           // totalTime=60f;
+           // rifiutiraccolti=0;
+            //numerodaspawnare=5;
+            testo.gameObject.SetActive(true);
+            testo1.gameObject.SetActive(true);
+            testo2.gameObject.SetActive(true);
+            img.gameObject.SetActive(true);
+            totalTime2=totalTime+10f;
            oggettiNelPiano = 0;
            currentTime = totalTime;
            currentTime2=totalTime2;
@@ -45,6 +54,8 @@ public class SpawnPrefabsRandomly : MonoBehaviour
           SpawnPrefabs();
     }
     void Update(){
+
+        
          Debug.Log("oggetti nel paino"+oggettiNelPiano);
          Debug.Log("oggetti raccolti"+rifiutiraccolti);
         if(currentTime>0){
@@ -69,13 +80,13 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                rifiutiraccolti=oggettiNelPiano; 
                b=1;
             }
-            
-            testo.text = " ";
-            testo1.text = " ";
-            testo2.text = " ";
+            rb.AddForce(Vector3.up * upwardForce);
+            testo.gameObject.SetActive(false);
+            testo1.gameObject.SetActive(false);
+            testo2.gameObject.SetActive(false);
             img.gameObject.SetActive(false);
             currentTime = 0;
-             rb.AddForce(Vector3.up * upwardForce);
+             //rb.AddForce(Vector3.up * upwardForce);
             // Esegui azioni quando il timer scade.
             // Ad esempio, puoi terminare il gioco o attivare un'altra logica.
         }
@@ -85,10 +96,14 @@ public class SpawnPrefabsRandomly : MonoBehaviour
             {
                 Destroy(spazzatura);
             }
+            spazzature.Clear();
             //testo.text = " ";
             //testo1.text = " ";
            a=1;
            currentTime2=0;
+           this.gameObject.SetActive(false);
+           
+          
         }
 
           /*  if (oggettiNelPiano==numerodaspawnare)
@@ -159,7 +174,11 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         }
     }
       
-    
+    private void OnEnable()
+    {
+       Start1();
+    }
+
      
 }
 

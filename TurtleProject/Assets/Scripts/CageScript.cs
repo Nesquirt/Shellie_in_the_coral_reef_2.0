@@ -6,13 +6,15 @@ public class CageScript : MonoBehaviour
 {
     private bool _isLocked = true;
     private GameObject door;
-    private Animator anim;
+    private Animator animDoor;
     private Rigidbody rb;
+    //private Animator animCage;
 
-    void Start()
+    void Awake()
     {
         this.door = transform.GetChild(0).gameObject;  //primo figlio della gabbia
-        this.anim = this.door.GetComponent<Animator>();
+        this.animDoor = this.door.GetComponent<Animator>();
+        //this.animCage = GetComponent<Animator>();
         
     }
 
@@ -28,7 +30,7 @@ public class CageScript : MonoBehaviour
 
     IEnumerator openCageAnimation()
     {
-        this.anim.SetTrigger("openDoor");
+        this.animDoor.SetTrigger("openDoor");
         yield return new WaitForSeconds(3);
         Destroy(transform.GetChild(1).gameObject);   //granchio = secondo figlio della gabbia
         StopCoroutine(openCageAnimation());
@@ -44,9 +46,10 @@ public class CageScript : MonoBehaviour
     //TODO: fai partire con animazione
     public void GoUp()
     {
-
-        //this.rb = this.GetComponent<Rigidbody>();
-        //this.rb.AddForce(Vector3.up * 10);
+        //animCage.SetTrigger("cageUp");
+        this.rb = this.GetComponent<Rigidbody>();
+        //this.rb.isKinematic = false;
+        this.rb.AddForce(Vector3.up * 10);
         //Debug.Log("saleeeee");
     }
 

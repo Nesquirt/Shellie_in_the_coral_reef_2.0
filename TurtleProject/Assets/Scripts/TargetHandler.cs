@@ -80,7 +80,6 @@ public class TargetHandler : MonoBehaviour
         obstacleRacePrompt.gameObject.SetActive(false);
         canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
         raceStart();
-        Debug.Log("Premuto tasto si");
     }
     public void CancelButton_onClick()
     {
@@ -99,11 +98,10 @@ public class TargetHandler : MonoBehaviour
         { 
             Debug.Log("Non puoi cominciare il minigioco se sei già impegnato da un'altra parte!");
             Debug.Log(GameDirector.Instance.getGameState());
+            GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
             return;
         }
 
-
-        Debug.Log("test");
         //Imposta il gameState generale in modo che non può iniziare altri minigiochi
         GameDirector.Instance.setGameState(GameDirector.GameState.ObstacleCourse);
 

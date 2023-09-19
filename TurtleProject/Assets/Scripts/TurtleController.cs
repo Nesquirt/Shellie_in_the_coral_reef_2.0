@@ -11,6 +11,7 @@ public class TurtleController : MonoBehaviour
     private float speed, verticalRotationSpeed, lateralRotationSpeed;
     private Vector3 eulerRotationSpeed;
     private float h, v, j;
+    private AudioSource bubble;
 
     private GameObject posizioni_cageKey;
     
@@ -40,7 +41,6 @@ public class TurtleController : MonoBehaviour
             speed = 0;
         if (speed > maxSpeed)
             speed = maxSpeed;
-
         // -------------------------------------------------------------------- //
         //calcolo della rotazione laterale
         lateralRotationSpeed = 0;

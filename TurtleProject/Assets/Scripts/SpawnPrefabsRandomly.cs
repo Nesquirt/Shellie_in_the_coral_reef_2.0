@@ -10,6 +10,8 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     [SerializeField] private GameObject prefabToSpawn2;
     [SerializeField] private GameObject prefabToSpawn3;
     [SerializeField] private GameObject sostegno;
+    [SerializeField] private GameObject rete;
+    //private Animator anim;
     [SerializeField] private float spawnAreaWidth = 100f; // Larghezza dell'area in cui verranno spawnati i prefabs
     [SerializeField] private float spawnAreaLength = 100f; // Lunghezza dell'area in cui verranno spawnati i prefabs
     [SerializeField] private int numerodaspawnare =10;
@@ -31,12 +33,13 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     private float currentTime;
     private float currentTime2;
     public int rifiutiraccolti;
+     
    
     void Start1()
     { 
             a=0;
             b=0;
-         
+           // anim=rete.GetComponent<Animator>();
            // totalTime=60f;
            // rifiutiraccolti=0;
             //numerodaspawnare=5;
@@ -55,7 +58,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
          
           SpawnPrefabs();
     }
-    void Update(){
+    void FixedUpdate(){
 
         
          Debug.Log("oggetti nel paino"+oggettiNelPiano);
@@ -83,6 +86,8 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                b=1;
             }
             rb.AddForce(Vector3.up * upwardForce,ForceMode.Impulse);
+            //rb.MovePosition(rb.position)
+            //anim.SetTrigger("reteSale");
             testo.gameObject.SetActive(false);
             testo1.gameObject.SetActive(false);
             testo2.gameObject.SetActive(false);
@@ -92,6 +97,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
             // Esegui azioni quando il timer scade.
             // Ad esempio, puoi terminare il gioco o attivare un'altra logica.
         }
+      
         if (currentTime2<=0){
 
           foreach (GameObject spazzatura in spazzature)

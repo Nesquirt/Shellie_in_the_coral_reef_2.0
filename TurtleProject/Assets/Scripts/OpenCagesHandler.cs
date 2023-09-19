@@ -30,7 +30,7 @@ public class OpenCagesHandler : MonoBehaviour
     //TODO: richiama ogni volta che parte minigame MazeExploring
     public void restartMazeGame()
     {
-        this.timeRemaining = 60f;
+        this.timeRemaining = 6f;
         this.seconds = Mathf.Round(timeRemaining);
 
         this.hasKey = false;
@@ -48,7 +48,7 @@ public class OpenCagesHandler : MonoBehaviour
     }
 
     //TODO: elimina metodo Update, NON è necessario --> sistema codice altrove (Coroutines ogni 0.1f)
-    /*private void Update()
+    private void Update()
     {
         //if (GameObject.Find("Director").GetComponent<GameDirector>().getGameState() != GameDirector.GameState.MazeExploring)
             //return;
@@ -96,11 +96,12 @@ public class OpenCagesHandler : MonoBehaviour
                 }
             }
 
-            this.gameObject.SetActive(false);
+            //Debug.Log("GIOCO FINITO");
+            this.gameObject.SetActive(false);  //così, una volta finito il gioco, Update non viene più richiamato
 
         }
     }
-    */
+    
 
 
 

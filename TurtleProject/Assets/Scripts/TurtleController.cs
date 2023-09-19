@@ -107,7 +107,8 @@ public class TurtleController : MonoBehaviour
         {
             //TODO: richiama metodo per far partire gioco libera granchi 
             Debug.Log("Entrata MazeExploring");
-            this.posizioni_cageKey.GetComponent<SpawnCages>().restartGame();  //spawn gabbie e chiavi
+            this.posizioni_cageKey.SetActive(true);
+            this.posizioni_cageKey.GetComponent<OpenCagesHandler>().restartMazeGame();
             //GameObject.Find("Posizioni_CageKey").GetComponent<OpenCagesHandler>().restartMazeGame();  //metodo che inizializza tutto e fa partire il gioco
         }
     }
@@ -121,8 +122,11 @@ public class TurtleController : MonoBehaviour
         {
             //
         }
-        //else if (other.tag == "chiave" || other.tag == "gabbia")
-        //    GameObject.Find("Posizioni_CageKey").GetComponent<OpenCagesHandler>().TriggerMethod(other);
+        else if (other.tag == "Chiave" || other.tag == "Gabbia")
+        {
+            GameObject.Find("Posizioni_CageKey").GetComponent<OpenCagesHandler>().TriggerMethod(other);
+        }
+           
     }
     public void OnTriggerExit(Collider other)
     {

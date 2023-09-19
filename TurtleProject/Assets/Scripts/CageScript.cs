@@ -13,6 +13,7 @@ public class CageScript : MonoBehaviour
     {
         this.door = transform.GetChild(0).gameObject;  //primo figlio della gabbia
         this.anim = this.door.GetComponent<Animator>();
+        
     }
 
 
@@ -43,8 +44,9 @@ public class CageScript : MonoBehaviour
     //TODO: fai partire con animazione
     public void GoUp()
     {
-        this.rb = this.GetComponent<Rigidbody>();
-        this.rb.AddForce(Vector3.up * 10);
+
+        //this.rb = this.GetComponent<Rigidbody>();
+        //this.rb.AddForce(Vector3.up * 10);
         //Debug.Log("saleeeee");
     }
 

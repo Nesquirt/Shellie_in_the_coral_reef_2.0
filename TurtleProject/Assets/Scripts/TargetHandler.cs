@@ -11,7 +11,7 @@ public class TargetHandler : MonoBehaviour
     //private GameObject[] targets;
     [SerializeField] private Material activeMaterial, inactiveMaterial;
     private int currentTime;        //Tempo attuale del timer in millisecondi
-
+    
     private int currentTenths;      //Numero di ostacoli superati dal giocatore
     public int targetNumber;        //L'indice di questo ostacolo, per sapere quando deve diventare attivo
 
@@ -20,6 +20,7 @@ public class TargetHandler : MonoBehaviour
     private Transform obstacleRacePrompt;
     private TextMeshProUGUI NPCName, dialogueText, rewardsText, timer;
     private Button confirmButton, cancelButton;
+
     private void Awake()
     {
         // -------------------------------------------------------------------- //
@@ -75,10 +76,11 @@ public class TargetHandler : MonoBehaviour
     //Listener dei bottoni di dialogo
     public void ConfirmButton_onClick()
     {
-        raceStart();
         canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
         obstacleRacePrompt.gameObject.SetActive(false);
         canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
+        raceStart();
+        Debug.Log("Premuto tasto si");
     }
     public void CancelButton_onClick()
     {
@@ -92,12 +94,16 @@ public class TargetHandler : MonoBehaviour
         // -------------------------------------------------------------------- //
         //GAMESTATE
         //Check per vedere se un altro minigioco è attivo
+        Debug.Log("GameState all'inizio di raceStart: " + GameDirector.Instance.getGameState());
         if (GameDirector.Instance.getGameState() != GameDirector.GameState.FreeRoaming)
-        {
+        { 
             Debug.Log("Non puoi cominciare il minigioco se sei già impegnato da un'altra parte!");
+            Debug.Log(GameDirector.Instance.getGameState());
             return;
         }
 
+
+        Debug.Log("test");
         //Imposta il gameState generale in modo che non può iniziare altri minigiochi
         GameDirector.Instance.setGameState(GameDirector.GameState.ObstacleCourse);
 

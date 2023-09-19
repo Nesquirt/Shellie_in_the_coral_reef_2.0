@@ -12,16 +12,20 @@ public class TurtleController : MonoBehaviour
     private Vector3 eulerRotationSpeed;
     private float h, v, j;
 
-    private GameObject posizioni_cageKey;
+    //private GameObject posizioni_cageKey;
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         this.rb = GetComponent<Rigidbody>();
         this.eulerRotationSpeed = new Vector3(0, this.maxRotationSpeed, 0);
         
-        this.posizioni_cageKey = GameObject.Find("Posizioni_CageKey");
-        posizioni_cageKey.SetActive(false);
+        if(GameDirector.Instance == null)
+        {
+            //Non deve fare nulla; questo if è chiamato solo per inizializzare il director nella scena
+        }
+        //this.posizioni_cageKey = GameObject.Find("Posizioni_CageKey");
+        //posizioni_cageKey.SetActive(false);
     }
 
 
@@ -108,8 +112,8 @@ public class TurtleController : MonoBehaviour
         {
             //TODO: richiama metodo per far partire gioco libera granchi 
             Debug.Log("Entrata MazeExploring");
-            posizioni_cageKey.SetActive(true);
-            posizioni_cageKey.GetComponent<OpenCagesHandler>().restartMazeGame();
+            //posizioni_cageKey.SetActive(true);
+            //posizioni_cageKey.GetComponent<OpenCagesHandler>().restartMazeGame();
             //GameObject.Find("Posizioni_CageKey").GetComponent<OpenCagesHandler>().restartMazeGame();  //metodo che inizializza tutto e fa partire il gioco
         }
     }
@@ -121,11 +125,11 @@ public class TurtleController : MonoBehaviour
         }
         else if (other.name == "pesceColorato")
         {
-            posizioni_cageKey.GetComponent<OpenCagesHandler>().mazeStartPrompt();
+            //posizioni_cageKey.GetComponent<OpenCagesHandler>().mazeStartPrompt();
         }
         else if (other.tag == "Chiave" || other.tag == "Gabbia")
         {
-            posizioni_cageKey.GetComponent<OpenCagesHandler>().TriggerMethod(other);
+            //posizioni_cageKey.GetComponent<OpenCagesHandler>().TriggerMethod(other);
         }
            
     }

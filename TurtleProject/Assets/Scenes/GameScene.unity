@@ -2704,6 +2704,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pesceColorato
       objectReference: {fileID: 0}
+    - target: {fileID: 6655467127361658262, guid: 1ad2865fe1f81b640926462607d53c91, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ad2865fe1f81b640926462607d53c91, type: 3}
 --- !u!4 &208898758 stripped
@@ -2986,7 +2990,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &252222511
 Transform:
   m_ObjectHideFlags: 0
@@ -10232,7 +10236,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 695833873}
-  m_LocalRotation: {x: -1e-45, y: -3.78245e-10, z: 2.220446e-16, w: 1}
+  m_LocalRotation: {x: -0, y: -3.78245e-10, z: 2.220446e-16, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13413,7 +13417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1294277742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15442,7 +15446,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1656438655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16031,7 +16035,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772230589}
-  m_LocalRotation: {x: -0.036324956, y: 0.0000000017713826, z: 6.438812e-11, w: 0.99934006}
+  m_LocalRotation: {x: -0.036324956, y: -0.00000000236789, z: -8.607008e-11, w: 0.99934006}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16470,8 +16474,8 @@ MonoBehaviour:
   upwardForce: 2
   a: 0
   b: 0
-  testo: {fileID: 41519}
-  testo1: {fileID: 1996703296}
+  testocronometro: {fileID: 0}
+  testooggetti: {fileID: 0}
   testo2: {fileID: 1617554176}
   img: {fileID: 687284201}
   totalTime: 180
@@ -18425,6 +18429,10 @@ PrefabInstance:
     - target: {fileID: 3054633155635562997, guid: e3c8963f03898664e874051ca3ad904b, type: 3}
       propertyPath: m_Name
       value: EntrataMazeLabyrint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3054633155635562997, guid: e3c8963f03898664e874051ca3ad904b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3c8963f03898664e874051ca3ad904b, type: 3}

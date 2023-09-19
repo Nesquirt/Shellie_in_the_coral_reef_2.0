@@ -28,6 +28,7 @@ public class GameDirector : MonoBehaviour
                 DontDestroyOnLoad(newObj);
             }
         }
+        
     }
     private void OnDestroy()
     {
@@ -37,6 +38,7 @@ public class GameDirector : MonoBehaviour
             Instance = null;
         }
     }
+    protected GameDirector() { } //Costruttore protected per non permettere l'inizializzazione fuori dalla gerarchia
     // -------------------------------------------------------------------- //
     //Creazione dell'enum per gli stati del gioco
     public enum GameState
@@ -54,10 +56,11 @@ public class GameDirector : MonoBehaviour
     private int reefHealth, pollution, biodiversity, oxygenLevel;
     private int pollutionChange, biodiversityChange, oxygenLevelChange, reefHealthChange;
     private GameObject[] corals;
-    //TODO: rendi questi elementi dell'UI private e ricavali nell'awake con GameObject.Find
-    public Slider reefHealthSlider, pollutionSlider, biodiversitySlider, oxygenLevelSlider;
-    public Image reefHealthArrow, pollutionArrow, biodiversityArrow, oxygenLevelArrow;  //TODO: aggiungi un'immagine per quando il cambiamento di parametri è 0
-    public Sprite upArrow, downArrow;
+    private Canvas canvas;
+    
+    private Slider reefHealthSlider, pollutionSlider, biodiversitySlider, oxygenLevelSlider;
+    private Image reefHealthArrow, pollutionArrow, biodiversityArrow, oxygenLevelArrow;  //TODO: aggiungi un'immagine per quando il cambiamento di parametri è 0
+    private Sprite upArrow, downArrow;
     
     public GameObject currentCoralSpot;  //Questa variabile comunica con CoralHandler per ricordare su quale roccia si sta piantando i coralli
     // -------------------------------------------------------------------- //
@@ -74,6 +77,21 @@ public class GameDirector : MonoBehaviour
         {
             Destroy(gameObject); //Se esiste già un'altra istanza, distrugge questo oggetto per evitare duplicati dell'istanza
         }
+        // -------------------------------------------------------------------- //
+        //Nella scena di gioco, prende dalla hierarchy tutti gli elementi dell'interfaccia
+        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        reefHealthSlider = canvas.transform.Find("BarsPanel/ReefHealthBar").GetComponent<Slider>();
+        pollutionSlider = canvas.transform.Find("BarsPanel/PollutionBar").GetComponent<Slider>();
+        biodiversitySlider = canvas.transform.Find("BarsPanel/BiodiversityBar").GetComponent<Slider>();
+        oxygenLevelSlider = canvas.transform.Find("BarsPanel/OxygenLevelBar").GetComponent<Slider>();
+        
+        reefHealthArrow = canvas.transform.Find("BarsPanel/ReefHealthBar/ReefHealthArrow").GetComponent<Image>();
+        pollutionArrow = canvas.transform.Find("BarsPanel/PollutionBar/PollutionArrow").GetComponent<Image>();
+        biodiversityArrow = canvas.transform.Find("BarsPanel/BiodiversityBar/BiodiversityArrow").GetComponent<Image>();
+        oxygenLevelArrow = canvas.transform.Find("BarsPanel/OxygenLevelBar/OxygenLevelArrow").GetComponent<Image>();
+
+        upArrow = Resources.Load<Sprite>("Sprites/UpArrow");
+        downArrow = Resources.Load<Sprite>("Sprites/DownArrow");
         // -------------------------------------------------------------------- //
         //Impostazione dei valori iniziali di gioco
         currentState = GameState.FreeRoaming;
@@ -114,7 +132,6 @@ public class GameDirector : MonoBehaviour
         //Metodo per cambiare il colore della nebbia
         float pollutionPercentage = (float)pollution / 100;
         Color32 CleanWater = new Color32(114, 205, 231, 255);
-        Debug.Log(CleanWater);
         Color32 PollutedWater = new Color32(114, 200, 186, 255);
         RenderSettings.fogColor = Color.LerpUnclamped(CleanWater, PollutedWater, pollutionPercentage);
 
@@ -241,6 +258,7 @@ public class GameDirector : MonoBehaviour
     //Metodi per interagire con il GameState; usati dai minigiochi
     public void setGameState(GameState newState)
     {
+        Debug.Log("Changed GameState to: " + newState);
         currentState = newState;
     }
 

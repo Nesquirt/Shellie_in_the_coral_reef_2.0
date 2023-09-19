@@ -18,6 +18,8 @@ public class OpenCagesHandler : MonoBehaviour
     private int openCages;
     private int totCages;
 
+    private GameObject[] arr_cages;
+
     void Awake()
     {
         this.totCages = this.GetComponent<SpawnCages>().totalCages;  //prendo il numero di casse
@@ -26,13 +28,15 @@ public class OpenCagesHandler : MonoBehaviour
         this.crub_icon = canvas.transform.Find("MazeCanvas/CrubIcon").gameObject.GetComponent<Image>();
         this.key_icon = canvas.transform.Find("MazeCanvas/KeyIcon").gameObject.GetComponent<Image>();
         this.crub_text = canvas.transform.Find("MazeCanvas/FreedCrub").gameObject.GetComponent<TextMeshProUGUI>();
+
     }
 
     //TODO: richiama ogni volta che parte minigame MazeExploring
     public void restartMazeGame()
     {
-        this.timeRemaining = 13f;
+        this.timeRemaining = 12f;
         this.seconds = Mathf.Round(timeRemaining);
+        Debug.Log("SECONDI: " + this.seconds);
 
         this.hasKey = false;
         this.openCages = 0;
@@ -49,7 +53,7 @@ public class OpenCagesHandler : MonoBehaviour
         //TODO: fai partire Coroutine(?)
     }
 
-    //TODO: elimina metodo Update, NON è necessario --> sistema codice altrove (Coroutines ogni 0.1f)
+
     private void Update()
     {
         //if (GameObject.Find("Director").GetComponent<GameDirector>().getGameState() != GameDirector.GameState.MazeExploring)
@@ -62,8 +66,8 @@ public class OpenCagesHandler : MonoBehaviour
             this.timer_text.SetText(seconds.ToString());
         }
 
-        //TODO: metti dentro Coroutine
-        if(IsFinished())   //--> se gioco finito
+
+        if(IsFinished())   
         {
             //Debug.Log("THE END");
             this.timer_text.enabled = false;
@@ -80,10 +84,11 @@ public class OpenCagesHandler : MonoBehaviour
             }
 
             //ANIMAZIONE gabbie che salgono 
-            GameObject[] arr_cages = GameObject.FindGameObjectsWithTag("Gabbia");
+            this.arr_cages = GameObject.FindGameObjectsWithTag("Gabbia");
 
             if(arr_cages != null)
             {
+                //StartCoroutine(cageGoesUp());
                 for (int i = 0; i < arr_cages.Length; i++)
                 {
                     if (arr_cages[i] != null)
@@ -100,12 +105,36 @@ public class OpenCagesHandler : MonoBehaviour
                 }
             }
 
+
+
             //Debug.Log("GIOCO FINITO");
             //this.gameObject.SetActive(false);  //così, una volta finito il gioco, Update non viene più richiamato
 
         }
     }
     
+    IEnumerator cageGoesUp()
+    {
+
+        for (int i = 0; i < arr_cages.Length; i++)
+        {
+            if (arr_cages[i] != null)
+            {
+                arr_cages[i].GetComponent<CageScript>().GoUp();
+                if (arr_cages[i].transform.position.y > 120f)
+                {
+                    //arr_cages[i].GetComponent<Rigidbody>().isKinematic = true;      //ho già disabilitato la fisica per l'oggetto
+                    Debug.Log("gabbia distrutta");
+                    Destroy(arr_cages[i]);
+                }
+            }
+
+        }
+        yield return new WaitForSeconds(6);
+        this.gameObject.SetActive(false);
+        StopCoroutine(cageGoesUp());
+
+    }
 
 
 
@@ -190,6 +219,7 @@ public class OpenCagesHandler : MonoBehaviour
     {
         if(this.openCages == this.totCages || this.seconds == 0)
          {
+            Debug.Log("FINE" + " openCages: " + this.openCages + " + seconds: " + this.seconds);
              return true;
          }
         else

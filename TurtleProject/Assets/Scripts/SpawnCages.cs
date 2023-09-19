@@ -11,8 +11,7 @@ public class SpawnCages : MonoBehaviour
     private Transform cagesParent;
     private Transform keysParent;
 
-    [SerializeField] public int totalCages = 4;
-    //private int timer = 180f;
+    [SerializeField] public int totalCages;
 
     private List<Vector3> mazeSpawnPoints;
     private float posx;
@@ -24,7 +23,8 @@ public class SpawnCages : MonoBehaviour
     private int num;
 
     private void Awake()
-    {        
+    {
+        this.totalCages = 4;
         this.mazeSpawnPoints = new List<Vector3>();
         this.posx = this.transform.position.x;
         this.posy = this.transform.position.y;

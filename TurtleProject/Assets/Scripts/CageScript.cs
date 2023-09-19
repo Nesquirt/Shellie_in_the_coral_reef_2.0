@@ -50,7 +50,6 @@ public class CageScript : MonoBehaviour
         this.rb = this.GetComponent<Rigidbody>();
         //this.rb.isKinematic = false;
         this.rb.AddForce(Vector3.up * 10);
-        //Debug.Log("saleeeee");
     }
 
 

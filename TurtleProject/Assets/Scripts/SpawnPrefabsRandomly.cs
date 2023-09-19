@@ -45,7 +45,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
             testo1.gameObject.SetActive(true);
             testo2.gameObject.SetActive(true);
             img.gameObject.SetActive(true);
-            totalTime2=totalTime+10f;
+            totalTime2=totalTime+4f;
            oggettiNelPiano = 0;
            currentTime = totalTime;
            currentTime2=totalTime2;
@@ -82,7 +82,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                rifiutiraccolti=oggettiNelPiano; 
                b=1;
             }
-            rb.AddForce(Vector3.up * upwardForce);
+            rb.AddForce(Vector3.up * upwardForce,ForceMode.Impulse);
             testo.gameObject.SetActive(false);
             testo1.gameObject.SetActive(false);
             testo2.gameObject.SetActive(false);

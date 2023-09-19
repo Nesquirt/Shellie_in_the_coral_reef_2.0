@@ -39,7 +39,7 @@ public class OpenCagesHandler : MonoBehaviour
     //TODO: richiama ogni volta che parte minigame MazeExploring
     public void restartMazeGame()
     {
-        this.timeRemaining = 12f;
+        this.timeRemaining = 60f;
         this.seconds = Mathf.Round(timeRemaining);
         Debug.Log("SECONDI: " + this.seconds);
 

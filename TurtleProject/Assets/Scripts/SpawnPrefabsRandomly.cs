@@ -24,8 +24,8 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     public Rigidbody rb ;
     public float upwardForce;
     public int a ,b;
-    public TextMeshProUGUI testo;
-    public TextMeshProUGUI testo1;
+    public TextMeshProUGUI testocronometro;
+    public TextMeshProUGUI testooggetti;
     public TextMeshProUGUI testo2;
      public Image img;
     public float totalTime = 60f;
@@ -44,8 +44,8 @@ public class SpawnPrefabsRandomly : MonoBehaviour
            // rifiutiraccolti=0;
             //numerodaspawnare=5;
             sostegno.gameObject.SetActive(false);
-            testo.gameObject.SetActive(true);
-            testo1.gameObject.SetActive(true);
+            testocronometro.gameObject.SetActive(true);
+            testooggetti.gameObject.SetActive(true);
             testo2.gameObject.SetActive(true);
             img.gameObject.SetActive(true);
             totalTime2=totalTime+4f;
@@ -64,13 +64,13 @@ public class SpawnPrefabsRandomly : MonoBehaviour
          Debug.Log("oggetti nel paino"+oggettiNelPiano);
          Debug.Log("oggetti raccolti"+rifiutiraccolti);
         if(currentTime>0){
-            testo.text = Mathf.Round(currentTime).ToString();
-            testo1.text = oggettiNelPiano.ToString();
+            testocronometro.text = Mathf.Round(currentTime).ToString();
+            testooggetti.text = oggettiNelPiano.ToString();
              
             currentTime -= Time.deltaTime;
         }
         if (currentTime2>0){
-             testo1.text = oggettiNelPiano.ToString();
+             testooggetti.text = oggettiNelPiano.ToString();
              currentTime2 -=Time.deltaTime;
         }
          //currentTime2 -=Time.deltaTime;
@@ -88,8 +88,8 @@ public class SpawnPrefabsRandomly : MonoBehaviour
             rb.AddForce(Vector3.up * upwardForce,ForceMode.Impulse);
             //rb.MovePosition(rb.position)
             //anim.SetTrigger("reteSale");
-            testo.gameObject.SetActive(false);
-            testo1.gameObject.SetActive(false);
+            testocronometro.gameObject.SetActive(false);
+            testooggetti.gameObject.SetActive(false);
             testo2.gameObject.SetActive(false);
             img.gameObject.SetActive(false);
             currentTime = 0;

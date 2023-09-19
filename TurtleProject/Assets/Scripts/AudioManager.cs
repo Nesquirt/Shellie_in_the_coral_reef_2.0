@@ -1,83 +1,42 @@
-﻿using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.Events;
-using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;
+    [Header("- - - - AUDIO SOURCE")]
+    [SerializeField] AudioSource SoundtrackSource;
+    [SerializeField] AudioSource MovementSource;
+    [SerializeField] AudioSource BubbleSource;
+    [SerializeField] AudioSource CoralSource;
+    [SerializeField] AudioSource SFXSource;
 
-    private AudioSource musicAudioSource;
-    private AudioSource soundEffectsAudioSource;
+    [Header("- - - - AUDIO CLIP (LOOP)")]
+    public AudioClip soundtrack;
+    public AudioClip movement;
+    public AudioClip bubble;
 
-    [SerializeField] private AudioSource BackgroundMUSIC, TenseMUSIC;
-    [SerializeField] private float MUSIC_VOLUME, EFX_VOLUME; //da 0 a 1
-    [SerializeField] private AudioMixerGroup MUSIC_MIXER, EFX_MIXER;
+    [Header("- - - - AUDIO CLIP (ONE SHOT)")]
+    public AudioClip coral;
 
-    public GameObject slider;
-    //private AudioMixer MUSIC_MIXER, EFX_MIXER;
+    [Header("- - - - AUDIO CLIP MATTEO'S GAME (ONE SHOT)")]
+    public AudioClip startRace;
+    public AudioClip endRace;
+    public AudioClip crossRing;
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // Mantieni l'AudioManager tra le scene
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        // Crea due AudioSources per la musica e gli effetti sonori
-        musicAudioSource = gameObject.AddComponent<AudioSource>();
-        soundEffectsAudioSource = gameObject.AddComponent<AudioSource>();
-
-        // Imposta i volumi in base alle preferenze salvate
-        musicAudioSource.volume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
-        soundEffectsAudioSource.volume = PlayerPrefs.GetFloat("SoundEffectsVolume", 1.0f);
-
-        
-    }
 
     private void Start()
     {
-        slider.GetComponent<Slider>().value = 0.8f;
-        SetMusicVolume(0.8f);
+        SoundtrackSource.clip = soundtrack;
+        SoundtrackSource.Play();
+        MovementSource.clip = movement;
+        MovementSource.Play();
+        BubbleSource.clip = bubble;
+        BubbleSource.Play();
     }
-
-    public void SetMusicVolume(float volume)
+    public void PlaySFX(AudioClip sfx)
     {
-        musicAudioSource.volume = volume;
-        MUSIC_MIXER.audioMixer.SetFloat("MUSIC_MASTER", Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
-        //Debug.Log(volume);
-    }
-
-    public void SetSoundEffectsVolume(float volume)
-    {
-        soundEffectsAudioSource.volume = volume;
-        EFX_MIXER.audioMixer.SetFloat("EFX_MASTER", Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("SoundEffectsVolume", Mathf.Log10(volume) * 20);
-        //Debug.Log("Effetti");
-    }
-
-    public void PlayMusic(AudioClip musicClip)
-    {
-        musicAudioSource.clip = musicClip;
-        musicAudioSource.loop = true;
-        musicAudioSource.Play();
-    }
-
-    public void StopMusic()
-    {
-        musicAudioSource.Stop();
-    }
-
-    public void PlaySoundEffect(AudioClip soundEffectClip)
-    {
-        soundEffectsAudioSource.PlayOneShot(soundEffectClip);
+        SFXSource.PlayOneShot(sfx);
     }
 }
-
-// made with love from Assassin's script ♥

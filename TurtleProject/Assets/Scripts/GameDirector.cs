@@ -81,7 +81,7 @@ public class GameDirector : MonoBehaviour
         currentPearls = 100;
 
         reefHealth = 50;
-        pollution = 70;
+        pollution = 20;
         biodiversity = 24;
         oxygenLevel = 50;
 
@@ -109,6 +109,14 @@ public class GameDirector : MonoBehaviour
         //pollution += CalculatePollutionChange();               //Calcolo del cambio di inquinamento
         pollution += pollutionChange;
         pollutionSlider.value = pollution;
+
+        //Metodo per cambiare il colore della nebbia
+        float pollutionPercentage = (float)pollution / 100;
+        Debug.Log(pollutionPercentage);
+        Color32 CleanWater = new Color32(114, 205, 231, 255);
+        Debug.Log(CleanWater);
+        Color32 PollutedWater = new Color32(114, 200, 186, 255);
+        RenderSettings.fogColor = Color.LerpUnclamped(CleanWater, PollutedWater, pollutionPercentage);
 
         //biodiversity += CalculateBiodiversityChange();         //Calcolo del cambio di biodiversità
         biodiversity += biodiversityChange;

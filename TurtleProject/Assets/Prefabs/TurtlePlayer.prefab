@@ -369,7 +369,6 @@ MonoBehaviour:
   acceleration: 15
   maxSpeed: 25
   maxRotationSpeed: 90
-  posizioni_cageKey: {fileID: 0}
 --- !u!1 &6229277400757579858
 GameObject:
   m_ObjectHideFlags: 0

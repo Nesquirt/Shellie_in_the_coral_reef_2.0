@@ -30,7 +30,7 @@ public class GameDirector : MonoBehaviour
     {
         currentState = GameState.FreeRoaming;
 
-        currentPearls = 0;
+        currentPearls = 100;
 
         reefHealth = 50;
         pollution = 70;

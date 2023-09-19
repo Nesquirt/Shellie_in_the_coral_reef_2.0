@@ -78,8 +78,9 @@ public class OpenCagesHandler : MonoBehaviour
             MazePrompt.gameObject.SetActive(false);
             canvas.transform.Find("DialoguePanel").gameObject.SetActive(true);
             NPCName.SetText("Pesce");
-            dialogueText.SetText("Descrizione maze in progress :)");
-        }
+            dialogueText.SetText("Hey Shelly! Ci sono dei granchi che hanno bisogno di essere liberati! \n" +
+                "Ti va di aiutarmi?" + " Nel labirinto troverai delle chiavi con cui poter aprire le gabbie \n" +
+                "Attenta! Puoi prendere solo una chiave alla volta ed hai 3 minuti di tempo per liberarli tutti \n");
 
     }
     public void PesceTriggerExit()

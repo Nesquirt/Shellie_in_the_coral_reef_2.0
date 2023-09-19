@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class OpenCagesHandler : MonoBehaviour
 {
     private GameObject canvas;
-    private TextMeshProUGUI timer_text, crub_text;
+    private TextMeshProUGUI timer_text, crub_text, NPCName, dialogueText;
+    private Transform MazePrompt;
     private Image crub_icon, key_icon;
 
     private float timeRemaining;
@@ -23,17 +24,24 @@ public class OpenCagesHandler : MonoBehaviour
     void Awake()
     {
         this.totCages = this.GetComponent<SpawnCages>().totalCages;  //prendo il numero di casse
-        this.canvas = GameObject.Find("SaraCanvas");
+        this.canvas = GameObject.Find("Canvas");
+        /*
         this.timer_text = canvas.transform.Find("MazeCanvas/TimerText").gameObject.GetComponent<TextMeshProUGUI>();
         this.crub_icon = canvas.transform.Find("MazeCanvas/CrubIcon").gameObject.GetComponent<Image>();
         this.key_icon = canvas.transform.Find("MazeCanvas/KeyIcon").gameObject.GetComponent<Image>();
         this.crub_text = canvas.transform.Find("MazeCanvas/FreedCrub").gameObject.GetComponent<TextMeshProUGUI>();
+        */
+        this.MazePrompt = canvas.transform.Find("MazePrompt");
+        MazePrompt.gameObject.SetActive(false);
+        this.NPCName = canvas.transform.Find("DialoguePanel/TitlePanel/NPCName").gameObject.GetComponent<TextMeshProUGUI>();
+        this.dialogueText = canvas.transform.Find("DialoguePanel/DialogueText").gameObject.GetComponent<TextMeshProUGUI>();
 
+        /*
         timer_text.enabled = false;
         crub_icon.enabled = false;
         key_icon.enabled = false;
         crub_text.enabled = false;
-
+        */
     }
 
     //TODO: richiama ogni volta che parte minigame MazeExploring
@@ -58,7 +66,31 @@ public class OpenCagesHandler : MonoBehaviour
         this.GetComponent<SpawnCages>().restartGame();
         //TODO: fai partire Coroutine(?)
     }
+    public void mazeStartPrompt()
+    {
+        if (GameDirector.Instance.getGameState() != GameDirector.GameState.FreeRoaming)
+            return;
+        if (!canvas.transform.Find("DialoguePanel").gameObject.activeSelf)
+            MazePrompt.gameObject.SetActive(true);
+        if(Input.GetKey(KeyCode.E))
+        {
+            canvas.transform.Find("BarsPanel").gameObject.SetActive(false);
+            MazePrompt.gameObject.SetActive(false);
+            canvas.transform.Find("DialoguePanel").gameObject.SetActive(true);
+            NPCName.SetText("Pesce");
+            dialogueText.SetText("Descrizione maze in progress :)");
+        }
 
+    }
+    public void PesceTriggerExit()
+    {
+        if (canvas.transform.Find("DialoguePanel").gameObject.activeSelf)
+            canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
+        if (MazePrompt.gameObject.activeSelf)
+            MazePrompt.gameObject.SetActive(false);
+        if (!canvas.transform.Find("BarsPanel").gameObject.activeSelf)
+            canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
+    }
 
     private void Update()
     {

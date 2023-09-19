@@ -113,7 +113,6 @@ public class GameDirector : MonoBehaviour
 
         //Metodo per cambiare il colore della nebbia
         float pollutionPercentage = (float)pollution / 100;
-        Debug.Log(pollutionPercentage);
         Color32 CleanWater = new Color32(114, 205, 231, 255);
         Debug.Log(CleanWater);
         Color32 PollutedWater = new Color32(114, 200, 186, 255);

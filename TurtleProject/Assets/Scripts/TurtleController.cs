@@ -121,7 +121,7 @@ public class TurtleController : MonoBehaviour
         }
         else if (other.name == "pesceColorato")
         {
-            //
+            posizioni_cageKey.GetComponent<OpenCagesHandler>().mazeStartPrompt();
         }
         else if (other.tag == "Chiave" || other.tag == "Gabbia")
         {
@@ -135,8 +135,12 @@ public class TurtleController : MonoBehaviour
         {
             other.GetComponentInParent<TargetHandler>().AnguillaTriggerExit();
         }
-    }
+        else if (other.name == "pesceColorato")
+        {
+            other.GetComponentInParent<OpenCagesHandler>().PesceTriggerExit();
+        }
 
+    }
     // -------------------------------------------------------------------- //
     //Funzione per rallentare in caso di collisione, principalmente per prevenire movimenti fuori controllo e passaggi attraverso il terreno
     public void OnCollisionStay(Collision collision)
@@ -163,3 +167,4 @@ public class TurtleController : MonoBehaviour
 
     // -------------------------------------------------------------------- //
 }
+

@@ -11,7 +11,6 @@ public class TurtleController : MonoBehaviour
     private float speed, verticalRotationSpeed, lateralRotationSpeed;
     private Vector3 eulerRotationSpeed;
     private float h, v, j;
-    private AudioSource bubble;
 
     private GameObject posizioni_cageKey;
     

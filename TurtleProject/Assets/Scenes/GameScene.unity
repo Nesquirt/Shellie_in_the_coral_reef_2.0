@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.000026953418, g: 0.00008999061, b: 0.000123516, a: 1}
+  m_IndirectSpecularColor: {r: 0.031627297, g: 0.032905985, b: 0.035788614, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1949.4287, y: 949.43384}
+  m_AnchoredPosition: {x: 1589, y: 949.43384}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &41518
@@ -11600,9 +11600,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scriptObject: {fileID: 1804891036}
-  testo: {fileID: 1996703296}
+  testo: {fileID: 41519}
   testo1: {fileID: 1617554176}
-  testo2: {fileID: 41519}
+  testo2: {fileID: 1996703296}
   img: {fileID: 687284201}
 --- !u!65 &1013294109
 BoxCollider:
@@ -15442,7 +15442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1656438655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16470,9 +16470,9 @@ MonoBehaviour:
   upwardForce: 2
   a: 0
   b: 0
-  testo: {fileID: 41519}
-  testo1: {fileID: 1996703296}
-  testo2: {fileID: 1617554176}
+  testocronometro: {fileID: 41519}
+  testooggetti: {fileID: 1617554176}
+  testo2: {fileID: 1996703296}
   img: {fileID: 687284201}
   totalTime: 180
   totalTime2: 0

@@ -369,7 +369,6 @@ MonoBehaviour:
   acceleration: 15
   maxSpeed: 25
   maxRotationSpeed: 90
-  posizioni_cageKey: {fileID: 0}
 --- !u!1 &6229277400757579858
 GameObject:
   m_ObjectHideFlags: 0
@@ -5544,7 +5543,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 75b9eb2cffc9e4018bdfee36e5d1587e, type: 2}
+  - {fileID: 2100000, guid: fc98f029ad1a2c24abce7a2c214eb689, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

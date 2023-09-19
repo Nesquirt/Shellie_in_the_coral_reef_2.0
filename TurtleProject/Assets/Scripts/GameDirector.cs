@@ -91,6 +91,7 @@ public class GameDirector : MonoBehaviour
 
         corals = GameObject.FindGameObjectsWithTag("CoralSpot");
 
+        //Metodo che fa partire il ciclo di cambiamento dei parametri
         InvokeRepeating("tick", 0, 10);
     }
 

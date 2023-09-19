@@ -39,7 +39,7 @@ public class OpenCagesHandler : MonoBehaviour
     //TODO: richiama ogni volta che parte minigame MazeExploring
     public void restartMazeGame()
     {
-        this.timeRemaining = 60f;
+        this.timeRemaining = 3f;
         this.seconds = Mathf.Round(timeRemaining);
         Debug.Log("SECONDI: " + this.seconds);
 
@@ -91,9 +91,11 @@ public class OpenCagesHandler : MonoBehaviour
 
             //ANIMAZIONE gabbie che salgono 
             this.arr_cages = GameObject.FindGameObjectsWithTag("Gabbia");
+            Debug.Log("dim array: " + arr_cages.Length);
 
-            if(arr_cages != null)
+            if(arr_cages.Length != 0)
             {
+                //Debug.Log(arr_cages);
                 //StartCoroutine(cageGoesUp());
                 for (int i = 0; i < arr_cages.Length; i++)
                 {
@@ -111,7 +113,11 @@ public class OpenCagesHandler : MonoBehaviour
                 }
             }
             else
+            {
                 this.gameObject.SetActive(false);
+                Debug.Log("ogg posizioni ELIMINATO");
+            }
+                
 
 
 
@@ -229,7 +235,7 @@ public class OpenCagesHandler : MonoBehaviour
     {
         if(this.openCages == this.totCages || this.seconds == 0)
          {
-            //Debug.Log("FINE" + " openCages: " + this.openCages + " + seconds: " + this.seconds);
+            Debug.Log("FINE" + " openCages: " + this.openCages + " + seconds: " + this.seconds);
              return true;
          }
         else

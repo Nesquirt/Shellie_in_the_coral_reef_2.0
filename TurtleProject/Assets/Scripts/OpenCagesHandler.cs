@@ -9,7 +9,7 @@ public class OpenCagesHandler : MonoBehaviour
 {
     private GameObject canvas;
     private TextMeshProUGUI timer_text, crub_text;
-    private Image crub_icon;
+    private Image crub_icon, key_icon;
 
     private float timeRemaining;
     private float seconds;
@@ -24,13 +24,14 @@ public class OpenCagesHandler : MonoBehaviour
         this.canvas = GameObject.Find("Canvas");
         this.timer_text = canvas.transform.Find("MazeCanvas/TimerText").gameObject.GetComponent<TextMeshProUGUI>();
         this.crub_icon = canvas.transform.Find("MazeCanvas/CrubIcon").gameObject.GetComponent<Image>();
+        this.key_icon = canvas.transform.Find("MazeCanvas/KeyIcon").gameObject.GetComponent<Image>();
         this.crub_text = canvas.transform.Find("MazeCanvas/FreedCrub").gameObject.GetComponent<TextMeshProUGUI>();
     }
 
     //TODO: richiama ogni volta che parte minigame MazeExploring
     public void restartMazeGame()
     {
-        this.timeRemaining = 6f;
+        this.timeRemaining = 13f;
         this.seconds = Mathf.Round(timeRemaining);
 
         this.hasKey = false;
@@ -40,6 +41,7 @@ public class OpenCagesHandler : MonoBehaviour
         timer_text.SetText(seconds.ToString());
 
         crub_icon.enabled = true;
+
         crub_text.enabled = true;
         crub_text.SetText(openCages.ToString() + "/" + totCages.ToString());
 
@@ -67,6 +69,7 @@ public class OpenCagesHandler : MonoBehaviour
             this.timer_text.enabled = false;
             this.crub_text.enabled = false;
             this.crub_icon.enabled = false;
+            this.key_icon.enabled = false;
             this.hasKey = false;
 
             //faccio scomparire le chiavi
@@ -86,9 +89,10 @@ public class OpenCagesHandler : MonoBehaviour
                     if (arr_cages[i] != null)
                     {
                         arr_cages[i].GetComponent<CageScript>().GoUp();
-                        if(arr_cages[i].transform.position.y > 50f)
+                        if(arr_cages[i].transform.position.y > 120f)
                         {
                             //arr_cages[i].GetComponent<Rigidbody>().isKinematic = true;      //ho già disabilitato la fisica per l'oggetto
+                            Debug.Log("gabbia distrutta");
                             Destroy(arr_cages[i]);
                         }
                     }
@@ -97,7 +101,7 @@ public class OpenCagesHandler : MonoBehaviour
             }
 
             //Debug.Log("GIOCO FINITO");
-            this.gameObject.SetActive(false);  //così, una volta finito il gioco, Update non viene più richiamato
+            //this.gameObject.SetActive(false);  //così, una volta finito il gioco, Update non viene più richiamato
 
         }
     }
@@ -154,6 +158,7 @@ public class OpenCagesHandler : MonoBehaviour
                 {
                     Destroy(other.gameObject);
                     this.hasKey = true;
+                    this.key_icon.enabled = true;
                     Debug.Log("ho la chiave");
                 }
                 else
@@ -170,6 +175,7 @@ public class OpenCagesHandler : MonoBehaviour
                     Debug.Log("apro gabbia");
                     other.GetComponent<CageScript>().OpenCage();
                     this.hasKey = false;
+                    this.key_icon.enabled = false;
                     this.openCages++;
                     Debug.Log("GABBIE APERTE: " + this.openCages);
                     this.crub_text.SetText(openCages.ToString() + "/" + totCages.ToString());

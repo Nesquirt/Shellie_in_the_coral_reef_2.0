@@ -5,7 +5,6 @@ using UnityEngine;
 //Questo è lo script associato a ogni roccia su cui potrà crescere un corallo
 public class CoralHandler : MonoBehaviour
 {
-    private GameObject gameDirector;
     [SerializeField] private GameObject PillarCoral, FireCoral, SoftCoral, ElkhornCoral;
     private Vector3 spawnPoint1, spawnPoint2, spawnPoint3, spawnPoint4, spawnPoint5;
     private Vector3[] spawnPoints;
@@ -17,7 +16,6 @@ public class CoralHandler : MonoBehaviour
     private void Awake()
     {
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-        gameDirector = GameObject.Find("Director");
         isGrowing = false;
         spawnPoints = new Vector3[5];
         //Creo i vettori con le posizioni in cui deve instanziare i nuovi coralli relativi alla roccia
@@ -44,9 +42,9 @@ public class CoralHandler : MonoBehaviour
                     newCoral.transform.parent = this.transform;
                 }
                 //TODO: vedi se è possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
-                gameDirector.GetComponent<GameDirector>().modifyBiodiversityChange(2);
-                gameDirector.GetComponent<GameDirector>().modifyPollutionChange(1);
-                gameDirector.GetComponent<GameDirector>().modifyOxygenLevelChange(3);
+                GameDirector.Instance.modifyBiodiversityChange(2);
+                GameDirector.Instance.modifyPollutionChange(1);
+                GameDirector.Instance.modifyOxygenLevelChange(3);
                 break;
             case 1: //FireCoral
                   
@@ -56,9 +54,9 @@ public class CoralHandler : MonoBehaviour
                     newCoral.transform.parent = this.transform;
                 }
                 //TODO: vedi se è possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
-                gameDirector.GetComponent<GameDirector>().modifyBiodiversityChange(-1);
-                gameDirector.GetComponent<GameDirector>().modifyPollutionChange(-3);
-                gameDirector.GetComponent<GameDirector>().modifyOxygenLevelChange(-1);
+                GameDirector.Instance.modifyBiodiversityChange(-1);
+                GameDirector.Instance.modifyPollutionChange(-3);
+                GameDirector.Instance.modifyOxygenLevelChange(-1);
                 break;
             case 2: //SoftCoral
                 for (int i = 0; i < spawnPoints.Length; i++)
@@ -67,9 +65,9 @@ public class CoralHandler : MonoBehaviour
                     newCoral.transform.parent = this.transform;
                 }
                 //TODO: vedi se è possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
-                gameDirector.GetComponent<GameDirector>().modifyBiodiversityChange(1);
-                gameDirector.GetComponent<GameDirector>().modifyPollutionChange(0);
-                gameDirector.GetComponent<GameDirector>().modifyOxygenLevelChange(1);
+                GameDirector.Instance.modifyBiodiversityChange(1);
+                GameDirector.Instance.modifyPollutionChange(0);
+                GameDirector.Instance.modifyOxygenLevelChange(1);
                 break;
             case 3: //ElkhornCoral
                 for (int i = 0; i < spawnPoints.Length; i++)
@@ -78,9 +76,9 @@ public class CoralHandler : MonoBehaviour
                     newCoral.transform.parent = this.transform;
                 }
                 //TODO: vedi se è possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
-                gameDirector.GetComponent<GameDirector>().modifyBiodiversityChange(2);
-                gameDirector.GetComponent<GameDirector>().modifyPollutionChange(1);
-                gameDirector.GetComponent<GameDirector>().modifyOxygenLevelChange(3);
+                GameDirector.Instance.modifyBiodiversityChange(2);
+                GameDirector.Instance.modifyPollutionChange(1);
+                GameDirector.Instance.modifyOxygenLevelChange(3);
                 break;
 
 
@@ -115,8 +113,8 @@ public class CoralHandler : MonoBehaviour
 
     public void OnTriggerEnter(Collider collider)
     {
-        if(collider.gameObject.tag == "Player" && 
-            gameDirector.GetComponent<GameDirector>().getGameState() == GameDirector.GameState.FreeRoaming)
+        if(collider.gameObject.tag == "Player" &&
+            GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
         {
             //Attiva il prompt "Premi E per piantare un corallo"
             canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(true);
@@ -129,7 +127,7 @@ public class CoralHandler : MonoBehaviour
     public void OnTriggerStay(Collider collider)
     {
         if (collider.gameObject.tag == "Player" &&
-            gameDirector.GetComponent<GameDirector>().getGameState() == GameDirector.GameState.FreeRoaming)
+            GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
         {
             if (isGrowing)
             {
@@ -139,7 +137,7 @@ public class CoralHandler : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.E))
             {
-                gameDirector.GetComponent<GameDirector>().currentCoralSpot = this.gameObject;
+                GameDirector.Instance.currentCoralSpot = this.gameObject;
                 canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(true);
                 canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(false);
             }
@@ -157,7 +155,7 @@ public class CoralHandler : MonoBehaviour
     public void OnTriggerExit(Collider collider)
     {
         if (collider.gameObject.tag == "Player" &&
-            gameDirector.GetComponent<GameDirector>().getGameState() == GameDirector.GameState.FreeRoaming)
+            GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
         {
 
             //Uscito dalla zona del CoralSpot, chiude gli elementi dell'UI

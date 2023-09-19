@@ -11,15 +11,17 @@ public class TurtleController : MonoBehaviour
     private float speed, verticalRotationSpeed, lateralRotationSpeed;
     private Vector3 eulerRotationSpeed;
     private float h, v, j;
+    private AudioSource bubble;
 
-    [SerializeField] private GameObject posizioni_cageKey;
+    private GameObject posizioni_cageKey;
     
     // Start is called before the first frame update
     void Start()
     {
         this.rb = GetComponent<Rigidbody>();
         this.eulerRotationSpeed = new Vector3(0, this.maxRotationSpeed, 0);
-       
+        
+        this.posizioni_cageKey = GameObject.Find("Posizioni_CageKey");
     }
 
 
@@ -39,7 +41,6 @@ public class TurtleController : MonoBehaviour
             speed = 0;
         if (speed > maxSpeed)
             speed = maxSpeed;
-
         // -------------------------------------------------------------------- //
         //calcolo della rotazione laterale
         lateralRotationSpeed = 0;
@@ -107,8 +108,8 @@ public class TurtleController : MonoBehaviour
         {
             //TODO: richiama metodo per far partire gioco libera granchi 
             Debug.Log("Entrata MazeExploring");
-            this.posizioni_cageKey.SetActive(true);
-            this.posizioni_cageKey.GetComponent<OpenCagesHandler>().restartMazeGame();
+            posizioni_cageKey.SetActive(true);
+            posizioni_cageKey.GetComponent<OpenCagesHandler>().restartMazeGame();
             //GameObject.Find("Posizioni_CageKey").GetComponent<OpenCagesHandler>().restartMazeGame();  //metodo che inizializza tutto e fa partire il gioco
         }
     }
@@ -124,7 +125,7 @@ public class TurtleController : MonoBehaviour
         }
         else if (other.tag == "Chiave" || other.tag == "Gabbia")
         {
-            GameObject.Find("Posizioni_CageKey").GetComponent<OpenCagesHandler>().TriggerMethod(other);
+            posizioni_cageKey.GetComponent<OpenCagesHandler>().TriggerMethod(other);
         }
            
     }

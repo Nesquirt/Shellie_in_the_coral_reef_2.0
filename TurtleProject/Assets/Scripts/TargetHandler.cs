@@ -7,9 +7,7 @@ using TMPro;
 public class TargetHandler : MonoBehaviour
 {
     private GameObject player;
-    private GameObject directorObject;
     private GameObject canvas;
-    private GameDirector director;
     //private GameObject[] targets;
     [SerializeField] private Material activeMaterial, inactiveMaterial;
     private int currentTime;        //Tempo attuale del timer in millisecondi
@@ -24,7 +22,11 @@ public class TargetHandler : MonoBehaviour
     private Button confirmButton, cancelButton;
     private void Awake()
     {
+        // -------------------------------------------------------------------- //
+        //Trova gli oggetti di gioco e di interfaccia all'avvio
+        player = GameObject.Find("TurtlePlayer");
         canvas = GameObject.Find("Canvas");
+
         obstacleRacePrompt = canvas.transform.Find("ObstacleRacePrompt");
         obstacleRacePrompt.gameObject.SetActive(false);
         NPCName = canvas.transform.Find("DialoguePanel/TitlePanel/NPCName").gameObject.GetComponent<TextMeshProUGUI>();
@@ -34,21 +36,18 @@ public class TargetHandler : MonoBehaviour
         cancelButton = canvas.transform.Find("DialoguePanel/CancelButton").gameObject.GetComponent<Button>();
         timer = canvas.transform.Find("Timer").gameObject.GetComponent<TextMeshProUGUI>();
 
+        //Aggiunge i listener ai bottoni di dialogo
         confirmButton.onClick.AddListener(ConfirmButton_onClick);
         cancelButton.onClick.AddListener(CancelButton_onClick);
 
-        player = GameObject.Find("TurtlePlayer");
-        directorObject = GameObject.Find("Director");
-        director = directorObject.GetComponent<GameDirector>();
         
-
-        //raceStart(); //TODO: rimuovi e mettilo come prompt
+        
     }
     // -------------------------------------------------------------------- //
     //Funzioni chiamate all'interno di TurtleController per gestire il dialogo con l'anguilla
     public void raceStartPrompt()
     {
-        if (director.getGameState() != GameDirector.GameState.FreeRoaming)
+        if (GameDirector.Instance.getGameState() != GameDirector.GameState.FreeRoaming)
             return;
         if(!canvas.transform.Find("DialoguePanel").gameObject.activeSelf)
             obstacleRacePrompt.gameObject.SetActive(true);
@@ -72,6 +71,8 @@ public class TargetHandler : MonoBehaviour
         if(!canvas.transform.Find("BarsPanel").gameObject.activeSelf)
             canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
     }
+    // -------------------------------------------------------------------- //
+    //Listener dei bottoni di dialogo
     public void ConfirmButton_onClick()
     {
         raceStart();
@@ -91,14 +92,14 @@ public class TargetHandler : MonoBehaviour
         // -------------------------------------------------------------------- //
         //GAMESTATE
         //Check per vedere se un altro minigioco è attivo
-        if (director.getGameState() != GameDirector.GameState.FreeRoaming)
+        if (GameDirector.Instance.getGameState() != GameDirector.GameState.FreeRoaming)
         {
             Debug.Log("Non puoi cominciare il minigioco se sei già impegnato da un'altra parte!");
             return;
         }
 
         //Imposta il gameState generale in modo che non può iniziare altri minigiochi
-        director.setGameState(GameDirector.GameState.ObstacleCourse);
+        GameDirector.Instance.setGameState(GameDirector.GameState.ObstacleCourse);
 
         // -------------------------------------------------------------------- //
         //TIMER
@@ -126,6 +127,8 @@ public class TargetHandler : MonoBehaviour
                 GameObject.Find(targetName).GetComponent<MeshRenderer>().material = inactiveMaterial;
         }
     }
+    // -------------------------------------------------------------------- //
+    //Coroutine del timer
     IEnumerator Timer()
     {
         for (currentTenths = 0; currentTenths < 18000; currentTenths++)
@@ -134,11 +137,12 @@ public class TargetHandler : MonoBehaviour
             yield return new WaitForSeconds(.1f);
         }
     }
-    public void TargetCollision(string targetName) //Metodo chiamato da TurtleController
+    // -------------------------------------------------------------------- //
+    //Metodo chiamato da TurtleController.OnTriggerEnter
+    public void TargetCollision(string targetName) 
     {
-        Debug.Log(TimeToString());
-        //Check del gamestate, per vedere se è iniziato il minigioco (TODO: disabilitato finché non implemento il prompt, altrimenti va in conflitto con l'awake del gamedirector
-        if (director.getGameState() != GameDirector.GameState.ObstacleCourse)
+        //Check del gamestate, per vedere se è iniziato il minigioco
+        if (GameDirector.Instance.getGameState() != GameDirector.GameState.ObstacleCourse)
             return;
 
             //Imposta il target successivo come attivo
@@ -166,15 +170,17 @@ public class TargetHandler : MonoBehaviour
                 
             }
     }
+    // -------------------------------------------------------------------- //
+    //Metodo di fine minigioco
     public void Victory()
     {
-        director.setGameState(GameDirector.GameState.FreeRoaming);
+        GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
 
         float earnedPearlsFloat = 10 + 10 * (float)(800/currentTenths); //da più gemme se il percorso è completato entro un minuto e venti
         int earnedPearls = (int)earnedPearlsFloat;
         //current range di perle: 20 max, 13 min
-        director.addPearls(earnedPearls);
-        director.addOxygenLevel(20);
+        GameDirector.Instance.addPearls(earnedPearls);
+        GameDirector.Instance.addOxygenLevel(20);
 
         canvas.transform.Find("VictoryPanel").gameObject.SetActive(true);
         rewardsText = canvas.transform.Find("VictoryPanel/RewardsPanel/RewardsText").GetComponent<TextMeshProUGUI>();
@@ -182,7 +188,8 @@ public class TargetHandler : MonoBehaviour
                             "Perle guadagnate: " + earnedPearls + "\n" + 
                             "Livello di ossigeno aumentato del 20%");
     }
-
+    // -------------------------------------------------------------------- //
+    //Metodo di conversione dell'int del timer in una String (xx:xx:xx)
     private string TimeToString()
     {
         int minutes = currentTenths / 600;

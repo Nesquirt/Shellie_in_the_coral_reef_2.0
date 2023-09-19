@@ -22,6 +22,7 @@ public class TurtleController : MonoBehaviour
         this.eulerRotationSpeed = new Vector3(0, this.maxRotationSpeed, 0);
         
         this.posizioni_cageKey = GameObject.Find("Posizioni_CageKey");
+        posizioni_cageKey.SetActive(false);
     }
 
 

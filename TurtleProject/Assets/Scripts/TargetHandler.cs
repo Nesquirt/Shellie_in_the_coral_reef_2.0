@@ -93,11 +93,8 @@ public class TargetHandler : MonoBehaviour
         // -------------------------------------------------------------------- //
         //GAMESTATE
         //Check per vedere se un altro minigioco è attivo
-        Debug.Log("GameState all'inizio di raceStart: " + GameDirector.Instance.getGameState());
         if (GameDirector.Instance.getGameState() != GameDirector.GameState.FreeRoaming)
         { 
-            Debug.Log("Non puoi cominciare il minigioco se sei già impegnato da un'altra parte!");
-            Debug.Log(GameDirector.Instance.getGameState());
             GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
             return;
         }

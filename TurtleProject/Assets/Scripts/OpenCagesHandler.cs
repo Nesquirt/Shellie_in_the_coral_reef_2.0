@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class OpenCagesHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject container;  //è l'oggetto stesso
-
     private GameObject canvas;
     private TextMeshProUGUI timer_text, crub_text;
     private Image crub_icon;
@@ -22,12 +20,11 @@ public class OpenCagesHandler : MonoBehaviour
 
     void Awake()
     {
-        this.totCages = this.container.GetComponent<SpawnCages>().totalCages;  //prendo il numero di casse
+        this.totCages = this.GetComponent<SpawnCages>().totalCages;  //prendo il numero di casse
         this.canvas = GameObject.Find("Canvas");
         this.timer_text = canvas.transform.Find("MazeCanvas/TimerText").gameObject.GetComponent<TextMeshProUGUI>();
         this.crub_icon = canvas.transform.Find("MazeCanvas/CrubIcon").gameObject.GetComponent<Image>();
         this.crub_text = canvas.transform.Find("MazeCanvas/FreedCrub").gameObject.GetComponent<TextMeshProUGUI>();
-        restartMazeGame();
     }
 
     //TODO: richiama ogni volta che parte minigame MazeExploring
@@ -43,15 +40,15 @@ public class OpenCagesHandler : MonoBehaviour
         timer_text.SetText(seconds.ToString());
 
         crub_icon.enabled = true;
-
         crub_text.enabled = true;
         crub_text.SetText(openCages.ToString() + "/" + totCages.ToString());
 
+        this.GetComponent<SpawnCages>().restartGame();
         //TODO: fai partire Coroutine(?)
     }
 
     //TODO: elimina metodo Update, NON è necessario --> sistema codice altrove (Coroutines ogni 0.1f)
-    private void Update()
+    /*private void Update()
     {
         //if (GameObject.Find("Director").GetComponent<GameDirector>().getGameState() != GameDirector.GameState.MazeExploring)
             //return;
@@ -99,9 +96,11 @@ public class OpenCagesHandler : MonoBehaviour
                 }
             }
 
+            this.gameObject.SetActive(false);
 
         }
     }
+    */
 
 
 
@@ -143,7 +142,7 @@ public class OpenCagesHandler : MonoBehaviour
            
     }
 
-    //TODO: temporaneo (metodo chiamato da TurtleController
+    //TODO: temporaneo (metodo chiamato da TurtleController)
     public void TriggerMethod(Collider other)
     {
         if (other.CompareTag("Chiave"))

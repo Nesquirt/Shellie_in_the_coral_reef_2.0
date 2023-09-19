@@ -11,6 +11,8 @@ public class TurtleController : MonoBehaviour
     private float speed, verticalRotationSpeed, lateralRotationSpeed;
     private Vector3 eulerRotationSpeed;
     private float h, v, j;
+
+    [SerializeField] private GameObject posizioni_cageKey;
     
     // Start is called before the first frame update
     void Start()
@@ -101,12 +103,23 @@ public class TurtleController : MonoBehaviour
         {
             other.GetComponentInParent<TargetHandler>().TargetCollision(other.name);
         }
+        if (other.CompareTag("MazeExploring"))
+        {
+            //TODO: richiama metodo per far partire gioco libera granchi 
+            Debug.Log("Entrata MazeExploring");
+            this.posizioni_cageKey.GetComponent<SpawnCages>().restartGame();  //spawn gabbie e chiavi
+            //GameObject.Find("Posizioni_CageKey").GetComponent<OpenCagesHandler>().restartMazeGame();  //metodo che inizializza tutto e fa partire il gioco
+        }
     }
     public void OnTriggerStay(Collider other)
     {
         if (other.name == "Anguilla_collider")
         {
             other.GetComponentInParent<TargetHandler>().raceStartPrompt();
+        }
+        else if (other.name == "pesceColorato")
+        {
+            //
         }
         //else if (other.tag == "chiave" || other.tag == "gabbia")
         //    GameObject.Find("Posizioni_CageKey").GetComponent<OpenCagesHandler>().TriggerMethod(other);

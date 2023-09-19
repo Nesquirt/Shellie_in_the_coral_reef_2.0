@@ -61,6 +61,9 @@ public class GameDirector : MonoBehaviour
     private Slider reefHealthSlider, pollutionSlider, biodiversitySlider, oxygenLevelSlider;
     private Image reefHealthArrow, pollutionArrow, biodiversityArrow, oxygenLevelArrow;  //TODO: aggiungi un'immagine per quando il cambiamento di parametri è 0
     private Sprite upArrow, downArrow;
+    private GameObject GameOverPanel;
+    private TextMeshProUGUI TitleText, CentralText, BottomText;
+    private Button ReturnToMenuButton, WebsiteButton;
     
     public GameObject currentCoralSpot;  //Questa variabile comunica con CoralHandler per ricordare su quale roccia si sta piantando i coralli
     // -------------------------------------------------------------------- //
@@ -90,6 +93,22 @@ public class GameDirector : MonoBehaviour
         biodiversityArrow = canvas.transform.Find("BarsPanel/BiodiversityBar/BiodiversityArrow").GetComponent<Image>();
         oxygenLevelArrow = canvas.transform.Find("BarsPanel/OxygenLevelBar/OxygenLevelArrow").GetComponent<Image>();
 
+        GameOverPanel = canvas.transform.Find("GameOverPanel").gameObject;
+        TitleText = GameOverPanel.transform.Find("TitleText").GetComponent<TextMeshProUGUI>();
+        CentralText = GameOverPanel.transform.Find("CentralText").GetComponent<TextMeshProUGUI>();
+        BottomText = GameOverPanel.transform.Find("BottomText").GetComponent<TextMeshProUGUI>();
+        GameOverPanel.SetActive(false);
+        TitleText.gameObject.SetActive(false);
+        CentralText.gameObject.SetActive(false);
+        BottomText.gameObject.SetActive(false);
+
+        ReturnToMenuButton = GameOverPanel.transform.Find("ReturnToMenuButton").GetComponent<Button>();
+        WebsiteButton = GameOverPanel.transform.Find("WebsiteButton").GetComponent<Button>();
+        ReturnToMenuButton.gameObject.SetActive(false);
+        WebsiteButton.gameObject.SetActive(false);
+        //ReturnToMenuButton.onClick.AddListener();  //TODO: collega alla scena menù
+        WebsiteButton.onClick.AddListener(OpenURL);
+
         upArrow = Resources.Load<Sprite>("Sprites/UpArrow");
         downArrow = Resources.Load<Sprite>("Sprites/DownArrow");
         // -------------------------------------------------------------------- //
@@ -110,7 +129,7 @@ public class GameDirector : MonoBehaviour
         corals = GameObject.FindGameObjectsWithTag("CoralSpot");
 
         //Metodo che fa partire il ciclo di cambiamento dei parametri
-        InvokeRepeating("tick", 0, 10);
+        InvokeRepeating("tick", 0, 30);
     }
 
     public void tick()                                          //Funzione che viene chiamata una volta ogni minuto, e aggiorna i valori delle statistiche di gioco
@@ -171,11 +190,14 @@ public class GameDirector : MonoBehaviour
             
         }
         else if (reefHealth >= 100)
+        {
             reefHealth = 100;
+            Victory();
+        }  
         else if(reefHealth<=0)
         {
             reefHealth = 0;
-            //TODO: gameOver
+            GameOver();
         }
 
         reefHealthSlider.value = reefHealth;
@@ -267,5 +289,49 @@ public class GameDirector : MonoBehaviour
         return currentState;
     }
     // -------------------------------------------------------------------- //
+    //Metodi di GameOver e Victory
+    public void GameOver()
+    {
+        TitleText.SetText("GAME OVER!");
+        CentralText.SetText("Le condizioni dell'ambiente si sono deteriorate, e i coralli stanno cominciando ad appassire... " +
+            "Dovremo riprovare da un'altra parte.");
+        GameOverPanel.SetActive(true);
+        StartCoroutine(FadeIn(GameOverPanel.GetComponent<Image>()));
+    }
+    public void Victory()
+    {
+        TitleText.SetText("VITTORIA!");
+        CentralText.SetText("Grazie ai tuoi sforzi, le condizioni dell'ambiente sono stabili e in grado di prosperare." +
+            "Questa barriera corallina è salva!");
+        GameOverPanel.SetActive(true);
+        StartCoroutine(FadeIn(GameOverPanel.GetComponent<Image>()));
+    }
 
+    IEnumerator FadeIn(Image GameOverPanel)
+    {
+        float fadeAmount;
+        Color nextFrameColor;
+        while(GameOverPanel.color.a < 1)
+        {
+            fadeAmount = GameOverPanel.color.a + (1.3f * Time.deltaTime);
+            nextFrameColor = new Color(GameOverPanel.color.r, GameOverPanel.color.g, GameOverPanel.color.b, fadeAmount);
+            GameOverPanel.color = nextFrameColor;
+            yield return new WaitForSeconds(0.1f);
+        }
+        yield return new WaitForSeconds(1);
+        TitleText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1);
+        CentralText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1);
+        BottomText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1);
+        ReturnToMenuButton.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        WebsiteButton.gameObject.SetActive(true);
+        
+    }
+    public void OpenURL()
+    {
+        Application.OpenURL("https://oceanservice.noaa.gov/facts/thingsyoucando.html");
+    }
 }

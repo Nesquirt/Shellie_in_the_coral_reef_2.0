@@ -6,6 +6,39 @@ using UnityEngine.UI;
 using TMPro;
 public class GameDirector : MonoBehaviour
 {
+    // -------------------------------------------------------------------- //
+    //Creazione dell'istanza del Singleton
+    private static GameDirector _instance;
+    public static GameDirector Instance
+    {
+        get { CreateOrGetInstance();
+            return _instance; }
+        protected set { _instance = value; }
+    }
+    static void CreateOrGetInstance()
+    {
+        if(_instance == null)
+        {
+            _instance = FindObjectOfType<GameDirector>(); //Cerca nella scena se esiste un oggetto di tipo GameDirector
+            if(_instance == null)
+            {
+                GameObject newObj = new GameObject("Director"); //Se non la trova, crea il singleton
+                newObj.AddComponent<GameDirector>();
+                _instance = newObj.GetComponent<GameDirector>();
+                DontDestroyOnLoad(newObj);
+            }
+        }
+    }
+    private void OnDestroy()
+    {
+        //Se e quando l'oggetto viene distrutto, se questa è l'istanza settata allora la rimuove
+        if(_instance == this)
+        {
+            Instance = null;
+        }
+    }
+    // -------------------------------------------------------------------- //
+    //Creazione dell'enum per gli stati del gioco
     public enum GameState
     {
         FreeRoaming,        //Non attualmente in un minigioco
@@ -13,24 +46,39 @@ public class GameDirector : MonoBehaviour
         TrashCollecting,    //Raccolta della spazzatura nella rete
         MazeExploring       //Esplorazione del labirinto per liberare i granchi
     }
-
-    public GameState currentState;
+    // -------------------------------------------------------------------- //
+    //Dichiarazione iniziale delle variabili
+    private GameState currentState;
 
     private int currentPearls;
     private int reefHealth, pollution, biodiversity, oxygenLevel;
     private int pollutionChange, biodiversityChange, oxygenLevelChange, reefHealthChange;
     private GameObject[] corals;
-
+    //TODO: rendi questi elementi dell'UI private e ricavali nell'awake con GameObject.Find
     public Slider reefHealthSlider, pollutionSlider, biodiversitySlider, oxygenLevelSlider;
     public Image reefHealthArrow, pollutionArrow, biodiversityArrow, oxygenLevelArrow;  //TODO: aggiungi un'immagine per quando il cambiamento di parametri è 0
     public Sprite upArrow, downArrow;
     
-    public GameObject currentCoralSpot;
+    public GameObject currentCoralSpot;  //Questa variabile comunica con CoralHandler per ricordare su quale roccia si sta piantando i coralli
+    // -------------------------------------------------------------------- //
     private void Awake()
     {
+        // -------------------------------------------------------------------- //
+        //Inizializzazione del Singleton
+        if(Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject); //Se esiste già un'altra istanza, distrugge questo oggetto per evitare duplicati dell'istanza
+        }
+        // -------------------------------------------------------------------- //
+        //Impostazione dei valori iniziali di gioco
         currentState = GameState.FreeRoaming;
 
-        currentPearls = 0;
+        currentPearls = 100;
 
         reefHealth = 50;
         pollution = 70;

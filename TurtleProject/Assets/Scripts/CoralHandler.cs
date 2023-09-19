@@ -5,17 +5,19 @@ using UnityEngine;
 //Questo è lo script associato a ogni roccia su cui potrà crescere un corallo
 public class CoralHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject gameDirector;
+    private GameObject gameDirector;
     [SerializeField] private GameObject PillarCoral, FireCoral, SoftCoral, ElkhornCoral;
     private Vector3 spawnPoint1, spawnPoint2, spawnPoint3, spawnPoint4, spawnPoint5;
     private Vector3[] spawnPoints;
     private int growthCounter;
     private bool isGrowing;
 
-    [SerializeField] private Canvas canvas;
+    private Canvas canvas;
 
     private void Awake()
     {
+        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        gameDirector = GameObject.Find("Director");
         isGrowing = false;
         spawnPoints = new Vector3[5];
         //Creo i vettori con le posizioni in cui deve instanziare i nuovi coralli relativi alla roccia
@@ -106,7 +108,7 @@ public class CoralHandler : MonoBehaviour
                 
             }
             growthCounter++;
-            yield return new WaitForSeconds(0.1f); 
+            yield return new WaitForSeconds(0.001f); 
         }
         
     }

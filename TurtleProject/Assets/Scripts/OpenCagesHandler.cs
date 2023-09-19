@@ -45,6 +45,7 @@ public class OpenCagesHandler : MonoBehaviour
         timer_text.SetText(seconds.ToString());
 
         crub_icon.enabled = true;
+        key_icon.enabled = false;
 
         crub_text.enabled = true;
         crub_text.SetText(openCages.ToString() + "/" + totCages.ToString());
@@ -94,7 +95,7 @@ public class OpenCagesHandler : MonoBehaviour
                     if (arr_cages[i] != null)
                     {
                         arr_cages[i].GetComponent<CageScript>().GoUp();
-                        if(arr_cages[i].transform.position.y > 120f)
+                        if(arr_cages[i].transform.position.y > 100f)
                         {
                             //arr_cages[i].GetComponent<Rigidbody>().isKinematic = true;      //ho già disabilitato la fisica per l'oggetto
                             Debug.Log("gabbia distrutta");
@@ -113,6 +114,7 @@ public class OpenCagesHandler : MonoBehaviour
         }
     }
     
+    //TODO: sistemare coroutine
     IEnumerator cageGoesUp()
     {
 
@@ -130,7 +132,7 @@ public class OpenCagesHandler : MonoBehaviour
             }
 
         }
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(4);
         this.gameObject.SetActive(false);
         StopCoroutine(cageGoesUp());
 
@@ -138,7 +140,7 @@ public class OpenCagesHandler : MonoBehaviour
 
 
 
-    public void OnTriggerStay(Collider other)
+    /*public void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Chiave"))
         {
@@ -174,7 +176,7 @@ public class OpenCagesHandler : MonoBehaviour
             }
         }
            
-    }
+    }*/
 
     //TODO: temporaneo (metodo chiamato da TurtleController)
     public void TriggerMethod(Collider other)
@@ -219,7 +221,7 @@ public class OpenCagesHandler : MonoBehaviour
     {
         if(this.openCages == this.totCages || this.seconds == 0)
          {
-            Debug.Log("FINE" + " openCages: " + this.openCages + " + seconds: " + this.seconds);
+            //Debug.Log("FINE" + " openCages: " + this.openCages + " + seconds: " + this.seconds);
              return true;
          }
         else

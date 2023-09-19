@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.44770378, g: 0.78431374, b: 0.7294118, a: 1}
+  m_FogColor: {r: 0.44705883, g: 0.78431374, b: 0.7294118, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.007
   m_LinearFogStart: 0
@@ -9771,7 +9771,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 695833873}
-  m_LocalRotation: {x: 1e-45, y: -3.78245e-10, z: 2.220446e-16, w: 1}
+  m_LocalRotation: {x: -0, y: -3.78245e-10, z: 2.220446e-16, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15236,11 +15236,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772230589}
-<<<<<<< Updated upstream
   m_LocalRotation: {x: -0.036324956, y: -0.0000000025273732, z: -9.186713e-11, w: 0.99934006}
-=======
-  m_LocalRotation: {x: -0.03632495, y: 0.0000000017713833, z: 6.438814e-11, w: 0.99934006}
->>>>>>> Stashed changes
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

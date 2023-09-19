@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
     // Funzione per avviare una nuova partita
     public void StartGame()
     {
-        SceneManager.LoadScene("Matteo_Terrain");
+        SceneManager.LoadScene("MatteoScene");
     }
 
     // Funzione per aprire il menu delle impostazioni (la scena SettingsMenu)

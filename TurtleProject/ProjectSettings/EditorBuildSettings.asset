@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Matteo_Terrain.unity
-    guid: 786af831c8cf95a4ca8e5d578bc8eaee
-  - enabled: 1
     path: Assets/Scenes/Simone_impostazioni.unity
     guid: 0b621279206a83842841e6d61b178b53
   - enabled: 1
     path: Assets/Scenes/Simone_Menu_iniziale.unity
     guid: eebb3a1e3c40a0542b2a0936f03a75b9
+  - enabled: 1
+    path: Assets/Scenes/MatteoScene.unity
+    guid: 597d49bbb6357174e82d75dafb2bdfb2
   m_configObjects: {}

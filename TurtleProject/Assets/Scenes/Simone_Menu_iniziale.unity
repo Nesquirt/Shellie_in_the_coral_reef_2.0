@@ -357,7 +357,6 @@ RectTransform:
   - {fileID: 833384085}
   - {fileID: 1025770334}
   - {fileID: 729694805}
-  - {fileID: 1119886060}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1311,13 +1310,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e2a2887975cf83439c073947a8464f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BackgroundMUSIC: {fileID: 1026425381}
-  TenseMUSIC: {fileID: 1026425381}
-  MUSIC_VOLUME: 1
-  EFX_VOLUME: 1
-  MUSIC_MIXER: {fileID: 24300002, guid: 6abac69ff87a55a41b1e9e2ba11a384e, type: 2}
-  EFX_MIXER: {fileID: 24300002, guid: 11f455faf4d8bcb44b62d72c1ff396f7, type: 2}
-  slider: {fileID: 0}
 --- !u!4 &1026425383
 Transform:
   m_ObjectHideFlags: 0
@@ -1333,73 +1325,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1119886059
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1119886060}
-  - component: {fileID: 1119886061}
-  m_Layer: 0
-  m_Name: Video Player
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1119886060
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1119886059}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -550.5, y: -257.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 660524704}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!328 &1119886061
-VideoPlayer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1119886059}
-  m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 82fc2562043f0074ba31a9d6382c0d14, type: 3}
-  m_TargetCameraAlpha: 1
-  m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 8400000, guid: 64e1cba57ff7b0144a77a560c8a56b36, type: 2}
-  m_TimeReference: 0
-  m_TargetMaterialRenderer: {fileID: 0}
-  m_TargetMaterialProperty: <noninit>
-  m_RenderMode: 2
-  m_AspectRatio: 2
-  m_DataSource: 1
-  m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
-  m_TargetAudioSources:
-  - {fileID: 0}
-  m_DirectAudioVolumes:
-  - 0
-  m_Url: https://www.youtube.com/watch?v=gjaPIMzHHDs
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 01
-  m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
-  m_SkipOnDrop: 1
-  m_Looping: 1
-  m_WaitForFirstFrame: 1
-  m_FrameReadyEventEnabled: 0
-  m_VideoShaders: []
 --- !u!1 &1201822041
 GameObject:
   m_ObjectHideFlags: 0

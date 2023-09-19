@@ -133,6 +133,7 @@ public class GameDirector : MonoBehaviour
 
         //Metodo che fa partire il ciclo di cambiamento dei parametri
         InvokeRepeating("tick", 0, 30);
+
     }
 
     public void tick()                                          //Funzione che viene chiamata una volta ogni minuto, e aggiorna i valori delle statistiche di gioco

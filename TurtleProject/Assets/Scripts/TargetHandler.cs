@@ -21,6 +21,8 @@ public class TargetHandler : MonoBehaviour
     private TextMeshProUGUI NPCName, dialogueText, rewardsText, timer;
     private Button confirmButton, cancelButton;
 
+    private AudioManager audioManager;
+
     private void Awake()
     {
         // -------------------------------------------------------------------- //
@@ -41,7 +43,7 @@ public class TargetHandler : MonoBehaviour
         confirmButton.onClick.AddListener(ConfirmButton_onClick);
         cancelButton.onClick.AddListener(CancelButton_onClick);
 
-        
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         
     }
     // -------------------------------------------------------------------- //
@@ -158,15 +160,19 @@ public class TargetHandler : MonoBehaviour
                 if(targetNumber == 0)
                 {
                     StartCoroutine(Timer());
-                }
+                    audioManager.PlaySFX(audioManager.startRace);
+
+            }
                 if(targetNumber == 28)
                 {
                     Victory();
                     StopCoroutine(Timer());
                     timer.gameObject.SetActive(false);
-                return;
+                    audioManager.PlaySFX(audioManager.endRace);
+                    return;
                 }
                 GameObject.Find(nextTargetName).GetComponent<MeshRenderer>().material = activeMaterial;
+                if(targetNumber > 0 && targetNumber < 28) audioManager.PlaySFX(audioManager.crossRing);
                 targetNumber++;
                 
             }

@@ -25,7 +25,6 @@ public class AudioManager : MonoBehaviour
     public AudioClip endRace;
     public AudioClip crossRing;
 
-
     private void Start()
     {
         SoundtrackSource.clip = soundtrack;
@@ -38,5 +37,7 @@ public class AudioManager : MonoBehaviour
     public void PlaySFX(AudioClip sfx)
     {
         SFXSource.PlayOneShot(sfx);
+        SFXSource.clip = sfx;
+        SFXSource.Play();
     }
 }

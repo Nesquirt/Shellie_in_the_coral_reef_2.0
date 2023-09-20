@@ -7,6 +7,7 @@ public class TurtleController : MonoBehaviour
     [SerializeField] private float acceleration;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float maxRotationSpeed;
+    private GameObject oggettoscriptTrash;
     private Rigidbody rb;
     private float speed, verticalRotationSpeed, lateralRotationSpeed;
     private Vector3 eulerRotationSpeed;
@@ -128,6 +129,13 @@ public class TurtleController : MonoBehaviour
         {
             other.GetComponentInParent<TargetHandler>().raceStartPrompt();
         }
+        else if(other.name == "PesceRosso_collider")
+        {
+           // other.GetComponentInChildren<SpawnPrefabsRandomly>().raceStartPrompt1();
+            oggettoscriptTrash = GameObject.Find("ContenitoreStefano/oggettoscriptTrash");
+            oggettoscriptTrash.GetComponent<SpawnPrefabsRandomly>().raceStartPrompt1();
+            
+        }
         else if(other.name == "SpecialTarget")
         {
             other.GetComponentInParent<TargetHandler>().summonSpecialTarget();
@@ -147,6 +155,12 @@ public class TurtleController : MonoBehaviour
         if (other.name == "Anguilla_collider")
         {
             other.GetComponentInParent<TargetHandler>().AnguillaTriggerExit();
+        }
+         else if (other.name == "PesceRosso_collider")
+        {
+            oggettoscriptTrash = GameObject.Find("ContenitoreStefano/oggettoscriptTrash");
+            oggettoscriptTrash.GetComponent<SpawnPrefabsRandomly>().PesceRossoTriggerExit();
+            //other.GetComponentInParent<SpawnPrefabsRandomly>().PesceRossoTriggerExit();
         }
         else if (other.name == "pesceColorato")
         {

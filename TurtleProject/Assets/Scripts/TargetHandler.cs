@@ -65,7 +65,7 @@ public class TargetHandler : MonoBehaviour
             NPCName.SetText("Anguilla");
             dialogueText.SetText("Hey, tu! Sembri una tipa molto in forma. Ti andrebbe di aiutarmi con una faccenda?\n" +
                                  "Le alghe in questo canyon sono in acqua stagnante... Svegliale attraversando tutti gli anelli rocciosi!\n" +
-                                 "Sono sicura che il livello di ossigeno ne aumenterà... E se vai abbastanza veloce, ti darò anche qualche perla in più. Ci stai?");
+                                 "Sono sicura che il livello di ossigeno ne aumenterï¿½... E se vai abbastanza veloce, ti darï¿½ anche qualche perla in piï¿½. Ci stai?");
         }
     }
     public void AnguillaTriggerExit()
@@ -97,11 +97,11 @@ public class TargetHandler : MonoBehaviour
     {
         // -------------------------------------------------------------------- //
         //GAMESTATE
-        //Check per vedere se un altro minigioco è attivo
-        //NOTA: ho dovuto mettere questo check in una coroutine perché, per un mistero quantico, metterlo direttamente in questo metodo
+        //Check per vedere se un altro minigioco ï¿½ attivo
+        //NOTA: ho dovuto mettere questo check in una coroutine perchï¿½, per un mistero quantico, metterlo direttamente in questo metodo
         StartCoroutine(CheckGameState());
 
-        //Imposta il gameState generale in modo che non può iniziare altri minigiochi
+        //Imposta il gameState generale in modo che non puï¿½ iniziare altri minigiochi
         GameDirector.Instance.setGameState(GameDirector.GameState.ObstacleCourse);
 
         // -------------------------------------------------------------------- //
@@ -155,7 +155,7 @@ public class TargetHandler : MonoBehaviour
     //Metodo chiamato da TurtleController.OnTriggerEnter
     public void TargetCollision(string targetName) 
     {
-        //Check del gamestate, per vedere se è iniziato il minigioco
+        //Check del gamestate, per vedere se ï¿½ iniziato il minigioco
         if (GameDirector.Instance.getGameState() != GameDirector.GameState.ObstacleCourse)
             return;
 
@@ -198,7 +198,7 @@ public class TargetHandler : MonoBehaviour
     {
         GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
 
-        float earnedPearlsFloat = 10 + 10 * (float)(800/currentTenths); //da più gemme se il percorso è completato entro un minuto e venti
+        float earnedPearlsFloat = 10 + 10 * (float)(800/currentTenths); //da piï¿½ gemme se il percorso ï¿½ completato entro un minuto e venti
         int earnedPearls = (int)earnedPearlsFloat;
         //current range di perle: 20 max, 13 min
         GameDirector.Instance.addPearls(earnedPearls);

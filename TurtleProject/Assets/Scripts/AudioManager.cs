@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip startRace;
     public AudioClip endRace;
     public AudioClip crossRing;
+    public AudioClip Crush_Spawn;
 
     private void Start()
     {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class TargetHandler : MonoBehaviour
 {
@@ -208,6 +209,26 @@ public class TargetHandler : MonoBehaviour
         else
             return minutes + ":" + seconds + ":" + tenths + "0";
 
+    }
+    // -------------------------------------------------------------------- //
+    //Shhhh...
+    public void summonSpecialTarget()
+    {
+        if(Input.GetKey(KeyCode.E))
+        {
+            audioManager.PlaySFX(audioManager.Crush_Spawn);
+            StartCoroutine(summoningRitual());
+        }
+    }
+    public IEnumerator summoningRitual()
+    {
+        GameObject Scorza = GameObject.Find("SpecialTarget");
+        Scorza.GetComponentInChildren<MeshRenderer>().enabled = true;
+        while (Scorza.transform.position.y>40)
+        {
+            Scorza.transform.position = Vector3.MoveTowards(Scorza.transform.position, new Vector3(57, 40, 530), Time.deltaTime * 1.5f);
+            yield return new WaitForFixedUpdate();
+        }
     }
 
 }

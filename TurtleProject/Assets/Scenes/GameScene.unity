@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.21838298, g: 0.72851455, b: 0.99998194, a: 1}
+  m_IndirectSpecularColor: {r: 0.009053468, g: 0.011537125, b: 0.014848266, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9414,7 +9414,7 @@ GameObject:
   - component: {fileID: 588878101}
   - component: {fileID: 588878100}
   m_Layer: 5
-  m_Name: BarsPopupButton
+  m_Name: OpenStatsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -65,7 +65,7 @@ public class GameDirector : MonoBehaviour
     private Slider reefHealthSlider, pollutionSlider, biodiversitySlider, oxygenLevelSlider;
     private Image reefHealthArrow, pollutionArrow, biodiversityArrow, oxygenLevelArrow;  //TODO: aggiungi un'immagine per quando il cambiamento di parametri e' 0
     private Sprite upArrow, downArrow;
-    private GameObject GameOverPanel;
+    private GameObject GameOverPanel, StatsPanel;
     private TextMeshProUGUI TitleText, CentralText, BottomText;
     private Button ReturnToMenuButton, WebsiteButton, SettingsButton, OpenStatsButton;
 
@@ -115,6 +115,8 @@ public class GameDirector : MonoBehaviour
         TitleText.gameObject.SetActive(false);
         CentralText.gameObject.SetActive(false);
         BottomText.gameObject.SetActive(false);
+        StatsPanel = canvas.transform.Find("StatsPanel").gameObject;
+        StatsPanel.SetActive(false);
 
         ReturnToMenuButton = GameOverPanel.transform.Find("ReturnToMenuButton").GetComponent<Button>();
         WebsiteButton = GameOverPanel.transform.Find("WebsiteButton").GetComponent<Button>();
@@ -123,7 +125,7 @@ public class GameDirector : MonoBehaviour
         SettingsButton = canvas.transform.Find("SettingsButton").GetComponent<Button>();
         OpenStatsButton = canvas.transform.Find("OpenStatsButton").GetComponent<Button>();
 
-        OpenStatsButton.onClick.AddListener(OpenSettings);
+        OpenStatsButton.onClick.AddListener(OpenStats);
         SettingsButton.onClick.AddListener(OpenSettings);
         ReturnToMenuButton.onClick.AddListener(LoadMenu);
         WebsiteButton.onClick.AddListener(OpenURL);
@@ -377,6 +379,9 @@ public class GameDirector : MonoBehaviour
         SceneManager.LoadScene("Simone_Impostazioni", LoadSceneMode.Additive);
     }
     
-
-
+    public void OpenStats()
+    {
+        StatsPanel.SetActive(true);
+        
+    }
 }

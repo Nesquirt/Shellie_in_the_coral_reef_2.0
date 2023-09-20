@@ -67,7 +67,7 @@ public class GameDirector : MonoBehaviour
     private Sprite upArrow, downArrow;
     private GameObject GameOverPanel;
     private TextMeshProUGUI TitleText, CentralText, BottomText;
-    private Button ReturnToMenuButton, WebsiteButton;
+    private Button ReturnToMenuButton, WebsiteButton, SettingsButton, OpenStatsButton;
 
     public GameObject currentCoralSpot;  //Questa variabile comunica con CoralHandler per ricordare su quale roccia si sta piantando i coralli
     // -------------------------------------------------------------------- //
@@ -120,9 +120,12 @@ public class GameDirector : MonoBehaviour
         WebsiteButton = GameOverPanel.transform.Find("WebsiteButton").GetComponent<Button>();
         ReturnToMenuButton.gameObject.SetActive(false);
         WebsiteButton.gameObject.SetActive(false);
+        SettingsButton = canvas.transform.Find("SettingsButton").GetComponent<Button>();
+        OpenStatsButton = canvas.transform.Find("OpenStatsButton").GetComponent<Button>();
 
-        ReturnToMenuButton.onClick.AddListener(LoadMenu);  //TODO: collega alla scena men�
-
+        OpenStatsButton.onClick.AddListener(OpenSettings);
+        SettingsButton.onClick.AddListener(OpenSettings);
+        ReturnToMenuButton.onClick.AddListener(LoadMenu);
         WebsiteButton.onClick.AddListener(OpenURL);
 
         upArrow = Resources.Load<Sprite>("Sprites/UpArrow");
@@ -368,5 +371,12 @@ public class GameDirector : MonoBehaviour
     {
         SceneManager.LoadScene("Simone_Menu_Iniziale");
     }
+
+    public void OpenSettings()
+    {
+        SceneManager.LoadScene("Simone_Impostazioni", LoadSceneMode.Additive);
+    }
     
+
+
 }

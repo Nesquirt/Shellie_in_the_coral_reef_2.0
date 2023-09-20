@@ -29,19 +29,13 @@ public class MainMenu : MonoBehaviour
     // Funzione per aprire il menu delle impostazioni (la scena SettingsMenu)
     public void OpenOptions()
     {
-        StartCoroutine(LoadOptions());
+        SceneManager.LoadScene("Simone_impostazioni", LoadSceneMode.Additive);
     }
 
     // Funzione per chiudere il gioco
     public void QuitGame()
     {
         Application.Quit();
-    }
-    IEnumerator LoadOptions()
-    {
-        yield return new WaitForEndOfFrame();
-        SceneManager.LoadScene("Simone_impostazioni", LoadSceneMode.Additive);
-        yield return new WaitForEndOfFrame();
     }
    
 }

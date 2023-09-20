@@ -15,13 +15,14 @@ public class MainMenu : MonoBehaviour
         startGameButton.onClick.AddListener(StartGame);
         optionsButton.onClick.AddListener(OpenOptions);
         quitButton.onClick.AddListener(QuitGame);
-        aboutButton.onClick.AddListener(OpenAbout);
+        aboutButton.onClick.AddListener(GameDirector.Instance.OpenURL);
     }
 
     // Funzione per avviare una nuova partita
     public void StartGame()
     {
         SceneManager.LoadScene("MatteoScene");
+        //GameDirector.Instance.PlayIntro();
     }
 
     // Funzione per aprire il menu delle impostazioni (la scena SettingsMenu)
@@ -37,10 +38,11 @@ public class MainMenu : MonoBehaviour
     }
 
     // Funzione per aprire il link "About" nel browser
+    /*
     public void OpenAbout()
     {
         Application.OpenURL("https://coralreefrescueinitiative.org/");
-    }
+    } */
 }
 
 // made with love from Assassin's script ♥

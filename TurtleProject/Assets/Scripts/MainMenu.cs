@@ -13,11 +13,11 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-        // Associa le funzioni ai pulsanti
+        /* Associa le funzioni ai pulsanti
         startGameButton.onClick.AddListener(StartGame);
         optionsButton.onClick.AddListener(OpenOptions);
         quitButton.onClick.AddListener(QuitGame);
-        aboutButton.onClick.AddListener(GameDirector.Instance.OpenURL);
+        aboutButton.onClick.AddListener(GameDirector.Instance.OpenURL); */
     }
 
     // Funzione per avviare una nuova partita

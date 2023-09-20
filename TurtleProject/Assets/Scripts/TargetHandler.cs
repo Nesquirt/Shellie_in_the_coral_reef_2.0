@@ -85,11 +85,13 @@ public class TargetHandler : MonoBehaviour
         obstacleRacePrompt.gameObject.SetActive(false);
         canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
         raceStart();
+        audioManager.PlaySFX(audioManager.selection);
     }
     public void CancelButton_onClick()
     {
         AnguillaTriggerExit();
         obstacleRacePrompt.gameObject.SetActive(true);
+        audioManager.PlaySFX(audioManager.selection);
     }
     // -------------------------------------------------------------------- //
     //Funzione di start del minigioco

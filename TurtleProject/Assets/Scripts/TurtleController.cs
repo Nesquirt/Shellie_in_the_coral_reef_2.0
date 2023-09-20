@@ -128,6 +128,10 @@ public class TurtleController : MonoBehaviour
         {
             other.GetComponentInParent<TargetHandler>().raceStartPrompt();
         }
+        else if(other.name == "SpecialTarget")
+        {
+            other.GetComponentInParent<TargetHandler>().summonSpecialTarget();
+        }
         else if (other.name == "pesceColorato")
         {
             //posizioni_cageKey.GetComponent<OpenCagesHandler>().mazeStartPrompt();

@@ -68,10 +68,15 @@ public class TurtleController : MonoBehaviour
         // -------------------------------------------------------------------- //
         //calcolo della rotazione verticale
         verticalRotationSpeed = 0;
+        if (rb.position.y >= 40 && j > 0)
+        {
+            j = 0;
+        }
         if (Mathf.Abs(verticalRotationSpeed) <= maxRotationSpeed && j != 0)
         {
             verticalRotationSpeed += acceleration * Time.deltaTime * j; //TODO: forse è meglio mettere un'accelerazione di rotazione separata
         }
+        
 
         //Se non sono premuti tasti verticali, la rotazione rallenta fino a tornare dritti
         else if (j == 0 && verticalRotationSpeed != 0)

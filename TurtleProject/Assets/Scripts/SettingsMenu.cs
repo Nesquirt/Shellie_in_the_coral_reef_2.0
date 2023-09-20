@@ -33,14 +33,14 @@ public class SettingsMenu : MonoBehaviour
     public void SetMusicVolume(float volume)
     {
         // Imposta il volume della musica e salva il valore nelle preferenze
-        AudioManager.Instance.SetMusicVolume(volume);
+        //AudioManager.Instance.SetMusicVolume(volume);
         PlayerPrefs.SetFloat("MusicVolume", volume);
     }
 
     public void SetSoundEffectsVolume(float volume)
     {
         // Imposta il volume degli effetti sonori e salva il valore nelle preferenze
-        AudioManager.Instance.SetSoundEffectsVolume(volume);
+        //AudioManager.Instance.SetSoundEffectsVolume(volume);
         PlayerPrefs.SetFloat("SoundEffectsVolume", volume);
     }
 }

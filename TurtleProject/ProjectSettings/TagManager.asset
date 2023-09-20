@@ -13,6 +13,7 @@ TagManager:
   - spazzatura
   - MazeExploring
   - posizioni
+  - Audio
   layers:
   - Default
   - TransparentFX

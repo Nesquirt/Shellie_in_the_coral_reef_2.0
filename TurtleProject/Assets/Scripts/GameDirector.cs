@@ -85,6 +85,14 @@ public class GameDirector : MonoBehaviour
             Destroy(gameObject); //Se esiste già un'altra istanza, distrugge questo oggetto per evitare duplicati dell'istanza
         }
         // -------------------------------------------------------------------- //
+
+    }
+    public void LoadGame()
+    {
+        if(SceneManager.GetActiveScene().name != "GameScene")
+        {
+            Debug.Log("Chiamata funzione LoadGame dal menù");
+        }
         //Nella scena di gioco, prende dalla hierarchy tutti gli elementi dell'interfaccia
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         reefHealthSlider = canvas.transform.Find("BarsPanel/ReefHealthBar").GetComponent<Slider>();
@@ -119,7 +127,7 @@ public class GameDirector : MonoBehaviour
         //Impostazione dei valori iniziali di gioco
         currentState = GameState.FreeRoaming;
 
-        currentPearls = 100;
+        currentPearls = 0;
 
         reefHealth = 50;
         pollution = 20;
@@ -134,8 +142,6 @@ public class GameDirector : MonoBehaviour
 
         //Metodo che fa partire il ciclo di cambiamento dei parametri
         InvokeRepeating("tick", 0, 30);
-        Victory();
-
     }
 
     public void tick()                                          //Funzione che viene chiamata una volta ogni minuto, e aggiorna i valori delle statistiche di gioco
@@ -324,7 +330,7 @@ public class GameDirector : MonoBehaviour
         GameOverPanel.SetActive(true);
         StartCoroutine(FadeIn(GameOverPanel.GetComponent<Image>()));
     }
-
+    //Coroutine per la comparsa del pannello e delle scritte
     IEnumerator FadeIn(Image GameOverPanel)
     {
         float fadeAmount;

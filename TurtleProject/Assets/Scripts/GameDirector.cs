@@ -57,7 +57,7 @@ public class GameDirector : MonoBehaviour
     private GameState currentState;
 
     private int currentPearls;
-    private int reefHealth, pollution, biodiversity, oxygenLevel;
+    [SerializeField]private int reefHealth, pollution, biodiversity, oxygenLevel;
     private int pollutionChange, biodiversityChange, oxygenLevelChange, reefHealthChange;
     private GameObject[] corals;
     private Canvas canvas;
@@ -262,6 +262,7 @@ public class GameDirector : MonoBehaviour
     {
         pollution += value;
         pollutionSlider.value = pollution;
+        Debug.Log("Test");
     }
     public void addOxygenLevel(int value)
     {

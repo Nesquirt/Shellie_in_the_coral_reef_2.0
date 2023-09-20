@@ -32,7 +32,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     private float currentTime;
     private float currentTime2;
     public int rifiutiraccolti;
-    private Transform obstacleRacePrompt;
+    private Transform StefanoPrompt;
     private TextMeshProUGUI NPCName, dialogueText, rewardsText, testocontatore,testocronometro,testo5;
     private Button confirmButton, cancelButton;
     private GameObject canvas;
@@ -48,8 +48,8 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         run = false;
         canvas = GameObject.Find("Canvas");
        // this.gameObject.SetActive(false);
-        obstacleRacePrompt = canvas.transform.Find("ObstacleRacePrompt");
-        obstacleRacePrompt.gameObject.SetActive(false);
+        StefanoPrompt = canvas.transform.Find("Promptstefano");
+        StefanoPrompt.gameObject.SetActive(false);
         NPCName = canvas.transform.Find("DialoguePanel/TitlePanel/NPCName").gameObject.GetComponent<TextMeshProUGUI>();
         testocronometro=canvas.transform.Find("Trashcronometro").gameObject.GetComponent<TextMeshProUGUI>();
         testocontatore=canvas.transform.Find("trashcontatore").gameObject.GetComponent<TextMeshProUGUI>();
@@ -77,37 +77,56 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         if (GameDirector.Instance.getGameState() != GameDirector.GameState.FreeRoaming)
             return;
         if(!canvas.transform.Find("DialoguePanel").gameObject.activeSelf)
-           obstacleRacePrompt.gameObject.SetActive(true);
+           StefanoPrompt.gameObject.SetActive(true);
         if(Input.GetKey(KeyCode.E))
         {
             canvas.transform.Find("BarsPanel").gameObject.SetActive(false);
-            obstacleRacePrompt.gameObject.SetActive(false);
+            StefanoPrompt.gameObject.SetActive(false);
             canvas.transform.Find("DialoguePanel").gameObject.SetActive(true);
             NPCName.SetText("pesce rosso");
-            dialogueText.SetText("ciao");
+            dialogueText.SetText("ciao ti vuoi drogare con me???\n "+
+            "attraversa la porta vedrai un mondo fatato");
         }
+     
     }  
     public void PesceRossoTriggerExit()
     {
         if (canvas.transform.Find("DialoguePanel").gameObject.activeSelf)
             canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
-        if(obstacleRacePrompt.gameObject.activeSelf)
-            obstacleRacePrompt.gameObject.SetActive(false);
+        if(StefanoPrompt.gameObject.activeSelf)
+            StefanoPrompt.gameObject.SetActive(false);
         if(!canvas.transform.Find("BarsPanel").gameObject.activeSelf)
             canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
     }
         public void ConfirmButton_onClick()
     {
         canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
-        obstacleRacePrompt.gameObject.SetActive(false);
+        StefanoPrompt.gameObject.SetActive(false);
         canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
         Start1();
     }
     public void CancelButton_onClick()
     {
         PesceRossoTriggerExit();
-        obstacleRacePrompt.gameObject.SetActive(true);
+        StefanoPrompt.gameObject.SetActive(true);
     }
+   /* public void Finish()
+    {
+  
+        GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
+
+        int earnedPearls = rifiutiraccolti*5; //da pi� gemme se il percorso � completato entro un minuto e venti
+     
+        //current range di perle: 20 max, 13 min
+        GameDirector.Instance.addPearls(earnedPearls);
+        GameDirector.Instance.addPollution(-5*rifiutiraccolti);
+
+        canvas.transform.Find("VictoryPanel").gameObject.SetActive(true);
+        rewardsText = canvas.transform.Find("VictoryPanel/RewardsPanel/RewardsText").GetComponent<TextMeshProUGUI>();
+        rewardsText.SetText("Rifiuti Raccolti: " + rifiutiraccolti + "\n" +
+                            "Perle guadagnate: " + earnedPearls + "\n" + 
+                            "Livello di ossigeno diminuito del %"+ -5*rifiutiraccolti);
+    }*/
     // -
     void Start1()
     { 
@@ -121,7 +140,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
             b=0;
            // anim=rete.GetComponent<Animator>();
            // totalTime=60f;
-           // rifiutiraccolti=0;
+            rifiutiraccolti=0;
             //numerodaspawnare=5;
             sostegno.gameObject.SetActive(false);
             testocronometro.gameObject.SetActive(true);
@@ -140,7 +159,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     }
     void FixedUpdate(){
 
- 
+       if (run){
          Debug.Log("oggetti nel paino"+oggettiNelPiano);
          Debug.Log("oggetti raccolti"+rifiutiraccolti);
         if(currentTime>0){
@@ -158,7 +177,12 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         {    
             if (b==0){
                rifiutiraccolti=oggettiNelPiano; 
+               int earnedPearls =rifiutiraccolti*5;
+               GameDirector.Instance.addPearls(earnedPearls);
+               //GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
+               GameDirector.Instance.addPollution(-rifiutiraccolti*5);
                b=1;
+               
             }
             rb.AddForce(Vector3.up * upwardForce,ForceMode.Impulse);
            
@@ -181,16 +205,23 @@ public class SpawnPrefabsRandomly : MonoBehaviour
            a=1;
            currentTime2=0;
            sostegno.gameObject.SetActive(true);
+            canvas.transform.Find("VictoryPanel").gameObject.SetActive(true);
+            rewardsText = canvas.transform.Find("VictoryPanel/RewardsPanel/RewardsText").GetComponent<TextMeshProUGUI>();
+            rewardsText.SetText("Rifiuti raccolti: " + rifiutiraccolti + "\n" +
+                            "Perle guadagnate: " + rifiutiraccolti*5+ "\n" + 
+                            "Livello di ossigeno diminuito del "+rifiutiraccolti*5+"%");
            GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
+           //GameDirector.Instance.addOxygenLevel(20);
            run=false;
            //GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
+           //run=false;
+           //GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
            //this.gameObject.SetActive(false);
-
-           
+          
           
         }
 
-        
+       }
         
         
 

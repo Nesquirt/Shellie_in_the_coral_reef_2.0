@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource SoundtrackSource;
     [SerializeField] AudioSource MovementSource;
     [SerializeField] AudioSource BubbleSource;
-    [SerializeField] AudioSource CoralSource;
+    [SerializeField] AudioSource GrowingCoralSource;
     [SerializeField] AudioSource SFXSource;
 
     [Header("- - - - AUDIO CLIP (LOOP)")]
@@ -25,6 +25,16 @@ public class AudioManager : MonoBehaviour
     public AudioClip endRace;
     public AudioClip crossRing;
     public AudioClip Crush_Spawn;
+
+    [Header("- - - - AUDIO CLIP SARA'S GAME (ONE SHOT)")]
+    public AudioClip KeyTaken;
+    public AudioClip CageOpening;
+
+    [Header("- - - - AUDIO CLIP STEFANO'S GAME (ONE SHOT)")]
+    public AudioClip GridDrop;
+    public AudioClip TrashMoving;
+    public AudioClip ShipHorn;
+    public AudioClip GridClimb;
 
     private void Start()
     {

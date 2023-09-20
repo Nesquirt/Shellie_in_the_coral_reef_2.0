@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -35,13 +37,8 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
-
-    // Funzione per aprire il link "About" nel browser
-    /*
-    public void OpenAbout()
-    {
-        Application.OpenURL("https://coralreefrescueinitiative.org/");
-    } */
+   
 }
+
 
 // made with love from Assassin's script ♥

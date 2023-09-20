@@ -26,20 +26,19 @@ public class GameDirector : MonoBehaviour
             _instance = FindObjectOfType<GameDirector>(); //Cerca nella scena se esiste un oggetto di tipo GameDirector
             if (_instance == null)
             {
-                GameObject newObj = new GameObject("Director"); //Se non la trova, crea il singleton
-                newObj.AddComponent<GameDirector>();
+                GameObject newObj = Instantiate<GameObject>(Resources.Load("Director") as GameObject);
+                //GameObject newObj = new GameObject("Director"); //Se non la trova, crea il singleton
                 _instance = newObj.GetComponent<GameDirector>();
                 DontDestroyOnLoad(newObj);
             }
         }
-
     }
     private void OnDestroy()
     {
         //Se e quando l'oggetto viene distrutto, se questa � l'istanza settata allora la rimuove
         if (_instance == this)
         {
-            Instance = null;
+            _instance = null;
         }
     }
     protected GameDirector() { } //Costruttore protected per non permettere l'inizializzazione fuori dalla gerarchia
@@ -67,7 +66,7 @@ public class GameDirector : MonoBehaviour
     private Sprite upArrow, downArrow;
     private GameObject GameOverPanel, StatsPanel;
     private TextMeshProUGUI TitleText, CentralText, BottomText;
-    private Button ReturnToMenuButton, WebsiteButton, SettingsButton, OpenStatsButton;
+    private Button ReturnToMenuButton, WebsiteButton, SettingsButton;
 
     public GameObject currentCoralSpot;  //Questa variabile comunica con CoralHandler per ricordare su quale roccia si sta piantando i coralli
     // -------------------------------------------------------------------- //
@@ -75,12 +74,12 @@ public class GameDirector : MonoBehaviour
     {
         // -------------------------------------------------------------------- //
         //Inizializzazione del Singleton
-        if (Instance == null)
+        if (_instance == null)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            _instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
-        else if (Instance != null && Instance != this)
+        else if (_instance != this)
         {
             Destroy(gameObject); //Se esiste gia' un'altra istanza, distrugge questo oggetto per evitare duplicati dell'istanza
         }
@@ -123,10 +122,8 @@ public class GameDirector : MonoBehaviour
         ReturnToMenuButton.gameObject.SetActive(false);
         WebsiteButton.gameObject.SetActive(false);
         SettingsButton = canvas.transform.Find("SettingsButton").GetComponent<Button>();
-        OpenStatsButton = canvas.transform.Find("OpenStatsButton").GetComponent<Button>();
 
-        OpenStatsButton.onClick.AddListener(OpenStats);
-        SettingsButton.onClick.AddListener(OpenSettings);
+        //SettingsButton.onClick.AddListener(OpenSettings);
         ReturnToMenuButton.onClick.AddListener(LoadMenu);
         WebsiteButton.onClick.AddListener(OpenURL);
 
@@ -371,6 +368,7 @@ public class GameDirector : MonoBehaviour
     }
     public void LoadMenu()
     {
+        CancelInvoke();
         SceneManager.LoadScene("Simone_Menu_Iniziale");
     }
 
@@ -378,10 +376,16 @@ public class GameDirector : MonoBehaviour
     {
         SceneManager.LoadScene("Simone_Impostazioni", LoadSceneMode.Additive);
     }
-    
-    public void OpenStats()
+
+    public void StatsOpenAndClose(GameObject obj)
     {
-        StatsPanel.SetActive(true);
-        
+        if(obj.activeSelf)
+        {
+            obj.SetActive(false);
+        }
+        else
+        {
+            obj.SetActive(true);
+        }
     }
 }

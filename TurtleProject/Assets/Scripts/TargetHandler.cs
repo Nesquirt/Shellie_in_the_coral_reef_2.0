@@ -36,7 +36,7 @@ public class TargetHandler : MonoBehaviour
         NPCName = canvas.transform.Find("DialoguePanel/TitlePanel/NPCName").gameObject.GetComponent<TextMeshProUGUI>();
         dialogueText = canvas.transform.Find("DialoguePanel/DialogueText").gameObject.GetComponent<TextMeshProUGUI>();
         canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
-        confirmButton = canvas.transform.Find("DialoguePanel/ConfirmButton").gameObject.GetComponent<Button>();
+        //confirmButton = canvas.transform.Find("DialoguePanel/ConfirmRaceButton").gameObject.GetComponent<Button>();
         cancelButton = canvas.transform.Find("DialoguePanel/CancelButton").gameObject.GetComponent<Button>();
         timer = canvas.transform.Find("Timer").gameObject.GetComponent<TextMeshProUGUI>();
 
@@ -61,11 +61,12 @@ public class TargetHandler : MonoBehaviour
             dialogueText.SetText("Hey, tu! Sembri una tipa molto in forma. Ti andrebbe di aiutarmi con una faccenda?\n" +
                                  "Le alghe in questo canyon sono in acqua stagnante... Svegliale attraversando tutti gli anelli rocciosi!\n" +
                                  "Sono sicura che il livello di ossigeno aumentera'... E se vai abbastanza veloce, ti daro' anche qualche perla in piu'. Ci stai?");
-            //Aggiunge i listener ai bottoni di dialogo
+            /*Aggiunge i listener ai bottoni di dialogo
             confirmButton.onClick.RemoveAllListeners();
             cancelButton.onClick.RemoveAllListeners();
             confirmButton.onClick.AddListener(ConfirmButton_onClick);
             cancelButton.onClick.AddListener(CancelButton_onClick);
+            */
         }
     }
     public void AnguillaTriggerExit()
@@ -85,13 +86,13 @@ public class TargetHandler : MonoBehaviour
         obstacleRacePrompt.gameObject.SetActive(false);
         canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
         raceStart();
-        audioManager.PlaySFX(audioManager.selection);
+        //audioManager.PlaySFX(audioManager.selection);
     }
     public void CancelButton_onClick()
     {
         AnguillaTriggerExit();
         obstacleRacePrompt.gameObject.SetActive(true);
-        audioManager.PlaySFX(audioManager.selection);
+        //audioManager.PlaySFX(audioManager.selection);
     }
     // -------------------------------------------------------------------- //
     //Funzione di start del minigioco
@@ -136,6 +137,7 @@ public class TargetHandler : MonoBehaviour
     //Coroutine del timer
     IEnumerator Timer()
     {
+        Debug.Log("Cominciato Timer");
         currentTenths = 0;
         for (currentTenths = 0; currentTenths < 18000; currentTenths++)
         {
@@ -173,22 +175,23 @@ public class TargetHandler : MonoBehaviour
                 GameObject.Find(targetName).gameObject.SetActive(false);
                 if(targetNumber == 0)
                 {
+                Debug.Log("Attraversato primo anello");
                     StartCoroutine(Timer());
-                    audioManager.PlaySFX(audioManager.startRace);
+                    //audioManager.PlaySFX(audioManager.startRace);
 
             }
-                if(targetNumber == 28)
+                if(targetNumber >= 28)
                 {
                     Victory();
                     StopCoroutine(Timer());
                     timer.gameObject.SetActive(false);
-                    audioManager.PlaySFX(audioManager.endRace);
+                    //audioManager.PlaySFX(audioManager.endRace);
                     return;
                 }
                 GameObject.Find(nextTargetName).GetComponent<MeshRenderer>().material = activeMaterial;
                 if(targetNumber > 0 && targetNumber < 28)
                 {
-                    audioManager.PlaySFX(audioManager.crossRing);
+                    //audioManager.PlaySFX(audioManager.crossRing);
                 }
 
             targetNumber++;
@@ -249,5 +252,6 @@ public class TargetHandler : MonoBehaviour
         }
         audioManager.soundtrack.GetComponent<AudioSource>().volume = 0.2f;
     }
+
 
 }

@@ -25,16 +25,18 @@ public class OpenCagesHandler : MonoBehaviour
     {
         this.totCages = this.GetComponent<SpawnCages>().totalCages;  //prendo il numero di casse
         this.canvas = GameObject.Find("Canvas");
-        /*
+        
         this.timer_text = canvas.transform.Find("MazeContainer/TimerText").gameObject.GetComponent<TextMeshProUGUI>();
         this.crub_icon = canvas.transform.Find("MazeContainer/CrubIcon").gameObject.GetComponent<Image>();
         this.key_icon = canvas.transform.Find("MazeContainer/KeyIcon").gameObject.GetComponent<Image>();
         this.crub_text = canvas.transform.Find("MazeContainer/FreedCrub").gameObject.GetComponent<TextMeshProUGUI>();
-        */
+        
         this.MazePrompt = canvas.transform.Find("MazePrompt");
         MazePrompt.gameObject.SetActive(false);
         this.NPCName = canvas.transform.Find("DialoguePanel/TitlePanel/NPCName").gameObject.GetComponent<TextMeshProUGUI>();
         this.dialogueText = canvas.transform.Find("DialoguePanel/DialogueText").gameObject.GetComponent<TextMeshProUGUI>();
+
+        //COMMENTO PROVA 
 
         /*
         timer_text.enabled = false;

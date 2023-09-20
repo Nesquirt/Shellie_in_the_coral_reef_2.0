@@ -40,13 +40,8 @@ public class TargetHandler : MonoBehaviour
         cancelButton = canvas.transform.Find("DialoguePanel/CancelButton").gameObject.GetComponent<Button>();
         timer = canvas.transform.Find("Timer").gameObject.GetComponent<TextMeshProUGUI>();
 
-        //Aggiunge i listener ai bottoni di dialogo
-        confirmButton.onClick.RemoveAllListeners();
-        cancelButton.onClick.RemoveAllListeners();
-        confirmButton.onClick.AddListener(ConfirmButton_onClick);
-        cancelButton.onClick.AddListener(CancelButton_onClick);
+        //audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
 
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         
     }
     // -------------------------------------------------------------------- //
@@ -65,7 +60,12 @@ public class TargetHandler : MonoBehaviour
             NPCName.SetText("Anguilla");
             dialogueText.SetText("Hey, tu! Sembri una tipa molto in forma. Ti andrebbe di aiutarmi con una faccenda?\n" +
                                  "Le alghe in questo canyon sono in acqua stagnante... Svegliale attraversando tutti gli anelli rocciosi!\n" +
-                                 "Sono sicura che il livello di ossigeno ne aumenter�... E se vai abbastanza veloce, ti dar� anche qualche perla in pi�. Ci stai?");
+                                 "Sono sicura che il livello di ossigeno aumentera'... E se vai abbastanza veloce, ti daro' anche qualche perla in piu'. Ci stai?");
+            //Aggiunge i listener ai bottoni di dialogo
+            confirmButton.onClick.RemoveAllListeners();
+            cancelButton.onClick.RemoveAllListeners();
+            confirmButton.onClick.AddListener(ConfirmButton_onClick);
+            cancelButton.onClick.AddListener(CancelButton_onClick);
         }
     }
     public void AnguillaTriggerExit()
@@ -136,6 +136,7 @@ public class TargetHandler : MonoBehaviour
     //Coroutine del timer
     IEnumerator Timer()
     {
+        currentTenths = 0;
         for (currentTenths = 0; currentTenths < 18000; currentTenths++)
         {
             timer.SetText(TimeToString());

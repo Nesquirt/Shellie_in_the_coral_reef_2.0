@@ -70,7 +70,9 @@ public class TurtleController : MonoBehaviour
         // -------------------------------------------------------------------- //
         //calcolo della rotazione verticale
         verticalRotationSpeed = 0;
-        if (rb.position.y >= 40 && j > 0)
+
+        //Limita l'input del giocatore una volta raggiunta l'altezza massima
+        if (rb.position.y >= 40 && Input.GetKey(KeyCode.Space))
         {
             j = 0;
         }

@@ -133,6 +133,7 @@ public class GameDirector : MonoBehaviour
 
         //Metodo che fa partire il ciclo di cambiamento dei parametri
         InvokeRepeating("tick", 0, 30);
+        Victory();
 
     }
 
@@ -309,7 +310,7 @@ public class GameDirector : MonoBehaviour
     public void GameOver()
     {
         TitleText.SetText("GAME OVER!");
-        CentralText.SetText("Le condizioni dell'ambiente si sono deteriorate, e i coralli stanno cominciando ad appassire... " +
+        CentralText.SetText("Le condizioni dell'ambiente si sono deteriorate, e i coralli stanno iniziando a perdere colore... " +
             "Dovremo riprovare da un'altra parte.");
         GameOverPanel.SetActive(true);
         StartCoroutine(FadeIn(GameOverPanel.GetComponent<Image>()));
@@ -329,7 +330,7 @@ public class GameDirector : MonoBehaviour
         Color nextFrameColor;
         while (GameOverPanel.color.a < 1)
         {
-            fadeAmount = GameOverPanel.color.a + (1.3f * Time.deltaTime);
+            fadeAmount = GameOverPanel.color.a + (2f * Time.deltaTime);
             nextFrameColor = new Color(GameOverPanel.color.r, GameOverPanel.color.g, GameOverPanel.color.b, fadeAmount);
             GameOverPanel.color = nextFrameColor;
             yield return new WaitForSeconds(0.1f);
@@ -341,9 +342,10 @@ public class GameDirector : MonoBehaviour
         yield return new WaitForSeconds(1);
         BottomText.gameObject.SetActive(true);
         yield return new WaitForSeconds(1);
-        ReturnToMenuButton.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
         WebsiteButton.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        ReturnToMenuButton.gameObject.SetActive(true);
+        
 
     }
     public void OpenURL()

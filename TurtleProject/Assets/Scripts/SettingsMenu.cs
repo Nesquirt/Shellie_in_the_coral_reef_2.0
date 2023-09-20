@@ -27,7 +27,7 @@ public class SettingsMenu : MonoBehaviour
     public void BackToMainMenu()
     {
         // Carica la scena del menu principale
-        SceneManager.LoadScene("Simone_Menu_iniziale");
+        SceneManager.UnloadScene("Simone_impostazioni");
     }
 
     public void SetMusicVolume(float volume)

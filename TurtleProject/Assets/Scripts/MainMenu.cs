@@ -27,7 +27,7 @@ public class MainMenu : MonoBehaviour
     // Funzione per aprire il menu delle impostazioni (la scena SettingsMenu)
     public void OpenOptions()
     {
-        SceneManager.LoadScene("Simone_impostazioni");
+        SceneManager.LoadScene("Simone_impostazioni", LoadSceneMode.Additive);
     }
 
     // Funzione per chiudere il gioco

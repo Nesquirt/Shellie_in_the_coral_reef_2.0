@@ -222,6 +222,7 @@ public class TargetHandler : MonoBehaviour
     }
     public IEnumerator summoningRitual()
     {
+        audioManager.soundtrack.GetComponent<AudioSource>().volume = 0.01f;
         GameObject Scorza = GameObject.Find("SpecialTarget");
         Scorza.GetComponentInChildren<MeshRenderer>().enabled = true;
         while (Scorza.transform.position.y>40)
@@ -229,6 +230,7 @@ public class TargetHandler : MonoBehaviour
             Scorza.transform.position = Vector3.MoveTowards(Scorza.transform.position, new Vector3(57, 40, 530), Time.deltaTime * 1.5f);
             yield return new WaitForFixedUpdate();
         }
+        audioManager.soundtrack.GetComponent<AudioSource>().volume = 0.2f;
     }
 
 }

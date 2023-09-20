@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class OpenCagesHandler : MonoBehaviour
 {
     private GameObject canvas;
-    private TextMeshProUGUI timer_text, crab_text, NPCName, dialogueText;
+    private TextMeshProUGUI timer_text, crab_text, NPCName, dialogueText, victoryText;
     private Transform MazePrompt;
     private Image crab_icon, key_icon;
     private Button confirmButton, cancelButton;
@@ -52,7 +52,7 @@ public class OpenCagesHandler : MonoBehaviour
     //Funzione START MazeExploring
     public void restartMazeGame()
     {
-        this.timeRemaining = 60f;
+        this.timeRemaining = 120f;
         this.seconds = Mathf.Round(timeRemaining);
         Debug.Log("SECONDI: " + this.seconds);
 
@@ -64,7 +64,7 @@ public class OpenCagesHandler : MonoBehaviour
 
         crab_icon.enabled = true;
         key_icon.enabled = false;
-
+       
         crab_text.enabled = true;
         crab_text.SetText(openCages.ToString() + "/" + totCages.ToString());
 
@@ -125,12 +125,14 @@ public class OpenCagesHandler : MonoBehaviour
         MazePrompt.gameObject.SetActive(true);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (GameObject.Find("Director").GetComponent<GameDirector>().getGameState() != GameDirector.GameState.MazeExploring)
            return;
 
-        Debug.Log("UPDATE");
+        //Debug.Log("UPDATE");
+
+        
 
         if (this.timeRemaining > 0)
         {
@@ -142,7 +144,8 @@ public class OpenCagesHandler : MonoBehaviour
 
         if(IsFinished())   
         {
-            //Debug.Log("THE END");
+            checkEnd();
+
             this.timer_text.enabled = false;
             this.crab_text.enabled = false;
             this.crab_icon.enabled = false;
@@ -186,7 +189,37 @@ public class OpenCagesHandler : MonoBehaviour
                 
         }
     }
-    
+
+    private void checkEnd()
+    {
+        int gane = 8 * openCages;
+
+        canvas.transform.Find("VictoryPanel").gameObject.SetActive(true);
+        victoryText = canvas.transform.Find("VictoryPanel/RewardsPanel/RewardsText").GetComponent<TextMeshProUGUI>();
+
+        if(openCages == 0)
+        {
+            victoryText.SetText("Purtroppo non sei riuscita a liberare nesssun granchio... \n" + 
+                                "Non hai guadagnato nessuna perla...\n" +
+                                "Il livello di ossigeno NON è aumentato...");
+        }
+        else if(openCages == totCages)
+        {
+            victoryText.SetText("Complimenti! Sei riuscita a salvare tutti i granchi! \n" + 
+                                "Perle guadagnate: " + gane + "\n" +
+                                 "Livello di ossigeno aumentato del " + gane + "%");
+        }
+        else
+        {
+            victoryText.SetText("Perle guadagnate: " + gane + "\n" +
+                            "Livello di ossigeno aumentato del " + gane + "%");
+        }
+
+        GameDirector.Instance.addPearls(gane);
+        GameDirector.Instance.addBiodiversity(gane);
+    }
+
+
     //TODO: sistemare coroutine
     IEnumerator cageGoesUp()
     {

@@ -96,11 +96,7 @@ public class TargetHandler : MonoBehaviour
         // -------------------------------------------------------------------- //
         //GAMESTATE
         //Check per vedere se un altro minigioco è attivo
-        if (GameDirector.Instance.getGameState() != GameDirector.GameState.FreeRoaming)
-        { 
-            GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
-            return;
-        }
+        StartCoroutine(CheckGameState());
 
         //Imposta il gameState generale in modo che non può iniziare altri minigiochi
         GameDirector.Instance.setGameState(GameDirector.GameState.ObstacleCourse);
@@ -139,6 +135,17 @@ public class TargetHandler : MonoBehaviour
         {
             timer.SetText(TimeToString());
             yield return new WaitForSeconds(.1f);
+        }
+    }
+
+    //Coroutine del check del gamestate
+    IEnumerator CheckGameState()
+    {
+        yield return new WaitForFixedUpdate();
+        if (GameDirector.Instance.getGameState() != GameDirector.GameState.FreeRoaming)
+        {
+            Debug.Log(GameDirector.Instance.getGameState());
+            //GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
         }
     }
     // -------------------------------------------------------------------- //

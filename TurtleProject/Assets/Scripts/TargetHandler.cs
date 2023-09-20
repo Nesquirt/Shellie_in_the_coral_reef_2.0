@@ -96,6 +96,7 @@ public class TargetHandler : MonoBehaviour
         // -------------------------------------------------------------------- //
         //GAMESTATE
         //Check per vedere se un altro minigioco è attivo
+        //NOTA: ho dovuto mettere questo check in una coroutine perché, per un mistero quantico, metterlo direttamente in questo metodo
         StartCoroutine(CheckGameState());
 
         //Imposta il gameState generale in modo che non può iniziare altri minigiochi
@@ -145,7 +146,7 @@ public class TargetHandler : MonoBehaviour
         if (GameDirector.Instance.getGameState() != GameDirector.GameState.FreeRoaming)
         {
             Debug.Log(GameDirector.Instance.getGameState());
-            //GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
+            
         }
     }
     // -------------------------------------------------------------------- //

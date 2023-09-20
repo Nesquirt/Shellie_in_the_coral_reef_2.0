@@ -284,13 +284,25 @@ public class GameDirector : MonoBehaviour
     //Metodi per interagire con il GameState; usati dai minigiochi
     public void setGameState(GameState newState)
     {
-        Debug.Log("Changed GameState to: " + newState);
-        currentState = newState;
+        StartCoroutine(setGameStateCR(newState));
     }
 
     public GameState getGameState()
     {
         return currentState;
+    }
+    // -------------------------------------------------------------------- //
+    //Coroutine per far attendere le chiamate di getGameState e setGameState
+    IEnumerator setGameStateCR(GameState newState)
+    {
+        yield return new WaitForFixedUpdate();
+        Debug.Log("Changed GameState to: " + newState);
+        currentState = newState;
+    }
+    IEnumerator getGameStateCR()
+    {
+        yield return new WaitForFixedUpdate();
+        yield return currentState;
     }
     // -------------------------------------------------------------------- //
     //Metodi di GameOver e Victory
@@ -336,6 +348,7 @@ public class GameDirector : MonoBehaviour
     }
     public void OpenURL()
     {
-        Application.OpenURL("https://oceanservice.noaa.gov/facts/thingsyoucando.html");
+        Application.OpenURL("https://coralreefrescueinitiative.org/");
     }
+    
 }

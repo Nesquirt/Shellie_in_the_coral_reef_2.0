@@ -21,9 +21,7 @@ public class MainMenu : MonoBehaviour
     // Funzione per avviare una nuova partita
     public void StartGame()
     {
-        SceneManager.LoadScene("GameScene", LoadSceneMode.Additive);
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameScene"));
-        GameDirector.Instance.LoadGame();
+        SceneManager.LoadScene("GameScene");
     }
 
     // Funzione per aprire il menu delle impostazioni (la scena SettingsMenu)

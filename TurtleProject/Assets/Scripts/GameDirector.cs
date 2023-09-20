@@ -85,7 +85,9 @@ public class GameDirector : MonoBehaviour
             Destroy(gameObject); //Se esiste già un'altra istanza, distrugge questo oggetto per evitare duplicati dell'istanza
         }
         // -------------------------------------------------------------------- //
-
+        //Funzione temporanea per testare i parametri senza passare dal menù
+        if (SceneManager.GetActiveScene().name == "GameScene")
+            LoadGame();
     }
     public void LoadGame()
     {
@@ -128,7 +130,6 @@ public class GameDirector : MonoBehaviour
         currentState = GameState.FreeRoaming;
 
         currentPearls = 0;
-
         reefHealth = 50;
         pollution = 20;
         biodiversity = 24;

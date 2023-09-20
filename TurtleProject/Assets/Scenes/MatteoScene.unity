@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.21838298, g: 0.72851455, b: 0.99998194, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1517,11 +1517,16 @@ MonoBehaviour:
   SoundtrackSource: {fileID: 1927368408}
   MovementSource: {fileID: 2120521260}
   BubbleSource: {fileID: 666203499}
-  SFX2DSource: {fileID: 0}
-  SFX3DSource: {fileID: 1631946702}
+  CoralSource: {fileID: 0}
+  SFXSource: {fileID: 0}
   soundtrack: {fileID: 8300000, guid: 28ed066f40bcd504aab4a037e00c8ce4, type: 3}
   movement: {fileID: 8300000, guid: d0061584c9f0a114db7a90b81136ff2c, type: 3}
   bubble: {fileID: 8300000, guid: c6d33823751eda246a21068f39c6ae5d, type: 3}
+  coral: {fileID: 0}
+  startRace: {fileID: 0}
+  endRace: {fileID: 0}
+  crossRing: {fileID: 0}
+  Crush_Spawn: {fileID: 0}
 --- !u!4 &244221148
 Transform:
   m_ObjectHideFlags: 0
@@ -1540,7 +1545,7 @@ Transform:
   - {fileID: 454522731}
   - {fileID: 1631946701}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &248685130
 GameObject:
@@ -6695,7 +6700,7 @@ RectTransform:
   m_Children:
   - {fileID: 260183254}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8981,50 +8986,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1704982371
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1704982373}
-  - component: {fileID: 1704982372}
-  m_Layer: 0
-  m_Name: SistemaMonete
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1704982372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1704982371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e1c08be575955d4d9681a03df72c343, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1704982373
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1704982371}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1010.15717, y: 417.01108, z: 169.15411}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1777336085
 GameObject:
   m_ObjectHideFlags: 0
@@ -9285,7 +9246,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884043788}
-  m_LocalRotation: {x: -0.03632495, y: -0.0000000025273732, z: -9.1867125e-11, w: 0.99934006}
+  m_LocalRotation: {x: -0.03632495, y: 0.000000001771383, z: 6.438813e-11, w: 0.99934006}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9305,7 +9266,6 @@ GameObject:
   - component: {fileID: 1887737453}
   - component: {fileID: 1887737452}
   - component: {fileID: 1887737450}
-  - component: {fileID: 1887737451}
   m_Layer: 5
   m_Name: PearlsText
   m_TagString: Untagged
@@ -9402,18 +9362,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &1887737451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1887737449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e1c08be575955d4d9681a03df72c343, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &1887737452
 CanvasRenderer:
   m_ObjectHideFlags: 0

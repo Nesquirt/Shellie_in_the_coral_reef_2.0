@@ -26,6 +26,7 @@ public class TurtleController : MonoBehaviour
         }
         //this.posizioni_cageKey = GameObject.Find("Posizioni_CageKey");
         //posizioni_cageKey.SetActive(false);
+        GameDirector.Instance.LoadGame();
     }
 
 

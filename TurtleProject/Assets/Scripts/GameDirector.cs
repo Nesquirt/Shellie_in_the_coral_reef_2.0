@@ -63,7 +63,7 @@ public class GameDirector : MonoBehaviour
     private Canvas canvas;
 
     private Slider reefHealthSlider, pollutionSlider, biodiversitySlider, oxygenLevelSlider;
-    private Image reefHealthArrow, pollutionArrow, biodiversityArrow, oxygenLevelArrow;  //TODO: aggiungi un'immagine per quando il cambiamento di parametri ï¿½ 0
+    private Image reefHealthArrow, pollutionArrow, biodiversityArrow, oxygenLevelArrow;  //TODO: aggiungi un'immagine per quando il cambiamento di parametri e' 0
     private Sprite upArrow, downArrow;
     private GameObject GameOverPanel;
     private TextMeshProUGUI TitleText, CentralText, BottomText;
@@ -82,7 +82,7 @@ public class GameDirector : MonoBehaviour
         }
         else if (Instance != null && Instance != this)
         {
-            Destroy(gameObject); //Se esiste giï¿½ un'altra istanza, distrugge questo oggetto per evitare duplicati dell'istanza
+            Destroy(gameObject); //Se esiste gia' un'altra istanza, distrugge questo oggetto per evitare duplicati dell'istanza
         }
         // -------------------------------------------------------------------- //
         //Funzione temporanea per testare i parametri senza passare dal menù
@@ -93,7 +93,7 @@ public class GameDirector : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().name != "GameScene")
         {
-            Debug.Log("Chiamata funzione LoadGame dal menï¿½");
+            Debug.Log("Chiamata funzione LoadGame dal menu");
         }
         //Nella scena di gioco, prende dalla hierarchy tutti gli elementi dell'interfaccia
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
@@ -148,9 +148,10 @@ public class GameDirector : MonoBehaviour
 
         //Metodo che fa partire il ciclo di cambiamento dei parametri
         InvokeRepeating("tick", 0, 30);
+        Victory();
     }
 
-    public void tick()                                          //Funzione che viene chiamata una volta ogni minuto, e aggiorna i valori delle statistiche di gioco
+    public void tick()  //Funzione che viene chiamata una volta ogni minuto, e aggiorna i valori delle statistiche di gioco
     {
         // -------------------------------------------------------------------- //
         //Controlla tutti gli oggetti con tag "Corallo", e li mette nell'array
@@ -332,7 +333,7 @@ public class GameDirector : MonoBehaviour
     {
         TitleText.SetText("VITTORIA!");
         CentralText.SetText("Grazie ai tuoi sforzi, le condizioni dell'ambiente sono stabili e in grado di prosperare." +
-            "Questa barriera corallina ï¿½ salva!");
+            "Questa barriera corallina e' salva!");
         GameOverPanel.SetActive(true);
         StartCoroutine(FadeIn(GameOverPanel.GetComponent<Image>()));
     }
@@ -343,7 +344,7 @@ public class GameDirector : MonoBehaviour
         Color nextFrameColor;
         while (GameOverPanel.color.a < 1)
         {
-            fadeAmount = GameOverPanel.color.a + (2f * Time.deltaTime);
+            fadeAmount = GameOverPanel.color.a + ( Time.deltaTime);
             nextFrameColor = new Color(GameOverPanel.color.r, GameOverPanel.color.g, GameOverPanel.color.b, fadeAmount);
             GameOverPanel.color = nextFrameColor;
             yield return new WaitForSeconds(0.1f);

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 public class GameDirector : MonoBehaviour
@@ -109,7 +110,7 @@ public class GameDirector : MonoBehaviour
         WebsiteButton = GameOverPanel.transform.Find("WebsiteButton").GetComponent<Button>();
         ReturnToMenuButton.gameObject.SetActive(false);
         WebsiteButton.gameObject.SetActive(false);
-        //ReturnToMenuButton.onClick.AddListener();  //TODO: collega alla scena menù
+        ReturnToMenuButton.onClick.AddListener(LoadMenu);  //TODO: collega alla scena menù
         WebsiteButton.onClick.AddListener(OpenURL);
 
         upArrow = Resources.Load<Sprite>("Sprites/UpArrow");
@@ -348,9 +349,15 @@ public class GameDirector : MonoBehaviour
         
 
     }
+    // -------------------------------------------------------------------- //
+    //Listener per i bottoni della schermata finale (apri sito web e torna al menù)
     public void OpenURL()
     {
         Application.OpenURL("https://coralreefrescueinitiative.org/");
+    }
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("Simone_Menu_Iniziale");
     }
     
 }

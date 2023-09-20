@@ -74,7 +74,7 @@ public class OpenCagesHandler : MonoBehaviour
             return;
         if (!canvas.transform.Find("DialoguePanel").gameObject.activeSelf)
             MazePrompt.gameObject.SetActive(true);
-        if(Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.E))
         {
             canvas.transform.Find("BarsPanel").gameObject.SetActive(false);
             MazePrompt.gameObject.SetActive(false);
@@ -83,7 +83,7 @@ public class OpenCagesHandler : MonoBehaviour
             dialogueText.SetText("Hey Shelly! Ci sono dei granchi che hanno bisogno di essere liberati! \n" +
                 "Ti va di aiutarmi?" + " Nel labirinto troverai delle chiavi con cui poter aprire le gabbie \n" +
                 "Attenta! Puoi prendere solo una chiave alla volta ed hai 3 minuti di tempo per liberarli tutti \n");
-
+        }
     }
     public void PesceTriggerExit()
     {

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -27,7 +29,7 @@ public class MainMenu : MonoBehaviour
     // Funzione per aprire il menu delle impostazioni (la scena SettingsMenu)
     public void OpenOptions()
     {
-        SceneManager.LoadScene("Simone_impostazioni", LoadSceneMode.Additive);
+        StartCoroutine(LoadOptions());
     }
 
     // Funzione per chiudere il gioco
@@ -35,13 +37,14 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
-
-    // Funzione per aprire il link "About" nel browser
-    /*
-    public void OpenAbout()
+    IEnumerator LoadOptions()
     {
-        Application.OpenURL("https://coralreefrescueinitiative.org/");
-    } */
+        yield return new WaitForEndOfFrame();
+        SceneManager.LoadScene("Simone_impostazioni", LoadSceneMode.Additive);
+        yield return new WaitForEndOfFrame();
+    }
+   
 }
+
 
 // made with love from Assassin's script ♥

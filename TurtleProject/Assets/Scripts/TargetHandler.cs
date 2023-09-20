@@ -41,10 +41,12 @@ public class TargetHandler : MonoBehaviour
         timer = canvas.transform.Find("Timer").gameObject.GetComponent<TextMeshProUGUI>();
 
         //Aggiunge i listener ai bottoni di dialogo
+        confirmButton.onClick.RemoveAllListeners();
+        cancelButton.onClick.RemoveAllListeners();
         confirmButton.onClick.AddListener(ConfirmButton_onClick);
         cancelButton.onClick.AddListener(CancelButton_onClick);
 
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        //audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         
     }
     // -------------------------------------------------------------------- //
@@ -169,7 +171,7 @@ public class TargetHandler : MonoBehaviour
                 if(targetNumber == 0)
                 {
                     StartCoroutine(Timer());
-                    audioManager.PlaySFX(audioManager.startRace);
+                    //audioManager.PlaySFX(audioManager.startRace);
 
             }
                 if(targetNumber == 28)
@@ -177,12 +179,16 @@ public class TargetHandler : MonoBehaviour
                     Victory();
                     StopCoroutine(Timer());
                     timer.gameObject.SetActive(false);
-                    audioManager.PlaySFX(audioManager.endRace);
+                    //audioManager.PlaySFX(audioManager.endRace);
                     return;
                 }
                 GameObject.Find(nextTargetName).GetComponent<MeshRenderer>().material = activeMaterial;
-                if(targetNumber > 0 && targetNumber < 28) audioManager.PlaySFX(audioManager.crossRing);
-                targetNumber++;
+                if(targetNumber > 0 && targetNumber < 28)
+                {
+                    //audioManager.PlaySFX(audioManager.crossRing);
+                }
+
+            targetNumber++;
                 
             }
     }

@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("- - - - AUDIO CLIP (ONE SHOT)")]
     public AudioClip coral;
+    public AudioClip selection;
 
     [Header("- - - - AUDIO CLIP MATTEO'S GAME (ONE SHOT)")]
     public AudioClip startRace;

@@ -16698,12 +16698,13 @@ MonoBehaviour:
   SoundtrackSource: {fileID: 1635993389}
   MovementSource: {fileID: 1506960354}
   BubbleSource: {fileID: 1274952588}
-  GrowingCoralSource: {fileID: 0}
+  GrowingCoralSource: {fileID: 1918393814}
   SFXSource: {fileID: 1307809078}
   soundtrack: {fileID: 8300000, guid: f7b57d5e08ea45d4c8c77cafd916934a, type: 3}
   movement: {fileID: 8300000, guid: bb1913dbb4d9cf64fbe48e52b60a7dd7, type: 3}
   bubble: {fileID: 8300000, guid: b85f27fbdb545a1469056563b1d8f28e, type: 3}
   coral: {fileID: 8300000, guid: aaf31a02283d7c64ca7728fc8307b0a7, type: 3}
+  selection: {fileID: 8300000, guid: b1f67582c74e26843a49a5e150160e14, type: 3}
   startRace: {fileID: 8300000, guid: b65c04ecc2000b84bbece92b8e38f4c1, type: 3}
   endRace: {fileID: 8300000, guid: 686fdbf1e494f6d4ca77183551ff84fe, type: 3}
   crossRing: {fileID: 8300000, guid: da7c345ebc1608f438b4172245a12274, type: 3}
@@ -19983,7 +19984,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.9
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0

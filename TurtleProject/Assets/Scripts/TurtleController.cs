@@ -12,7 +12,7 @@ public class TurtleController : MonoBehaviour
     private Vector3 eulerRotationSpeed;
     private float h, v, j;
 
-    //private GameObject posizioni_cageKey;
+    private GameObject posizioni_cageKey;
     
     // Start is called before the first frame update
     void Awake()
@@ -24,8 +24,8 @@ public class TurtleController : MonoBehaviour
         {
             //Non deve fare nulla; questo if è chiamato solo per inizializzare il director nella scena
         }
-        //this.posizioni_cageKey = GameObject.Find("Posizioni_CageKey");
-        //posizioni_cageKey.SetActive(false);
+        this.posizioni_cageKey = GameObject.Find("Posizioni_CageKey");
+        posizioni_cageKey.SetActive(true);
     }
 
 
@@ -119,7 +119,6 @@ public class TurtleController : MonoBehaviour
             Debug.Log("Entrata MazeExploring");
             //posizioni_cageKey.SetActive(true);
             //posizioni_cageKey.GetComponent<OpenCagesHandler>().restartMazeGame();
-            //GameObject.Find("Posizioni_CageKey").GetComponent<OpenCagesHandler>().restartMazeGame();  //metodo che inizializza tutto e fa partire il gioco
         }
     }
     public void OnTriggerStay(Collider other)
@@ -134,11 +133,11 @@ public class TurtleController : MonoBehaviour
         }
         else if (other.name == "pesceColorato")
         {
-            //posizioni_cageKey.GetComponent<OpenCagesHandler>().mazeStartPrompt();
+            posizioni_cageKey.GetComponent<OpenCagesHandler>().mazeStartPrompt();
         }
         else if (other.tag == "Chiave" || other.tag == "Gabbia")
         {
-            //posizioni_cageKey.GetComponent<OpenCagesHandler>().TriggerMethod(other);
+            posizioni_cageKey.GetComponent<OpenCagesHandler>().TriggerMethod(other);
         }
            
     }
@@ -150,7 +149,7 @@ public class TurtleController : MonoBehaviour
         }
         else if (other.name == "pesceColorato")
         {
-            other.GetComponentInParent<OpenCagesHandler>().PesceTriggerExit();
+            posizioni_cageKey.GetComponent<OpenCagesHandler>().PesceTriggerExit();
         }
 
     }

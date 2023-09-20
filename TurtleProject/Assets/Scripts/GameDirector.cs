@@ -36,7 +36,7 @@ public class GameDirector : MonoBehaviour
     }
     private void OnDestroy()
     {
-        //Se e quando l'oggetto viene distrutto, se questa è l'istanza settata allora la rimuove
+        //Se e quando l'oggetto viene distrutto, se questa ï¿½ l'istanza settata allora la rimuove
         if (_instance == this)
         {
             Instance = null;
@@ -63,7 +63,7 @@ public class GameDirector : MonoBehaviour
     private Canvas canvas;
 
     private Slider reefHealthSlider, pollutionSlider, biodiversitySlider, oxygenLevelSlider;
-    private Image reefHealthArrow, pollutionArrow, biodiversityArrow, oxygenLevelArrow;  //TODO: aggiungi un'immagine per quando il cambiamento di parametri è 0
+    private Image reefHealthArrow, pollutionArrow, biodiversityArrow, oxygenLevelArrow;  //TODO: aggiungi un'immagine per quando il cambiamento di parametri ï¿½ 0
     private Sprite upArrow, downArrow;
     private GameObject GameOverPanel;
     private TextMeshProUGUI TitleText, CentralText, BottomText;
@@ -82,7 +82,7 @@ public class GameDirector : MonoBehaviour
         }
         else if (Instance != null && Instance != this)
         {
-            Destroy(gameObject); //Se esiste già un'altra istanza, distrugge questo oggetto per evitare duplicati dell'istanza
+            Destroy(gameObject); //Se esiste giï¿½ un'altra istanza, distrugge questo oggetto per evitare duplicati dell'istanza
         }
         // -------------------------------------------------------------------- //
         //Funzione temporanea per testare i parametri senza passare dal menù
@@ -93,7 +93,7 @@ public class GameDirector : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().name != "GameScene")
         {
-            Debug.Log("Chiamata funzione LoadGame dal menù");
+            Debug.Log("Chiamata funzione LoadGame dal menï¿½");
         }
         //Nella scena di gioco, prende dalla hierarchy tutti gli elementi dell'interfaccia
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
@@ -120,7 +120,9 @@ public class GameDirector : MonoBehaviour
         WebsiteButton = GameOverPanel.transform.Find("WebsiteButton").GetComponent<Button>();
         ReturnToMenuButton.gameObject.SetActive(false);
         WebsiteButton.gameObject.SetActive(false);
-        ReturnToMenuButton.onClick.AddListener(LoadMenu);  //TODO: collega alla scena menù
+
+        ReturnToMenuButton.onClick.AddListener(LoadMenu);  //TODO: collega alla scena menï¿½
+
         WebsiteButton.onClick.AddListener(OpenURL);
 
         upArrow = Resources.Load<Sprite>("Sprites/UpArrow");
@@ -167,7 +169,7 @@ public class GameDirector : MonoBehaviour
         Color32 PollutedWater = new Color32(114, 200, 186, 255);
         RenderSettings.fogColor = Color.LerpUnclamped(CleanWater, PollutedWater, pollutionPercentage);
 
-        //biodiversity += CalculateBiodiversityChange();         //Calcolo del cambio di biodiversità
+        //biodiversity += CalculateBiodiversityChange();         //Calcolo del cambio di biodiversitï¿½
         biodiversity += biodiversityChange;
         biodiversitySlider.value = biodiversity;
 
@@ -225,7 +227,7 @@ public class GameDirector : MonoBehaviour
     }
 
     // -------------------------------------------------------------------- //
-    //Metodi per modificare la velocità dei parametri; usati dai coralli
+    //Metodi per modificare la velocitï¿½ dei parametri; usati dai coralli
     public void modifyPollutionChange(int value)
     {
         pollutionChange += value;
@@ -327,7 +329,7 @@ public class GameDirector : MonoBehaviour
     {
         TitleText.SetText("VITTORIA!");
         CentralText.SetText("Grazie ai tuoi sforzi, le condizioni dell'ambiente sono stabili e in grado di prosperare." +
-            "Questa barriera corallina è salva!");
+            "Questa barriera corallina ï¿½ salva!");
         GameOverPanel.SetActive(true);
         StartCoroutine(FadeIn(GameOverPanel.GetComponent<Image>()));
     }
@@ -357,7 +359,7 @@ public class GameDirector : MonoBehaviour
 
     }
     // -------------------------------------------------------------------- //
-    //Listener per i bottoni della schermata finale (apri sito web e torna al menù)
+    //Listener per i bottoni della schermata finale (apri sito web e torna al menï¿½)
     public void OpenURL()
     {
         Application.OpenURL("https://coralreefrescueinitiative.org/");

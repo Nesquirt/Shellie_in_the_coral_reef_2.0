@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
     // Funzione per avviare una nuova partita
     public void StartGame()
     {
-        SceneManager.LoadScene("MatteoScene");
+        SceneManager.LoadScene("GameScene");
         //GameDirector.Instance.PlayIntro();
     }
 

@@ -125,7 +125,7 @@ public class OpenCagesHandler : MonoBehaviour
         MazePrompt.gameObject.SetActive(false);
         canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
         GameDirector.Instance.setGameState(GameDirector.GameState.MazeExploring);
-        audioManager.PlaySFX(audioManager.selection);
+        audioManager.ChangeMusic(audioManager.SaraGameSountrack, true, 0.25f);
         restartMazeGame();
     }
     public void CancelMazeButton_onClick()
@@ -214,6 +214,7 @@ public class OpenCagesHandler : MonoBehaviour
         canvas.transform.Find("VictoryPanel").gameObject.SetActive(true);
         victoryText = canvas.transform.Find("VictoryPanel/RewardsPanel/RewardsText").GetComponent<TextMeshProUGUI>();
         audioManager.PlaySFX(audioManager.endMiniGame);
+        audioManager.ChangeMusic(audioManager.SaraGameSountrack, false,0.25f);
         if (openCages == 0)
         {
             victoryText.SetText("Purtroppo non sei riuscita a liberare nesssun granchio... \n" +

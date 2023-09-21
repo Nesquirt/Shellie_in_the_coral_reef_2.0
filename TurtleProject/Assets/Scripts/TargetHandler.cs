@@ -88,7 +88,7 @@ public class TargetHandler : MonoBehaviour
         canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
         raceStart();
         audioManager.PlaySFX(audioManager.selection);
-        audioManager.ChangeMusic(audioManager.MatteoGameSountrack,true);
+        audioManager.ChangeMusic(audioManager.MatteoGameSountrack,true, 0.12f);
     }
     public void CancelButton_onClick()
     {
@@ -191,7 +191,7 @@ public class TargetHandler : MonoBehaviour
                     StopCoroutine(Timer());
                     timer.gameObject.SetActive(false);
                     audioManager.PlaySFX(audioManager.endMiniGame);
-                    audioManager.ChangeMusic(audioManager.MatteoGameSountrack, false);
+                    audioManager.ChangeMusic(audioManager.MatteoGameSountrack, false,0.12f);
                     return;
                 }
                 GameObject.Find(nextTargetName).GetComponent<MeshRenderer>().material = activeMaterial;

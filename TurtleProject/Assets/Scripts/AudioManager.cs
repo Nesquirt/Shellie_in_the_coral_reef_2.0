@@ -64,11 +64,11 @@ public class AudioManager : MonoBehaviour
         TrashMovingSource.clip = trashMoving;
         TrashMovingSource.Play();
     }
-    public void ChangeMusic(AudioClip miniGameSoundtrack,bool fade)
+    public void ChangeMusic(AudioClip miniGameSoundtrack,bool fade,float vol)
     {
-        StartCoroutine(Fade(miniGameSoundtrack,fade));
+        StartCoroutine(Fade(miniGameSoundtrack,fade,vol));
     }
-    public IEnumerator Fade(AudioClip miniGameSoundtrack,bool fade)
+    public IEnumerator Fade(AudioClip miniGameSoundtrack,bool fade, float vol)
     {
         float time = 0f;
         float duration = 5f;
@@ -80,7 +80,7 @@ public class AudioManager : MonoBehaviour
             {
                 time += Time.deltaTime;
                 BackgroundMusicSource.volume = Mathf.Lerp(0.2f, 0, time / duration);
-                MinigamesSoundtrackSource.volume = Mathf.Lerp(0, 0.1f, time / duration);
+                MinigamesSoundtrackSource.volume = Mathf.Lerp(0, vol, time / duration);
                 yield return null;
             }
         }
@@ -90,7 +90,7 @@ public class AudioManager : MonoBehaviour
             {
                 time += Time.deltaTime;
                 BackgroundMusicSource.volume = Mathf.Lerp(0, 0.2f, time / duration);
-                MinigamesSoundtrackSource.volume = Mathf.Lerp(0.1f, 0, time / duration);
+                MinigamesSoundtrackSource.volume = Mathf.Lerp(vol, 0, time / duration);
                 yield return null;
             }
             MinigamesSoundtrackSource.Play();

@@ -101,6 +101,8 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
         StefanoPrompt.gameObject.SetActive(false);
         canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
+        audioManager.PlaySFX(audioManager.GridClimb);
+        audioManager.ChangeMusic(audioManager.StefanoGameSountrack, true, 0.18f);
         startTrashGame();
     }
     public void CancelButton_onClick()
@@ -129,7 +131,6 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         currentTime = totalTime;
         currentTime2 = totalTime2;
         run = true;
-        audioManager.PlaySFX(audioManager.GridClimb);
         SpawnPrefabs();
     }
     void FixedUpdate()
@@ -202,6 +203,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                                  "Livello di ossigeno diminuito del " + rifiutiraccolti * 5 + "%");
                 GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
                 audioManager.PlaySFX(audioManager.endMiniGame);
+                audioManager.ChangeMusic(audioManager.StefanoGameSountrack, false, 0.18f);
                 run = false;
 
 

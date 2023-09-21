@@ -8,7 +8,7 @@ using static Unity.VisualScripting.Member;
 public class AudioManager : MonoBehaviour
 {
     [Header("- - - - AUDIO SOURCE")]
-    [SerializeField] AudioSource SoundtrackSource;
+    [SerializeField] AudioSource BackgroundMusicSource;
     [SerializeField] AudioSource MinigamesSoundtrackSource;
     [SerializeField] AudioSource MovementSource;
     [SerializeField] AudioSource BubbleSource;
@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource SFXSource;
 
     [Header("- - - - AUDIO CLIP (LOOP)")]
-    public AudioClip soundtrack;
+    public AudioClip backgroundMusic;
     public AudioClip movement;
     public AudioClip bubble;
 
@@ -45,8 +45,8 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        SoundtrackSource.clip = soundtrack;
-        SoundtrackSource.Play();
+        BackgroundMusicSource.clip = backgroundMusic;
+        BackgroundMusicSource.Play();
         MovementSource.clip = movement;
         MovementSource.Play();
         BubbleSource.clip = bubble;
@@ -57,7 +57,7 @@ public class AudioManager : MonoBehaviour
         SFXSource.clip = sfx;
         SFXSource.Play();
     }
-    public void ChangeMusic(AudioClip miniGameSoundtrack)
+    /*public void ChangeMusic(AudioClip miniGameSoundtrack)
     {
         SoundtrackSource.clip = miniGameSoundtrack;
         SoundtrackSource.Play();
@@ -75,6 +75,6 @@ public class AudioManager : MonoBehaviour
             yield return null;
         }
         yield break;
-    }
+    }*/
 
 }

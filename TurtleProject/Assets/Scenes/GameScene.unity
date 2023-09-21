@@ -10851,7 +10851,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Continue
+  m_text: Continua
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fac782c5edb347e499a483fe63f086ce, type: 2}
   m_sharedMaterial: {fileID: 1337011401350216163, guid: fac782c5edb347e499a483fe63f086ce, type: 2}
@@ -12687,12 +12687,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Comandi:\r\n\r\nWASD: Utilizza questi tasti per muovere Shellie attraverso
-    l'acqua.\r\n\nSpazio: Premi il tasto spazio per far salire Shellie in superficie
-    per respirare.\r\n\nCtrl: Usa il tasto Ctrl per far scendere Shellie a profondit\xE0
-    maggiori.\r\n\nE: Premi il tasto E per interagire con i pesci e gli oggetti nell'ambiente
-    marino. Puoi chiedere aiuto ai pesci o raccogliere oggetti utili per la missione.\r\n\nMouse
-    Destro: Muovi il mouse destro per controllare la visuale e osservare da vicino
-    la bellezza della barriera corallina."
+    l'acqua.\r\n\nSpazio: Premi il tasto spazio per far salire Shellie verso l'alto.\n\nCtrl:
+    Usa il tasto Ctrl per far scendere Shellie a profondit\xE0 maggiori.\r\n\nE:
+    Premi il tasto E per interagire con i pesci e gli oggetti nell'ambiente marino.
+    Puoi chiedere aiuto ai pesci o raccogliere oggetti utili per la missione.\r\n\nMouse
+    Destro: Tieni premuto il tasto destro del mouse per controllare la visuale e
+    osservare da vicino la bellezza della barriera corallina."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fac782c5edb347e499a483fe63f086ce, type: 2}
   m_sharedMaterial: {fileID: 1337011401350216163, guid: fac782c5edb347e499a483fe63f086ce, type: 2}
@@ -14554,7 +14554,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Skip
+  m_text: Chiudi
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fac782c5edb347e499a483fe63f086ce, type: 2}
   m_sharedMaterial: {fileID: 1337011401350216163, guid: fac782c5edb347e499a483fe63f086ce, type: 2}
@@ -16779,17 +16779,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1910957799}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
-        m_Mode: 1
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1910957802
 MonoBehaviour:

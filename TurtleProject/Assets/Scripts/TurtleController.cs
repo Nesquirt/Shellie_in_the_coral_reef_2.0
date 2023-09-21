@@ -72,7 +72,7 @@ public class TurtleController : MonoBehaviour
         verticalRotationSpeed = 0;
 
         //Limita l'input del giocatore una volta raggiunta l'altezza massima
-        if (rb.position.y >= 40 && Input.GetKey(KeyCode.Space))
+        if (rb.position.y >= 40 && j>0)
         {
             j = 0;
         }
@@ -136,7 +136,7 @@ public class TurtleController : MonoBehaviour
         {
             // other.GetComponentInChildren<SpawnPrefabsRandomly>().raceStartPrompt1();
             oggettoscriptTrash = GameObject.Find("ContenitoreStefano/oggettoscriptTrash");
-            oggettoscriptTrash.GetComponent<SpawnPrefabsRandomly>().trashStartPrompt1();
+            oggettoscriptTrash.GetComponent<SpawnPrefabsRandomly>().trashStartPrompt();
 
         }
         else if (other.name == "SpecialTarget")

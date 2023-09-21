@@ -72,7 +72,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         cancelButton.onClick.AddListener(CancelButton_onClick);
         
     }
-    public void raceStartPrompt1()
+    public void trashStartPrompt()
     {
         if (GameDirector.Instance.getGameState() != GameDirector.GameState.FreeRoaming)
             return;

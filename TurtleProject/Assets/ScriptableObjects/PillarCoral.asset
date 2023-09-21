@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87dc7ed9285f2044ca5ede0311ff4157, type: 3}
   m_Name: PillarCoral
   m_EditorClassIdentifier: 
-  pollutionChange: 1
+  pollutionChange: 0
   oxygenLevelChange: 3
   biodiversityChange: 2
-  cost: 25
+  cost: 20
   coralName: Dendrogyra (corallo a pilastro)
   coralDesc: "I coralli a pilastro formano alte strutture cilindriche che offrono
     un habitat ideale per varie specie marine. Sono eccellenti per produrre ossigeno,

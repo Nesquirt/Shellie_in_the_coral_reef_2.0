@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87dc7ed9285f2044ca5ede0311ff4157, type: 3}
   m_Name: SoftCoral
   m_EditorClassIdentifier: 
-  pollutionChange: 0
+  pollutionChange: -1
   oxygenLevelChange: 1
   biodiversityChange: 1
   cost: 10

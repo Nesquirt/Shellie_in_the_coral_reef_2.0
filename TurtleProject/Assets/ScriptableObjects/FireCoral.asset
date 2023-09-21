@@ -15,7 +15,7 @@ MonoBehaviour:
   pollutionChange: -3
   oxygenLevelChange: -1
   biodiversityChange: -1
-  cost: 20
+  cost: 15
   coralName: "Millepora (\u201CCorallo di fuoco\u201D)"
   coralDesc: "I coralli di fuoco sono conosciuti per le cellule presenti sul loro
     scheletro dotate di un organo urticante chiamato nematocista, il cui veleno pu\xF2

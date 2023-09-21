@@ -8,13 +8,13 @@ using static Unity.VisualScripting.Member;
 public class AudioManager : MonoBehaviour
 {
     [Header("- - - - AUDIO SOURCE")]
-    [SerializeField] AudioSource BackgroundMusicSource;
-    [SerializeField] AudioSource MinigamesSoundtrackSource;
-    [SerializeField] AudioSource MovementSource;
-    [SerializeField] AudioSource BubbleSource;
-    [SerializeField] AudioSource GrowingCoralSource;
-    [SerializeField] AudioSource TrashMovingSource;
-    [SerializeField] AudioSource SFXSource;
+    [SerializeField] private AudioSource BackgroundMusicSource;
+    [SerializeField] private AudioSource MinigamesSoundtrackSource;
+    [SerializeField] private AudioSource MovementSource;
+    [SerializeField] private AudioSource BubbleSource;
+    [SerializeField] private AudioSource GrowingCoralSource;
+    [SerializeField] private AudioSource TrashMovingSource;
+    [SerializeField] private AudioSource SFXSource;
 
 
     [Header("- - - - AUDIO CLIP (LOOP)")]

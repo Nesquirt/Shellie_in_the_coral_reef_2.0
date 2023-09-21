@@ -27,7 +27,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     private Image img;
     private Transform StefanoPrompt;
     private TextMeshProUGUI NPCName, dialogueText, rewardsText, testocontatore, testocronometro, testo5;
-    private Button confirmButton, cancelButton;
+    //private Button confirmButton, cancelButton;
     private GameObject canvas;
     private bool run = false;
 
@@ -51,15 +51,15 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         img.gameObject.SetActive(false);
         dialogueText = canvas.transform.Find("DialoguePanel/DialogueText").gameObject.GetComponent<TextMeshProUGUI>();
         canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
-        confirmButton = canvas.transform.Find("DialoguePanel/ConfirmButton").gameObject.GetComponent<Button>();
-        cancelButton = canvas.transform.Find("DialoguePanel/CancelButton").gameObject.GetComponent<Button>();
+        //confirmButton = canvas.transform.Find("DialoguePanel/ConfirmButton").gameObject.GetComponent<Button>();
+        //cancelButton = canvas.transform.Find("DialoguePanel/CancelButton").gameObject.GetComponent<Button>();
         totalTime2 = totalTime + 4f;
 
         //Aggiunge i listener ai bottoni di dialogo
-        confirmButton.onClick.RemoveAllListeners();
-        confirmButton.onClick.RemoveAllListeners();
-        confirmButton.onClick.AddListener(ConfirmButton_onClick);
-        cancelButton.onClick.AddListener(CancelButton_onClick);
+        //confirmButton.onClick.RemoveAllListeners();
+        //confirmButton.onClick.RemoveAllListeners();
+        //confirmButton.onClick.AddListener(ConfirmButton_onClick);
+        //cancelButton.onClick.AddListener(CancelButton_onClick);
         Transform tp = GetComponent<Transform>();
         originepianox = tp.position.x;
         originepianoz = tp.position.z;

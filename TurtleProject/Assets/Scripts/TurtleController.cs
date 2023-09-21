@@ -7,7 +7,9 @@ public class TurtleController : MonoBehaviour
     [SerializeField] private float acceleration;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float maxRotationSpeed;
+    private Animator turtleanim;
     private GameObject oggettoscriptTrash;
+
     private Rigidbody rb;
     private float speed, verticalRotationSpeed, lateralRotationSpeed;
     private Vector3 eulerRotationSpeed;
@@ -20,6 +22,7 @@ public class TurtleController : MonoBehaviour
     {
         this.rb = GetComponent<Rigidbody>();
         this.eulerRotationSpeed = new Vector3(0, this.maxRotationSpeed, 0);
+        this.turtleanim = GetComponentInChildren<Animator>();
 
         if (GameDirector.Instance == null)
         {
@@ -47,6 +50,11 @@ public class TurtleController : MonoBehaviour
             speed = 0;
         if (speed > maxSpeed)
             speed = maxSpeed;
+
+        // -------------------------------------------------------------------- //
+        //animazione movimento tartaruga
+        turtleanim.SetFloat("speed", speed);
+
         // -------------------------------------------------------------------- //
         //calcolo della rotazione laterale
         lateralRotationSpeed = 0;
@@ -213,3 +221,4 @@ public class TurtleController : MonoBehaviour
 
 //12.35 Adattato turtle controller per Sara
 //13.41 Adattato turtle controller per Stefano
+//17.47 Aggiunta animazione

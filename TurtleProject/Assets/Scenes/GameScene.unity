@@ -14247,6 +14247,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurtlePlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 7803231290325262265, guid: d2e49869989351f429bdec8d8be2273e, type: 3}
+      propertyPath: turtleanim
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 284972076, guid: d2e49869989351f429bdec8d8be2273e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d2e49869989351f429bdec8d8be2273e, type: 3}

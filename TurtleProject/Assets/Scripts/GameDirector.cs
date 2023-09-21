@@ -452,3 +452,18 @@ public class GameDirector : MonoBehaviour
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/*Dopo i Serial Killer.....
+ora ci sono pure i Parallel Killer, assassini tecnologici che uccidono 8
+persone alla volta… /*

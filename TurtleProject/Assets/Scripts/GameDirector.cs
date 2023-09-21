@@ -136,12 +136,12 @@ public class GameDirector : MonoBehaviour
         currentPearls = 0;
         reefHealth = 50;
         pollution = 20;
-        biodiversity = 24;
-        oxygenLevel = 50;
+        biodiversity = 60;
+        oxygenLevel = 60;
 
         pollutionChange = +5;
-        biodiversityChange = -4;
-        oxygenLevelChange = -3;
+        biodiversityChange = -5;
+        oxygenLevelChange = -5;
 
         corals = GameObject.FindGameObjectsWithTag("CoralSpot");
 

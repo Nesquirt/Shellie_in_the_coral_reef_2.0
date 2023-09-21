@@ -361,7 +361,7 @@ public class GameDirector : MonoBehaviour
 
     }
     // -------------------------------------------------------------------- //
-    //Listener per i bottoni della schermata finale (apri sito web e torna al men�)
+    //Listener per i bottoni della schermata finale (apri sito web e torna al menu')
     public void OpenURL()
     {
         Application.OpenURL("https://coralreefrescueinitiative.org/");
@@ -386,6 +386,50 @@ public class GameDirector : MonoBehaviour
         else
         {
             obj.SetActive(true);
+        }
+    }
+    // -------------------------------------------------------------------- //
+    //Metodo chiamato dai prompt degli NPC per cambiare i tasti di dialogo
+
+    public void checkDialoguePanelButtons(string minigame)
+    {
+        GameObject DialoguePanel = canvas.transform.Find("DialoguePanel").gameObject;
+        //Questo script trova i bottoni di conferma e annulla dei singoli minigiochi in base alla loro posizione nella hierarchy.
+        //0: ConfirmRaceButton
+        //1: CancelRaceButton
+        //2: ConfirmMazeButton
+        //3: CancelMazeButton
+        //4: ConfirmTrashButton
+        //5: CancelTrashButton
+        if(minigame == "ObstacleRace")
+        {
+            DialoguePanel.transform.GetChild(0).gameObject.SetActive(true);
+            DialoguePanel.transform.GetChild(1).gameObject.SetActive(true);
+
+            DialoguePanel.transform.GetChild(2).gameObject.SetActive(false);
+            DialoguePanel.transform.GetChild(3).gameObject.SetActive(false);
+            DialoguePanel.transform.GetChild(4).gameObject.SetActive(false);
+            DialoguePanel.transform.GetChild(5).gameObject.SetActive(false);
+        }
+        else if(minigame == "TrashCollecting")
+        {
+            DialoguePanel.transform.GetChild(4).gameObject.SetActive(true);
+            DialoguePanel.transform.GetChild(5).gameObject.SetActive(true);
+
+            DialoguePanel.transform.GetChild(2).gameObject.SetActive(false);
+            DialoguePanel.transform.GetChild(3).gameObject.SetActive(false);
+            DialoguePanel.transform.GetChild(0).gameObject.SetActive(false);
+            DialoguePanel.transform.GetChild(1).gameObject.SetActive(false);
+        }
+        else if(minigame == "MazeExploring")
+        {
+            DialoguePanel.transform.GetChild(2).gameObject.SetActive(true);
+            DialoguePanel.transform.GetChild(3).gameObject.SetActive(true);
+
+            DialoguePanel.transform.GetChild(0).gameObject.SetActive(false);
+            DialoguePanel.transform.GetChild(1).gameObject.SetActive(false);
+            DialoguePanel.transform.GetChild(4).gameObject.SetActive(false);
+            DialoguePanel.transform.GetChild(5).gameObject.SetActive(false);
         }
     }
 }

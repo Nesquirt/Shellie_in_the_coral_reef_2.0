@@ -2304,7 +2304,7 @@ RectTransform:
   m_Children:
   - {fileID: 1997029049}
   m_Father: {fileID: 1853527828}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3462,7 +3462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &332641308
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3477,7 +3477,7 @@ RectTransform:
   m_Children:
   - {fileID: 918614720}
   m_Father: {fileID: 1853527828}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6632,6 +6632,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8553663393630711511, guid: aedd5ef493b485949bb5c609f6e74fa0, type: 3}
   m_PrefabInstance: {fileID: 727476140}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &748139133 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1676256086955676034, guid: 831b33c9bcc7be34192a64054dfa0eff, type: 3}
+  m_PrefabInstance: {fileID: 682885445}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af673f2dfbf0f4cc5aaa466afe7297b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &766898285
 GameObject:
   m_ObjectHideFlags: 0
@@ -7654,7 +7665,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 445255104}
         m_TargetAssemblyTypeName: TargetHandler, Assembly-CSharp
-        m_MethodName: raceStart
+        m_MethodName: ConfirmButton_onClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10359,8 +10370,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 445255104}
-        m_TargetAssemblyTypeName: TargetHandler, Assembly-CSharp
+      - m_Target: {fileID: 748139133}
+        m_TargetAssemblyTypeName: SpawnPrefabsRandomly, Assembly-CSharp
         m_MethodName: CancelButton_onClick
         m_Mode: 1
         m_Arguments:
@@ -10712,7 +10723,7 @@ RectTransform:
   m_Children:
   - {fileID: 1100015219}
   m_Father: {fileID: 1853527828}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10763,9 +10774,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1948517419}
-        m_TargetAssemblyTypeName: TargetHandler, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 748139133}
+        m_TargetAssemblyTypeName: SpawnPrefabsRandomly, Assembly-CSharp
+        m_MethodName: ConfirmButton_onClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14030,7 +14041,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772230589}
-  m_LocalRotation: {x: -0.03632495, y: 0.000000001164052, z: 4.231228e-11, w: 0.99934006}
+  m_LocalRotation: {x: -0.036324956, y: 0.0000000017713828, z: 6.438813e-11, w: 0.99934006}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14769,10 +14780,10 @@ RectTransform:
   - {fileID: 1783786963}
   - {fileID: 118624828}
   - {fileID: 922114897}
-  - {fileID: 2115370036}
-  - {fileID: 1352108949}
   - {fileID: 169294054}
+  - {fileID: 2115370036}
   - {fileID: 332641308}
+  - {fileID: 1352108949}
   - {fileID: 1338760120}
   m_Father: {fileID: 1570023806}
   m_RootOrder: 7
@@ -17682,7 +17693,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2115370036
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17697,7 +17708,7 @@ RectTransform:
   m_Children:
   - {fileID: 1320544811}
   m_Father: {fileID: 1853527828}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

@@ -20,7 +20,7 @@ public class TargetHandler : MonoBehaviour
 
     private Transform obstacleRacePrompt;
     private TextMeshProUGUI NPCName, dialogueText, rewardsText, timer;
-    private Button confirmButton, cancelButton;
+    //private Button confirmButton, cancelButton;
 
     private AudioManager audioManager;
 
@@ -37,7 +37,7 @@ public class TargetHandler : MonoBehaviour
         dialogueText = canvas.transform.Find("DialoguePanel/DialogueText").gameObject.GetComponent<TextMeshProUGUI>();
         canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
         //confirmButton = canvas.transform.Find("DialoguePanel/ConfirmRaceButton").gameObject.GetComponent<Button>();
-        cancelButton = canvas.transform.Find("DialoguePanel/CancelRaceButton").gameObject.GetComponent<Button>();
+        //cancelButton = canvas.transform.Find("DialoguePanel/CancelRaceButton").gameObject.GetComponent<Button>();
         timer = canvas.transform.Find("Timer").gameObject.GetComponent<TextMeshProUGUI>();
 
         //audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
@@ -57,6 +57,7 @@ public class TargetHandler : MonoBehaviour
             canvas.transform.Find("BarsPanel").gameObject.SetActive(false);
             obstacleRacePrompt.gameObject.SetActive(false);
             canvas.transform.Find("DialoguePanel").gameObject.SetActive(true);
+            GameDirector.Instance.checkDialoguePanelButtons("ObstacleRace");
             NPCName.SetText("Anguilla");
             dialogueText.SetText("Hey, tu! Sembri una tipa molto in forma. Ti andrebbe di aiutarmi con una faccenda?\n" +
                                  "Le alghe in questo canyon sono in acqua stagnante... Svegliale attraversando tutti gli anelli rocciosi!\n" +

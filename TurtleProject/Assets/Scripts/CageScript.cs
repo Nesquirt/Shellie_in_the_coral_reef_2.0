@@ -48,22 +48,13 @@ public class CageScript : MonoBehaviour
     public void GoUp()
     {
         StartCoroutine(CageAnimation());
-        
-        //Destroy(this);
-        
-        /*while (this.transform.position.y < 100f)
-        {
-            Debug.Log("gabbia sale");
-            this.rb.AddForce(Vector3.up * 10);
-        }*/
     }
 
     IEnumerator CageAnimation ()
     {
         while (this.transform.position.y < 100f)
         {
-            Debug.Log("gabbia sale");
-            this.rb.AddForce(Vector3.up * 10, ForceMode.VelocityChange);
+            this.rb.AddForce(Vector3.up * 10, ForceMode.VelocityChange);  //gabbia spinta su 
             yield return new WaitForSeconds(1f);
         }
         Debug.Log("Gabbia distrutta");

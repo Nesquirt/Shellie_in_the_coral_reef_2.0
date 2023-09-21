@@ -58,7 +58,7 @@ public class OpenCagesHandler : MonoBehaviour
     //Funzione START MazeExploring
     public void restartMazeGame()
     {
-        finalFunctionCalled = 0;
+        this.finalFunctionCalled = 0;
         this.timeRemaining = 3f;
         this.seconds = Mathf.Round(timeRemaining);
         Debug.Log("SECONDI: " + this.seconds);
@@ -233,31 +233,6 @@ public class OpenCagesHandler : MonoBehaviour
         GameDirector.Instance.addBiodiversity(gane);
     }
 
-
-    //TODO: sistemare coroutine
-    /*IEnumerator cageGoesUp()
-    {
-
-        for (int i = 0; i < arr_cages.Length; i++)
-        {
-            if (arr_cages[i] != null)
-            {
-                arr_cages[i].GetComponent<CageScript>().GoUp();
-                if (arr_cages[i].transform.position.y > 120f)
-                {
-                    //arr_cages[i].GetComponent<Rigidbody>().isKinematic = true;      //ho già disabilitato la fisica per l'oggetto
-                    Debug.Log("gabbia distrutta");
-                    Destroy(arr_cages[i]);
-                }
-            }
-
-        }
-        yield return new WaitForSeconds(4);
-        this.gameObject.SetActive(false);
-        StopCoroutine(cageGoesUp());
-
-    }*/
-
     //metodo chiamato da TurtleController
     public void TriggerMethod(Collider other)
     {
@@ -304,19 +279,5 @@ public class OpenCagesHandler : MonoBehaviour
             }
         }
     }
-    /*
-    private bool IsFinished()
-    {
-        if (this.openCages == this.totCages || this.seconds == 0)
-        {
-            //audioManager.PlaySFX(audioManager.endMiniGame);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    */
 
 }

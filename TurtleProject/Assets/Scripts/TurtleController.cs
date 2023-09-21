@@ -16,6 +16,7 @@ public class TurtleController : MonoBehaviour
     private float h, v, j;
 
     private GameObject posizioni_cageKey;
+    private AudioManager audioManager;
 
     // Start is called before the first frame update
     void Awake()
@@ -31,6 +32,7 @@ public class TurtleController : MonoBehaviour
         this.posizioni_cageKey = GameObject.Find("Map/Posizioni_CageKey");
         posizioni_cageKey.SetActive(true);
         GameDirector.Instance.LoadGame();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
 
@@ -194,6 +196,7 @@ public class TurtleController : MonoBehaviour
             Vector3 force = collision.transform.position - transform.position;
             force.Normalize();
             Debug.Log("spinta");
+            audioManager.PlaySFX(audioManager.TrashMoving);
 
             collision.gameObject.GetComponent<Rigidbody>().AddForce(force * intensità, ForceMode.Force);
         }

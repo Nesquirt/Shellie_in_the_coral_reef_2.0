@@ -31,7 +31,8 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     private GameObject canvas;
     private bool run = false;
 
-
+    private AudioManager audioManager;
+    private bool playHorn = true;
 
     private void Awake()
     {
@@ -63,6 +64,8 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         Transform tp = GetComponent<Transform>();
         originepianox = tp.position.x;
         originepianoz = tp.position.z;
+
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
 
     }
     public void trashStartPrompt()
@@ -98,11 +101,13 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
         StefanoPrompt.gameObject.SetActive(false);
         canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
+        audioManager.PlaySFX(audioManager.selection);
         startTrashGame();
     }
     public void CancelButton_onClick()
     {
         PesceRossoTriggerExit();
+        audioManager.PlaySFX(audioManager.selection);
         StefanoPrompt.gameObject.SetActive(true);
     }
 
@@ -125,6 +130,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         currentTime = totalTime;
         currentTime2 = totalTime2;
         run = true;
+        audioManager.PlaySFX(audioManager.GridClimb);
         SpawnPrefabs();
     }
     void FixedUpdate()
@@ -147,6 +153,11 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                 currentTime2 -= Time.deltaTime;
             }
 
+            if (currentTime < 10 && playHorn == true)
+            {
+                audioManager.PlaySFX(audioManager.ShipHorn);
+                playHorn = false;
+            }
             if (currentTime <= 0 && a == 0)
             {
                 if (b == 0)
@@ -161,6 +172,8 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                     testo5.gameObject.SetActive(false);
                     img.gameObject.SetActive(false);
                     b = 1;
+
+                    audioManager.PlaySFX(audioManager.GridClimb);
 
                 }
                 rb.AddForce(Vector3.up * upwardForce, ForceMode.Impulse);

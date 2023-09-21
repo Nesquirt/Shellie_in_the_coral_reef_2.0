@@ -140,9 +140,12 @@ public class TargetHandler : MonoBehaviour
     {
         Debug.Log("Cominciato Timer");
         currentTenths = 0;
-        for (currentTenths = 0; currentTenths < 18000; currentTenths++)
+        while(currentTenths<=18000)
         {
             timer.SetText(TimeToString());
+            currentTenths++;
+            if (GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
+                break;
             yield return new WaitForSeconds(.1f);
         }
     }
@@ -186,7 +189,7 @@ public class TargetHandler : MonoBehaviour
                     Victory();
                     StopCoroutine(Timer());
                     timer.gameObject.SetActive(false);
-                    audioManager.PlaySFX(audioManager.endRace);
+                    audioManager.PlaySFX(audioManager.endMiniGame);
                     return;
                 }
                 GameObject.Find(nextTargetName).GetComponent<MeshRenderer>().material = activeMaterial;

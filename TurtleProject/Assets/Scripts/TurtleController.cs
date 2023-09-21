@@ -13,20 +13,20 @@ public class TurtleController : MonoBehaviour
     private Vector3 eulerRotationSpeed;
     private float h, v, j;
 
-    //private GameObject posizioni_cageKey;
-    
+    private GameObject posizioni_cageKey;
+
     // Start is called before the first frame update
     void Awake()
     {
         this.rb = GetComponent<Rigidbody>();
         this.eulerRotationSpeed = new Vector3(0, this.maxRotationSpeed, 0);
-        
-        if(GameDirector.Instance == null)
+
+        if (GameDirector.Instance == null)
         {
             //Non deve fare nulla; questo if è chiamato solo per inizializzare il director nella scena
         }
-        //this.posizioni_cageKey = GameObject.Find("Posizioni_CageKey");
-        //posizioni_cageKey.SetActive(false);
+        this.posizioni_cageKey = GameObject.Find("Map/Posizioni_CageKey");
+        posizioni_cageKey.SetActive(true);
         GameDirector.Instance.LoadGame();
     }
 
@@ -39,7 +39,7 @@ public class TurtleController : MonoBehaviour
 
         // -------------------------------------------------------------------- //
         //calcolo della velocità frontale
-        if(speed>=0 && speed<=maxSpeed)
+        if (speed >= 0 && speed <= maxSpeed)
             speed += acceleration * v * Time.deltaTime;
         if (v == 0 && speed >= 0) //se non è premuta W, la tartaruga rallenta
             speed -= acceleration * Time.deltaTime * 0.5f;
@@ -50,23 +50,23 @@ public class TurtleController : MonoBehaviour
         // -------------------------------------------------------------------- //
         //calcolo della rotazione laterale
         lateralRotationSpeed = 0;
-        if(Mathf.Abs(lateralRotationSpeed) <= maxRotationSpeed && h != 0)
+        if (Mathf.Abs(lateralRotationSpeed) <= maxRotationSpeed && h != 0)
         {
-            lateralRotationSpeed += acceleration * h * Time.deltaTime; 
+            lateralRotationSpeed += acceleration * h * Time.deltaTime;
             //TODO: forse è meglio mettere un'accelerazione di rotazione separata
         }
 
         //Se non sono premuti tasti laterali, la rotazione rallenta fino a tornare dritti
-        else if (h == 0 && lateralRotationSpeed != 0) 
-        {           
+        else if (h == 0 && lateralRotationSpeed != 0)
+        {
             if (lateralRotationSpeed > 0)
-                lateralRotationSpeed -= acceleration * Time.deltaTime * 0.2f ;
+                lateralRotationSpeed -= acceleration * Time.deltaTime * 0.2f;
             else
-                lateralRotationSpeed += acceleration * Time.deltaTime * 0.2f * (maxSpeed / speed); 
+                lateralRotationSpeed += acceleration * Time.deltaTime * 0.2f * (maxSpeed / speed);
         }
 
         //Fattore di rotazione relativo alla velocità (più la tartaruga è lenta, più può ruotare veloce
-        float lateralRotationFactor = 7f - (speed/(maxSpeed))*3f;
+        float lateralRotationFactor = 7f - (speed / (maxSpeed)) * 3f;
         // -------------------------------------------------------------------- //
         //calcolo della rotazione verticale
         verticalRotationSpeed = 0;
@@ -80,7 +80,7 @@ public class TurtleController : MonoBehaviour
         {
             verticalRotationSpeed += acceleration * Time.deltaTime * j; //TODO: forse è meglio mettere un'accelerazione di rotazione separata
         }
-        
+
 
         //Se non sono premuti tasti verticali, la rotazione rallenta fino a tornare dritti
         else if (j == 0 && verticalRotationSpeed != 0)
@@ -132,26 +132,26 @@ public class TurtleController : MonoBehaviour
         {
             other.GetComponentInParent<TargetHandler>().raceStartPrompt();
         }
-        else if(other.name == "PesceRosso_collider")
+        else if (other.name == "PesceRosso_collider")
         {
-           // other.GetComponentInChildren<SpawnPrefabsRandomly>().raceStartPrompt1();
+            // other.GetComponentInChildren<SpawnPrefabsRandomly>().raceStartPrompt1();
             oggettoscriptTrash = GameObject.Find("ContenitoreStefano/oggettoscriptTrash");
             oggettoscriptTrash.GetComponent<SpawnPrefabsRandomly>().raceStartPrompt1();
-            
+
         }
-        else if(other.name == "SpecialTarget")
+        else if (other.name == "SpecialTarget")
         {
             other.GetComponentInParent<TargetHandler>().summonSpecialTarget();
         }
         else if (other.name == "pesceColorato")
         {
-            //posizioni_cageKey.GetComponent<OpenCagesHandler>().mazeStartPrompt();
+            posizioni_cageKey.GetComponent<OpenCagesHandler>().mazeStartPrompt();
         }
         else if (other.tag == "Chiave" || other.tag == "Gabbia")
         {
-            //posizioni_cageKey.GetComponent<OpenCagesHandler>().TriggerMethod(other);
+            posizioni_cageKey.GetComponent<OpenCagesHandler>().TriggerMethod(other);
         }
-           
+
     }
     public void OnTriggerExit(Collider other)
     {
@@ -159,7 +159,7 @@ public class TurtleController : MonoBehaviour
         {
             other.GetComponentInParent<TargetHandler>().AnguillaTriggerExit();
         }
-         else if (other.name == "PesceRosso_collider")
+        else if (other.name == "PesceRosso_collider")
         {
             oggettoscriptTrash = GameObject.Find("ContenitoreStefano/oggettoscriptTrash");
             oggettoscriptTrash.GetComponent<SpawnPrefabsRandomly>().PesceRossoTriggerExit();
@@ -167,7 +167,7 @@ public class TurtleController : MonoBehaviour
         }
         else if (other.name == "pesceColorato")
         {
-            other.GetComponentInParent<OpenCagesHandler>().PesceTriggerExit();
+            posizioni_cageKey.GetComponent<OpenCagesHandler>().PesceTriggerExit();
         }
 
     }
@@ -175,8 +175,8 @@ public class TurtleController : MonoBehaviour
     //Funzione per rallentare in caso di collisione, principalmente per prevenire movimenti fuori controllo e passaggi attraverso il terreno
     public void OnCollisionStay(Collision collision)
     {
-        if(speed >= maxSpeed/6)
-            speed = maxSpeed/6;
+        if (speed >= maxSpeed / 6)
+            speed = maxSpeed / 6;
     }
 
     //Funzione per eliminare la velocità generata da collisioni
@@ -198,3 +198,4 @@ public class TurtleController : MonoBehaviour
     // -------------------------------------------------------------------- //
 }
 
+//12.35 Adattato turtle controller per Sara

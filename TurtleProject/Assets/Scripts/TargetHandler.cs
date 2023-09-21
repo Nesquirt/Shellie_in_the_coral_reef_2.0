@@ -37,7 +37,7 @@ public class TargetHandler : MonoBehaviour
         dialogueText = canvas.transform.Find("DialoguePanel/DialogueText").gameObject.GetComponent<TextMeshProUGUI>();
         canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
         //confirmButton = canvas.transform.Find("DialoguePanel/ConfirmRaceButton").gameObject.GetComponent<Button>();
-        cancelButton = canvas.transform.Find("DialoguePanel/CancelButton").gameObject.GetComponent<Button>();
+        cancelButton = canvas.transform.Find("DialoguePanel/CancelRaceButton").gameObject.GetComponent<Button>();
         timer = canvas.transform.Find("Timer").gameObject.GetComponent<TextMeshProUGUI>();
 
         //audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();

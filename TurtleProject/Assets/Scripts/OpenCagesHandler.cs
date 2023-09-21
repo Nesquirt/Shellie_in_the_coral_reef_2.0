@@ -12,7 +12,7 @@ public class OpenCagesHandler : MonoBehaviour
     private TextMeshProUGUI timer_text, crab_text, NPCName, dialogueText, victoryText;
     private Transform MazePrompt;
     private Image crab_icon, key_icon;
-    private Button confirmButton, cancelButton;
+    private Button confirmMazeButton, cancelMazeButton;
 
     private float timeRemaining;
     private float seconds;
@@ -41,8 +41,8 @@ public class OpenCagesHandler : MonoBehaviour
         canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
 
         //Bottoni 
-        confirmButton = canvas.transform.Find("DialoguePanel/ConfirmButton").gameObject.GetComponent<Button>();
-        cancelButton = canvas.transform.Find("DialoguePanel/CancelButton").gameObject.GetComponent<Button>();
+        confirmMazeButton = canvas.transform.Find("DialoguePanel/ConfirmMazeButton").gameObject.GetComponent<Button>();
+        cancelMazeButton = canvas.transform.Find("DialoguePanel/CancelMazeButton").gameObject.GetComponent<Button>();
 
         timer_text.enabled = false;
         crab_icon.enabled = false;
@@ -53,7 +53,7 @@ public class OpenCagesHandler : MonoBehaviour
     //Funzione START MazeExploring
     public void restartMazeGame()
     {
-        this.timeRemaining = 120f;
+        this.timeRemaining = 10f;
         this.seconds = Mathf.Round(timeRemaining);
         Debug.Log("SECONDI: " + this.seconds);
 
@@ -92,10 +92,10 @@ public class OpenCagesHandler : MonoBehaviour
             dialogueText.SetText("Hey Shelly! Ci sono dei granchi che hanno bisogno di essere liberati! \n" +
                 "Ti va di aiutarmi?" + " Nel labirinto troverai delle chiavi con cui poter aprire le gabbie \n" +
                 "Attenta! Puoi prendere solo una chiave alla volta ed hai 3 minuti di tempo per liberarli tutti \n");
-            confirmButton.onClick.RemoveAllListeners();
+            /*confirmButton.onClick.RemoveAllListeners();
             cancelButton.onClick.RemoveAllListeners();
             confirmButton.onClick.AddListener(ConfirmMazeButton_onClick);
-            cancelButton.onClick.AddListener(CancelMazeButton_onClick);
+            cancelButton.onClick.AddListener(CancelMazeButton_onClick);*/
         }
     }
 
@@ -128,11 +128,11 @@ public class OpenCagesHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameObject.Find("Director").GetComponent<GameDirector>().getGameState() != GameDirector.GameState.MazeExploring)
+        //if (GameObject.Find("Director").GetComponent<GameDirector>().getGameState() != GameDirector.GameState.MazeExploring)
+        //    return;
+
+        if (GameDirector.Instance.getGameState() != GameDirector.GameState.MazeExploring)
             return;
-
-        //Debug.Log("UPDATE");
-
 
 
         if (this.timeRemaining > 0)

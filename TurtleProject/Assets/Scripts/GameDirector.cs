@@ -124,8 +124,8 @@ public class GameDirector : MonoBehaviour
         SettingsButton = canvas.transform.Find("SettingsButton").GetComponent<Button>();
 
         //SettingsButton.onClick.AddListener(OpenSettings);
-        ReturnToMenuButton.onClick.AddListener(LoadMenu);
-        WebsiteButton.onClick.AddListener(OpenURL);
+        //ReturnToMenuButton.onClick.AddListener(LoadMenu);
+        //WebsiteButton.onClick.AddListener(OpenURL);
 
         upArrow = Resources.Load<Sprite>("Sprites/UpArrow");
         downArrow = Resources.Load<Sprite>("Sprites/DownArrow");

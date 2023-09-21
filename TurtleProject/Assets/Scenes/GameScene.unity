@@ -1167,7 +1167,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1853527828}
-  m_RootOrder: 1
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2560,7 +2560,7 @@ RectTransform:
   m_Children:
   - {fileID: 1997029049}
   m_Father: {fileID: 1853527828}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3733,7 +3733,7 @@ RectTransform:
   m_Children:
   - {fileID: 918614720}
   m_Father: {fileID: 1853527828}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5149,7 +5149,7 @@ GameObject:
   - component: {fileID: 552590748}
   - component: {fileID: 552590749}
   m_Layer: 0
-  m_Name: Soundtrack
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8133,7 +8133,7 @@ RectTransform:
   m_Children:
   - {fileID: 1235574639}
   m_Father: {fileID: 1853527828}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10840,7 +10840,7 @@ RectTransform:
   m_Children:
   - {fileID: 2119607111}
   m_Father: {fileID: 1853527828}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11244,7 +11244,7 @@ RectTransform:
   m_Children:
   - {fileID: 1100015219}
   m_Father: {fileID: 1853527828}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13230,13 +13230,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91124729805d7f4c9da8fcb078b346d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SoundtrackSource: {fileID: 552590749}
+  BackgroundMusicSource: {fileID: 552590749}
   MinigamesSoundtrackSource: {fileID: 1077123993}
   MovementSource: {fileID: 167519600}
   BubbleSource: {fileID: 1225073617}
   GrowingCoralSource: {fileID: 498053754}
   SFXSource: {fileID: 126468609}
-  soundtrack: {fileID: 8300000, guid: 79d8feee7f64cf94399889e402c1ce21, type: 3}
+  backgroundMusic: {fileID: 8300000, guid: 79d8feee7f64cf94399889e402c1ce21, type: 3}
   movement: {fileID: 8300000, guid: bb1913dbb4d9cf64fbe48e52b60a7dd7, type: 3}
   bubble: {fileID: 8300000, guid: b85f27fbdb545a1469056563b1d8f28e, type: 3}
   coral: {fileID: 8300000, guid: aaf31a02283d7c64ca7728fc8307b0a7, type: 3}
@@ -14311,7 +14311,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772230589}
-  m_LocalRotation: {x: -0.036324956, y: 0.0000000017713828, z: 6.438813e-11, w: 0.99934006}
+  m_LocalRotation: {x: -0.036324956, y: -0.0000000025273734, z: -9.186714e-11, w: 0.99934006}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14487,7 +14487,7 @@ RectTransform:
   m_Children:
   - {fileID: 166661551}
   m_Father: {fileID: 1853527828}
-  m_RootOrder: 0
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -15047,14 +15047,14 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1783786963}
-  - {fileID: 118624828}
   - {fileID: 922114897}
   - {fileID: 169294054}
   - {fileID: 2115370036}
   - {fileID: 332641308}
   - {fileID: 1352108949}
   - {fileID: 1338760120}
+  - {fileID: 1783786963}
+  - {fileID: 118624828}
   m_Father: {fileID: 1570023806}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17841,7 +17841,7 @@ RectTransform:
   m_Children:
   - {fileID: 1320544811}
   m_Father: {fileID: 1853527828}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

@@ -23,6 +23,8 @@ public class OpenCagesHandler : MonoBehaviour
 
     private GameObject[] arr_cages;
 
+    private AudioManager audioManager;
+
     void Awake()
     {
         this.totCages = this.GetComponent<SpawnCages>().totalCages;  //prendo il numero di casse
@@ -48,6 +50,8 @@ public class OpenCagesHandler : MonoBehaviour
         crab_icon.enabled = false;
         key_icon.enabled = false;
         crab_text.enabled = false;
+
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     //Funzione START MazeExploring
@@ -259,6 +263,7 @@ public class OpenCagesHandler : MonoBehaviour
                     this.hasKey = true;
                     this.key_icon.enabled = true;
                     Debug.Log("ho la chiave");
+                    audioManager.PlaySFX(audioManager.KeyTaken);
                 }
                 else
                     return;
@@ -278,6 +283,7 @@ public class OpenCagesHandler : MonoBehaviour
                     this.openCages++;
                     Debug.Log("GABBIE APERTE: " + this.openCages);
                     this.crab_text.SetText(openCages.ToString() + "/" + totCages.ToString());
+                    audioManager.PlaySFX(audioManager.CageOpening);
                 }
                 else
                     return;

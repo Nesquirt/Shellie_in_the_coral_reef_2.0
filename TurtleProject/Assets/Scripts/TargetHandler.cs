@@ -40,7 +40,7 @@ public class TargetHandler : MonoBehaviour
         //cancelButton = canvas.transform.Find("DialoguePanel/CancelRaceButton").gameObject.GetComponent<Button>();
         timer = canvas.transform.Find("Timer").gameObject.GetComponent<TextMeshProUGUI>();
 
-        //audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
 
         
     }
@@ -87,13 +87,13 @@ public class TargetHandler : MonoBehaviour
         obstacleRacePrompt.gameObject.SetActive(false);
         canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
         raceStart();
-        //audioManager.PlaySFX(audioManager.selection);
+        audioManager.PlaySFX(audioManager.selection);
     }
     public void CancelButton_onClick()
     {
         AnguillaTriggerExit();
         obstacleRacePrompt.gameObject.SetActive(true);
-        //audioManager.PlaySFX(audioManager.selection);
+        audioManager.PlaySFX(audioManager.selection);
     }
     // -------------------------------------------------------------------- //
     //Funzione di start del minigioco
@@ -178,7 +178,7 @@ public class TargetHandler : MonoBehaviour
                 {
                 Debug.Log("Attraversato primo anello");
                     StartCoroutine(Timer());
-                    //audioManager.PlaySFX(audioManager.startRace);
+                    audioManager.PlaySFX(audioManager.startRace);
 
             }
                 if(targetNumber >= 28)
@@ -186,13 +186,13 @@ public class TargetHandler : MonoBehaviour
                     Victory();
                     StopCoroutine(Timer());
                     timer.gameObject.SetActive(false);
-                    //audioManager.PlaySFX(audioManager.endRace);
+                    audioManager.PlaySFX(audioManager.endRace);
                     return;
                 }
                 GameObject.Find(nextTargetName).GetComponent<MeshRenderer>().material = activeMaterial;
                 if(targetNumber > 0 && targetNumber < 28)
                 {
-                    //audioManager.PlaySFX(audioManager.crossRing);
+                    audioManager.PlaySFX(audioManager.crossRing);
                 }
 
             targetNumber++;
@@ -243,7 +243,7 @@ public class TargetHandler : MonoBehaviour
     }
     public IEnumerator summoningRitual()
     {
-        audioManager.soundtrack.GetComponent<AudioSource>().volume = 0.01f;
+        //audioManager.soundtrack.GetComponent<AudioSource>().volume = 0.01f;
         GameObject Scorza = GameObject.Find("SpecialTarget");
         Scorza.GetComponentInChildren<MeshRenderer>().enabled = true;
         while (Scorza.transform.position.y>40)
@@ -251,7 +251,7 @@ public class TargetHandler : MonoBehaviour
             Scorza.transform.position = Vector3.MoveTowards(Scorza.transform.position, new Vector3(57, 40, 530), Time.deltaTime * 1.5f);
             yield return new WaitForFixedUpdate();
         }
-        audioManager.soundtrack.GetComponent<AudioSource>().volume = 0.2f;
+        //audioManager.soundtrack.GetComponent<AudioSource>().volume = 0.2f;
     }
 
 

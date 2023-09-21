@@ -186,7 +186,7 @@ public class TargetHandler : MonoBehaviour
                     Victory();
                     StopCoroutine(Timer());
                     timer.gameObject.SetActive(false);
-                    audioManager.PlaySFX(audioManager.endRace);
+                    audioManager.PlaySFX(audioManager.endMiniGame);
                     return;
                 }
                 GameObject.Find(nextTargetName).GetComponent<MeshRenderer>().material = activeMaterial;

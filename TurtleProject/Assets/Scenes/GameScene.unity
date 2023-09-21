@@ -13241,13 +13241,13 @@ MonoBehaviour:
   bubble: {fileID: 8300000, guid: b85f27fbdb545a1469056563b1d8f28e, type: 3}
   coral: {fileID: 8300000, guid: aaf31a02283d7c64ca7728fc8307b0a7, type: 3}
   selection: {fileID: 8300000, guid: b1f67582c74e26843a49a5e150160e14, type: 3}
+  endMiniGame: {fileID: 8300000, guid: e7825c10f99412349ac4cb186d18c86b, type: 3}
   MatteoGameSountrack: {fileID: 8300000, guid: 5287ccf048fdf1a408bbc2a153da8219, type: 3}
   startRace: {fileID: 8300000, guid: b65c04ecc2000b84bbece92b8e38f4c1, type: 3}
-  endRace: {fileID: 8300000, guid: 686fdbf1e494f6d4ca77183551ff84fe, type: 3}
   crossRing: {fileID: 8300000, guid: da7c345ebc1608f438b4172245a12274, type: 3}
   Crush_Spawn: {fileID: 8300000, guid: df0848fca24a7f947aeaa58b255db4a7, type: 3}
   SaraGameSountrack: {fileID: 8300000, guid: 73fd376e4dd2b604bb5cabc652294d87, type: 3}
-  KeyTaken: {fileID: 8300000, guid: 95378cd7c94fbb8438fdf4e284c0df5f, type: 3}
+  KeyTaken: {fileID: 8300000, guid: bc032fa3c136f70448f25ad8ea26d49d, type: 3}
   CageOpening: {fileID: 8300000, guid: f95bbb0ba0380fe4b80408e53523a499, type: 3}
   StefanoGameSountrack: {fileID: 8300000, guid: 2e833ab082e8ee140a0c44ca79877e34, type: 3}
   GridDrop: {fileID: 8300000, guid: 5b847342f867a17429aab62a3ba52cbe, type: 3}
@@ -14311,7 +14311,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772230589}
-  m_LocalRotation: {x: -0.036324956, y: 0.0000000017713828, z: 6.438813e-11, w: 0.99934006}
+  m_LocalRotation: {x: -0.036324956, y: -0.0000000041008272, z: -1.4906053e-10, w: 0.99934006}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

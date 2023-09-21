@@ -23,11 +23,11 @@ public class AudioManager : MonoBehaviour
     [Header("- - - - AUDIO CLIP (ONE SHOT)")]
     public AudioClip coral;
     public AudioClip selection;
+    public AudioClip endMiniGame;
 
     [Header("- - - - AUDIO CLIP MATTEO'S GAME")]
     public AudioClip MatteoGameSountrack;
     public AudioClip startRace;
-    public AudioClip endRace;
     public AudioClip crossRing;
     public AudioClip Crush_Spawn;
 

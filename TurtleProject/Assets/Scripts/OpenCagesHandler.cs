@@ -20,6 +20,7 @@ public class OpenCagesHandler : MonoBehaviour
     private bool hasKey;
     private int openCages;
     private int totCages;
+    private bool finalFunctionCalled;
 
     private GameObject[] arr_cages;
 
@@ -57,7 +58,8 @@ public class OpenCagesHandler : MonoBehaviour
     //Funzione START MazeExploring
     public void restartMazeGame()
     {
-        this.timeRemaining = 60f;
+        finalFunctionCalled = false;
+        this.timeRemaining = 18f;
         this.seconds = Mathf.Round(timeRemaining);
         Debug.Log("SECONDI: " + this.seconds);
 
@@ -123,12 +125,14 @@ public class OpenCagesHandler : MonoBehaviour
         MazePrompt.gameObject.SetActive(false);
         canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
         GameDirector.Instance.setGameState(GameDirector.GameState.MazeExploring);
+        audioManager.PlaySFX(audioManager.selection);
         restartMazeGame();
     }
     public void CancelMazeButton_onClick()
     {
         PesceTriggerExit();
         MazePrompt.gameObject.SetActive(true);
+        audioManager.PlaySFX(audioManager.selection);
     }
 
     private void FixedUpdate()
@@ -158,39 +162,44 @@ public class OpenCagesHandler : MonoBehaviour
             this.key_icon.enabled = false;
             this.hasKey = false;
 
-            //faccio scomparire le chiavi
-            GameObject[] arr_keys = GameObject.FindGameObjectsWithTag("Chiave");
-            for (int i = 0; i < arr_keys.Length; i++)
+            if (finalFunctionCalled == false)
             {
-                Destroy(arr_keys[i]);
-            }
+                finalFunctionCalled = true;
 
-            //ANIMAZIONE gabbie che salgono 
-            this.arr_cages = GameObject.FindGameObjectsWithTag("Gabbia");
-            Debug.Log("dim array: " + arr_cages.Length);
-
-            if (arr_cages.Length != 0)
-            {
-                //Debug.Log(arr_cages);
-                //StartCoroutine(cageGoesUp());
-                for (int i = 0; i < arr_cages.Length; i++)
+                //faccio scomparire le chiavi
+                GameObject[] arr_keys = GameObject.FindGameObjectsWithTag("Chiave");
+                for (int i = 0; i < arr_keys.Length; i++)
                 {
-                    if (arr_cages[i] != null)
-                    {
-                        arr_cages[i].GetComponent<CageScript>().GoUp();
-                        if (arr_cages[i].transform.position.y > 100f)
-                        {
-                            //arr_cages[i].GetComponent<Rigidbody>().isKinematic = true;      //ho già disabilitato la fisica per l'oggetto
-                            Debug.Log("gabbia distrutta");
-                            Destroy(arr_cages[i]);
-                        }
-                    }
-
+                    Destroy(arr_keys[i]);
                 }
-            }
-            else
-            {
-                GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
+
+                //ANIMAZIONE gabbie che salgono 
+                this.arr_cages = GameObject.FindGameObjectsWithTag("Gabbia");
+                Debug.Log("dim array: " + arr_cages.Length);
+
+                if (arr_cages.Length != 0)
+                {
+                    //Debug.Log(arr_cages);
+                    //StartCoroutine(cageGoesUp());
+                    for (int i = 0; i < arr_cages.Length; i++)
+                    {
+                        if (arr_cages[i] != null)
+                        {
+                            arr_cages[i].GetComponent<CageScript>().GoUp();
+                            if (arr_cages[i].transform.position.y > 100f)
+                            {
+                                //arr_cages[i].GetComponent<Rigidbody>().isKinematic = true;      //ho già disabilitato la fisica per l'oggetto
+                                Debug.Log("gabbia distrutta");
+                                Destroy(arr_cages[i]);
+                            }
+                        }
+
+                    }
+                }
+                else
+                {
+                    GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
+                }
             }
 
         }
@@ -220,7 +229,6 @@ public class OpenCagesHandler : MonoBehaviour
             victoryText.SetText("Perle guadagnate: " + gane + "\n" +
                             "Livello di ossigeno aumentato del " + gane + "%");
         }
-
         GameDirector.Instance.addPearls(gane);
         GameDirector.Instance.addBiodiversity(gane);
     }
@@ -295,6 +303,7 @@ public class OpenCagesHandler : MonoBehaviour
     {
         if (this.openCages == this.totCages || this.seconds == 0)
         {
+            audioManager.PlaySFX(audioManager.endMiniGame);
             return true;
         }
         else

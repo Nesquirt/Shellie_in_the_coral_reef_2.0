@@ -106,7 +106,7 @@ public class CoralHandler : MonoBehaviour
                 
             }
             growthCounter++;
-            yield return new WaitForSeconds(0.001f); 
+            yield return new WaitForSeconds(0.1f); 
         }
         
     }

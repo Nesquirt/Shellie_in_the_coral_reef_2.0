@@ -20,7 +20,7 @@ public class OpenCagesHandler : MonoBehaviour
     private bool hasKey;
     private int openCages;
     private int totCages;
-    private bool finalFunctionCalled;
+    private int finalFunctionCalled;
 
     private GameObject[] arr_cages;
 
@@ -58,8 +58,8 @@ public class OpenCagesHandler : MonoBehaviour
     //Funzione START MazeExploring
     public void restartMazeGame()
     {
-        finalFunctionCalled = false;
-        this.timeRemaining = 18f;
+        finalFunctionCalled = 0;
+        this.timeRemaining = 3f;
         this.seconds = Mathf.Round(timeRemaining);
         Debug.Log("SECONDI: " + this.seconds);
 
@@ -150,59 +150,59 @@ public class OpenCagesHandler : MonoBehaviour
             this.seconds = Mathf.Round(timeRemaining);
             this.timer_text.SetText(seconds.ToString());
         }
-
-
-        if (IsFinished())
+        else
         {
-            checkEnd();
-
-            this.timer_text.enabled = false;
-            this.crab_text.enabled = false;
-            this.crab_icon.enabled = false;
-            this.key_icon.enabled = false;
-            this.hasKey = false;
-
-            if (finalFunctionCalled == false)
-            {
-                finalFunctionCalled = true;
-
-                //faccio scomparire le chiavi
-                GameObject[] arr_keys = GameObject.FindGameObjectsWithTag("Chiave");
-                for (int i = 0; i < arr_keys.Length; i++)
-                {
-                    Destroy(arr_keys[i]);
-                }
-
-                //ANIMAZIONE gabbie che salgono 
-                this.arr_cages = GameObject.FindGameObjectsWithTag("Gabbia");
-                Debug.Log("dim array: " + arr_cages.Length);
-
-                if (arr_cages.Length != 0)
-                {
-                    //Debug.Log(arr_cages);
-                    //StartCoroutine(cageGoesUp());
-                    for (int i = 0; i < arr_cages.Length; i++)
-                    {
-                        if (arr_cages[i] != null)
-                        {
-                            arr_cages[i].GetComponent<CageScript>().GoUp();
-                            if (arr_cages[i].transform.position.y > 100f)
-                            {
-                                //arr_cages[i].GetComponent<Rigidbody>().isKinematic = true;      //ho già disabilitato la fisica per l'oggetto
-                                Debug.Log("gabbia distrutta");
-                                Destroy(arr_cages[i]);
-                            }
-                        }
-
-                    }
-                }
-                else
-                {
-                    GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
-                }
-            }
-
+            if (finalFunctionCalled == 0)
+                callFinalFunction();
+            finalFunctionCalled++;
         }
+    }
+    public void callFinalFunction()
+    {
+        checkEnd();
+
+        Debug.Log("FINE");
+
+        this.timer_text.enabled = false;
+        this.crab_text.enabled = false;
+        this.crab_icon.enabled = false;
+        this.key_icon.enabled = false;
+        this.hasKey = false;
+
+        //faccio scomparire le chiavi
+        GameObject[] arr_keys = GameObject.FindGameObjectsWithTag("Chiave");
+        for (int i = 0; i < arr_keys.Length; i++)
+        {
+            Destroy(arr_keys[i]);
+        }
+
+        //riempie array di gabbie
+        this.arr_cages = GameObject.FindGameObjectsWithTag("Gabbia");
+        Debug.Log("dim array: " + arr_cages.Length);
+
+        if (arr_cages.Length != 0)
+        {
+            Debug.Log("arr_cages non NULL");
+
+            for (int i = 0; i < totCages; i++)
+            {
+                if (arr_cages[i] != null)
+                {
+                    arr_cages[i].GetComponent<CageScript>().GoUp();
+                    //if (arr_cages[i].transform.position.y > 100f)
+                    //{
+                        //arr_cages[i].GetComponent<Rigidbody>().isKinematic = true;      //ho già disabilitato la fisica per l'oggetto
+                        //Destroy(arr_cages[i]);
+                        //Debug.Log("gabbia distrutta");
+                    //}
+                }
+
+            }
+            Debug.Log("arr_cages.Length: " + arr_cages.Length);
+        }
+        else
+            GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
+
     }
 
     private void checkEnd()
@@ -235,7 +235,7 @@ public class OpenCagesHandler : MonoBehaviour
 
 
     //TODO: sistemare coroutine
-    IEnumerator cageGoesUp()
+    /*IEnumerator cageGoesUp()
     {
 
         for (int i = 0; i < arr_cages.Length; i++)
@@ -256,7 +256,7 @@ public class OpenCagesHandler : MonoBehaviour
         this.gameObject.SetActive(false);
         StopCoroutine(cageGoesUp());
 
-    }
+    }*/
 
     //metodo chiamato da TurtleController
     public void TriggerMethod(Collider other)
@@ -292,6 +292,11 @@ public class OpenCagesHandler : MonoBehaviour
                     Debug.Log("GABBIE APERTE: " + this.openCages);
                     this.crab_text.SetText(openCages.ToString() + "/" + totCages.ToString());
                     audioManager.PlaySFX(audioManager.CageOpening);
+                    if(openCages == totCages && finalFunctionCalled == 0)
+                    {
+                        callFinalFunction();
+                        finalFunctionCalled++;
+                    }
                 }
                 else
                     return;
@@ -299,11 +304,12 @@ public class OpenCagesHandler : MonoBehaviour
             }
         }
     }
+    /*
     private bool IsFinished()
     {
         if (this.openCages == this.totCages || this.seconds == 0)
         {
-            audioManager.PlaySFX(audioManager.endMiniGame);
+            //audioManager.PlaySFX(audioManager.endMiniGame);
             return true;
         }
         else
@@ -311,5 +317,6 @@ public class OpenCagesHandler : MonoBehaviour
             return false;
         }
     }
+    */
 
 }

@@ -145,7 +145,7 @@ public class GameDirector : MonoBehaviour
         //Coroutine di fade out del loading screen
         StartCoroutine(FadeOutLoadingScreen());
         //Metodo che fa partire il ciclo di cambiamento dei parametri
-        InvokeRepeating("tick", 0, 30);
+        InvokeRepeating("tick", 0, 60);
     }
 
     public void tick()  //Funzione che viene chiamata una volta ogni minuto, e aggiorna i valori delle statistiche di gioco

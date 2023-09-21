@@ -136,7 +136,7 @@ public class TurtleController : MonoBehaviour
         {
             // other.GetComponentInChildren<SpawnPrefabsRandomly>().raceStartPrompt1();
             oggettoscriptTrash = GameObject.Find("ContenitoreStefano/oggettoscriptTrash");
-            oggettoscriptTrash.GetComponent<SpawnPrefabsRandomly>().raceStartPrompt1();
+            oggettoscriptTrash.GetComponent<SpawnPrefabsRandomly>().trashStartPrompt1();
 
         }
         else if (other.name == "SpecialTarget")
@@ -172,12 +172,25 @@ public class TurtleController : MonoBehaviour
 
     }
     // -------------------------------------------------------------------- //
+
     //Funzione per rallentare in caso di collisione, principalmente per prevenire movimenti fuori controllo e passaggi attraverso il terreno
     public void OnCollisionStay(Collision collision)
     {
         if (speed >= maxSpeed / 6)
             speed = maxSpeed / 6;
+
+
+        if (collision.gameObject.CompareTag("spazzatura"))
+        {
+            float intensità = 0.5f;
+            Vector3 force = collision.transform.position - transform.position;
+            force.Normalize();
+            Debug.Log("spinta");
+
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(force * intensità, ForceMode.Force);
+        }
     }
+
 
     //Funzione per eliminare la velocità generata da collisioni
     public void OnCollisionExit(Collision collision)
@@ -199,3 +212,4 @@ public class TurtleController : MonoBehaviour
 }
 
 //12.35 Adattato turtle controller per Sara
+//13.41 Adattato turtle controller per Stefano

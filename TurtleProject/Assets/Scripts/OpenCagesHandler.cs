@@ -83,7 +83,7 @@ public class OpenCagesHandler : MonoBehaviour
     {
         if (GameDirector.Instance.getGameState() != GameDirector.GameState.FreeRoaming)
             return;
-
+        Debug.Log("Test: " +GameDirector.Instance.getGameState());
         if (!canvas.transform.Find("DialoguePanel").gameObject.activeSelf)
         {
             MazePrompt.gameObject.SetActive(true);
@@ -96,7 +96,7 @@ public class OpenCagesHandler : MonoBehaviour
             canvas.transform.Find("DialoguePanel").gameObject.SetActive(true);
             GameDirector.Instance.checkDialoguePanelButtons("MazeExploring");
             NPCName.SetText("Dory");
-            dialogueText.SetText("Hey Shelly! Ci sono dei granchi che hanno bisogno di essere liberati! \n" +
+            dialogueText.SetText("Hey Shellie! Ci sono dei granchi che hanno bisogno di essere liberati! \n" +
                 "Ti va di aiutarmi?" + " Nel labirinto troverai delle chiavi con cui poter aprire le gabbie \n" +
                 "Attenta! Puoi prendere solo una chiave alla volta ed hai 3 minuti di tempo per liberarli tutti \n");
             /*confirmButton.onClick.RemoveAllListeners();
@@ -122,9 +122,9 @@ public class OpenCagesHandler : MonoBehaviour
     public void ConfirmMazeButton_onClick()
     {
         canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
-        MazePrompt.gameObject.SetActive(false);
         canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
         GameDirector.Instance.setGameState(GameDirector.GameState.MazeExploring);
+        MazePrompt.gameObject.SetActive(false);
         audioManager.ChangeMusic(audioManager.SaraGameSountrack, true, 0.3f);
         restartMazeGame();
     }

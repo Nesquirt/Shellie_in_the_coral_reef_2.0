@@ -147,7 +147,6 @@ public class TurtleController : MonoBehaviour
             // other.GetComponentInChildren<SpawnPrefabsRandomly>().raceStartPrompt1();
             oggettoscriptTrash = GameObject.Find("ContenitoreStefano/oggettoscriptTrash");
             oggettoscriptTrash.GetComponent<SpawnPrefabsRandomly>().trashStartPrompt();
-
         }
         else if (other.name == "SpecialTarget")
         {

@@ -242,21 +242,22 @@ public class TargetHandler : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.E))
         {
-            audioManager.PlaySFX(audioManager.Crush_Spawn);
+            audioManager.ChangeMusic(audioManager.Crush_Spawn, true, 0.5f);
             StartCoroutine(summoningRitual());
+
         }
     }
     public IEnumerator summoningRitual()
     {
-        //audioManager.soundtrack.GetComponent<AudioSource>().volume = 0.01f;
+        
         GameObject Scorza = GameObject.Find("SpecialTarget");
         Scorza.GetComponentInChildren<MeshRenderer>().enabled = true;
         while (Scorza.transform.position.y>40)
         {
-            Scorza.transform.position = Vector3.MoveTowards(Scorza.transform.position, new Vector3(57, 40, 530), Time.deltaTime * 1.5f);
+            Scorza.transform.position = Vector3.MoveTowards(Scorza.transform.position, new Vector3(57, 40, 530), Time.deltaTime * 3f);
             yield return new WaitForFixedUpdate();
         }
-        //audioManager.soundtrack.GetComponent<AudioSource>().volume = 0.2f;
+        audioManager.ChangeMusic(audioManager.Crush_Spawn, false, 0.5f);
     }
 
 

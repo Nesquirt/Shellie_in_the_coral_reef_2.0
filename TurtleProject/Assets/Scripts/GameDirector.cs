@@ -90,10 +90,7 @@ public class GameDirector : MonoBehaviour
     }
     public void LoadGame()
     {
-        if(SceneManager.GetActiveScene().name != "GameScene")
-        {
-            Debug.Log("Chiamata funzione LoadGame dal menu");
-        }
+        
         //Nella scena di gioco, prende dalla hierarchy tutti gli elementi dell'interfaccia
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         reefHealthSlider = canvas.transform.Find("BarsPanel/ReefHealthBar").GetComponent<Slider>();
@@ -145,6 +142,8 @@ public class GameDirector : MonoBehaviour
 
         corals = GameObject.FindGameObjectsWithTag("CoralSpot");
 
+        //Coroutine di fade out del loading screen
+        StartCoroutine(FadeOutLoadingScreen());
         //Metodo che fa partire il ciclo di cambiamento dei parametri
         InvokeRepeating("tick", 0, 30);
     }
@@ -316,6 +315,26 @@ public class GameDirector : MonoBehaviour
     {
         yield return new WaitForFixedUpdate();
         yield return currentState;
+    }
+    // -------------------------------------------------------------------- //
+    //Coroutine di fade out del loading screen
+    IEnumerator FadeOutLoadingScreen()
+    {
+        Image LoadingPanelImage = canvas.transform.Find("LoadingPanel").GetComponent<Image>();
+        TextMeshProUGUI LoadingTextImage = canvas.transform.Find("LoadingPanel/LoadingText").GetComponent<TextMeshProUGUI>();
+        float fadeAmount;
+        Color nextPanelColor, nextTextColor;
+        yield return new WaitForSeconds(1);
+        while (LoadingPanelImage.color.a > 0)
+        {
+            fadeAmount = LoadingPanelImage.color.a - (Time.deltaTime * 0.5f);
+            nextPanelColor = new Color(LoadingPanelImage.color.r, LoadingPanelImage.color.g, LoadingPanelImage.color.b, fadeAmount);
+            nextTextColor = new Color(LoadingTextImage.color.r, LoadingTextImage.color.g, LoadingTextImage.color.b, fadeAmount);
+            LoadingPanelImage.color = nextPanelColor;
+            LoadingTextImage.color = nextTextColor;
+            yield return new WaitForSeconds(0.01f);
+        }
+        LoadingPanelImage.gameObject.SetActive(false);
     }
     // -------------------------------------------------------------------- //
     //Metodi di GameOver e Victory

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using TMPro;
 public class MainMenu : MonoBehaviour
 {
     public Button startGameButton;
@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     public Button quitButton;
     public Button aboutButton;
 
+    public GameObject LoadingPanel;
     void Start()
     {
         /* Associa le funzioni ai pulsanti
@@ -18,12 +19,15 @@ public class MainMenu : MonoBehaviour
         optionsButton.onClick.AddListener(OpenOptions);
         quitButton.onClick.AddListener(QuitGame);
         aboutButton.onClick.AddListener(GameDirector.Instance.OpenURL); */
+        LoadingPanel = GameObject.Find("Canvas/LoadingPanel");
+        LoadingPanel.SetActive(false);
     }
 
     // Funzione per avviare una nuova partita
     public void StartGame()
     {
-        SceneManager.LoadScene("GameScene");
+        LoadingPanel.SetActive(true);
+        StartCoroutine(FadeInLoadingScreen());
     }
 
     // Funzione per aprire il menu delle impostazioni (la scena SettingsMenu)
@@ -46,7 +50,23 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
-
+    IEnumerator FadeInLoadingScreen()
+    {
+        Image LoadingPanelImage = LoadingPanel.GetComponent<Image>();
+        TextMeshProUGUI LoadingTextImage = LoadingPanel.transform.Find("LoadingText").GetComponent<TextMeshProUGUI>();
+        float fadeAmount;
+        Color nextPanelColor, nextTextColor;
+        while (LoadingPanelImage.color.a < 1)
+        {
+            fadeAmount = LoadingPanelImage.color.a + (Time.deltaTime*5);
+            nextPanelColor = new Color(LoadingPanelImage.color.r, LoadingPanelImage.color.g, LoadingPanelImage.color.b, fadeAmount);
+            nextTextColor = new Color(LoadingTextImage.color.r, LoadingTextImage.color.g, LoadingTextImage.color.b, fadeAmount);
+            LoadingPanelImage.color = nextPanelColor;
+            LoadingTextImage.color = nextTextColor;
+            yield return new WaitForSeconds(0.01f);
+        }
+            SceneManager.LoadScene("GameScene");
+    }
 }
 
 

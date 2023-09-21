@@ -101,7 +101,6 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
         StefanoPrompt.gameObject.SetActive(false);
         canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
-        audioManager.PlaySFX(audioManager.selection);
         startTrashGame();
     }
     public void CancelButton_onClick()
@@ -202,6 +201,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                                  "Perle guadagnate: " + rifiutiraccolti * 5 + "\n" +
                                  "Livello di ossigeno diminuito del " + rifiutiraccolti * 5 + "%");
                 GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
+                audioManager.PlaySFX(audioManager.endMiniGame);
                 run = false;
 
 

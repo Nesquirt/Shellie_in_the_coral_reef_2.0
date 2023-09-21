@@ -59,7 +59,7 @@ public class OpenCagesHandler : MonoBehaviour
     public void restartMazeGame()
     {
         this.finalFunctionCalled = 0;
-        this.timeRemaining = 3f;
+        this.timeRemaining = 180f;
         this.seconds = Mathf.Round(timeRemaining);
         Debug.Log("SECONDI: " + this.seconds);
 
@@ -153,7 +153,9 @@ public class OpenCagesHandler : MonoBehaviour
         else
         {
             if (finalFunctionCalled == 0)
+            {
                 callFinalFunction();
+            }
             finalFunctionCalled++;
         }
     }
@@ -211,7 +213,7 @@ public class OpenCagesHandler : MonoBehaviour
 
         canvas.transform.Find("VictoryPanel").gameObject.SetActive(true);
         victoryText = canvas.transform.Find("VictoryPanel/RewardsPanel/RewardsText").GetComponent<TextMeshProUGUI>();
-
+        audioManager.PlaySFX(audioManager.endMiniGame);
         if (openCages == 0)
         {
             victoryText.SetText("Purtroppo non sei riuscita a liberare nesssun granchio... \n" +

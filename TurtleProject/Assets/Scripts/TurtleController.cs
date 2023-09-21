@@ -196,7 +196,7 @@ public class TurtleController : MonoBehaviour
             Vector3 force = collision.transform.position - transform.position;
             force.Normalize();
             Debug.Log("spinta");
-            audioManager.PlaySFX(audioManager.TrashMoving);
+            audioManager.PlayTrash();
 
             collision.gameObject.GetComponent<Rigidbody>().AddForce(force * intensità, ForceMode.Force);
         }

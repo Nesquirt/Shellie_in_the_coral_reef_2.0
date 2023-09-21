@@ -13,7 +13,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource MovementSource;
     [SerializeField] AudioSource BubbleSource;
     [SerializeField] AudioSource GrowingCoralSource;
+    [SerializeField] AudioSource TrashMovingSource;
     [SerializeField] AudioSource SFXSource;
+
 
     [Header("- - - - AUDIO CLIP (LOOP)")]
     public AudioClip backgroundMusic;
@@ -39,7 +41,7 @@ public class AudioManager : MonoBehaviour
     [Header("- - - - AUDIO CLIP STEFANO'S GAME")]
     public AudioClip StefanoGameSountrack;
     public AudioClip GridDrop;
-    public AudioClip TrashMoving;
+    public AudioClip trashMoving;
     public AudioClip ShipHorn;
     public AudioClip GridClimb;
 
@@ -56,6 +58,11 @@ public class AudioManager : MonoBehaviour
     {
         SFXSource.clip = sfx;
         SFXSource.Play();
+    }
+    public void PlayTrash()
+    {
+        TrashMovingSource.clip = trashMoving;
+        TrashMovingSource.Play();
     }
     /*public void ChangeMusic(AudioClip miniGameSoundtrack)
     {

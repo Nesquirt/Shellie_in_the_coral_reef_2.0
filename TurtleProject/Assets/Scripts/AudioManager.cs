@@ -64,24 +64,37 @@ public class AudioManager : MonoBehaviour
         TrashMovingSource.clip = trashMoving;
         TrashMovingSource.Play();
     }
-    /*public void ChangeMusic(AudioClip miniGameSoundtrack)
+    public void ChangeMusic(AudioClip miniGameSoundtrack,bool fade)
     {
-        SoundtrackSource.clip = miniGameSoundtrack;
-        SoundtrackSource.Play();
-        StartCoroutine(Fade());
+        StartCoroutine(Fade(miniGameSoundtrack,fade));
     }
-    public IEnumerator Fade()
+    public IEnumerator Fade(AudioClip miniGameSoundtrack,bool fade)
     {
         float time = 0f;
         float duration = 5f;
-        while (time < duration)
+        if(fade)
         {
-            time += Time.deltaTime;
-            SoundtrackSource.volume = Mathf.Lerp(0.2f, 0, time / duration);
-            MinigamesSoundtrackSource.volume = Mathf.Lerp(0, 0.2f, time / duration);
-            yield return null;
+            MinigamesSoundtrackSource.clip = miniGameSoundtrack;
+            MinigamesSoundtrackSource.Play();
+            while (time < duration)
+            {
+                time += Time.deltaTime;
+                BackgroundMusicSource.volume = Mathf.Lerp(0.2f, 0, time / duration);
+                MinigamesSoundtrackSource.volume = Mathf.Lerp(0, 0.1f, time / duration);
+                yield return null;
+            }
         }
-        yield break;
-    }*/
+        else
+        {
+            while (time < duration)
+            {
+                time += Time.deltaTime;
+                BackgroundMusicSource.volume = Mathf.Lerp(0, 0.2f, time / duration);
+                MinigamesSoundtrackSource.volume = Mathf.Lerp(0.1f, 0, time / duration);
+                yield return null;
+            }
+            MinigamesSoundtrackSource.Play();
+        }
+    }
 
 }

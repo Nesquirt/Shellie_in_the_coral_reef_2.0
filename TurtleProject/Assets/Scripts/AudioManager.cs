@@ -17,6 +17,7 @@ public class AudioManager : MonoBehaviour
 
 
     [Header("- - - - AUDIO CLIP (LOOP)")]
+    public AudioClip menuMusic;
     public AudioClip backgroundMusic;
     public AudioClip movement;
     public AudioClip bubble;
@@ -45,6 +46,12 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        MinigamesSoundtrackSource.clip = menuMusic;
+        MinigamesSoundtrackSource.Play();
+    }
+    public void StartGameMusic()
+    {
+        ChangeMusic(menuMusic, false, 1f);
         BackgroundMusicSource.clip = backgroundMusic;
         BackgroundMusicSource.Play();
         MovementSource.clip = movement;
@@ -91,7 +98,7 @@ public class AudioManager : MonoBehaviour
                 MinigamesSoundtrackSource.volume = Mathf.Lerp(vol, 0, time / duration);
                 yield return null;
             }
-            MinigamesSoundtrackSource.Play();
+            MinigamesSoundtrackSource.Stop();
         }
     }
 

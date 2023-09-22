@@ -1,18 +1,27 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public Slider musicVolumeSlider;
-    public Slider soundEffectsVolumeSlider;
+    [SerializeField] private Slider MusicVolumeSlider;
+    [SerializeField] private Slider SFXVolumeSlider;
+    [SerializeField] private AudioMixer myMixer;
     public Button backButton;
 
     private void Start()
     {
-        // Slider
-        musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
-        soundEffectsVolumeSlider.value = PlayerPrefs.GetFloat("SoundEffectsVolume", 1.0f);
+        //Slider start values
+        if(PlayerPrefs.HasKey("MusicVolume"))
+        {
+            LoadVolume();
+        }
+        else 
+        {
+            SetMusicVolume();
+            SetSoundEffectsVolume();
+        }
 
         // Aggiungi i listener per gli eventi dei pulsanti
         backButton.onClick.AddListener(BackToMainMenu);
@@ -29,19 +38,28 @@ public class SettingsMenu : MonoBehaviour
         // Carica la scena del menu principale
         SceneManager.UnloadSceneAsync("Simone_impostazioni");
     }
-
-    public void SetMusicVolume(float volume)
+    public void LoadVolume()
     {
-        // Imposta il volume della musica e salva il valore nelle preferenze
-        //AudioManager.Instance.SetMusicVolume(volume);
+        MusicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+        SFXVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolume");
+
+        SetMusicVolume();
+        SetSoundEffectsVolume();
+    }
+    public void SetMusicVolume()
+    {
+        // Imposta il volume della musica nel mixer
+        float volume = MusicVolumeSlider.value;
+        myMixer.SetFloat("Music", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("MusicVolume", volume);
     }
 
-    public void SetSoundEffectsVolume(float volume)
+    public void SetSoundEffectsVolume()
     {
-        // Imposta il volume degli effetti sonori e salva il valore nelle preferenze
-        //AudioManager.Instance.SetSoundEffectsVolume(volume);
-        PlayerPrefs.SetFloat("SoundEffectsVolume", volume);
+        // Imposta il volume degli SFX nel mixer
+        float volume = SFXVolumeSlider.value;
+        myMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("SFXVolume", volume);
     }
 }
 

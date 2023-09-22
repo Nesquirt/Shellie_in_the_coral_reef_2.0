@@ -200,7 +200,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                 rewardsText = canvas.transform.Find("VictoryPanel/RewardsPanel/RewardsText").GetComponent<TextMeshProUGUI>();
                 rewardsText.SetText("Rifiuti raccolti: " + rifiutiraccolti + "\n" +
                                  "Perle guadagnate: " + rifiutiraccolti * 5 + "\n" +
-                                 "Livello di ossigeno diminuito del " + rifiutiraccolti * 5 + "%");
+                                 "Livello di inquinamento diminuito del " + rifiutiraccolti * 5 + "%");
                 GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
                 audioManager.PlaySFX(audioManager.endMiniGame);
                 audioManager.ChangeMusic(audioManager.StefanoGameSountrack, false, 0.18f);

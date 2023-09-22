@@ -25,10 +25,6 @@ public class TurtleController : MonoBehaviour
         this.eulerRotationSpeed = new Vector3(0, this.maxRotationSpeed, 0);
         this.turtleanim = GetComponentInChildren<Animator>();
 
-        if (GameDirector.Instance == null)
-        {
-            //Non deve fare nulla; questo if è chiamato solo per inizializzare il director nella scena
-        }
         this.posizioni_cageKey = GameObject.Find("Map/Posizioni_CageKey");
         posizioni_cageKey.SetActive(true);
         GameDirector.Instance.LoadGame();

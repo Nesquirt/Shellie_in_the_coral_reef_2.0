@@ -178,6 +178,10 @@ public class TurtleController : MonoBehaviour
         {
             posizioni_cageKey.GetComponent<OpenCagesHandler>().PesceTriggerExit();
         }
+        else if (other.name == "SpecialTarget")
+        {
+            GameObject.Find("Canvas/SpecialTargetPrompt").gameObject.SetActive(false);
+        }
 
     }
     // -------------------------------------------------------------------- //

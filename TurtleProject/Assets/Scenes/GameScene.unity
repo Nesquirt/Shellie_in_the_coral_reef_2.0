@@ -13889,16 +13889,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "In \"Shellie in the Coral Reef,\" i giocatori si immergeranno nelle profondit\xE0
-    dell'oceano nel ruolo  di Shellie, una tartaruga determinata a salvare la preziosa
-    barriera corallina. La barriera corallina \xE8 minacciata da vari pericoli, Shellie
-    dovr\xE0 navigare attraverso questo delicato ecosistema, risolvendo sfide e compiti
-    per preservare la sua bellezza e vitalit\xE0. Durante il gioco, dovrai monitorare
-    costantemente i parametri chiave dell'ecosistema, come i livelli di ossigeno,
-    la quantit\xE0 di inquinamento e la salute della biodiversit\xE0. Prendi decisioni
-    sagge e affronta sfide per mantenere la barriera corallina in uno stato sano
-    e vibrante. Immergiti nei panni di Shellie per preservare questo invredibile
-    ecosistema per le generazioni future.                          "
+  m_text: "Hey, questo sembra essere un ottimo punto per far nascere una nuova barriera
+    corallina! Aiuta Shellie e i suoi amici a rendere questo pertugio del fondale
+    marino abitabile. Durante il gioco, dovrai mantenere i parametri chiave dell'ecosistema:
+    il livello di ossigeno, la quantit\xE0 di inquinamento e la salute della biodiversit\xE0.
+    Aiuta gli amici di Shellie con le loro faccende, guadagna perle e spendile per
+    piantare nuovi coralli che ti aiuteranno ad aumentare la salute della barriera
+    corallina!             "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fac782c5edb347e499a483fe63f086ce, type: 2}
   m_sharedMaterial: {fileID: 1337011401350216163, guid: fac782c5edb347e499a483fe63f086ce, type: 2}

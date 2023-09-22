@@ -125,6 +125,7 @@ public class OpenCagesHandler : MonoBehaviour
         canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
         GameDirector.Instance.setGameState(GameDirector.GameState.MazeExploring);
         MazePrompt.gameObject.SetActive(false);
+        audioManager.PlaySFX(audioManager.selection);
         audioManager.ChangeMusic(audioManager.SaraGameSountrack, true, 0.3f);
         restartMazeGame();
     }

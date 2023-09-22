@@ -7134,7 +7134,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5423279242834183883, guid: 2e652ec4cf5ca4641981055f3ecc69c9, type: 3}
+      - m_Target: {fileID: 8447793620668918140, guid: 5416bb493336d044c9741429efcc40b9, type: 3}
         m_TargetAssemblyTypeName: GameDirector, Assembly-CSharp
         m_MethodName: StatsOpenAndClose
         m_Mode: 2
@@ -13083,7 +13083,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5423279242834183883, guid: 2e652ec4cf5ca4641981055f3ecc69c9, type: 3}
+      - m_Target: {fileID: 8447793620668918140, guid: 5416bb493336d044c9741429efcc40b9, type: 3}
         m_TargetAssemblyTypeName: GameDirector, Assembly-CSharp
         m_MethodName: OpenSettings
         m_Mode: 1

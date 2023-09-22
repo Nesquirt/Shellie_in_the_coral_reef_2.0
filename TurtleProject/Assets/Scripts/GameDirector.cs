@@ -92,10 +92,6 @@ public class GameDirector : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "GameScene")
             LoadGame();
     }
-    public void Start()
-    {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-    }
     public void LoadGame()
     {
         

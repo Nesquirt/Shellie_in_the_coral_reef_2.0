@@ -68,6 +68,8 @@ public class GameDirector : MonoBehaviour
     private TextMeshProUGUI TitleText, CentralText, BottomText;
     private Button ReturnToMenuButton, WebsiteButton, SettingsButton;
 
+    //private AudioManager audioManager;
+
     public GameObject currentCoralSpot;  //Questa variabile comunica con CoralHandler per ricordare su quale roccia si sta piantando i coralli
     // -------------------------------------------------------------------- //
     private void Awake()
@@ -83,10 +85,16 @@ public class GameDirector : MonoBehaviour
         {
             Destroy(gameObject); //Se esiste gia' un'altra istanza, distrugge questo oggetto per evitare duplicati dell'istanza
         }
+        //audioManager = GetComponentInChildren<AudioManager>();
+        //audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         // -------------------------------------------------------------------- //
         //Funzione temporanea per testare i parametri senza passare dal menù
         if (SceneManager.GetActiveScene().name == "GameScene")
             LoadGame();
+    }
+    public void Start()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
     public void LoadGame()
     {
@@ -364,22 +372,26 @@ public class GameDirector : MonoBehaviour
     //Listener per i bottoni della schermata finale (apri sito web e torna al menu')
     public void OpenURL()
     {
+        //audioManager.PlaySFX(audioManager.selection);
         Application.OpenURL("https://coralreefrescueinitiative.org/");
     }
     public void LoadMenu()
     {
         CancelInvoke();
+        //audioManager.PlaySFX(audioManager.selection);
         SceneManager.LoadScene("Simone_Menu_Iniziale");
     }
 
     public void OpenSettings()
     {
+        //audioManager.PlaySFX(audioManager.selection);
         SceneManager.LoadScene("Simone_Impostazioni", LoadSceneMode.Additive);
     }
 
     public void StatsOpenAndClose(GameObject obj)
     {
-        if(obj.activeSelf)
+        //audioManager.PlaySFX(audioManager.selection);
+        if (obj.activeSelf)
         {
             obj.SetActive(false);
         }

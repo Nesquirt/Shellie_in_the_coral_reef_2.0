@@ -193,7 +193,7 @@ public class OpenCagesHandler : MonoBehaviour
                     arr_cages[i].GetComponent<CageScript>().GoUp();
                     //if (arr_cages[i].transform.position.y > 100f)
                     //{
-                        //arr_cages[i].GetComponent<Rigidbody>().isKinematic = true;      //ho già disabilitato la fisica per l'oggetto
+                        //arr_cages[i].GetComponent<Rigidbody>().isKinematic = true;      //ho giï¿½ disabilitato la fisica per l'oggetto
                         //Destroy(arr_cages[i]);
                         //Debug.Log("gabbia distrutta");
                     //}
@@ -219,18 +219,18 @@ public class OpenCagesHandler : MonoBehaviour
         {
             victoryText.SetText("Purtroppo non sei riuscita a liberare nesssun granchio... \n" +
                                 "Non hai guadagnato nessuna perla...\n" +
-                                "Il livello di ossigeno NON è aumentato...");
+                                "Il livello di biodiversitÃ  NON ï¿½ aumentato...");
         }
         else if (openCages == totCages)
         {
             victoryText.SetText("Complimenti! Sei riuscita a salvare tutti i granchi! \n" +
                                 "Perle guadagnate: " + gane + "\n" +
-                                 "Livello di ossigeno aumentato del " + gane + "%");
+                                 "Livello di biodiversitÃ  aumentato del " + gane + "%");
         }
         else
         {
             victoryText.SetText("Perle guadagnate: " + gane + "\n" +
-                            "Livello di ossigeno aumentato del " + gane + "%");
+                            "Livello di biodiversitÃ  aumentato del " + gane + "%");
         }
         GameDirector.Instance.addPearls(gane);
         GameDirector.Instance.addBiodiversity(gane);

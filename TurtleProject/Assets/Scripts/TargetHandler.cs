@@ -15,6 +15,7 @@ public class TargetHandler : MonoBehaviour
     
     private int currentTenths;      //Numero di ostacoli superati dal giocatore
     public int targetNumber;        //L'indice di questo ostacolo, per sapere quando deve diventare attivo
+    private bool specialTargetActive;
 
     private Rigidbody rb;
 
@@ -41,7 +42,7 @@ public class TargetHandler : MonoBehaviour
         timer = canvas.transform.Find("Timer").gameObject.GetComponent<TextMeshProUGUI>();
 
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-
+        specialTargetActive = false;
         
     }
     // -------------------------------------------------------------------- //
@@ -240,8 +241,11 @@ public class TargetHandler : MonoBehaviour
     //Shhhh...
     public void summonSpecialTarget()
     {
-        if(Input.GetKey(KeyCode.E))
+        canvas.transform.Find("SpecialTargetPrompt").gameObject.SetActive(true);
+        if(Input.GetKey(KeyCode.E) && !specialTargetActive)
         {
+            specialTargetActive = true;
+            canvas.transform.Find("SpecialTargetPrompt").gameObject.SetActive(false);
             audioManager.ChangeMusic(audioManager.Crush_Spawn, true, 0.5f);
             StartCoroutine(summoningRitual());
 

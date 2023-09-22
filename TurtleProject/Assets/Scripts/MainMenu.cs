@@ -14,6 +14,11 @@ public class MainMenu : MonoBehaviour
     public GameObject LoadingPanel;
     void Start()
     {
+        if (GameDirector.Instance == null)
+        {
+            //Non deve fare nulla; questo if è chiamato solo per inizializzare il director nella scena
+        }
+
         /* Associa le funzioni ai pulsanti
         startGameButton.onClick.AddListener(StartGame);
         optionsButton.onClick.AddListener(OpenOptions);

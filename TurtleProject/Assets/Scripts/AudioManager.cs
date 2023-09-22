@@ -12,7 +12,6 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource MinigamesSoundtrackSource;
     [SerializeField] private AudioSource MovementSource;
     [SerializeField] private AudioSource BubbleSource;
-    [SerializeField] private AudioSource GrowingCoralSource;
     [SerializeField] private AudioSource TrashMovingSource;
     [SerializeField] private AudioSource SFXSource;
 
@@ -23,7 +22,6 @@ public class AudioManager : MonoBehaviour
     public AudioClip bubble;
 
     [Header("- - - - AUDIO CLIP (ONE SHOT)")]
-    public AudioClip coral;
     public AudioClip selection;
     public AudioClip endMiniGame;
 

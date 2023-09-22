@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.44705883, g: 0.78431374, b: 0.7294118, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.007
@@ -11552,7 +11552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1676256086955676034, guid: 831b33c9bcc7be34192a64054dfa0eff, type: 3}
       propertyPath: totalTime
-      value: 15
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3316478615047330116, guid: 831b33c9bcc7be34192a64054dfa0eff, type: 3}
       propertyPath: m_LocalScale.x
@@ -26055,7 +26055,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772230589}
-  m_LocalRotation: {x: -0.041315243, y: -3.7792203e-10, z: -1.5627062e-11, w: 0.99914616}
+  m_LocalRotation: {x: -0.041315246, y: -3.7792203e-10, z: -1.5627062e-11, w: 0.99914616}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -31960,7 +31960,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Perle: 0'
+  m_text: 'Perle: 10'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

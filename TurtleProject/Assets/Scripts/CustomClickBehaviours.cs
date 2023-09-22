@@ -7,7 +7,7 @@ public class CustomClickBehaviours : MonoBehaviour
 {
     private Button[] coralButtons;  
     private Button ConfirmButton;
-    private TextMeshProUGUI coralTitle, coralDesc, coralStats, coralCost;
+    private TextMeshProUGUI coralTitle, coralDesc, coralStats, coralCost, currentPearls;
 
     [SerializeField] private CoralSO pillarCoral, fireCoral, softCoral, elkhornCoral;
     private CoralSO[] corals;                                                                                
@@ -52,11 +52,13 @@ public class CustomClickBehaviours : MonoBehaviour
         coralDesc = transform.Find("CoralChoicePanel/InfoPanel/DescriptionPanel/CoralDesc").gameObject.GetComponent<TextMeshProUGUI>();
         coralStats = transform.Find("CoralChoicePanel/InfoPanel/StatsPanel/CoralStats").gameObject.GetComponent<TextMeshProUGUI>();
         coralCost = transform.Find("CoralChoicePanel/ChoicePanel/CostText").gameObject.GetComponent<TextMeshProUGUI>();
+        currentPearls = transform.Find("CoralChoicePanel/ChoicePanel/AvailablePearlsText").gameObject.GetComponent<TextMeshProUGUI>();
         //Svuota i testi all'avvio
         coralTitle.SetText("");
         coralDesc.SetText("");
         coralStats.SetText("");
         coralCost.SetText("");
+        currentPearls.SetText("Perle disponibili: " + GameDirector.Instance.getCurrentPearls());
 
         //Se lasciato attivo, nasconde il pannello all'accensione
         if (transform.Find("CoralChoicePanel").gameObject.activeSelf)
@@ -84,10 +86,12 @@ public class CustomClickBehaviours : MonoBehaviour
     }
     public void Confirm_onClick()
     {
-        if(selectedCoral != -1 && gameDirector.GetComponent<GameDirector>().getCurrentPearls() >= corals[selectedCoral].getCost())
+        Debug.Log("Selected Coral: " + corals[selectedCoral].coralName);
+        currentPearls.SetText("Perle disponibili: " + GameDirector.Instance.getCurrentPearls());
+        if (selectedCoral != -1 && GameDirector.Instance.getCurrentPearls() >= corals[selectedCoral].getCost())
         {
-            gameDirector.GetComponent<GameDirector>().addPearls(-corals[selectedCoral].getCost());
-            gameDirector.GetComponent<GameDirector>().currentCoralSpot.GetComponent<CoralHandler>().SpawnCorals(selectedCoral);
+            GameDirector.Instance.addPearls(-corals[selectedCoral].getCost());
+            GameDirector.Instance.currentCoralSpot.GetComponent<CoralHandler>().SpawnCorals(selectedCoral);
         }
 
     }

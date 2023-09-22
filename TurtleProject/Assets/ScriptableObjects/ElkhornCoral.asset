@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87dc7ed9285f2044ca5ede0311ff4157, type: 3}
   m_Name: ElkhornCoral
   m_EditorClassIdentifier: 
-  pollutionChange: 2
-  oxygenLevelChange: 3
-  biodiversityChange: 2
+  pollutionChange: 3
+  oxygenLevelChange: 4
+  biodiversityChange: 5
   cost: 25
   coralName: "Acropora palmata (\u201CCorallo a corno d\u2019alce\u201D)"
   coralDesc: "Questi coralli hanno larghe strutture ramificate che gli permettono

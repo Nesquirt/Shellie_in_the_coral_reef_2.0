@@ -83,7 +83,6 @@ public class OpenCagesHandler : MonoBehaviour
     {
         if (GameDirector.Instance.getGameState() != GameDirector.GameState.FreeRoaming)
             return;
-        Debug.Log("Test: " +GameDirector.Instance.getGameState());
         if (!canvas.transform.Find("DialoguePanel").gameObject.activeSelf)
         {
             MazePrompt.gameObject.SetActive(true);
@@ -163,7 +162,7 @@ public class OpenCagesHandler : MonoBehaviour
     public void callFinalFunction()
     {
         checkEnd();
-
+        GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
         Debug.Log("FINE");
 
         this.timer_text.enabled = false;

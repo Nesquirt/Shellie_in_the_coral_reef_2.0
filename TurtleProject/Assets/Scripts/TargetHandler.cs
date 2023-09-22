@@ -211,7 +211,7 @@ public class TargetHandler : MonoBehaviour
     {
         GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
 
-        float earnedPearlsFloat = 10 + 10 * (float)(800/currentTenths); //da pi� gemme se il percorso � completato entro un minuto e venti
+        float earnedPearlsFloat = 10 + 10 * 800f/currentTenths; //da piu' gemme se il percorso e' completato entro un minuto e venti
         int earnedPearls = (int)earnedPearlsFloat;
         //current range di perle: 20 max, 13 min
         GameDirector.Instance.addPearls(earnedPearls);

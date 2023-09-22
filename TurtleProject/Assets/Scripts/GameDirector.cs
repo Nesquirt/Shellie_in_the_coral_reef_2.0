@@ -130,7 +130,7 @@ public class GameDirector : MonoBehaviour
         //Impostazione dei valori iniziali di gioco
         currentState = GameState.FreeRoaming;
 
-        currentPearls = 0;
+        currentPearls = 10;
         reefHealth = 50;
         pollution = 20;
         biodiversity = 60;
@@ -217,18 +217,10 @@ public class GameDirector : MonoBehaviour
         }
 
         reefHealthSlider.value = reefHealth;
-        // -------------------------------------------------------------------- //
-        /*
-        Debug.Log("Tick");
-        Debug.Log("Biodiversity: " + biodiversity);
-        Debug.Log("Pollution: " + pollution);
-        Debug.Log("Oxygen Level: " + oxygenLevel);
-        Debug.Log("Total Reef Health: " + reefHealth);
-        */
     }
 
     // -------------------------------------------------------------------- //
-    //Metodi per modificare la velocit� dei parametri; usati dai coralli
+    //Metodi per modificare la velocita' dei parametri; usati dai coralli
     public void modifyPollutionChange(int value)
     {
         pollutionChange += value;
@@ -296,25 +288,13 @@ public class GameDirector : MonoBehaviour
     //Metodi per interagire con il GameState; usati dai minigiochi
     public void setGameState(GameState newState)
     {
-        StartCoroutine(setGameStateCR(newState));
+        Debug.Log("Changed GameState to: " + newState);
+        currentState = newState;
     }
 
     public GameState getGameState()
     {
         return currentState;
-    }
-    // -------------------------------------------------------------------- //
-    //Coroutine per far attendere le chiamate di getGameState e setGameState
-    IEnumerator setGameStateCR(GameState newState)
-    {
-        yield return new WaitForFixedUpdate();
-        Debug.Log("Changed GameState to: " + newState);
-        currentState = newState;
-    }
-    IEnumerator getGameStateCR()
-    {
-        yield return new WaitForFixedUpdate();
-        yield return currentState;
     }
     // -------------------------------------------------------------------- //
     //Coroutine di fade out del loading screen
@@ -354,6 +334,7 @@ public class GameDirector : MonoBehaviour
         GameOverPanel.SetActive(true);
         StartCoroutine(FadeIn(GameOverPanel.GetComponent<Image>()));
     }
+    // -------------------------------------------------------------------- //
     //Coroutine per la comparsa del pannello e delle scritte
     IEnumerator FadeIn(Image GameOverPanel)
     {

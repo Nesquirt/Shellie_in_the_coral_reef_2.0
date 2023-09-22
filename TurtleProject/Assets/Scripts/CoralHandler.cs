@@ -66,7 +66,7 @@ public class CoralHandler : MonoBehaviour
                 }
                 //TODO: vedi se è possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
                 GameDirector.Instance.modifyBiodiversityChange(1);
-                GameDirector.Instance.modifyPollutionChange(0);
+                GameDirector.Instance.modifyPollutionChange(-1);
                 GameDirector.Instance.modifyOxygenLevelChange(1);
                 break;
             case 3: //ElkhornCoral
@@ -76,9 +76,9 @@ public class CoralHandler : MonoBehaviour
                     newCoral.transform.parent = this.transform;
                 }
                 //TODO: vedi se è possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
-                GameDirector.Instance.modifyBiodiversityChange(2);
-                GameDirector.Instance.modifyPollutionChange(1);
-                GameDirector.Instance.modifyOxygenLevelChange(3);
+                GameDirector.Instance.modifyBiodiversityChange(5);
+                GameDirector.Instance.modifyPollutionChange(3);
+                GameDirector.Instance.modifyOxygenLevelChange(4);
                 break;
 
 

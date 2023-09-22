@@ -21,7 +21,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     private float originepianox, originepianoz, totalTime2, currentTime, currentTime2;
     private float lunghezzapiano = 30f;
     private float larghezzapiano = 30f;
-    private int oggettiNelPiano, a, b, rifiutiraccolti;
+    private int oggettiNelPiano, a, b, d, rifiutiraccolti;
     private List<GameObject> spazzature = new List<GameObject>();
     private float upwardForce = 2f;
     private Image img;
@@ -37,7 +37,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     private void Awake()
     {
 
-
+        d = 0;
         canvas = GameObject.Find("Canvas");
         StefanoPrompt = canvas.transform.Find("Promptstefano");
         StefanoPrompt.gameObject.SetActive(false);
@@ -122,6 +122,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         GameDirector.Instance.setGameState(GameDirector.GameState.TrashCollecting);
         a = 0;
         b = 0;
+        d = 0;
         rifiutiraccolti = 0;
         sostegno.gameObject.SetActive(false);
         testocronometro.gameObject.SetActive(true);
@@ -209,10 +210,11 @@ public class SpawnPrefabsRandomly : MonoBehaviour
 
 
             }
-            if (numerosacchettidaspawnare == oggettiNelPiano)
+            if (numerosacchettidaspawnare == oggettiNelPiano && d == 0)
             {
-                currentTime = 0;
-                currentTime2 = 4f;
+                d = 1;
+                currentTime = 10;
+                currentTime2 = 14f;
             }
 
         }

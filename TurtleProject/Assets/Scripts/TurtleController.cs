@@ -191,13 +191,14 @@ public class TurtleController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("spazzatura"))
         {
-            float intensità = 0.5f;
-            Vector3 force = collision.transform.position - transform.position;
+            float intensità = 2.5f * (speed/2);
+            Vector3 push = new Vector3(0, 10, 0);
+            Vector3 force = (collision.transform.position - transform.position)+push;
             force.Normalize();
             Debug.Log("spinta");
             audioManager.PlayTrash();
 
-            collision.gameObject.GetComponent<Rigidbody>().AddForce(force * intensità, ForceMode.Force);
+            collision.gameObject.GetComponent<Rigidbody>().AddForce((force * intensità), ForceMode.Force);
         }
     }
 

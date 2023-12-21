@@ -182,6 +182,26 @@ public class TurtleController : MonoBehaviour
     }
     // -------------------------------------------------------------------- //
 
+    
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("spazzatura"))
+        {
+            float intensità = 1.5f * (speed / 2);
+            Vector3 push = new Vector3(0, 10, 0);
+            //Vector3 angle = new Vector3(10, 0, 0);
+            Vector3 directionToPlayer = (transform.position - collision.transform.position).normalized;
+            //Vector3 force = directionToPlayer + push;
+            Quaternion rotation = Quaternion.Euler(0, 45, 0);//rotazione 30 gradi attoeno ad y
+            Vector3 rotatedDirection = rotation * directionToPlayer; //ruota player 30 gradi
+            Vector3 force = rotatedDirection + push; //spinta diagonale
+            force.Normalize();
+            Debug.Log("spinta");
+            audioManager.PlayTrash();
+
+            collision.gameObject.GetComponent<Rigidbody>().AddForce((force * intensità), ForceMode.Force);
+        }
+    }
     //Funzione per rallentare in caso di collisione, principalmente per prevenire movimenti fuori controllo e passaggi attraverso il terreno
     public void OnCollisionStay(Collision collision)
     {
@@ -189,20 +209,7 @@ public class TurtleController : MonoBehaviour
             speed = maxSpeed / 6;
 
 
-        if (collision.gameObject.CompareTag("spazzatura"))
-        {
-            float intensità = 2f * (speed/2);
-            Vector3 push = new Vector3(0, 15, 0);
-            //Vector3 angle = new Vector3(10, 0, 0);
-            Vector3 directionToPlayer = (transform.position - collision.transform.position).normalized;
-            //Vector3 force = directionToPlayer + push;
-            Vector3 force = Quaternion.Euler(25, 0, 0) * directionToPlayer + push; //spinta diagonale
-            force.Normalize();
-            Debug.Log("spinta");
-            audioManager.PlayTrash();
-
-            collision.gameObject.GetComponent<Rigidbody>().AddForce((force * intensità), ForceMode.Force);
-        }
+        
     }
 
 

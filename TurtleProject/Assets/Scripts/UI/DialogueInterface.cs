@@ -32,6 +32,7 @@ public class DialogueInterface : MonoBehaviour
         NPCName.SetText(name);
     }
 
+    //TODO: toggleDialoguePanel(bool state), fesso
     public static void toggleDialoguePanelOn()
     {
         dialoguePanel.SetActive(true);

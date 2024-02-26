@@ -133,8 +133,8 @@ public class TurtleController : MonoBehaviour
                 case "PesceRosso_collider":
                     PromptInterface.setPromptText("Premi E per parlare con Peppe");
                     break;
-                case "PesceColorato_collider":
-                    PromptInterface.setPromptText("Premi E per parlare con il pesce");
+                case "pesceColorato":
+                    PromptInterface.setPromptText("Premi E per parlare con Dory");
                     break;
             }
             PromptInterface.togglePromptOn();
@@ -145,85 +145,56 @@ public class TurtleController : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.E))
         {
-
-            PromptInterface.togglePromptOff();
-            switch(other.name)
+            if (other.tag != "Chiave" && other.tag != "Gabbia")
             {
-                case "Anguilla_collider":
-                    DialogueInterface.setNPCName("Anguilla");
-                    DialogueInterface.setDialogueText("Hey, tu! Sembri una tipa molto in forma. Ti andrebbe di aiutarmi con una faccenda?\n" +
-                                 "Le alghe in questo canyon sono in acqua stagnante... Svegliale attraversando tutti gli anelli rocciosi!\n" +
-                                 "Sono sicura che il livello di ossigeno aumentera'... E se vai abbastanza veloce, ti daro' anche qualche perla in piu'. Ci stai?");
-                    DialogueInterface.setCurrentNPC("Anguilla");
-                    //TODO: lascia solo setCurrentNPC, e sposta setNPCName e setDialogueText in DialogueInterface;
-                    //In questo modo standardizziamo i testi e li rimuoviamo da turtleController.
-                    break;
+                PromptInterface.togglePromptOff();
+                switch (other.name)
+                {
+                    case "Anguilla_collider":
+                        DialogueInterface.setNPCName("Anguilla");
+                        DialogueInterface.setDialogueText("Hey, tu! Sembri una tipa molto in forma. Ti andrebbe di aiutarmi con una faccenda?\n" +
+                                     "Le alghe in questo canyon sono in acqua stagnante... Svegliale attraversando tutti gli anelli rocciosi!\n" +
+                                     "Sono sicura che il livello di ossigeno aumentera'... E se vai abbastanza veloce, ti daro' anche qualche perla in piu'. Ci stai?");
+                        DialogueInterface.setCurrentNPC("Anguilla");
+                        //TODO: lascia solo setCurrentNPC, e sposta setNPCName e setDialogueText in DialogueInterface;
+                        //In questo modo standardizziamo i testi e li rimuoviamo da turtleController.
+                        break;
 
-                case "PesceRosso_collider":
-                    DialogueInterface.setNPCName("Peppe il pesce");
-                    DialogueInterface.setDialogueText("Hey sembrerebbe che ci siano dei sacchetti della spazzatura\n " +
-                                "ad inquinare l'oceano! Ti va di aiutarmi a metterli tutti nella rete? \n" +
-                                "Attenta! hai solo un minuto di tempo prima che risalga la rete");
-                    DialogueInterface.setCurrentNPC("Peppe");
-                    break;
+                    case "PesceRosso_collider":
+                        DialogueInterface.setNPCName("Peppe il pesce");
+                        DialogueInterface.setDialogueText("Hey sembrerebbe che ci siano dei sacchetti della spazzatura\n " +
+                                    "ad inquinare l'oceano! Ti va di aiutarmi a metterli tutti nella rete? \n" +
+                                    "Attenta! hai solo un minuto di tempo prima che risalga la rete");
+                        DialogueInterface.setCurrentNPC("Peppe");
+                        break;
 
-                case "pesceColorato":
-                    DialogueInterface.setNPCName("Dory");
-                    DialogueInterface.setDialogueText("Hey Shellie! Ci sono dei granchi che hanno bisogno di essere liberati! \n" +
-                                "Ti va di aiutarmi?" + " Nel labirinto troverai delle chiavi con cui poter aprire le gabbie \n" +
-                                "Attenta! Puoi prendere solo una chiave alla volta ed hai 3 minuti di tempo per liberarli tutti!");
-                    DialogueInterface.setCurrentNPC("Dory");
-                    break;
+                    case "pesceColorato":
+                        DialogueInterface.setNPCName("Dory");
+                        DialogueInterface.setDialogueText("Hey Shellie! Ci sono dei granchi che hanno bisogno di essere liberati! \n" +
+                                    "Ti va di aiutarmi?" + " Nel labirinto troverai delle chiavi con cui poter aprire le gabbie \n" +
+                                    "Attenta! Puoi prendere solo una chiave alla volta ed hai 3 minuti di tempo per liberarli tutti!");
+                        DialogueInterface.setCurrentNPC("Dory");
+                        break;
 
-                    //TODO: interazione con pesci degli altri due minigiochi, specialTarget, chiavi e gabbie
+                    case "SpecialTarget":
+                        //other.GetComponentInParent<TargetHandler>().summonSpecialTarget();
+                        break;
+                }
+                DialogueInterface.toggleDialoguePanelOn();
+            } else
+            {
+                posizioni_cageKey.GetComponent<OpenCagesHandler>().TriggerMethod(other);
             }
         }
-        /*
-        else if (other.name == "PesceRosso_collider")
-        {
-            // other.GetComponentInChildren<SpawnPrefabsRandomly>().raceStartPrompt1();
-            oggettoscriptTrash = GameObject.Find("ContenitoreStefano/oggettoscriptTrash");
-            oggettoscriptTrash.GetComponent<SpawnPrefabsRandomly>().trashStartPrompt();
-        }
-        else if (other.name == "SpecialTarget")
-        {
-            //other.GetComponentInParent<TargetHandler>().summonSpecialTarget();
-        }
-        else if (other.name == "pesceColorato")
-        {
-            posizioni_cageKey.GetComponent<OpenCagesHandler>().mazeStartPrompt();
-        }
-        else if (other.tag == "Chiave" || other.tag == "Gabbia")
-        {
-            posizioni_cageKey.GetComponent<OpenCagesHandler>().TriggerMethod(other);
-        }
-        */
+
     }
     public void OnTriggerExit(Collider other)
     {
         PromptInterface.togglePromptOff();
         DialogueInterface.toggleDialoguePanelOff();
-
-        /*
-        if (other.name == "PesceRosso_collider")
-        {
-            oggettoscriptTrash = GameObject.Find("ContenitoreStefano/oggettoscriptTrash");
-            oggettoscriptTrash.GetComponent<SpawnPrefabsRandomly>().PesceRossoTriggerExit();
-            //other.GetComponentInParent<SpawnPrefabsRandomly>().PesceRossoTriggerExit();
-        }
-        else if (other.name == "pesceColorato")
-        {
-            posizioni_cageKey.GetComponent<OpenCagesHandler>().PesceTriggerExit();
-        }
-        else if (other.name == "SpecialTarget")
-        {
-            GameObject.Find("Canvas/SpecialTargetPrompt").gameObject.SetActive(false);
-        }
-        */
     }
     // -------------------------------------------------------------------- //
 
-    
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("spazzatura"))
@@ -248,11 +219,7 @@ public class TurtleController : MonoBehaviour
     {
         if (speed >= maxSpeed / 6)
             speed = maxSpeed / 6;
-
-
-        
     }
-
 
     //Funzione per eliminare la velocità generata da collisioni
     public void OnCollisionExit(Collision collision)
@@ -272,7 +239,3 @@ public class TurtleController : MonoBehaviour
 
     // -------------------------------------------------------------------- //
 }
-
-//12.35 Adattato turtle controller per Sara
-//13.41 Adattato turtle controller per Stefano
-//17.47 Aggiunta animazione

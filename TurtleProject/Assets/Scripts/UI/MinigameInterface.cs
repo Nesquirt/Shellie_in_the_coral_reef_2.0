@@ -6,9 +6,9 @@ using TMPro;
 
 public class MinigameInterface : MonoBehaviour
 {
-    private GameObject minigamePanel;
-    private TextMeshProUGUI timer, scoreText;
-    private Image minigameIcon, keyIcon;
+    private static GameObject minigamePanel;
+    private static TextMeshProUGUI timer, scoreText;
+    private static Image minigameIcon, keyIcon;
 
     [Header("--- Sprites ---")]
     public Sprite obstacleCourseSprite;
@@ -31,7 +31,7 @@ public class MinigameInterface : MonoBehaviour
 
     }
 
-    public void startMinigame()
+    public static void startMinigame()
     {
         minigamePanel.SetActive(true);
         timer.SetText("0:00:00");
@@ -39,38 +39,38 @@ public class MinigameInterface : MonoBehaviour
         switch(GameDirector.Instance.getGameState())
         {
             case GameDirector.GameState.ObstacleCourse:
-                minigameIcon.sprite = obstacleCourseSprite;
+                //minigameIcon.sprite = obstacleCourseSprite;
                 setScoreText(0, 29);
                 break;
 
             case GameDirector.GameState.TrashCollecting:
-                minigameIcon.sprite = trashCollectingSprite;
+                //minigameIcon.sprite = trashCollectingSprite;
                 setScoreText(0, 5);
                 break;
 
             case GameDirector.GameState.MazeExploring:
-                minigameIcon.sprite = mazeExploringSprite;
+                //minigameIcon.sprite = mazeExploringSprite;
                 setScoreText(0, 4);
                 break;
 
         }
     }
 
-    public void endMinigame()
+    public static void endMinigame()
     {
             minigamePanel.SetActive(false);
     }
 
     //Imposta il testo del timer; chiamato nelle funzioni dei minigiochi.
     //Nota: il parametro time è attualmente in decimi di secondo.
-    public void setTimerText(int time)
+    public static void setTimerText(int time)
     {
         timer.SetText(TimeToString(time));
     }
 
     //Metodo che ritorna una stringa in formato x:xx:xx;
     //prende in input un numero di decimi di secondo.
-    private string TimeToString(int currentTenths)
+    private  static string TimeToString(int currentTenths)
     {
         int minutes = currentTenths / 600;
         int seconds = (currentTenths % 600) / 10;
@@ -82,18 +82,13 @@ public class MinigameInterface : MonoBehaviour
             return minutes + ":" + seconds + ":" + tenths + "0";
 
     }
-    public void setScoreText(int current, int max)
+    public static void setScoreText(int current, int max)
     {
         scoreText.SetText(current + "/" + max);
     }
 
-    public void toggleKeyIcon()
-    {
-        if (keyIcon.IsActive())
-        {
-            keyIcon.gameObject.SetActive(false);
-        }
-        else keyIcon.gameObject.SetActive(true);
+    public static void toggleKeyIcon(bool state)
+    { 
+        keyIcon.gameObject.SetActive(state);
     }
-
 }

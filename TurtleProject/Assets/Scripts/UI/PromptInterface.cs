@@ -14,6 +14,7 @@ public class PromptInterface : MonoBehaviour
 
     }
 
+    //TODO: togglePrompt(bool state), scemo
     public static void togglePromptOn()
     {
         interactPrompt.gameObject.SetActive(true);

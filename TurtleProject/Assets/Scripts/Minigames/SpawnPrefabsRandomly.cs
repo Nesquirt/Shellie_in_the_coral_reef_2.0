@@ -29,7 +29,6 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     //private TextMeshProUGUI NPCName, dialogueText, rewardsText, testocontatore, testocronometro, testo5;
     //private Button confirmButton, cancelButton;
     //private GameObject canvas;
-    private MinigameInterface minigameInterface;
     private bool run = false;
 
     private AudioManager audioManager;
@@ -65,7 +64,6 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         //confirmButton.onClick.RemoveAllListeners();
         //confirmButton.onClick.AddListener(ConfirmButton_onClick);
         //cancelButton.onClick.AddListener(CancelButton_onClick);
-        minigameInterface = GameObject.Find("Canvas/MinigamePanel").GetComponent<MinigameInterface>();
 
         Transform tp = GetComponent<Transform>();
         originepianox = tp.position.x;
@@ -76,7 +74,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     }
     public void StartTrashGame()
     {
-        if (DialogueInterface.getCurrentNPC() == "pesceRosso")
+        if (DialogueInterface.getCurrentNPC() == "Peppe")
         {
             GameDirector.Instance.setGameState(GameDirector.GameState.TrashCollecting);
             a = 0;
@@ -103,7 +101,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
             if (currentTime > 0)
             {
                 currentTime -= Time.deltaTime;
-                minigameInterface.setTimerText((int)Mathf.Round(currentTime));
+                MinigameInterface.setTimerText((int)Mathf.Round(currentTime));
 
                 //testocronometro.text = Mathf.Round(currentTime).ToString();
                 //testocontatore.text = oggettiNelPiano.ToString();
@@ -112,7 +110,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
             }
             if (currentTime2 > 0)
             {
-                minigameInterface.setScoreText(oggettiNelPiano, 5);
+                MinigameInterface.setScoreText(oggettiNelPiano, 5);
                 //testocontatore.text = oggettiNelPiano.ToString();
                 currentTime2 -= Time.deltaTime;
             }

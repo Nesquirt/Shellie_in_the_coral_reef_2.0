@@ -17,11 +17,8 @@ public class TargetHandler : MonoBehaviour
     private Rigidbody rb;
     private AudioManager audioManager;
 
-    private MinigameInterface minigameInterface;
-
     private void Awake()
     {
-        minigameInterface = GameObject.Find("Canvas/MinigamePanel").GetComponent<MinigameInterface>();
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         specialTargetActive = false;   
     }
@@ -71,9 +68,8 @@ public class TargetHandler : MonoBehaviour
         currentTenths = 0;
         while(currentTenths<=18000)
         {
-            GameObject.Find("Canvas/MinigamePanel").GetComponent<MinigameInterface>().setTimerText(currentTenths);
             currentTenths++;
-            minigameInterface.setTimerText(currentTenths);
+            MinigameInterface.setTimerText(currentTenths);
             if (GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
                 break;
             yield return new WaitForSeconds(.1f);
@@ -100,15 +96,16 @@ public class TargetHandler : MonoBehaviour
         if (GameDirector.Instance.getGameState() != GameDirector.GameState.ObstacleCourse)
             return;
 
-            //Imposta il target successivo come attivo
-            if(targetNumber <= 28)
+        //Imposta il target successivo come attivo
+        MinigameInterface.setScoreText(targetNumber + 1, 29);
+        if (targetNumber <= 28)
             {
                 if (targetName != "Target" + targetNumber)
                     return;
 
                 string nextTargetName = "Target" + (targetNumber + 1);
                 GameObject.Find(targetName).gameObject.SetActive(false);
-                minigameInterface.setScoreText(targetNumber, 29);
+                
 
                 if (targetNumber == 0)
                 {
@@ -140,7 +137,6 @@ public class TargetHandler : MonoBehaviour
     public void Victory()
     {
         GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
-
         float earnedPearlsFloat = 10 + 10 * 800f/currentTenths; //da piu' gemme se il percorso e' completato entro un minuto e venti
         int earnedPearls = (int)earnedPearlsFloat;
         //current range di perle: 20 max, 13 min
@@ -149,6 +145,7 @@ public class TargetHandler : MonoBehaviour
         VictoryInterface.setRewardsText("Tempo impiegato: " + currentTenths + "\n" +
                             "Perle guadagnate: " + earnedPearls + "\n" +
                             "Livello di ossigeno aumentato del 20%");
+        Debug.Log("TestVittoria");
         VictoryInterface.toggleVictoryPanelOn();
     }
 

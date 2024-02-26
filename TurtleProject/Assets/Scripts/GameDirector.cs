@@ -54,7 +54,7 @@ public class GameDirector : MonoBehaviour
     // -------------------------------------------------------------------- //
     //Dichiarazione iniziale delle variabili
     private GameState currentState;
-    private MinigameInterface minigameInterface;
+
     //TODO: Sposta e separa in nuovi metodi per ogni pannello
     private int currentPearls;
     private int reefHealth, pollution, biodiversity, oxygenLevel;
@@ -95,9 +95,6 @@ public class GameDirector : MonoBehaviour
     }
     public void LoadGame()
     {
-        
-        minigameInterface = GameObject.Find("Canvas/MinigamePanel").GetComponent<MinigameInterface>();
-        //TODO: temporaneo
         currentState = GameState.FreeRoaming;
 
         //Nella scena di gioco, prende dalla hierarchy tutti gli elementi dell'interfaccia
@@ -261,7 +258,7 @@ public class GameDirector : MonoBehaviour
     public void addPearls(int value)
     {
         currentPearls += value;
-        GameObject.Find("Canvas/PearlsText").gameObject.GetComponent<TextMeshProUGUI>().SetText("Perle: " + getCurrentPearls());
+        //GameObject.Find("Canvas/PearlsText").gameObject.GetComponent<TextMeshProUGUI>().SetText("Perle: " + getCurrentPearls());
     }
     public void addPollution(int value)
     {
@@ -302,14 +299,14 @@ public class GameDirector : MonoBehaviour
         if(newState == GameState.FreeRoaming)
         {
             Debug.Log("Changed GameState to: " + newState);
-            minigameInterface.endMinigame();
+            MinigameInterface.endMinigame();
         }
         else
         {
-            minigameInterface.startMinigame();
+            DialogueInterface.toggleDialoguePanelOff();
+            MinigameInterface.startMinigame();
         }
 
-        
         currentState = newState;
     }
 

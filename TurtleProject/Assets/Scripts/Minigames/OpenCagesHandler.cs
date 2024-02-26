@@ -8,12 +8,13 @@ using UnityEngine.UI;
 
 public class OpenCagesHandler : MonoBehaviour
 {
+    /*
     private GameObject canvas;
     private TextMeshProUGUI timer_text, crab_text, NPCName, dialogueText, victoryText;
     private Transform MazePrompt;
     private Image crab_icon, key_icon;
     private Button confirmMazeButton, cancelMazeButton;
-
+    */
     private float timeRemaining;
     private float seconds;
 
@@ -29,6 +30,7 @@ public class OpenCagesHandler : MonoBehaviour
     void Awake()
     {
         this.totCages = this.GetComponent<SpawnCages>().totalCages;  //prendo il numero di casse
+        /*
         this.canvas = GameObject.Find("Canvas");
 
         this.timer_text = canvas.transform.Find("MazeContainer/TimerText").gameObject.GetComponent<TextMeshProUGUI>();
@@ -51,16 +53,16 @@ public class OpenCagesHandler : MonoBehaviour
         crab_icon.enabled = false;
         key_icon.enabled = false;
         crab_text.enabled = false;
-
+        */
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     //Funzione START MazeExploring
     public void restartMazeGame()
     {
-        if (DialogueInterface.getCurrentNPC() == "pesceColorato")
+        if (DialogueInterface.getCurrentNPC() == "Dory")
         {
-
+            GameDirector.Instance.setGameState(GameDirector.GameState.MazeExploring);
             this.finalFunctionCalled = 0;
             this.timeRemaining = 180f;
             this.seconds = Mathf.Round(timeRemaining);
@@ -69,74 +71,16 @@ public class OpenCagesHandler : MonoBehaviour
             this.hasKey = false;
             this.openCages = 0;
 
-            timer_text.enabled = true;
-            timer_text.SetText(seconds.ToString());
-
+            MinigameInterface.setScoreText(0, totCages);
+            /*
             crab_icon.enabled = true;
             key_icon.enabled = false;
 
             crab_text.enabled = true;
             crab_text.SetText(openCages.ToString() + "/" + totCages.ToString());
-
+            */
             this.GetComponent<SpawnCages>().restartGame();
         }
-    }
-
-    //chiamato quando Shelly si avvicina al pesce
-    public void mazeStartPrompt()
-    {
-        if (GameDirector.Instance.getGameState() != GameDirector.GameState.FreeRoaming)
-            return;
-        if (!canvas.transform.Find("DialoguePanel").gameObject.activeSelf)
-        {
-            MazePrompt.gameObject.SetActive(true);
-        }
-
-        if (Input.GetKey(KeyCode.E))
-        {
-            canvas.transform.Find("BarsPanel").gameObject.SetActive(false);
-            MazePrompt.gameObject.SetActive(false);
-            canvas.transform.Find("DialoguePanel").gameObject.SetActive(true);
-            //GameDirector.Instance.checkDialoguePanelButtons("MazeExploring");
-            NPCName.SetText("Dory");
-            dialogueText.SetText("Hey Shellie! Ci sono dei granchi che hanno bisogno di essere liberati! \n" +
-                "Ti va di aiutarmi?" + " Nel labirinto troverai delle chiavi con cui poter aprire le gabbie \n" +
-                "Attenta! Puoi prendere solo una chiave alla volta ed hai 3 minuti di tempo per liberarli tutti \n");
-            /*confirmButton.onClick.RemoveAllListeners();
-            cancelButton.onClick.RemoveAllListeners();
-            confirmButton.onClick.AddListener(ConfirmMazeButton_onClick);
-            cancelButton.onClick.AddListener(CancelMazeButton_onClick);*/
-        }
-    }
-
-    public void PesceTriggerExit()
-    {
-        if (canvas.transform.Find("DialoguePanel").gameObject.activeSelf)
-            canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
-
-        if (MazePrompt.gameObject.activeSelf)
-            MazePrompt.gameObject.SetActive(false);
-
-        if (!canvas.transform.Find("BarsPanel").gameObject.activeSelf)
-            canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
-    }
-
-    //Listener bottoni di dialogo
-    public void ConfirmMazeButton_onClick()
-    {
-        canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
-        canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
-        GameDirector.Instance.setGameState(GameDirector.GameState.MazeExploring);
-        MazePrompt.gameObject.SetActive(false);
-        audioManager.PlaySFX(audioManager.selection);
-        audioManager.ChangeMusic(audioManager.SaraGameSountrack, true, 0.3f);
-        restartMazeGame();
-    }
-    public void CancelMazeButton_onClick()
-    {
-        PesceTriggerExit();
-        MazePrompt.gameObject.SetActive(true);
-        audioManager.PlaySFX(audioManager.selection);
     }
 
     private void FixedUpdate()
@@ -152,7 +96,7 @@ public class OpenCagesHandler : MonoBehaviour
         {
             this.timeRemaining -= Time.deltaTime;
             this.seconds = Mathf.Round(timeRemaining);
-            this.timer_text.SetText(seconds.ToString());
+            MinigameInterface.setTimerText((int)seconds);
         }
         else
         {
@@ -167,12 +111,6 @@ public class OpenCagesHandler : MonoBehaviour
     {
         checkEnd();
         GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
-        Debug.Log("FINE");
-
-        this.timer_text.enabled = false;
-        this.crab_text.enabled = false;
-        this.crab_icon.enabled = false;
-        this.key_icon.enabled = false;
         this.hasKey = false;
 
         //faccio scomparire le chiavi
@@ -213,31 +151,30 @@ public class OpenCagesHandler : MonoBehaviour
 
     private void checkEnd()
     {
-        int gane = 8 * openCages;
-
-        canvas.transform.Find("VictoryPanel").gameObject.SetActive(true);
-        victoryText = canvas.transform.Find("VictoryPanel/RewardsPanel/RewardsText").GetComponent<TextMeshProUGUI>();
+        int gainedPearls = 8 * openCages;
         audioManager.PlaySFX(audioManager.endMiniGame);
         audioManager.ChangeMusic(audioManager.SaraGameSountrack, false,0.3f);
         if (openCages == 0)
         {
-            victoryText.SetText("Purtroppo non sei riuscita a liberare nesssun granchio... \n" +
-                                "Non hai guadagnato nessuna perla...\n" +
-                                "Il livello di biodiversità NON � aumentato...");
+            VictoryInterface.setRewardsText("Purtroppo non sei riuscita a liberare nesssun granchio... \n" +
+                                    "Non hai guadagnato nessuna perla...\n" +
+                                    "Il livello di biodiversità NON � aumentato...");
         }
         else if (openCages == totCages)
         {
-            victoryText.SetText("Complimenti! Sei riuscita a salvare tutti i granchi! \n" +
-                                "Perle guadagnate: " + gane + "\n" +
-                                 "Livello di biodiversità aumentato del " + gane + "%");
+            VictoryInterface.setRewardsText("Complimenti! Sei riuscita a salvare tutti i granchi! \n" +
+                                "Perle guadagnate: " + gainedPearls + "\n" +
+                                "Livello di biodiversità aumentato del " + gainedPearls + "%");
         }
         else
         {
-            victoryText.SetText("Perle guadagnate: " + gane + "\n" +
-                            "Livello di biodiversità aumentato del " + gane + "%");
+            VictoryInterface.setRewardsText("Perle guadagnate: " + gainedPearls + "\n" +
+                                "Livello di biodiversità aumentato del " + gainedPearls + "%");
         }
-        GameDirector.Instance.addPearls(gane);
-        GameDirector.Instance.addBiodiversity(gane);
+        VictoryInterface.toggleVictoryPanelOn();
+
+        GameDirector.Instance.addPearls(gainedPearls);
+        GameDirector.Instance.addBiodiversity(gainedPearls);
     }
 
     //metodo chiamato da TurtleController
@@ -251,7 +188,7 @@ public class OpenCagesHandler : MonoBehaviour
                 {
                     Destroy(other.gameObject);
                     this.hasKey = true;
-                    this.key_icon.enabled = true;
+                    MinigameInterface.toggleKeyIcon(true);
                     Debug.Log("ho la chiave");
                     audioManager.PlaySFX(audioManager.KeyTaken);
                 }
@@ -269,10 +206,10 @@ public class OpenCagesHandler : MonoBehaviour
                     Debug.Log("apro gabbia");
                     other.GetComponent<CageScript>().OpenCage();
                     this.hasKey = false;
-                    this.key_icon.enabled = false;
+                    MinigameInterface.toggleKeyIcon(false);
                     this.openCages++;
                     Debug.Log("GABBIE APERTE: " + this.openCages);
-                    this.crab_text.SetText(openCages.ToString() + "/" + totCages.ToString());
+                    MinigameInterface.setScoreText(openCages, totCages);
                     audioManager.PlaySFX(audioManager.CageOpening);
                     if(openCages == totCages && finalFunctionCalled == 0)
                     {

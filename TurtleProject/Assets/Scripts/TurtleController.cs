@@ -108,21 +108,21 @@ public class TurtleController : MonoBehaviour
         if (speed > 0)
             this.rb.MovePosition(this.rb.position + this.transform.forward * (speed * Time.deltaTime));
     }
+
     /*
     public void Update()        //In questo metodo vanno le funzioni dedicate allo spostamento
     {
         
-    }*/
-
-
+    }
+    */
     // -------------------------------------------------------------------- //
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Target")
+        if (other.tag == "Target" && GameDirector.Instance.getGameState() == GameDirector.GameState.ObstacleCourse)
         {
             other.GetComponentInParent<TargetHandler>().TargetCollision(other.name);
         }
-        else
+        else if(GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
         {
             switch (other.name)
             {
@@ -145,7 +145,7 @@ public class TurtleController : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.E))
         {
-            if (other.tag != "Chiave" && other.tag != "Gabbia")
+            if (GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
             {
                 PromptInterface.togglePromptOff();
                 switch (other.name)
@@ -181,7 +181,7 @@ public class TurtleController : MonoBehaviour
                         break;
                 }
                 DialogueInterface.toggleDialoguePanelOn();
-            } else
+            } else if(other.tag == "Chiave" || other.tag == "Gabbia")
             {
                 posizioni_cageKey.GetComponent<OpenCagesHandler>().TriggerMethod(other);
             }

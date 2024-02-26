@@ -35,7 +35,7 @@ public class MinigameInterface : MonoBehaviour
     {
         minigamePanel.SetActive(true);
         timer.SetText("0:00:00");
-        
+        toggleKeyIcon(false);
         switch(GameDirector.Instance.getGameState())
         {
             case GameDirector.GameState.ObstacleCourse:
@@ -70,16 +70,40 @@ public class MinigameInterface : MonoBehaviour
 
     //Metodo che ritorna una stringa in formato x:xx:xx;
     //prende in input un numero di decimi di secondo.
-    private  static string TimeToString(int currentTenths)
+    private  static string TimeToString(int currentTime)
     {
-        int minutes = currentTenths / 600;
-        int seconds = (currentTenths % 600) / 10;
-        int tenths = currentTenths % 10;
+        int minutes, seconds, tenths;
+        switch(GameDirector.Instance.getGameState())
+        {
+            case GameDirector.GameState.ObstacleCourse:
+                minutes = currentTime / 600;
+                seconds = (currentTime % 600) / 10;
+                tenths = currentTime % 10;
 
-        if (seconds < 10)
-            return minutes + ":0" + seconds + ":" + tenths + "0";
-        else
-            return minutes + ":" + seconds + ":" + tenths + "0";
+                if (seconds < 10)
+                    return minutes + ":0" + seconds + ":" + tenths + "0";
+                else
+                    return minutes + ":" + seconds + ":" + tenths + "0";
+
+            case GameDirector.GameState.MazeExploring:
+            case GameDirector.GameState.TrashCollecting:
+                minutes = currentTime / 60;
+                seconds = currentTime % 60;
+
+                if (seconds < 10)
+                    return minutes + ":0" + seconds;
+                else
+                    return minutes + ":" + seconds;
+            default:
+                return "0:00:00";
+
+        }
+        // Obstacle Course (currentTime = decimi di secondi)
+        if (GameDirector.Instance.getGameState() == GameDirector.GameState.ObstacleCourse)
+        {
+            
+        }
+        
 
     }
     public static void setScoreText(int current, int max)

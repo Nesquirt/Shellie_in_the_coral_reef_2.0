@@ -298,7 +298,6 @@ public class GameDirector : MonoBehaviour
     {
         if(newState == GameState.FreeRoaming)
         {
-            Debug.Log("Changed GameState to: " + newState);
             MinigameInterface.endMinigame();
         }
         else
@@ -306,7 +305,7 @@ public class GameDirector : MonoBehaviour
             DialogueInterface.toggleDialoguePanelOff();
             MinigameInterface.startMinigame();
         }
-
+        Debug.Log("Changed GameState to: " + newState);
         currentState = newState;
     }
 

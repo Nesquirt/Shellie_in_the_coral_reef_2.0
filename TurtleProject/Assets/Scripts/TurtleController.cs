@@ -145,6 +145,7 @@ public class TurtleController : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.E))
         {
+
             PromptInterface.togglePromptOff();
             switch(other.name)
             {
@@ -157,9 +158,27 @@ public class TurtleController : MonoBehaviour
                     //TODO: lascia solo setCurrentNPC, e sposta setNPCName e setDialogueText in DialogueInterface;
                     //In questo modo standardizziamo i testi e li rimuoviamo da turtleController.
                     break;
+
+                case "PesceRosso_collider":
+                    DialogueInterface.setNPCName("Peppe il pesce");
+                    DialogueInterface.setDialogueText("Hey sembrerebbe che ci siano dei sacchetti della spazzatura\n " +
+                                "ad inquinare l'oceano! Ti va di aiutarmi a metterli tutti nella rete? \n" +
+                                "Attenta! hai solo un minuto di tempo prima che risalga la rete");
+                    DialogueInterface.setCurrentNPC("Peppe");
+                    break;
+
+                case "pesceColorato":
+                    DialogueInterface.setNPCName("Dory");
+                    DialogueInterface.setDialogueText("Hey Shellie! Ci sono dei granchi che hanno bisogno di essere liberati! \n" +
+                                "Ti va di aiutarmi?" + " Nel labirinto troverai delle chiavi con cui poter aprire le gabbie \n" +
+                                "Attenta! Puoi prendere solo una chiave alla volta ed hai 3 minuti di tempo per liberarli tutti!");
+                    DialogueInterface.setCurrentNPC("Dory");
+                    break;
+
                     //TODO: interazione con pesci degli altri due minigiochi, specialTarget, chiavi e gabbie
             }
         }
+        /*
         else if (other.name == "PesceRosso_collider")
         {
             // other.GetComponentInChildren<SpawnPrefabsRandomly>().raceStartPrompt1();
@@ -178,13 +197,14 @@ public class TurtleController : MonoBehaviour
         {
             posizioni_cageKey.GetComponent<OpenCagesHandler>().TriggerMethod(other);
         }
-
+        */
     }
     public void OnTriggerExit(Collider other)
     {
         PromptInterface.togglePromptOff();
         DialogueInterface.toggleDialoguePanelOff();
 
+        /*
         if (other.name == "PesceRosso_collider")
         {
             oggettoscriptTrash = GameObject.Find("ContenitoreStefano/oggettoscriptTrash");
@@ -199,7 +219,7 @@ public class TurtleController : MonoBehaviour
         {
             GameObject.Find("Canvas/SpecialTargetPrompt").gameObject.SetActive(false);
         }
-
+        */
     }
     // -------------------------------------------------------------------- //
 

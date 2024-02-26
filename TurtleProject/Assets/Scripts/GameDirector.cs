@@ -54,7 +54,7 @@ public class GameDirector : MonoBehaviour
     // -------------------------------------------------------------------- //
     //Dichiarazione iniziale delle variabili
     private GameState currentState;
-    private GameObject minigamePanel;
+    private MinigameInterface minigameInterface;
     //TODO: Sposta e separa in nuovi metodi per ogni pannello
     private int currentPearls;
     private int reefHealth, pollution, biodiversity, oxygenLevel;
@@ -95,9 +95,10 @@ public class GameDirector : MonoBehaviour
     }
     public void LoadGame()
     {
+        
+        minigameInterface = GameObject.Find("Canvas/MinigamePanel").GetComponent<MinigameInterface>();
         //TODO: temporaneo
-        setGameState(GameState.FreeRoaming);
-        minigamePanel = GameObject.Find("Canvas/MinigamePanel");
+        currentState = GameState.FreeRoaming;
 
         //Nella scena di gioco, prende dalla hierarchy tutti gli elementi dell'interfaccia
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
@@ -119,7 +120,9 @@ public class GameDirector : MonoBehaviour
         TitleText.gameObject.SetActive(false);
         CentralText.gameObject.SetActive(false);
         BottomText.gameObject.SetActive(false);
-        StatsPanel = canvas.transform.Find("StatsPanel").gameObject;
+
+        //TODO: cambia/sposta/rimuovi
+        StatsPanel = canvas.transform.Find("InfoPanel").gameObject;
         StatsPanel.SetActive(false);
 
         ReturnToMenuButton = GameOverPanel.transform.Find("ReturnToMenuButton").GetComponent<Button>();
@@ -296,17 +299,18 @@ public class GameDirector : MonoBehaviour
     //Metodi per interagire con il GameState; usati dai minigiochi
     public void setGameState(GameState newState)
     {
-        Debug.Log("Changed GameState to: " + newState);
-        currentState = newState;
-
         if(newState == GameState.FreeRoaming)
         {
-            minigamePanel.GetComponent<MinigameInterface>().endMinigame();
+            Debug.Log("Changed GameState to: " + newState);
+            minigameInterface.endMinigame();
         }
         else
         {
-            minigamePanel.GetComponent<MinigameInterface>().startMinigame();
+            minigameInterface.startMinigame();
         }
+
+        
+        currentState = newState;
     }
 
     public GameState getGameState()

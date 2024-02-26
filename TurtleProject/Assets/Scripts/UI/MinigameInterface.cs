@@ -18,6 +18,7 @@ public class MinigameInterface : MonoBehaviour
     private void Awake()
     {
         minigamePanel = GameObject.Find("Canvas/MinigamePanel");
+        Debug.Log(minigamePanel.name);
         minigamePanel.SetActive(false);
 
         timer = minigamePanel.transform.Find("Timer").gameObject.GetComponent<TextMeshProUGUI>();
@@ -57,7 +58,7 @@ public class MinigameInterface : MonoBehaviour
 
     public void endMinigame()
     {
-        minigamePanel.SetActive(false);
+            minigamePanel.SetActive(false);
     }
 
     //Imposta il testo del timer; chiamato nelle funzioni dei minigiochi.

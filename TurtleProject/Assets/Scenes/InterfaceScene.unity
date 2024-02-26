@@ -8294,7 +8294,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &474394221
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14089,7 +14089,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &872560283
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15203,7 +15203,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 748139133}
         m_TargetAssemblyTypeName: SpawnPrefabsRandomly, Assembly-CSharp
-        m_MethodName: ConfirmButton_onClick
+        m_MethodName: StartTrashGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

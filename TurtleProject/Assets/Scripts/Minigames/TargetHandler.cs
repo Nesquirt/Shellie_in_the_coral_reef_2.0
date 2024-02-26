@@ -7,11 +7,9 @@ using Unity.VisualScripting;
 
 public class TargetHandler : MonoBehaviour
 {
-    private GameObject player;
-
     //TODO: rimuovi una volta finito con MinigameInterface()
     private GameObject canvas;
-    //private GameObject[] targets;
+
     [SerializeField] private Material activeMaterial, inactiveMaterial;
     private int currentTime;        //Tempo attuale del timer in millisecondi
     
@@ -31,7 +29,6 @@ public class TargetHandler : MonoBehaviour
     {
         // -------------------------------------------------------------------- //
         //Trova gli oggetti di gioco e di interfaccia all'avvio
-        player = GameObject.Find("TurtlePlayer");
         canvas = GameObject.Find("Canvas");
 
         obstacleRacePrompt = canvas.transform.Find("ObstacleRacePrompt");

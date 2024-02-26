@@ -146,7 +146,7 @@ public class TargetHandler : MonoBehaviour
         currentTenths = 0;
         while(currentTenths<=18000)
         {
-            GameObject.Find("Canvas/MinigamePanel").GetComponent<MinigameInterface>().setTimerText(TimeToString());
+            GameObject.Find("Canvas/MinigamePanel").GetComponent<MinigameInterface>().setTimerText(currentTenths);
             //timer.SetText(TimeToString());
             currentTenths++;
             if (GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
@@ -209,7 +209,7 @@ public class TargetHandler : MonoBehaviour
             }
     }
     // -------------------------------------------------------------------- //
-    //Metodo di fine minigioco
+    //Metodo di fine minigioco (TODO: metti in script separato)
     public void Victory()
     {
         GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
@@ -222,24 +222,11 @@ public class TargetHandler : MonoBehaviour
 
         canvas.transform.Find("VictoryPanel").gameObject.SetActive(true);
         rewardsText = canvas.transform.Find("VictoryPanel/RewardsPanel/RewardsText").GetComponent<TextMeshProUGUI>();
-        rewardsText.SetText("Tempo impiegato: " + TimeToString() + "\n" +
+        rewardsText.SetText("Tempo impiegato: " + currentTenths + "\n" +
                             "Perle guadagnate: " + earnedPearls + "\n" + 
                             "Livello di ossigeno aumentato del 20%");
     }
-    // -------------------------------------------------------------------- //
-    //Metodo di conversione dell'int del timer in una String (xx:xx:xx)
-    private string TimeToString()
-    {
-        int minutes = currentTenths / 600;
-        int seconds = (currentTenths % 600) / 10;
-        int tenths = currentTenths % 10;
 
-        if(seconds<10)
-            return minutes + ":0" + seconds + ":" + tenths + "0";
-        else
-            return minutes + ":" + seconds + ":" + tenths + "0";
-
-    }
     // -------------------------------------------------------------------- //
     //Shhhh...
     public void summonSpecialTarget()

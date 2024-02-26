@@ -27,4 +27,6 @@ public class CoralSO : ScriptableObject
     {
         return cost;
     }
+
+    public 
 }

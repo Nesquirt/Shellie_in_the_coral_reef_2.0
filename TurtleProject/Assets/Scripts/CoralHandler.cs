@@ -28,6 +28,24 @@ public class CoralHandler : MonoBehaviour
         growthCounter = 0;
     }
 
+    public void SpawnCorals(CoralSO coral)
+    {
+        isGrowing = true;
+        for (int i = 0; i < spawnPoints.Length; i++)
+        {
+            var newCoral = Instantiate(PillarCoral, spawnPoints[i], Quaternion.identity);
+            newCoral.transform.parent = this.transform;
+        }
+        GameDirector.Instance.modifyBiodiversityChange(coral.getBiodiversityChange());
+        GameDirector.Instance.modifyPollutionChange(coral.getPollutionChange());
+        GameDirector.Instance.modifyOxygenLevelChange(coral.getOxygenLevelChange());
+
+        StartCoroutine(CoralGrow());
+    }
+
+
+    
+
     public void SpawnCorals(int coralChoice)
     {
         isGrowing = true;

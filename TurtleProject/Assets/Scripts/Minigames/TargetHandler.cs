@@ -17,8 +17,11 @@ public class TargetHandler : MonoBehaviour
     private Rigidbody rb;
     private AudioManager audioManager;
 
+    private MinigameInterface minigameInterface;
+
     private void Awake()
     {
+        minigameInterface = GameObject.Find("Canvas/MinigamePanel").GetComponent<MinigameInterface>();
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         specialTargetActive = false;   
     }
@@ -69,8 +72,8 @@ public class TargetHandler : MonoBehaviour
         while(currentTenths<=18000)
         {
             GameObject.Find("Canvas/MinigamePanel").GetComponent<MinigameInterface>().setTimerText(currentTenths);
-            //timer.SetText(TimeToString());
             currentTenths++;
+            minigameInterface.setTimerText(currentTenths);
             if (GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
                 break;
             yield return new WaitForSeconds(.1f);
@@ -100,24 +103,24 @@ public class TargetHandler : MonoBehaviour
             //Imposta il target successivo come attivo
             if(targetNumber <= 28)
             {
-                
                 if (targetName != "Target" + targetNumber)
                     return;
 
                 string nextTargetName = "Target" + (targetNumber + 1);
                 GameObject.Find(targetName).gameObject.SetActive(false);
-                if(targetNumber == 0)
+                minigameInterface.setScoreText(targetNumber, 29);
+
+                if (targetNumber == 0)
                 {
                 Debug.Log("Attraversato primo anello");
                     StartCoroutine(Timer());
                     audioManager.PlaySFX(audioManager.startRace);
-
-            }
+                
+                }
                 if(targetNumber >= 28)
                 {
                     Victory();
                     StopCoroutine(Timer());
-                    //timer.gameObject.SetActive(false);
                     audioManager.PlaySFX(audioManager.endMiniGame);
                     audioManager.ChangeMusic(audioManager.MatteoGameSountrack, false,0.12f);
                     return;
@@ -128,7 +131,7 @@ public class TargetHandler : MonoBehaviour
                     audioManager.PlaySFX(audioManager.crossRing);
                 }
 
-            targetNumber++;
+                targetNumber++;
                 
             }
     }
@@ -143,13 +146,10 @@ public class TargetHandler : MonoBehaviour
         //current range di perle: 20 max, 13 min
         GameDirector.Instance.addPearls(earnedPearls);
         GameDirector.Instance.addOxygenLevel(20);
-        /*
-        canvas.transform.Find("VictoryPanel").gameObject.SetActive(true);
-        rewardsText = canvas.transform.Find("VictoryPanel/RewardsPanel/RewardsText").GetComponent<TextMeshProUGUI>();
-        rewardsText.SetText("Tempo impiegato: " + currentTenths + "\n" +
-                            "Perle guadagnate: " + earnedPearls + "\n" + 
+        VictoryInterface.setRewardsText("Tempo impiegato: " + currentTenths + "\n" +
+                            "Perle guadagnate: " + earnedPearls + "\n" +
                             "Livello di ossigeno aumentato del 20%");
-        */
+        VictoryInterface.toggleVictoryPanelOn();
     }
 
     // -------------------------------------------------------------------- //

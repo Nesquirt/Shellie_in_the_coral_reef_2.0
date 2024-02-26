@@ -49,43 +49,11 @@ public class DialogueInterface : MonoBehaviour
         return currentNPC;
     }
     // -------------------------------------------------------------------- //
-    //Listener dei bottoni di dialogo
-    public void ConfirmButton_onClick()
-    {
-        toggleDialoguePanelOff();
-        switch(currentNPC)
-        {
-            case "Anguilla":
-                GameDirector.Instance.setGameState(GameDirector.GameState.ObstacleCourse);
-                break;
-
-        }
-    }
-
+    //Listener del bottone "no"
     public void CancelButton_onClick()
     {
         toggleDialoguePanelOff();
         PromptInterface.togglePromptOn();
     }
-    /*
-    public void ConfirmButton_onClick()
-    {
-        canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
-        obstacleRacePrompt.gameObject.SetActive(false);
-        canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
-        raceStart();
-        audioManager.PlaySFX(audioManager.selection);
-        audioManager.ChangeMusic(audioManager.MatteoGameSountrack, true, 0.12f);
-    }
-    public void CancelButton_onClick()
-    {
-        AnguillaTriggerExit();
-        obstacleRacePrompt.gameObject.SetActive(true);
-        audioManager.PlaySFX(audioManager.selection);
-    }
-    */
-
-
-
 
 }

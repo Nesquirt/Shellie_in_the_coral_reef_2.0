@@ -400,18 +400,11 @@ public class GameDirector : MonoBehaviour
     public void StatsOpenAndClose(GameObject obj)
     {
         //audioManager.PlaySFX(audioManager.selection);
-        if (obj.activeSelf)
-        {
-            obj.SetActive(false);
-        }
-        else
-        {
-            obj.SetActive(true);
-        }
+        obj.SetActive(!obj.activeSelf);
     }
     // -------------------------------------------------------------------- //
     //Metodo chiamato dai prompt degli NPC per cambiare i tasti di dialogo
-
+    /*
     public void checkDialoguePanelButtons(string minigame)
     {
         GameObject DialoguePanel = canvas.transform.Find("DialoguePanel").gameObject;
@@ -453,6 +446,7 @@ public class GameDirector : MonoBehaviour
             DialoguePanel.transform.GetChild(5).gameObject.SetActive(false);
         }
     }
+    */
 }
 
 

@@ -79,7 +79,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
             canvas.transform.Find("BarsPanel").gameObject.SetActive(false);
             StefanoPrompt.gameObject.SetActive(false);
             canvas.transform.Find("DialoguePanel").gameObject.SetActive(true);
-            GameDirector.Instance.checkDialoguePanelButtons("TrashCollecting");
+            //GameDirector.Instance.checkDialoguePanelButtons("TrashCollecting");
             NPCName.SetText("Peppe il pesce");
             dialogueText.SetText("Hey sembrerebbe che ci siano dei sacchetti della spazzatura\n " +
             "ad inquinare l'oceano! Ti va di aiutarmi a metterli tutti nella rete? \n" +

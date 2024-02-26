@@ -58,24 +58,28 @@ public class OpenCagesHandler : MonoBehaviour
     //Funzione START MazeExploring
     public void restartMazeGame()
     {
-        this.finalFunctionCalled = 0;
-        this.timeRemaining = 180f;
-        this.seconds = Mathf.Round(timeRemaining);
-        Debug.Log("SECONDI: " + this.seconds);
+        if (DialogueInterface.getCurrentNPC() == "pesceColorato")
+        {
 
-        this.hasKey = false;
-        this.openCages = 0;
+            this.finalFunctionCalled = 0;
+            this.timeRemaining = 180f;
+            this.seconds = Mathf.Round(timeRemaining);
+            Debug.Log("SECONDI: " + this.seconds);
 
-        timer_text.enabled = true;
-        timer_text.SetText(seconds.ToString());
+            this.hasKey = false;
+            this.openCages = 0;
 
-        crab_icon.enabled = true;
-        key_icon.enabled = false;
+            timer_text.enabled = true;
+            timer_text.SetText(seconds.ToString());
 
-        crab_text.enabled = true;
-        crab_text.SetText(openCages.ToString() + "/" + totCages.ToString());
+            crab_icon.enabled = true;
+            key_icon.enabled = false;
 
-        this.GetComponent<SpawnCages>().restartGame();
+            crab_text.enabled = true;
+            crab_text.SetText(openCages.ToString() + "/" + totCages.ToString());
+
+            this.GetComponent<SpawnCages>().restartGame();
+        }
     }
 
     //chiamato quando Shelly si avvicina al pesce

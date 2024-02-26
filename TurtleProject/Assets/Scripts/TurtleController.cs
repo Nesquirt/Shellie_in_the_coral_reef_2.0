@@ -116,27 +116,49 @@ public class TurtleController : MonoBehaviour
 
 
     // -------------------------------------------------------------------- //
-    //Metodo che invia il nome del target attraversato alla funzione principale, nel minigioco di corsa ad ostacoli
     public void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Target")
         {
             other.GetComponentInParent<TargetHandler>().TargetCollision(other.name);
         }
-        if (other.CompareTag("MazeExploring"))
+        else
         {
-            //TODO: richiama metodo per far partire gioco libera granchi 
-            Debug.Log("Entrata MazeExploring");
-            //posizioni_cageKey.SetActive(true);
-            //posizioni_cageKey.GetComponent<OpenCagesHandler>().restartMazeGame();
-            //GameObject.Find("Posizioni_CageKey").GetComponent<OpenCagesHandler>().restartMazeGame();  //metodo che inizializza tutto e fa partire il gioco
+            switch (other.name)
+            {
+                case "Anguilla_collider":
+                    PromptInterface.setPromptText("Premi E per parlare con l'anguilla");
+                    break;
+
+                case "PesceRosso_collider":
+                    PromptInterface.setPromptText("Premi E per parlare con Peppe");
+                    break;
+                case "PesceColorato_collider":
+                    PromptInterface.setPromptText("Premi E per parlare con il pesce");
+                    break;
+            }
+            PromptInterface.togglePromptOn();
         }
+
     }
     public void OnTriggerStay(Collider other)
     {
-        if (other.name == "Anguilla_collider")
+        if(Input.GetKey(KeyCode.E))
         {
-            other.GetComponentInParent<TargetHandler>().raceStartPrompt();
+            PromptInterface.togglePromptOff();
+            switch(other.name)
+            {
+                case "Anguilla_collider":
+                    DialogueInterface.setNPCName("Anguilla");
+                    DialogueInterface.setDialogueText("Hey, tu! Sembri una tipa molto in forma. Ti andrebbe di aiutarmi con una faccenda?\n" +
+                                 "Le alghe in questo canyon sono in acqua stagnante... Svegliale attraversando tutti gli anelli rocciosi!\n" +
+                                 "Sono sicura che il livello di ossigeno aumentera'... E se vai abbastanza veloce, ti daro' anche qualche perla in piu'. Ci stai?");
+                    DialogueInterface.setCurrentNPC("Anguilla");
+                    //TODO: lascia solo setCurrentNPC, e sposta setNPCName e setDialogueText in DialogueInterface;
+                    //In questo modo standardizziamo i testi e li rimuoviamo da turtleController.
+                    break;
+                    //TODO: interazione con pesci degli altri due minigiochi, specialTarget, chiavi e gabbie
+            }
         }
         else if (other.name == "PesceRosso_collider")
         {
@@ -160,11 +182,10 @@ public class TurtleController : MonoBehaviour
     }
     public void OnTriggerExit(Collider other)
     {
-        if (other.name == "Anguilla_collider")
-        {
-            other.GetComponentInParent<TargetHandler>().AnguillaTriggerExit();
-        }
-        else if (other.name == "PesceRosso_collider")
+        PromptInterface.togglePromptOff();
+        DialogueInterface.toggleDialoguePanelOff();
+
+        if (other.name == "PesceRosso_collider")
         {
             oggettoscriptTrash = GameObject.Find("ContenitoreStefano/oggettoscriptTrash");
             oggettoscriptTrash.GetComponent<SpawnPrefabsRandomly>().PesceRossoTriggerExit();

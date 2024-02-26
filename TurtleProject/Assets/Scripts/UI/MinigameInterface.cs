@@ -39,19 +39,18 @@ public class MinigameInterface : MonoBehaviour
         {
             case GameDirector.GameState.ObstacleCourse:
                 minigameIcon.sprite = obstacleCourseSprite;
-
+                setScoreText(0, 29);
                 break;
 
             case GameDirector.GameState.TrashCollecting:
                 minigameIcon.sprite = trashCollectingSprite;
-
+                setScoreText(0, 5);
                 break;
 
             case GameDirector.GameState.MazeExploring:
                 minigameIcon.sprite = mazeExploringSprite;
-
+                setScoreText(0, 4);
                 break;
-
 
         }
     }

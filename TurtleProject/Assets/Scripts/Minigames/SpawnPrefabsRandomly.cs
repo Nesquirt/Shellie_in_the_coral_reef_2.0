@@ -98,12 +98,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     }
     public void ConfirmButton_onClick()
     {
-        canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
-        StefanoPrompt.gameObject.SetActive(false);
-        canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
-        audioManager.PlaySFX(audioManager.GridClimb);
-        audioManager.ChangeMusic(audioManager.StefanoGameSountrack, true, 0.18f);
-        startTrashGame();
+        StartTrashGame();
     }
     public void CancelButton_onClick()
     {
@@ -112,31 +107,28 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         StefanoPrompt.gameObject.SetActive(true);
     }
 
-    void startTrashGame()
+    public void StartTrashGame()
     {
-        if (GameDirector.Instance.getGameState() != GameDirector.GameState.FreeRoaming)
+        if (DialogueInterface.getCurrentNPC() == "pesceRosso")
         {
-            GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
-            return;
+            //GameDirector.Instance.setGameState(GameDirector.GameState.TrashCollecting);
+            a = 0;
+            b = 0;
+            d = 0;
+            rifiutiraccolti = 0;
+            sostegno.gameObject.SetActive(false);
+            testocronometro.gameObject.SetActive(true);
+            testocontatore.gameObject.SetActive(true);
+            testo5.gameObject.SetActive(true);
+            img.gameObject.SetActive(true);
+            currentTime = totalTime;
+            currentTime2 = totalTime2;
+            run = true;
+            SpawnPrefabs();
         }
-        GameDirector.Instance.setGameState(GameDirector.GameState.TrashCollecting);
-        a = 0;
-        b = 0;
-        d = 0;
-        rifiutiraccolti = 0;
-        sostegno.gameObject.SetActive(false);
-        testocronometro.gameObject.SetActive(true);
-        testocontatore.gameObject.SetActive(true);
-        testo5.gameObject.SetActive(true);
-        img.gameObject.SetActive(true);
-        currentTime = totalTime;
-        currentTime2 = totalTime2;
-        run = true;
-        SpawnPrefabs();
     }
     void FixedUpdate()
     {
-
         if (run)
         {
             Debug.Log("oggetti nel paino" + oggettiNelPiano);
@@ -179,7 +171,6 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                 }
                 rb.AddForce(Vector3.up * upwardForce, ForceMode.Impulse);
 
-
                 currentTime = 0;
 
             }
@@ -216,11 +207,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                 currentTime = 10;
                 currentTime2 = 14f;
             }
-
         }
-
-
-
     }
 
 

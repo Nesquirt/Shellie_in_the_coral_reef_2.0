@@ -8,6 +8,8 @@ using Unity.VisualScripting;
 public class TargetHandler : MonoBehaviour
 {
     private GameObject player;
+
+    //TODO: rimuovi una volta finito con MinigameInterface()
     private GameObject canvas;
     //private GameObject[] targets;
     [SerializeField] private Material activeMaterial, inactiveMaterial;
@@ -140,11 +142,12 @@ public class TargetHandler : MonoBehaviour
     //Coroutine del timer
     IEnumerator Timer()
     {
-        Debug.Log("Cominciato Timer");
+        Debug.Log("Cominciato Timer ObstacleCourse");
         currentTenths = 0;
         while(currentTenths<=18000)
         {
-            timer.SetText(TimeToString());
+            GameObject.Find("Canvas/MinigamePanel").GetComponent<MinigameInterface>().setTimerText(TimeToString());
+            //timer.SetText(TimeToString());
             currentTenths++;
             if (GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
                 break;
@@ -190,7 +193,7 @@ public class TargetHandler : MonoBehaviour
                 {
                     Victory();
                     StopCoroutine(Timer());
-                    timer.gameObject.SetActive(false);
+                    //timer.gameObject.SetActive(false);
                     audioManager.PlaySFX(audioManager.endMiniGame);
                     audioManager.ChangeMusic(audioManager.MatteoGameSountrack, false,0.12f);
                     return;

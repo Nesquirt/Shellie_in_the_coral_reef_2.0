@@ -154,6 +154,7 @@ public class TargetHandler : MonoBehaviour
 
     // -------------------------------------------------------------------- //
     //Shhhh...
+    /*
     public void summonSpecialTarget()
     {
         canvas.transform.Find("SpecialTargetPrompt").gameObject.SetActive(true);
@@ -178,6 +179,6 @@ public class TargetHandler : MonoBehaviour
         }
         audioManager.ChangeMusic(audioManager.Crush_Spawn, false, 0.5f);
     }
-
+    */
 
 }

@@ -168,7 +168,7 @@ public class TurtleController : MonoBehaviour
         }
         else if (other.name == "SpecialTarget")
         {
-            other.GetComponentInParent<TargetHandler>().summonSpecialTarget();
+            //other.GetComponentInParent<TargetHandler>().summonSpecialTarget();
         }
         else if (other.name == "pesceColorato")
         {

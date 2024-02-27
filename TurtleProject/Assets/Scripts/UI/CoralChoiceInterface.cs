@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class CustomClickBehaviours : MonoBehaviour
+public class CoralChoiceInterface : MonoBehaviour
 {
     private Button[] coralButtons;  
     private Button ConfirmButton;
@@ -12,21 +12,19 @@ public class CustomClickBehaviours : MonoBehaviour
     [SerializeField] private CoralSO pillarCoral, fireCoral, softCoral, elkhornCoral;
     private CoralSO[] corals;                                                                                
     private int selectedCoral;
-    
-    private GameObject gameDirector;
+
+    private BarsInterface barsInterface;
     
     private void Awake()
     {
         // -------------------------------------------------------------------- //
-        //Trova il gameDirector
-        gameDirector = GameObject.Find("Director");
         //Trova tutti i bottoni dei coralli e li salva in un array
         selectedCoral = -1;
         coralButtons = new Button[4];
-        coralButtons[0] = transform.Find("CoralChoicePanel/IconsPanel/PillarCoralButton").GetComponent<Button>();
-        coralButtons[1] = transform.Find("CoralChoicePanel/IconsPanel/FireCoralButton").GetComponent<Button>();
-        coralButtons[2] = transform.Find("CoralChoicePanel/IconsPanel/SoftCoralButton").GetComponent<Button>();
-        coralButtons[3] = transform.Find("CoralChoicePanel/IconsPanel/ElkhornCoralButton").GetComponent<Button>();
+        coralButtons[0] = transform.Find("IconsPanel/PillarCoralButton").GetComponent<Button>();
+        coralButtons[1] = transform.Find("IconsPanel/FireCoralButton").GetComponent<Button>();
+        coralButtons[2] = transform.Find("IconsPanel/SoftCoralButton").GetComponent<Button>();
+        coralButtons[3] = transform.Find("IconsPanel/ElkhornCoralButton").GetComponent<Button>();
 
         //Aggiunge i listener ai bottoni dei coralli
         coralButtons[0].onClick.AddListener(delegate { CoralButton_onClick(0); });
@@ -35,9 +33,9 @@ public class CustomClickBehaviours : MonoBehaviour
         coralButtons[3].onClick.AddListener(delegate { CoralButton_onClick(3); });
 
         //Trova il bottone di conferma, e aggiunge il listener
-        ConfirmButton = transform.Find("CoralChoicePanel/ChoicePanel/ConfirmButton").GetComponent<Button>();
+        ConfirmButton = transform.Find("ChoicePanel/ConfirmButton").GetComponent<Button>();
         ConfirmButton.onClick.AddListener(delegate { Confirm_onClick(); });
-        //Nota: il bottone annulla ha il default listener, perché deve solo disattivare il pannello
+        //Nota: il bottone annulla ha il default listener, perchï¿½ deve solo disattivare il pannello
 
         //Inserisce gli scriptable objects con le info dei coralli in un array
         //TODO: vedi se riesci a ricavarli tramite resources.findobjectsoftypeall()
@@ -48,11 +46,11 @@ public class CustomClickBehaviours : MonoBehaviour
         corals[3] = elkhornCoral;
 
         //Prende i campi di testo del pannello
-        coralTitle = transform.Find("CoralChoicePanel/InfoPanel/TitlePanel/CoralTitle").gameObject.GetComponent<TextMeshProUGUI>();
-        coralDesc = transform.Find("CoralChoicePanel/InfoPanel/DescriptionPanel/CoralDesc").gameObject.GetComponent<TextMeshProUGUI>();
-        coralStats = transform.Find("CoralChoicePanel/InfoPanel/StatsPanel/CoralStats").gameObject.GetComponent<TextMeshProUGUI>();
-        coralCost = transform.Find("CoralChoicePanel/ChoicePanel/CostText").gameObject.GetComponent<TextMeshProUGUI>();
-        currentPearls = transform.Find("CoralChoicePanel/ChoicePanel/AvailablePearlsText").gameObject.GetComponent<TextMeshProUGUI>();
+        coralTitle = transform.Find("InfoPanel/TitlePanel/CoralTitle").gameObject.GetComponent<TextMeshProUGUI>();
+        coralDesc = transform.Find("InfoPanel/DescriptionPanel/CoralDesc").gameObject.GetComponent<TextMeshProUGUI>();
+        coralStats = transform.Find("InfoPanel/StatsPanel/CoralStats").gameObject.GetComponent<TextMeshProUGUI>();
+        coralCost = transform.Find("ChoicePanel/CostText").gameObject.GetComponent<TextMeshProUGUI>();
+        currentPearls = transform.Find("ChoicePanel/AvailablePearlsText").gameObject.GetComponent<TextMeshProUGUI>();
         //Svuota i testi all'avvio
         coralTitle.SetText("");
         coralDesc.SetText("");
@@ -61,8 +59,8 @@ public class CustomClickBehaviours : MonoBehaviour
         currentPearls.SetText("Perle disponibili: " + GameDirector.Instance.getCurrentPearls());
 
         //Se lasciato attivo, nasconde il pannello all'accensione
-        if (transform.Find("CoralChoicePanel").gameObject.activeSelf)
-            transform.Find("CoralChoicePanel").gameObject.SetActive(false);
+        if (GameObject.Find("CoralChoicePanel").gameObject.activeSelf)
+            GameObject.Find("CoralChoicePanel").gameObject.SetActive(false);
 
         /* Nota: questo for, per qualche motivo, non funziona bene. Per ora lascio la scrittura estesa
         for(int i = 0; i<coralButtons.Length;i++)
@@ -77,7 +75,7 @@ public class CustomClickBehaviours : MonoBehaviour
         coralTitle.SetText(corals[index].coralName);
         coralDesc.SetText(corals[index].coralDesc);
         coralStats.SetText("Caratteristiche:" +
-                           "\nBiodiversità: " + corals[index].getBiodiversityChange() +
+                           "\nBiodiversitï¿½: " + corals[index].getBiodiversityChange() +
                            "\nInquinamento: " + corals[index].getPollutionChange() +
                            "\nLivello di ossigeno: " + corals[index].getOxygenLevelChange());
         coralCost.SetText("Costo: " + corals[index].getCost() + " perle");

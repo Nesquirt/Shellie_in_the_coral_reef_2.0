@@ -140,7 +140,7 @@ public class TurtleController : MonoBehaviour
                     PromptInterface.setPromptText("Premi E per parlare con Dory");
                     break;
             }
-            PromptInterface.togglePromptOn();
+            PromptInterface.togglePrompt(true);
         }
 
     }
@@ -150,7 +150,7 @@ public class TurtleController : MonoBehaviour
         {
             if (GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
             {
-                PromptInterface.togglePromptOff();
+                PromptInterface.togglePrompt(false);
                 switch (other.name)
                 {
                     case "Anguilla_collider":
@@ -183,7 +183,7 @@ public class TurtleController : MonoBehaviour
                         //other.GetComponentInParent<TargetHandler>().summonSpecialTarget();
                         break;
                 }
-                DialogueInterface.toggleDialoguePanelOn();
+                DialogueInterface.toggleDialoguePanel(true);
             } else if(other.tag == "Chiave" || other.tag == "Gabbia")
             {
                 posizioni_cageKey.GetComponent<OpenCagesHandler>().TriggerMethod(other);
@@ -193,8 +193,8 @@ public class TurtleController : MonoBehaviour
     }
     public void OnTriggerExit(Collider other)
     {
-        PromptInterface.togglePromptOff();
-        DialogueInterface.toggleDialoguePanelOff();
+        PromptInterface.togglePrompt(false);
+        DialogueInterface.toggleDialoguePanel(false);
     }
     // -------------------------------------------------------------------- //
 

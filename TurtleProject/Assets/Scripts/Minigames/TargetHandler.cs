@@ -141,7 +141,7 @@ public class TargetHandler : MonoBehaviour
         int earnedPearls = (int)earnedPearlsFloat;
         //current range di perle: 20 max, 13 min
         GameDirector.Instance.addPearls(earnedPearls);
-        GameDirector.Instance.addOxygenLevel(20);
+        GameDirector.Instance.addParameters(0, 25, 0);
         VictoryInterface.setRewardsText("Tempo impiegato: " + currentTenths + "\n" +
                             "Perle guadagnate: " + earnedPearls + "\n" +
                             "Livello di ossigeno aumentato del 20%");

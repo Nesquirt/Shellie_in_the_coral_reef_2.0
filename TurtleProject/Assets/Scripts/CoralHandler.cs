@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Questo è lo script associato a ogni roccia su cui potrà crescere un corallo
+//Questo ï¿½ lo script associato a ogni roccia su cui potrï¿½ crescere un corallo
 public class CoralHandler : MonoBehaviour
 {
     [SerializeField] private GameObject PillarCoral, FireCoral, SoftCoral, ElkhornCoral;
@@ -12,7 +12,6 @@ public class CoralHandler : MonoBehaviour
     private bool isGrowing;
 
     private Canvas canvas;
-
     private void Awake()
     {
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
@@ -37,9 +36,7 @@ public class CoralHandler : MonoBehaviour
             newCoral.transform.parent = this.transform;
             Debug.Log(coral.getCoralName() + " " + coral.getPollutionChange() + " Pollution," + coral.getOxygenLevelChange() + " Oxygen," + coral.getBiodiversityChange() + " Biodiversity," + coral.getCost());
         }
-        GameDirector.Instance.modifyBiodiversityChange(coral.getBiodiversityChange());
-        GameDirector.Instance.modifyPollutionChange(coral.getPollutionChange());
-        GameDirector.Instance.modifyOxygenLevelChange(coral.getOxygenLevelChange());
+        GameDirector.Instance.modifyParameterChanges(coral.getPollutionChange(), coral.getBiodiversityChange(), coral.getOxygenLevelChange());
 
 
         StartCoroutine(CoralGrow());
@@ -47,8 +44,8 @@ public class CoralHandler : MonoBehaviour
 
 
     
-
-    /*public void SpawnCorals(int coralChoice)
+    /*
+    public void SpawnCorals(int coralChoice)
     {
         isGrowing = true;
         // -------------------------------------------------------------------- //
@@ -61,7 +58,7 @@ public class CoralHandler : MonoBehaviour
                     var newCoral = Instantiate(PillarCoral, spawnPoints[i], Quaternion.identity);
                     newCoral.transform.parent = this.transform;
                 }
-                //TODO: vedi se è possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
+                //TODO: vedi se ï¿½ possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
                 GameDirector.Instance.modifyBiodiversityChange(2);
                 GameDirector.Instance.modifyPollutionChange(1);
                 GameDirector.Instance.modifyOxygenLevelChange(3);
@@ -73,7 +70,7 @@ public class CoralHandler : MonoBehaviour
                     var newCoral = Instantiate(FireCoral, spawnPoints[i], Quaternion.identity);
                     newCoral.transform.parent = this.transform;
                 }
-                //TODO: vedi se è possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
+                //TODO: vedi se ï¿½ possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
                 GameDirector.Instance.modifyBiodiversityChange(-1);
                 GameDirector.Instance.modifyPollutionChange(-3);
                 GameDirector.Instance.modifyOxygenLevelChange(-1);
@@ -84,7 +81,7 @@ public class CoralHandler : MonoBehaviour
                     var newCoral = Instantiate(SoftCoral, spawnPoints[i], Quaternion.identity);
                     newCoral.transform.parent = this.transform;
                 }
-                //TODO: vedi se è possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
+                //TODO: vedi se ï¿½ possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
                 GameDirector.Instance.modifyBiodiversityChange(1);
                 GameDirector.Instance.modifyPollutionChange(-1);
                 GameDirector.Instance.modifyOxygenLevelChange(1);
@@ -95,7 +92,7 @@ public class CoralHandler : MonoBehaviour
                     var newCoral = Instantiate(ElkhornCoral, spawnPoints[i], Quaternion.identity);
                     newCoral.transform.parent = this.transform;
                 }
-                //TODO: vedi se è possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
+                //TODO: vedi se ï¿½ possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
                 GameDirector.Instance.modifyBiodiversityChange(5);
                 GameDirector.Instance.modifyPollutionChange(3);
                 GameDirector.Instance.modifyOxygenLevelChange(4);
@@ -103,7 +100,7 @@ public class CoralHandler : MonoBehaviour
 
 
         }
-
+    
         // -------------------------------------------------------------------- //
         //Coroutine per far crescere i coralli nell'arco di un minuto
             StartCoroutine(CoralGrow());
@@ -137,7 +134,9 @@ public class CoralHandler : MonoBehaviour
             GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
         {
             //Attiva il prompt "Premi E per piantare un corallo"
-            canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(true);
+            PromptInterface.setPromptText("Premi E per piantare un corallo");
+            PromptInterface.togglePrompt(true);
+            //canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(true);
 
             //TODO: test function temporanea, da eliminare
             //SpawnCorals(Coral.PillarCoral);
@@ -151,6 +150,7 @@ public class CoralHandler : MonoBehaviour
         {
             if (isGrowing)
             {
+                PromptInterface.togglePrompt(false);
                 canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(false);
                 canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(false);
                 return;

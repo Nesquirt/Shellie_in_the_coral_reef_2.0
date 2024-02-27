@@ -9,20 +9,13 @@ public class PromptInterface : MonoBehaviour
     private void Awake()
     {
         interactPrompt = GameObject.Find("Canvas/InteractPrompt").GetComponent<TextMeshProUGUI>();
-        togglePromptOff();
+        togglePrompt(false);
         setPromptText("If you see this, something went wrong");
 
     }
-
-    //TODO: togglePrompt(bool state), scemo
-    public static void togglePromptOn()
+    public static void togglePrompt(bool state)
     {
-        interactPrompt.gameObject.SetActive(true);
-    }
-
-    public static void togglePromptOff()
-    {
-        interactPrompt.gameObject.SetActive(false);
+        interactPrompt.gameObject.SetActive(state);
     }
 
     public static void setPromptText(string text)

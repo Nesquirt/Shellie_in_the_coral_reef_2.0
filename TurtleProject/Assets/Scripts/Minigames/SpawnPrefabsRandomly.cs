@@ -127,7 +127,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                     rifiutiraccolti = oggettiNelPiano;
                     int earnedPearls = rifiutiraccolti * 5;
                     GameDirector.Instance.addPearls(earnedPearls);
-                    GameDirector.Instance.addPollution(-rifiutiraccolti * 5);
+                    GameDirector.Instance.addParameters((-rifiutiraccolti * 5), 0, 0);
                     GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
 
                     //testocronometro.gameObject.SetActive(false);

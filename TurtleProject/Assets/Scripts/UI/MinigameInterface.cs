@@ -99,13 +99,6 @@ public class MinigameInterface : MonoBehaviour
                 return "0:00:00";
 
         }
-        // Obstacle Course (currentTime = decimi di secondi)
-        if (GameDirector.Instance.getGameState() == GameDirector.GameState.ObstacleCourse)
-        {
-            
-        }
-        
-
     }
     public static void setScoreText(int current, int max)
     {

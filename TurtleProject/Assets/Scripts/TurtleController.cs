@@ -7,7 +7,7 @@ public class TurtleController : MonoBehaviour
     [SerializeField] private float acceleration;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float maxRotationSpeed;
-    [SerializeField] private float maxTopHeight;
+    [SerializeField] private float maxTopHeight = 35;
     private Animator turtleanim;
     private GameObject oggettoscriptTrash;
 

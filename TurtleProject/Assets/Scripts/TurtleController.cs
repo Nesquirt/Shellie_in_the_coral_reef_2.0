@@ -7,7 +7,7 @@ public class TurtleController : MonoBehaviour
     [SerializeField] private float acceleration;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float maxRotationSpeed;
-    [SerializeField] private float maxTopHeight = 35;
+    [SerializeField] private float maxTopHeight;
     private Animator turtleanim;
     private GameObject oggettoscriptTrash;
 
@@ -25,6 +25,7 @@ public class TurtleController : MonoBehaviour
         this.rb = GetComponent<Rigidbody>();
         this.eulerRotationSpeed = new Vector3(0, this.maxRotationSpeed, 0);
         this.turtleanim = GetComponentInChildren<Animator>();
+        maxTopHeight = 40;
 
         this.posizioni_cageKey = GameObject.Find("Map/Posizioni_CageKey");
         posizioni_cageKey.SetActive(true);
@@ -79,6 +80,7 @@ public class TurtleController : MonoBehaviour
         verticalRotationSpeed = 0;
 
         //Limita l'input del giocatore una volta raggiunta l'altezza massima
+
         if (rb.position.y >= maxTopHeight && j>0)
         {
             j = 0;

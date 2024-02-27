@@ -16,7 +16,7 @@ public class DialogueInterface : MonoBehaviour
     private void Awake()
     {
         dialoguePanel = GameObject.Find("Canvas/DialoguePanel");
-        dialoguePanel.SetActive(false);
+        toggleDialoguePanel(false);
 
         NPCName = dialoguePanel.transform.Find("TitlePanel/NPCName").GetComponent<TextMeshProUGUI>();
         dialogueText = dialoguePanel.transform.Find("DialogueText").GetComponent<TextMeshProUGUI>();
@@ -31,15 +31,9 @@ public class DialogueInterface : MonoBehaviour
     {
         NPCName.SetText(name);
     }
-
-    //TODO: toggleDialoguePanel(bool state), fesso
-    public static void toggleDialoguePanelOn()
+    public static void toggleDialoguePanel(bool state)
     {
-        dialoguePanel.SetActive(true);
-    }
-    public static void toggleDialoguePanelOff()
-    {
-        dialoguePanel.SetActive(false);
+        dialoguePanel.SetActive(state);
     }
     public static void setCurrentNPC(string NPC)
     {
@@ -53,8 +47,8 @@ public class DialogueInterface : MonoBehaviour
     //Listener del bottone "no"
     public void CancelButton_onClick()
     {
-        toggleDialoguePanelOff();
-        PromptInterface.togglePromptOn();
+        toggleDialoguePanel(false);
+        PromptInterface.togglePrompt(true);
     }
 
 }

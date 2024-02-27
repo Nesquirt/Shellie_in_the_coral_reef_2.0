@@ -55,16 +55,13 @@ public class GameDirector : MonoBehaviour
     //Dichiarazione iniziale delle variabili
     private GameState currentState;
 
-    //TODO: Sposta e separa in nuovi metodi per ogni pannello
     private int currentPearls;
     private int reefHealth, pollution, biodiversity, oxygenLevel;
     private int pollutionChange, biodiversityChange, oxygenLevelChange, reefHealthChange;
+
     private GameObject[] corals;
     private Canvas canvas;
-
-    private Slider reefHealthSlider, pollutionSlider, biodiversitySlider, oxygenLevelSlider;
-    private Image reefHealthArrow, pollutionArrow, biodiversityArrow, oxygenLevelArrow;  //TODO: aggiungi un'immagine per quando il cambiamento di parametri e' 0
-    private Sprite upArrow, downArrow;
+    
     private GameObject GameOverPanel, StatsPanel;
     private TextMeshProUGUI TitleText, CentralText, BottomText;
     private Button ReturnToMenuButton, WebsiteButton, SettingsButton;
@@ -92,22 +89,14 @@ public class GameDirector : MonoBehaviour
         //Funzione temporanea per testare i parametri senza passare dal menù
         if (SceneManager.GetActiveScene().name == "GameScene")
             LoadGame();
+        
     }
     public void LoadGame()
     {
         currentState = GameState.FreeRoaming;
 
-        //Nella scena di gioco, prende dalla hierarchy tutti gli elementi dell'interfaccia
+        //TODO: temporaneo
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-        reefHealthSlider = canvas.transform.Find("BarsPanel/ReefHealthBar").GetComponent<Slider>();
-        pollutionSlider = canvas.transform.Find("BarsPanel/PollutionBar").GetComponent<Slider>();
-        biodiversitySlider = canvas.transform.Find("BarsPanel/BiodiversityBar").GetComponent<Slider>();
-        oxygenLevelSlider = canvas.transform.Find("BarsPanel/OxygenLevelBar").GetComponent<Slider>();
-
-        reefHealthArrow = canvas.transform.Find("BarsPanel/ReefHealthBar/ReefHealthArrow").GetComponent<Image>();
-        pollutionArrow = canvas.transform.Find("BarsPanel/PollutionBar/PollutionArrow").GetComponent<Image>();
-        biodiversityArrow = canvas.transform.Find("BarsPanel/BiodiversityBar/BiodiversityArrow").GetComponent<Image>();
-        oxygenLevelArrow = canvas.transform.Find("BarsPanel/OxygenLevelBar/OxygenLevelArrow").GetComponent<Image>();
 
         GameOverPanel = canvas.transform.Find("GameOverPanel").gameObject;
         TitleText = GameOverPanel.transform.Find("TitleText").GetComponent<TextMeshProUGUI>();
@@ -132,12 +121,53 @@ public class GameDirector : MonoBehaviour
         //ReturnToMenuButton.onClick.AddListener(LoadMenu);
         //WebsiteButton.onClick.AddListener(OpenURL);
 
-        upArrow = Resources.Load<Sprite>("Sprites/UpArrow");
-        downArrow = Resources.Load<Sprite>("Sprites/DownArrow");
         // -------------------------------------------------------------------- //
         //Impostazione dei valori iniziali di gioco
-        currentState = GameState.FreeRoaming;
+        corals = GameObject.FindGameObjectsWithTag("CoralSpot");
+        setStartValues();
+        // -------------------------------------------------------------------- //
+        //Coroutine di fade out del loading screen
+        StartCoroutine(FadeOutLoadingScreen());
+        //Metodo che fa partire il ciclo di cambiamento dei parametri
+        InvokeRepeating("tick", 0, 60);
+    }
 
+    public void tick()  //Funzione che viene chiamata una volta ogni minuto, e aggiorna i valori delle statistiche di gioco
+    {
+        updateValues();
+        // -------------------------------------------------------------------- //
+        //Controlla tutti gli oggetti con tag "Corallo", e li mette nell'array
+
+        if (corals.Length != 0)
+            Array.Clear(corals, 0, corals.Length);
+
+        corals = GameObject.FindGameObjectsWithTag("CoralSpot");
+    }
+    // -------------------------------------------------------------------- //
+    //Metodi per interagire con il GameState; usati dai minigiochi
+    public void setGameState(GameState newState)
+    {
+        if(newState == GameState.FreeRoaming)
+        {
+            MinigameInterface.endMinigame();
+        }
+        else
+        {
+            DialogueInterface.toggleDialoguePanel(false);
+            MinigameInterface.startMinigame();
+        }
+        Debug.Log("Changed GameState to: " + newState);
+        currentState = newState;
+    }
+
+    public GameState getGameState()
+    {
+        return currentState;
+    }
+    // -------------------------------------------------------------------- //
+    //Funzioni di gestione dei parametri di gioco
+    public void setStartValues()
+    {
         currentPearls = 10;
         reefHealth = 50;
         pollution = 20;
@@ -147,30 +177,12 @@ public class GameDirector : MonoBehaviour
         pollutionChange = +5;
         biodiversityChange = -5;
         oxygenLevelChange = -5;
-
-        corals = GameObject.FindGameObjectsWithTag("CoralSpot");
-
-        //Coroutine di fade out del loading screen
-        StartCoroutine(FadeOutLoadingScreen());
-        //Metodo che fa partire il ciclo di cambiamento dei parametri
-        InvokeRepeating("tick", 0, 60);
     }
-
-    public void tick()  //Funzione che viene chiamata una volta ogni minuto, e aggiorna i valori delle statistiche di gioco
+    public void updateValues()
     {
-        // -------------------------------------------------------------------- //
-        //Controlla tutti gli oggetti con tag "Corallo", e li mette nell'array
-
-        if (corals.Length != 0)
-            Array.Clear(corals, 0, corals.Length);
-
-        corals = GameObject.FindGameObjectsWithTag("CoralSpot");
-        // -------------------------------------------------------------------- //
-        //Calcolo del cambio dei parametri
-
-        //pollution += CalculatePollutionChange();               //Calcolo del cambio di inquinamento
         pollution += pollutionChange;
-        pollutionSlider.value = pollution;
+        biodiversity += biodiversityChange;
+        oxygenLevel += oxygenLevelChange;
 
         //Metodo per cambiare il colore della nebbia
         float pollutionPercentage = (float)pollution / 100;
@@ -178,14 +190,7 @@ public class GameDirector : MonoBehaviour
         Color32 PollutedWater = new Color32(114, 200, 186, 255);
         RenderSettings.fogColor = Color.LerpUnclamped(CleanWater, PollutedWater, pollutionPercentage);
 
-        //biodiversity += CalculateBiodiversityChange();         //Calcolo del cambio di biodiversitï¿½
-        biodiversity += biodiversityChange;
-        biodiversitySlider.value = biodiversity;
-
-        //oxygenLevel += CalculateOxygenLevelChange();           //Calcolo del cambio di livello di ossigeno
-        oxygenLevel += oxygenLevelChange;
-        oxygenLevelSlider.value = oxygenLevel;
-
+        //Standardizzazione valori
         if (pollution < 0)
             pollution = 0;
         if (pollution > 100)
@@ -200,18 +205,12 @@ public class GameDirector : MonoBehaviour
             oxygenLevel = 0;
         if (oxygenLevel > 100)
             oxygenLevel = 100;
-        // -------------------------------------------------------------------- //
-        //Calcolo del cambio di vita della barriera corallina
 
+        //Vita della barriera corallina
         if (reefHealth >= 0 && reefHealth <= 100)
         {
             reefHealthChange = (4 - (pollution / 10)) + ((biodiversity / 10) - 4) + ((oxygenLevel / 10) - 4);
             reefHealth += reefHealthChange;
-            if (reefHealthChange >= 0)
-                reefHealthArrow.sprite = upArrow;
-            else
-                reefHealthArrow.sprite = downArrow;
-
         }
         else if (reefHealth >= 100)
         {
@@ -224,96 +223,10 @@ public class GameDirector : MonoBehaviour
             GameOver();
         }
 
-        reefHealthSlider.value = reefHealth;
+        //Aggiorna l'interfaccia
+        BarsInterface.updateBars();
+        BarsInterface.updateArrows();
     }
-
-    // -------------------------------------------------------------------- //
-    //Metodi per modificare la velocita' dei parametri; usati dai coralli
-    public void modifyPollutionChange(int value)
-    {
-        pollutionChange += value;
-        if (pollutionChange >= 0)
-            pollutionArrow.sprite = downArrow;
-        else
-            pollutionArrow.sprite = upArrow;
-    }
-    public void modifyBiodiversityChange(int value)
-    {
-        biodiversityChange += value;
-        if (biodiversityChange >= 0)
-            biodiversityArrow.sprite = upArrow;
-        else
-            biodiversityArrow.sprite = downArrow;
-    }
-    public void modifyOxygenLevelChange(int value)
-    {
-        oxygenLevelChange += value;
-        if (oxygenLevelChange >= 0)
-            oxygenLevelArrow.sprite = upArrow;
-        else
-            oxygenLevelArrow.sprite = downArrow;
-    }
-    // -------------------------------------------------------------------- //
-    //Metodi per modificare direttamente i parametri; usati dai minigiochi
-    public void addPearls(int value)
-    {
-        currentPearls += value;
-        //GameObject.Find("Canvas/PearlsText").gameObject.GetComponent<TextMeshProUGUI>().SetText("Perle: " + getCurrentPearls());
-    }
-    public void addPollution(int value)
-    {
-        pollution += value;
-        pollutionSlider.value = pollution;
-    }
-    public void addOxygenLevel(int value)
-    {
-        oxygenLevel += value;
-        oxygenLevelSlider.value = oxygenLevel;
-    }
-    public void addBiodiversity(int value)
-    {
-        biodiversity += value;
-        biodiversitySlider.value = biodiversity;
-    }
-
-    public int getCurrentPearls()
-    {
-        return currentPearls;
-    }
-    public int getPollution()
-    {
-        return pollution;
-    }
-    public int getOxygenLevel()
-    {
-        return oxygenLevel;
-    }
-    public int getBiodiversity()
-    {
-        return biodiversity;
-    }
-    // -------------------------------------------------------------------- //
-    //Metodi per interagire con il GameState; usati dai minigiochi
-    public void setGameState(GameState newState)
-    {
-        if(newState == GameState.FreeRoaming)
-        {
-            MinigameInterface.endMinigame();
-        }
-        else
-        {
-            DialogueInterface.toggleDialoguePanelOff();
-            MinigameInterface.startMinigame();
-        }
-        Debug.Log("Changed GameState to: " + newState);
-        currentState = newState;
-    }
-
-    public GameState getGameState()
-    {
-        return currentState;
-    }
-    // -------------------------------------------------------------------- //
     //Coroutine di fade out del loading screen
     IEnumerator FadeOutLoadingScreen()
     {
@@ -403,61 +316,65 @@ public class GameDirector : MonoBehaviour
         obj.SetActive(!obj.activeSelf);
     }
     // -------------------------------------------------------------------- //
-    //Metodo chiamato dai prompt degli NPC per cambiare i tasti di dialogo
-    /*
-    public void checkDialoguePanelButtons(string minigame)
+    //Metodi get e set per i parametri
+    public void addPearls(int value)
     {
-        GameObject DialoguePanel = canvas.transform.Find("DialoguePanel").gameObject;
-        //Questo script trova i bottoni di conferma e annulla dei singoli minigiochi in base alla loro posizione nella hierarchy.
-        //0: ConfirmRaceButton
-        //1: CancelRaceButton
-        //2: ConfirmMazeButton
-        //3: CancelMazeButton
-        //4: ConfirmTrashButton
-        //5: CancelTrashButton
-        if(minigame == "ObstacleRace")
-        {
-            DialoguePanel.transform.GetChild(0).gameObject.SetActive(true);
-            DialoguePanel.transform.GetChild(1).gameObject.SetActive(true);
-
-            DialoguePanel.transform.GetChild(2).gameObject.SetActive(false);
-            DialoguePanel.transform.GetChild(3).gameObject.SetActive(false);
-            DialoguePanel.transform.GetChild(4).gameObject.SetActive(false);
-            DialoguePanel.transform.GetChild(5).gameObject.SetActive(false);
-        }
-        else if(minigame == "TrashCollecting")
-        {
-            DialoguePanel.transform.GetChild(4).gameObject.SetActive(true);
-            DialoguePanel.transform.GetChild(5).gameObject.SetActive(true);
-
-            DialoguePanel.transform.GetChild(2).gameObject.SetActive(false);
-            DialoguePanel.transform.GetChild(3).gameObject.SetActive(false);
-            DialoguePanel.transform.GetChild(0).gameObject.SetActive(false);
-            DialoguePanel.transform.GetChild(1).gameObject.SetActive(false);
-        }
-        else if(minigame == "MazeExploring")
-        {
-            DialoguePanel.transform.GetChild(2).gameObject.SetActive(true);
-            DialoguePanel.transform.GetChild(3).gameObject.SetActive(true);
-
-            DialoguePanel.transform.GetChild(0).gameObject.SetActive(false);
-            DialoguePanel.transform.GetChild(1).gameObject.SetActive(false);
-            DialoguePanel.transform.GetChild(4).gameObject.SetActive(false);
-            DialoguePanel.transform.GetChild(5).gameObject.SetActive(false);
-        }
+        currentPearls += value;
+        //GameObject.Find("Canvas/PearlsText").gameObject.GetComponent<TextMeshProUGUI>().SetText("Perle: " + getCurrentPearls());
     }
-    */
+    public int getCurrentPearls()
+    {
+        return currentPearls;
+    }
+    public void addParameters(int sumPollution, int sumOxygen, int sumBio)
+    {
+        pollution += sumPollution;
+        oxygenLevel += sumOxygen;
+        biodiversity += sumBio;
+        BarsInterface.updateBars();
+    }
+    public int getPollution()
+    {
+        return pollution;
+    }
+    public int getOxygenLevel()
+    {
+        return oxygenLevel;
+    }
+    public int getBiodiversity()
+    {
+        return biodiversity;
+    }
+    public int getReefHealth()
+    {
+        return reefHealth;
+    }
+    public int getReefHealthChange()
+    {
+        return reefHealthChange;
+    }
+    public void modifyParameterChanges(int sumPollutionChange, int sumBioChange, int sumOxygenChange)
+    {
+        pollutionChange += sumPollutionChange;
+        biodiversityChange += sumBioChange;
+        oxygenLevelChange += sumOxygenChange;
+
+        BarsInterface.updateArrows();
+    }
+    public int getPollutionChange()
+    {
+        return pollutionChange;
+    }
+    public int getBiodiversityChange()
+    {
+        return biodiversityChange;
+    }
+    public int getOxygenChange()
+    {
+        return oxygenLevelChange;
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
 
 
 /*Dopo i Serial Killer.....

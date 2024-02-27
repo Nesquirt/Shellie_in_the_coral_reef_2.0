@@ -174,7 +174,7 @@ public class OpenCagesHandler : MonoBehaviour
         VictoryInterface.toggleVictoryPanelOn();
 
         GameDirector.Instance.addPearls(gainedPearls);
-        GameDirector.Instance.addBiodiversity(gainedPearls);
+        GameDirector.Instance.addParameters(0, 0, gainedPearls);
     }
 
     //metodo chiamato da TurtleController

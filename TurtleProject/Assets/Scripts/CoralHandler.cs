@@ -12,7 +12,6 @@ public class CoralHandler : MonoBehaviour
     private bool isGrowing;
 
     private Canvas canvas;
-
     private void Awake()
     {
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
@@ -36,16 +35,14 @@ public class CoralHandler : MonoBehaviour
             var newCoral = Instantiate(PillarCoral, spawnPoints[i], Quaternion.identity);
             newCoral.transform.parent = this.transform;
         }
-        GameDirector.Instance.modifyBiodiversityChange(coral.getBiodiversityChange());
-        GameDirector.Instance.modifyPollutionChange(coral.getPollutionChange());
-        GameDirector.Instance.modifyOxygenLevelChange(coral.getOxygenLevelChange());
+        GameDirector.Instance.modifyParameterChanges(coral.getPollutionChange(), coral.getBiodiversityChange(), coral.getOxygenLevelChange());
 
         StartCoroutine(CoralGrow());
     }
 
 
     
-
+    /*
     public void SpawnCorals(int coralChoice)
     {
         isGrowing = true;
@@ -101,13 +98,13 @@ public class CoralHandler : MonoBehaviour
 
 
         }
-
+    
         // -------------------------------------------------------------------- //
         //Coroutine per far crescere i coralli nell'arco di un minuto
             StartCoroutine(CoralGrow());
 
         // -------------------------------------------------------------------- //
-    }
+    }*/
 
     IEnumerator CoralGrow()
     {
@@ -135,7 +132,9 @@ public class CoralHandler : MonoBehaviour
             GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
         {
             //Attiva il prompt "Premi E per piantare un corallo"
-            canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(true);
+            PromptInterface.setPromptText("Premi E per piantare un corallo");
+            PromptInterface.togglePrompt(true);
+            //canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(true);
 
             //TODO: test function temporanea, da eliminare
             //SpawnCorals(Coral.PillarCoral);
@@ -149,6 +148,7 @@ public class CoralHandler : MonoBehaviour
         {
             if (isGrowing)
             {
+                PromptInterface.togglePrompt(false);
                 canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(false);
                 canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(false);
                 return;

@@ -20,4 +20,4 @@ MonoBehaviour:
   coralDesc: "I coralli a pilastro formano alte strutture cilindriche che offrono
     un habitat ideale per varie specie marine. Sono eccellenti per produrre ossigeno,
     e sono moderatamente resistenti all\u2019inquinamento."
-  coralPrefab: {fileID: 0}
+  coralPrefab: {fileID: 5496174565807994253, guid: 1bba7ce585e8d04449322bd9765b7511, type: 3}

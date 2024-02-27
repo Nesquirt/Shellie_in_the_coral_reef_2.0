@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SoftCoral
   m_EditorClassIdentifier: 
   pollutionChange: -1
-  oxygenLevelChange: 1
+  oxygenLevelChange: 5
   biodiversityChange: 1
   cost: 10
   coralName: "Alcyonacea (\u201Ccorallo mollo\u201D)"
@@ -21,4 +21,4 @@ MonoBehaviour:
     hanno uno scheletro duro, e di conseguenza sono morbidi e flessibili. I vari
     colori aiutano ad attirare specie diverse, ma non producono molto ossigeno e
     non sono particolarmente resistenti ad acque inquinate.
-  coralPrefab: {fileID: 0}
+  coralPrefab: {fileID: 6248881581487960445, guid: 3f6d04dde10cdb147857f30548685ebf, type: 3}

@@ -9,6 +9,11 @@ public class CoralSO : ScriptableObject
     public string coralName, coralDesc;
     public GameObject coralPrefab;
 
+    public string getCoralName()
+    {
+        return coralName;
+    }
+
     public int getPollutionChange()
     {
         return pollutionChange;

@@ -35,7 +35,7 @@ public class CoralHandler : MonoBehaviour
         {
             var newCoral = Instantiate(coral.getcoralPrefab(), spawnPoints[i], Quaternion.identity);
             newCoral.transform.parent = this.transform;
-            Debug.Log(coral.getPollutionChange() + ": " + coral.getOxygenLevelChange() + ": " + coral.getBiodiversityChange() + ": " + coral.getCost() + "The coral cost: ");
+            Debug.Log(coral.getCoralName() + " " + coral.getPollutionChange() + " Pollution," + coral.getOxygenLevelChange() + " Oxygen," + coral.getBiodiversityChange() + " Biodiversity," + coral.getCost());
         }
         GameDirector.Instance.modifyBiodiversityChange(coral.getBiodiversityChange());
         GameDirector.Instance.modifyPollutionChange(coral.getPollutionChange());
@@ -48,7 +48,7 @@ public class CoralHandler : MonoBehaviour
 
     
 
-    public void SpawnCorals(int coralChoice)
+    /*public void SpawnCorals(int coralChoice)
     {
         isGrowing = true;
         // -------------------------------------------------------------------- //
@@ -109,7 +109,7 @@ public class CoralHandler : MonoBehaviour
             StartCoroutine(CoralGrow());
 
         // -------------------------------------------------------------------- //
-    }
+    }*/
 
     IEnumerator CoralGrow()
     {

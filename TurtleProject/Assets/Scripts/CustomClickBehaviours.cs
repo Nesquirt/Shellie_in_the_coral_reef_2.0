@@ -86,12 +86,12 @@ public class CustomClickBehaviours : MonoBehaviour
     }
     public void Confirm_onClick()
     {
-        Debug.Log("Selected Coral: " + corals[selectedCoral].coralName);
+        Debug.Log("Selected Coral: " + corals[selectedCoral].getCoralName());
         currentPearls.SetText("Perle disponibili: " + GameDirector.Instance.getCurrentPearls());
         if (selectedCoral != -1 && GameDirector.Instance.getCurrentPearls() >= corals[selectedCoral].getCost())
         {
-            GameDirector.Instance.addPearls(-corals[selectedCoral].getCost());
-            GameDirector.Instance.currentCoralSpot.GetComponent<CoralHandler>().SpawnCorals(selectedCoral);
+            GameDirector.Instance.addPearls(-(corals[selectedCoral].getCost()));
+            GameDirector.Instance.currentCoralSpot.GetComponent<CoralHandler>().SpawnCorals(corals[selectedCoral]);
         }
 
     }

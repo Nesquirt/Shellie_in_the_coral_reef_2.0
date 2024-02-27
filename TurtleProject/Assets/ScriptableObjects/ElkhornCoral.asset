@@ -21,3 +21,4 @@ MonoBehaviour:
     di assorbire pi\xF9 luce solare, e produrre ottime quantit\xE0 di ossigeno. Sono
     anche in grado di ospitare una buona quantit\xE0 di forme di vita, ma fanno fatica
     a riprodursi e a crescere in acque inquinate."
+  coralPrefab: {fileID: 0}

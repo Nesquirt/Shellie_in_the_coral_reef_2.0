@@ -41,73 +41,6 @@ public class CoralHandler : MonoBehaviour
 
         StartCoroutine(CoralGrow());
     }
-
-
-    
-    /*
-    public void SpawnCorals(int coralChoice)
-    {
-        isGrowing = true;
-        // -------------------------------------------------------------------- //
-        //A seconda del corallo scelto dall'interfaccia, instanzia cinque modelli del corallo scelto negli spawnPoint
-        switch (coralChoice)
-        {
-            case 0: //PillarCoral
-                for(int i = 0; i<spawnPoints.Length; i++)
-                {
-                    var newCoral = Instantiate(PillarCoral, spawnPoints[i], Quaternion.identity);
-                    newCoral.transform.parent = this.transform;
-                }
-                //TODO: vedi se � possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
-                GameDirector.Instance.modifyBiodiversityChange(2);
-                GameDirector.Instance.modifyPollutionChange(1);
-                GameDirector.Instance.modifyOxygenLevelChange(3);
-                break;
-            case 1: //FireCoral
-                  
-                for (int i = 0; i < spawnPoints.Length; i++)
-                {
-                    var newCoral = Instantiate(FireCoral, spawnPoints[i], Quaternion.identity);
-                    newCoral.transform.parent = this.transform;
-                }
-                //TODO: vedi se � possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
-                GameDirector.Instance.modifyBiodiversityChange(-1);
-                GameDirector.Instance.modifyPollutionChange(-3);
-                GameDirector.Instance.modifyOxygenLevelChange(-1);
-                break;
-            case 2: //SoftCoral
-                for (int i = 0; i < spawnPoints.Length; i++)
-                {
-                    var newCoral = Instantiate(SoftCoral, spawnPoints[i], Quaternion.identity);
-                    newCoral.transform.parent = this.transform;
-                }
-                //TODO: vedi se � possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
-                GameDirector.Instance.modifyBiodiversityChange(1);
-                GameDirector.Instance.modifyPollutionChange(-1);
-                GameDirector.Instance.modifyOxygenLevelChange(1);
-                break;
-            case 3: //ElkhornCoral
-                for (int i = 0; i < spawnPoints.Length; i++)
-                {
-                    var newCoral = Instantiate(ElkhornCoral, spawnPoints[i], Quaternion.identity);
-                    newCoral.transform.parent = this.transform;
-                }
-                //TODO: vedi se � possibile implementare i seguenti valori tramite gli ScriptableObjects, invece che a mano
-                GameDirector.Instance.modifyBiodiversityChange(5);
-                GameDirector.Instance.modifyPollutionChange(3);
-                GameDirector.Instance.modifyOxygenLevelChange(4);
-                break;
-
-
-        }
-    
-        // -------------------------------------------------------------------- //
-        //Coroutine per far crescere i coralli nell'arco di un minuto
-            StartCoroutine(CoralGrow());
-
-        // -------------------------------------------------------------------- //
-    }*/
-
     IEnumerator CoralGrow()
     {
         //GameObject[] corals = GetComponentsInChildren<GameObject>();
@@ -130,16 +63,18 @@ public class CoralHandler : MonoBehaviour
 
     public void OnTriggerEnter(Collider collider)
     {
-        if(collider.gameObject.tag == "Player" &&
+        if (isGrowing)
+        {
+            PromptInterface.togglePrompt(false);
+            canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(false);
+            return;
+        }
+        if (collider.gameObject.tag == "Player" &&
             GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
         {
             //Attiva il prompt "Premi E per piantare un corallo"
             PromptInterface.setPromptText("Premi E per piantare un corallo");
             PromptInterface.togglePrompt(true);
-            //canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(true);
-
-            //TODO: test function temporanea, da eliminare
-            //SpawnCorals(Coral.PillarCoral);
         }
     }
 
@@ -149,12 +84,8 @@ public class CoralHandler : MonoBehaviour
             GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
         {
             if (isGrowing)
-            {
-                PromptInterface.togglePrompt(false);
-                canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(false);
-                canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(false);
                 return;
-            }
+              
             if (Input.GetKey(KeyCode.E))
             {
                 GameDirector.Instance.currentCoralSpot = this.gameObject;

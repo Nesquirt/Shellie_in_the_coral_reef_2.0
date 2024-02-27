@@ -146,7 +146,7 @@ public class TurtleController : MonoBehaviour
     }
     public void OnTriggerStay(Collider other)
     {
-        if(Input.GetKey(KeyCode.E))
+        if(Input.GetKey(KeyCode.E) && other.tag != "CoralSpot")
         {
             if (GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
             {

@@ -9,12 +9,8 @@ public class MinigameInterface : MonoBehaviour
     private static GameObject minigamePanel;
     private static TextMeshProUGUI timer, scoreText;
     private static Image minigameIcon, keyIcon;
+    private static Sprite obstacleCourseSprite, trashCollectingSprite, mazeExploringSprite, keySprite;
 
-    [Header("--- Sprites ---")]
-    public Sprite obstacleCourseSprite;
-    public Sprite trashCollectingSprite;
-    public Sprite mazeExploringSprite;
-    public Sprite keySprite;
     private void Awake()
     {
         minigamePanel = GameObject.Find("Canvas/MinigamePanel");
@@ -27,6 +23,11 @@ public class MinigameInterface : MonoBehaviour
 
         minigameIcon = minigamePanel.transform.Find("MinigameIcon").gameObject.GetComponent<Image>();
         keyIcon = minigamePanel.transform.Find("KeyIcon").gameObject.GetComponent<Image>();
+
+        obstacleCourseSprite = Resources.Load("Sprites/ObstacleCourseSprite") as Sprite;
+        trashCollectingSprite = Resources.Load("Sprites/TrashCollectingSprite") as Sprite;
+        mazeExploringSprite = Resources.Load("Sprites/MazeExploringSprite") as Sprite;
+        keySprite = Resources.Load("Sprites/KeySprite") as Sprite;
         keyIcon.sprite = keySprite;
 
     }
@@ -39,17 +40,17 @@ public class MinigameInterface : MonoBehaviour
         switch(GameDirector.Instance.getGameState())
         {
             case GameDirector.GameState.ObstacleCourse:
-                //minigameIcon.sprite = obstacleCourseSprite;
+                minigameIcon.sprite = obstacleCourseSprite;
                 setScoreText(0, 29);
                 break;
 
             case GameDirector.GameState.TrashCollecting:
-                //minigameIcon.sprite = trashCollectingSprite;
+                minigameIcon.sprite = trashCollectingSprite;
                 setScoreText(0, 5);
                 break;
 
             case GameDirector.GameState.MazeExploring:
-                //minigameIcon.sprite = mazeExploringSprite;
+                minigameIcon.sprite = mazeExploringSprite;
                 setScoreText(0, 4);
                 break;
 

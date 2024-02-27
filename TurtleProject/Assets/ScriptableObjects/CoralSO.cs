@@ -7,6 +7,7 @@ public class CoralSO : ScriptableObject
 {
     public int pollutionChange, oxygenLevelChange, biodiversityChange, cost;
     public string coralName, coralDesc;
+    public GameObject coralPrefab;
 
     public int getPollutionChange()
     {
@@ -28,9 +29,14 @@ public class CoralSO : ScriptableObject
         return cost;
     }
 
+    public GameObject getcoralPrefab()
+    {
+        return coralPrefab;
+    }
+
     public void Print()
         {
-            Debug.Log(pollutionChange + ": " + oxygenLevelChange + ": " + biodiversityChange + ": " + cost + "The card cost: ");
+            Debug.Log(pollutionChange + ": " + oxygenLevelChange + ": " + biodiversityChange + ": " + cost + "The coral cost: ");
         }
 
 }

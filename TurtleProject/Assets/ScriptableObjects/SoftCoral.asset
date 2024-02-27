@@ -21,3 +21,4 @@ MonoBehaviour:
     hanno uno scheletro duro, e di conseguenza sono morbidi e flessibili. I vari
     colori aiutano ad attirare specie diverse, ma non producono molto ossigeno e
     non sono particolarmente resistenti ad acque inquinate.
+  coralPrefab: {fileID: 0}

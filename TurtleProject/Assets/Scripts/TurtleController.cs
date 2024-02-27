@@ -7,6 +7,7 @@ public class TurtleController : MonoBehaviour
     [SerializeField] private float acceleration;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float maxRotationSpeed;
+    [SerializeField] private float maxTopHeight;
     private Animator turtleanim;
     private GameObject oggettoscriptTrash;
 
@@ -78,7 +79,7 @@ public class TurtleController : MonoBehaviour
         verticalRotationSpeed = 0;
 
         //Limita l'input del giocatore una volta raggiunta l'altezza massima
-        if (rb.position.y >= 40 && j>0)
+        if (rb.position.y >= maxTopHeight && j>0)
         {
             j = 0;
         }
@@ -187,9 +188,9 @@ public class TurtleController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("spazzatura"))
         { 
-            float intensity = 2f * (speed);
+            float intensity = 2f * (acceleration);
             Vector3 directionToPlayer = (transform.position - collision.transform.position).normalized;
-            float pushAngle = 1.5f;  //angolo di spinta
+            float pushAngle = 3f;  //angolo di spinta
             Quaternion rotation = Quaternion.Euler(0, pushAngle, 0);
             //Vector3 force = rotation * directionToPlayer;
             Vector3 force = directionToPlayer + new Vector3(0, pushAngle, 0);

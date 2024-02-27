@@ -28,4 +28,9 @@ public class CoralSO : ScriptableObject
         return cost;
     }
 
+    public void Print()
+        {
+            Debug.Log(pollutionChange + ": " + oxygenLevelChange + ": " + biodiversityChange + ": " + cost + "The card cost: ");
+        }
+
 }

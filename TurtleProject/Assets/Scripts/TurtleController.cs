@@ -212,7 +212,6 @@ public class TurtleController : MonoBehaviour
             collision.gameObject.GetComponent<Rigidbody>().AddForce((force * intensity), ForceMode.Force);
 
             Debug.Log("spinta");
-            audioManager.PlayTrash();
         }
     }
 

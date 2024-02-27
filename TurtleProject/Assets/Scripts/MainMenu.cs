@@ -28,14 +28,15 @@ public class MainMenu : MonoBehaviour
         LoadingPanel = GameObject.Find("Canvas/LoadingPanel");
         LoadingPanel.SetActive(false);
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        audioManager.MenuMusic();
     }
 
     // Funzione per avviare una nuova partita
     public void StartGame()
     {
         LoadingPanel.SetActive(true);
-        audioManager.StartGameMusic();
-        audioManager.PlaySFX(audioManager.selection);
+        audioManager.Play("selection_SFX", false, 1f);
+        audioManager.GameMusic();
         StartCoroutine(FadeInLoadingScreen());
     }
 
@@ -47,7 +48,7 @@ public class MainMenu : MonoBehaviour
             Debug.Log("La scena è già caricata");
             return;
         }
-        audioManager.PlaySFX(audioManager.selection);
+        audioManager.Play("selection_SFX", false, 1f);
         SceneManager.LoadScene("Simone_impostazioni", LoadSceneMode.Additive);
     }
     public string CheckIfSceneLoaded()
@@ -58,7 +59,7 @@ public class MainMenu : MonoBehaviour
     // Funzione per chiudere il gioco
     public void QuitGame()
     {
-        audioManager.PlaySFX(audioManager.selection);
+        audioManager.Play("selection_SFX", false, 1f);
         Application.Quit();
     }
     IEnumerator FadeInLoadingScreen()

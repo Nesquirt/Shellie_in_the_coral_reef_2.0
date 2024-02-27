@@ -58,6 +58,9 @@ public class TargetHandler : MonoBehaviour
                 else
                     GameObject.Find(targetName).GetComponent<MeshRenderer>().material = inactiveMaterial;
             }
+
+            //AUDIO 
+            StartCoroutine(audioManager.FadeTwoClips("freeRoaming_Music", 0f, "obstacleCourse_Music", 1f, 5f));
         }
     }
     // -------------------------------------------------------------------- //
@@ -111,21 +114,21 @@ public class TargetHandler : MonoBehaviour
                 {
                 Debug.Log("Attraversato primo anello");
                     StartCoroutine(Timer());
-                    audioManager.PlaySFX(audioManager.startRace);
+                    audioManager.Play("raceStart_SFX",false,2f);
                 
                 }
                 if(targetNumber >= 28)
                 {
                     Victory();
                     StopCoroutine(Timer());
-                    audioManager.PlaySFX(audioManager.endMiniGame);
-                    audioManager.ChangeMusic(audioManager.MatteoGameSountrack, false,0.12f);
+                    audioManager.Play("raceStart_SFX", false, 1f);
+                    StartCoroutine(audioManager.FadeTwoClips("obstacleCourse_Music", 0f, "freeRoaming_Music", 1f, 5f));
                     return;
                 }
                 GameObject.Find(nextTargetName).GetComponent<MeshRenderer>().material = activeMaterial;
                 if(targetNumber > 0 && targetNumber < 28)
                 {
-                    audioManager.PlaySFX(audioManager.crossRing);
+                    audioManager.Play("ringCross_SFX", false, 1f);
                 }
 
                 targetNumber++;

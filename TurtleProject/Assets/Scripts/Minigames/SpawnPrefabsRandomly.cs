@@ -90,6 +90,8 @@ public class SpawnPrefabsRandomly : MonoBehaviour
             currentTime2 = totalTime2;
             run = true;
             SpawnPrefabs();
+            audioManager.Play("gridDrop_SFX", false, 1f);
+            StartCoroutine(audioManager.FadeTwoClips("freeRoaming_Music", 0f, "trashCollecting_Music", 1f, 5f));
         }
     }
     void FixedUpdate()
@@ -117,7 +119,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
 
             if (currentTime < 10 && playHorn == true)
             {
-                audioManager.PlaySFX(audioManager.ShipHorn);
+                audioManager.Play("shipHorn_SFX", false, 1f);
                 playHorn = false;
             }
             if (currentTime <= 0 && a == 0)
@@ -136,7 +138,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                     //img.gameObject.SetActive(false);
                     b = 1;
 
-                    audioManager.PlaySFX(audioManager.GridClimb);
+                    audioManager.Play("gridClimb_SFX", false, 1f);
 
                 }
                 rb.AddForce(Vector3.up * upwardForce, ForceMode.Impulse);
@@ -163,9 +165,9 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                                  "Perle guadagnate: " + rifiutiraccolti * 5 + "\n" +
                                  "Livello di inquinamento diminuito del " + rifiutiraccolti * 5 + "%");
                 VictoryInterface.toggleVictoryPanelOn();
-                
-                audioManager.PlaySFX(audioManager.endMiniGame);
-                audioManager.ChangeMusic(audioManager.StefanoGameSountrack, false, 0.18f);
+
+                audioManager.Play("endMiniGame_SFX", false, 1f);
+                StartCoroutine(audioManager.FadeTwoClips("freeRoaming_Music", 1f, "trashCollecting_Music", 0f, 5f));
                 run = false;
 
 

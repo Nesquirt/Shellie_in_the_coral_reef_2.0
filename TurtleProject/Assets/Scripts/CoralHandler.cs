@@ -34,11 +34,9 @@ public class CoralHandler : MonoBehaviour
         {
             var newCoral = Instantiate(coral.getcoralPrefab(), spawnPoints[i], Quaternion.identity);
             newCoral.transform.parent = this.transform;
-            Debug.Log(coral.getCoralName() + " " + coral.getPollutionChange() + " Pollution," + coral.getOxygenLevelChange() + " Oxygen," + coral.getBiodiversityChange() + " Biodiversity," + coral.getCost());
+            //Debug.Log(coral.getCoralName() + " " + coral.getPollutionChange() + " Pollution," + coral.getOxygenLevelChange() + " Oxygen," + coral.getBiodiversityChange() + " Biodiversity," + coral.getCost());
         }
         GameDirector.Instance.modifyParameterChanges(coral.getPollutionChange(), coral.getBiodiversityChange(), coral.getOxygenLevelChange());
-
-
         StartCoroutine(CoralGrow());
     }
     IEnumerator CoralGrow()
@@ -53,14 +51,11 @@ public class CoralHandler : MonoBehaviour
                     Vector3 scaleChange = new Vector3(0.005f, 0.005f, 0.005f);
                     coral.transform.localScale += scaleChange;
                 }
-                
             }
             growthCounter++;
             yield return new WaitForSeconds(0.1f); 
         }
-        
     }
-
     public void OnTriggerEnter(Collider collider)
     {
         if (isGrowing)
@@ -77,7 +72,6 @@ public class CoralHandler : MonoBehaviour
             PromptInterface.togglePrompt(true);
         }
     }
-
     public void OnTriggerStay(Collider collider)
     {
         if (collider.gameObject.tag == "Player" &&
@@ -85,7 +79,7 @@ public class CoralHandler : MonoBehaviour
         {
             if (isGrowing)
                 return;
-              
+
             if (Input.GetKey(KeyCode.E))
             {
                 GameDirector.Instance.currentCoralSpot = this.gameObject;
@@ -102,7 +96,6 @@ public class CoralHandler : MonoBehaviour
             }
         }
     }
-
     public void OnTriggerExit(Collider collider)
     {
         if (collider.gameObject.tag == "Player" &&

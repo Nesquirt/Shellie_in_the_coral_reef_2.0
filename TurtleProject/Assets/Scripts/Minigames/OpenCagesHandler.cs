@@ -80,6 +80,7 @@ public class OpenCagesHandler : MonoBehaviour
             crab_text.SetText(openCages.ToString() + "/" + totCages.ToString());
             */
             this.GetComponent<SpawnCages>().restartGame();
+            StartCoroutine(audioManager.FadeTwoClips("freeRoaming_Music", 0f, "mazeExploring_Music", 1f, 5f));
         }
     }
 
@@ -152,8 +153,8 @@ public class OpenCagesHandler : MonoBehaviour
     private void checkEnd()
     {
         int gainedPearls = 8 * openCages;
-        audioManager.PlaySFX(audioManager.endMiniGame);
-        audioManager.ChangeMusic(audioManager.SaraGameSountrack, false,0.3f);
+        audioManager.Play("endMiniGame_SFX", false, 1f);
+        StartCoroutine(audioManager.FadeTwoClips("mazeExploring_Music", 0f, "freeRoaming_Music", 1f, 5f));
         if (openCages == 0)
         {
             VictoryInterface.setRewardsText("Purtroppo non sei riuscita a liberare nesssun granchio... \n" +
@@ -190,7 +191,7 @@ public class OpenCagesHandler : MonoBehaviour
                     this.hasKey = true;
                     MinigameInterface.toggleKeyIcon(true);
                     Debug.Log("ho la chiave");
-                    audioManager.PlaySFX(audioManager.KeyTaken);
+                    audioManager.Play("keyTaken_SFX", false, 1f);
                 }
                 else
                     return;
@@ -210,8 +211,8 @@ public class OpenCagesHandler : MonoBehaviour
                     this.openCages++;
                     Debug.Log("GABBIE APERTE: " + this.openCages);
                     MinigameInterface.setScoreText(openCages, totCages);
-                    audioManager.PlaySFX(audioManager.CageOpening);
-                    if(openCages == totCages && finalFunctionCalled == 0)
+                    audioManager.Play("cageOpen_SFX", false, 1f);
+                    if (openCages == totCages && finalFunctionCalled == 0)
                     {
                         callFinalFunction();
                         finalFunctionCalled++;

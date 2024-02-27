@@ -55,6 +55,7 @@ public class GameDirector : MonoBehaviour
     //Dichiarazione iniziale delle variabili
     private GameState currentState;
 
+    //TODO: Sposta e separa in nuovi metodi per ogni pannello
     private int currentPearls;
     private int reefHealth, pollution, biodiversity, oxygenLevel;
     private int pollutionChange, biodiversityChange, oxygenLevelChange, reefHealthChange;
@@ -94,7 +95,8 @@ public class GameDirector : MonoBehaviour
     }
     public void LoadGame()
     {
-        
+        currentState = GameState.FreeRoaming;
+
         //Nella scena di gioco, prende dalla hierarchy tutti gli elementi dell'interfaccia
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         reefHealthSlider = canvas.transform.Find("BarsPanel/ReefHealthBar").GetComponent<Slider>();
@@ -115,7 +117,9 @@ public class GameDirector : MonoBehaviour
         TitleText.gameObject.SetActive(false);
         CentralText.gameObject.SetActive(false);
         BottomText.gameObject.SetActive(false);
-        StatsPanel = canvas.transform.Find("StatsPanel").gameObject;
+
+        //TODO: cambia/sposta/rimuovi
+        StatsPanel = canvas.transform.Find("InfoPanel").gameObject;
         StatsPanel.SetActive(false);
 
         ReturnToMenuButton = GameOverPanel.transform.Find("ReturnToMenuButton").GetComponent<Button>();
@@ -254,7 +258,7 @@ public class GameDirector : MonoBehaviour
     public void addPearls(int value)
     {
         currentPearls += value;
-        GameObject.Find("Canvas/PearlsText").gameObject.GetComponent<TextMeshProUGUI>().SetText("Perle: " + getCurrentPearls());
+        //GameObject.Find("Canvas/PearlsText").gameObject.GetComponent<TextMeshProUGUI>().SetText("Perle: " + getCurrentPearls());
     }
     public void addPollution(int value)
     {
@@ -292,6 +296,15 @@ public class GameDirector : MonoBehaviour
     //Metodi per interagire con il GameState; usati dai minigiochi
     public void setGameState(GameState newState)
     {
+        if(newState == GameState.FreeRoaming)
+        {
+            MinigameInterface.endMinigame();
+        }
+        else
+        {
+            DialogueInterface.toggleDialoguePanelOff();
+            MinigameInterface.startMinigame();
+        }
         Debug.Log("Changed GameState to: " + newState);
         currentState = newState;
     }
@@ -387,18 +400,11 @@ public class GameDirector : MonoBehaviour
     public void StatsOpenAndClose(GameObject obj)
     {
         //audioManager.PlaySFX(audioManager.selection);
-        if (obj.activeSelf)
-        {
-            obj.SetActive(false);
-        }
-        else
-        {
-            obj.SetActive(true);
-        }
+        obj.SetActive(!obj.activeSelf);
     }
     // -------------------------------------------------------------------- //
     //Metodo chiamato dai prompt degli NPC per cambiare i tasti di dialogo
-
+    /*
     public void checkDialoguePanelButtons(string minigame)
     {
         GameObject DialoguePanel = canvas.transform.Find("DialoguePanel").gameObject;
@@ -440,6 +446,7 @@ public class GameDirector : MonoBehaviour
             DialoguePanel.transform.GetChild(5).gameObject.SetActive(false);
         }
     }
+    */
 }
 
 

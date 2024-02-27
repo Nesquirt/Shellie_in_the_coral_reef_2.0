@@ -24,11 +24,11 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     private int oggettiNelPiano, a, b, d, rifiutiraccolti;
     private List<GameObject> spazzature = new List<GameObject>();
     private float upwardForce = 2f;
-    private Image img;
-    private Transform StefanoPrompt;
-    private TextMeshProUGUI NPCName, dialogueText, rewardsText, testocontatore, testocronometro, testo5;
+    //private Image img;
+    //private Transform StefanoPrompt;
+    //private TextMeshProUGUI NPCName, dialogueText, rewardsText, testocontatore, testocronometro, testo5;
     //private Button confirmButton, cancelButton;
-    private GameObject canvas;
+    //private GameObject canvas;
     private bool run = false;
 
     private AudioManager audioManager;
@@ -38,6 +38,8 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     {
 
         d = 0;
+
+        /*
         canvas = GameObject.Find("Canvas");
         StefanoPrompt = canvas.transform.Find("Promptstefano");
         StefanoPrompt.gameObject.SetActive(false);
@@ -54,6 +56,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
         //confirmButton = canvas.transform.Find("DialoguePanel/ConfirmButton").gameObject.GetComponent<Button>();
         //cancelButton = canvas.transform.Find("DialoguePanel/CancelButton").gameObject.GetComponent<Button>();
+        */
         totalTime2 = totalTime + 4f;
 
         //Aggiunge i listener ai bottoni di dialogo
@@ -61,6 +64,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         //confirmButton.onClick.RemoveAllListeners();
         //confirmButton.onClick.AddListener(ConfirmButton_onClick);
         //cancelButton.onClick.AddListener(CancelButton_onClick);
+
         Transform tp = GetComponent<Transform>();
         originepianox = tp.position.x;
         originepianoz = tp.position.z;
@@ -68,89 +72,46 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
 
     }
-    public void trashStartPrompt()
+    public void StartTrashGame()
     {
-        if (GameDirector.Instance.getGameState() != GameDirector.GameState.FreeRoaming)
-            return;
-        if (!canvas.transform.Find("DialoguePanel").gameObject.activeSelf)
-            StefanoPrompt.gameObject.SetActive(true);
-        if (Input.GetKey(KeyCode.E))
+        if (DialogueInterface.getCurrentNPC() == "Peppe")
         {
-            canvas.transform.Find("BarsPanel").gameObject.SetActive(false);
-            StefanoPrompt.gameObject.SetActive(false);
-            canvas.transform.Find("DialoguePanel").gameObject.SetActive(true);
-            GameDirector.Instance.checkDialoguePanelButtons("TrashCollecting");
-            NPCName.SetText("Peppe il pesce");
-            dialogueText.SetText("Hey sembrerebbe che ci siano dei sacchetti della spazzatura\n " +
-            "ad inquinare l'oceano! Ti va di aiutarmi a metterli tutti nella rete? \n" +
-            "Attenta! hai solo un minuto di tempo prima che risalga la rete");
+            GameDirector.Instance.setGameState(GameDirector.GameState.TrashCollecting);
+            a = 0;
+            b = 0;
+            d = 0;
+            rifiutiraccolti = 0;
+            sostegno.gameObject.SetActive(false);
+            //testocronometro.gameObject.SetActive(true);
+            //testocontatore.gameObject.SetActive(true);
+            //testo5.gameObject.SetActive(true);
+            //img.gameObject.SetActive(true);
+            currentTime = totalTime;
+            currentTime2 = totalTime2;
+            run = true;
+            SpawnPrefabs();
         }
-
-    }
-    public void PesceRossoTriggerExit()
-    {
-        if (canvas.transform.Find("DialoguePanel").gameObject.activeSelf)
-            canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
-        if (StefanoPrompt.gameObject.activeSelf)
-            StefanoPrompt.gameObject.SetActive(false);
-        if (!canvas.transform.Find("BarsPanel").gameObject.activeSelf)
-            canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
-    }
-    public void ConfirmButton_onClick()
-    {
-        canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
-        StefanoPrompt.gameObject.SetActive(false);
-        canvas.transform.Find("BarsPanel").gameObject.SetActive(true);
-        audioManager.PlaySFX(audioManager.GridClimb);
-        audioManager.ChangeMusic(audioManager.StefanoGameSountrack, true, 0.18f);
-        startTrashGame();
-    }
-    public void CancelButton_onClick()
-    {
-        PesceRossoTriggerExit();
-        audioManager.PlaySFX(audioManager.selection);
-        StefanoPrompt.gameObject.SetActive(true);
-    }
-
-    void startTrashGame()
-    {
-        if (GameDirector.Instance.getGameState() != GameDirector.GameState.FreeRoaming)
-        {
-            GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
-            return;
-        }
-        GameDirector.Instance.setGameState(GameDirector.GameState.TrashCollecting);
-        a = 0;
-        b = 0;
-        d = 0;
-        rifiutiraccolti = 0;
-        sostegno.gameObject.SetActive(false);
-        testocronometro.gameObject.SetActive(true);
-        testocontatore.gameObject.SetActive(true);
-        testo5.gameObject.SetActive(true);
-        img.gameObject.SetActive(true);
-        currentTime = totalTime;
-        currentTime2 = totalTime2;
-        run = true;
-        SpawnPrefabs();
     }
     void FixedUpdate()
     {
-
         if (run)
         {
-            Debug.Log("oggetti nel paino" + oggettiNelPiano);
-            Debug.Log("oggetti raccolti" + rifiutiraccolti);
+            //Debug.Log("oggetti nel piano: " + oggettiNelPiano);
+            //Debug.Log("oggetti raccolti: " + rifiutiraccolti);
             if (currentTime > 0)
             {
-                testocronometro.text = Mathf.Round(currentTime).ToString();
-                testocontatore.text = oggettiNelPiano.ToString();
-
                 currentTime -= Time.deltaTime;
+                MinigameInterface.setTimerText((int)Mathf.Round(currentTime));
+
+                //testocronometro.text = Mathf.Round(currentTime).ToString();
+                //testocontatore.text = oggettiNelPiano.ToString();
+
+                
             }
             if (currentTime2 > 0)
             {
-                testocontatore.text = oggettiNelPiano.ToString();
+                MinigameInterface.setScoreText(oggettiNelPiano, 5);
+                //testocontatore.text = oggettiNelPiano.ToString();
                 currentTime2 -= Time.deltaTime;
             }
 
@@ -166,19 +127,19 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                     rifiutiraccolti = oggettiNelPiano;
                     int earnedPearls = rifiutiraccolti * 5;
                     GameDirector.Instance.addPearls(earnedPearls);
-                    //GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
                     GameDirector.Instance.addPollution(-rifiutiraccolti * 5);
-                    testocronometro.gameObject.SetActive(false);
-                    testocontatore.gameObject.SetActive(false);
-                    testo5.gameObject.SetActive(false);
-                    img.gameObject.SetActive(false);
+                    GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
+
+                    //testocronometro.gameObject.SetActive(false);
+                    //testocontatore.gameObject.SetActive(false);
+                    //testo5.gameObject.SetActive(false);
+                    //img.gameObject.SetActive(false);
                     b = 1;
 
                     audioManager.PlaySFX(audioManager.GridClimb);
 
                 }
                 rb.AddForce(Vector3.up * upwardForce, ForceMode.Impulse);
-
 
                 currentTime = 0;
 
@@ -197,12 +158,12 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                 a = 1;
                 currentTime2 = 0;
                 sostegno.gameObject.SetActive(true);
-                canvas.transform.Find("VictoryPanel").gameObject.SetActive(true);
-                rewardsText = canvas.transform.Find("VictoryPanel/RewardsPanel/RewardsText").GetComponent<TextMeshProUGUI>();
-                rewardsText.SetText("Rifiuti raccolti: " + rifiutiraccolti + "\n" +
+
+                VictoryInterface.setRewardsText("Rifiuti raccolti: " + rifiutiraccolti + "\n" +
                                  "Perle guadagnate: " + rifiutiraccolti * 5 + "\n" +
                                  "Livello di inquinamento diminuito del " + rifiutiraccolti * 5 + "%");
-                GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
+                VictoryInterface.toggleVictoryPanelOn();
+                
                 audioManager.PlaySFX(audioManager.endMiniGame);
                 audioManager.ChangeMusic(audioManager.StefanoGameSountrack, false, 0.18f);
                 run = false;
@@ -216,11 +177,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                 currentTime = 10;
                 currentTime2 = 14f;
             }
-
         }
-
-
-
     }
 
 

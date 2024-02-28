@@ -36,18 +36,18 @@ public class CoralHandler : MonoBehaviour
         }
         IEnumerator CoralGrow()
         {
-            while (growthCounter <= 600)
+            while (growthCounter <= 1200)
             {
                 foreach (Transform coral in transform)
                 {
                     if (coral.tag == "Coral")
                     {
-                        Vector3 scaleChange = new Vector3(0.005f, 0.005f, 0.005f);
+                        Vector3 scaleChange = new Vector3(0.002f, 0.002f, 0.002f);
                         coral.transform.localScale += scaleChange;
                     }
                 }
                 growthCounter++;
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSecondsRealtime(0.1f);
             }
         }
     }

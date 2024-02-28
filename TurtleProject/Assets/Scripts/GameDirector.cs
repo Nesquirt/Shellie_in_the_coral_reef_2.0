@@ -63,6 +63,7 @@ public class GameDirector : MonoBehaviour
 
     private Canvas canvas; //TODO: rimuovi
     private GameOverInterface gameOverInterface;
+    public AudioManager audioManager;
     
 
     //private AudioManager audioManager;
@@ -82,7 +83,7 @@ public class GameDirector : MonoBehaviour
         {
             Destroy(gameObject); //Se esiste gia' un'altra istanza, distrugge questo oggetto per evitare duplicati dell'istanza
         }
-        //audioManager = GetComponentInChildren<AudioManager>();
+        audioManager = GetComponentInChildren<AudioManager>();
         //audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         // -------------------------------------------------------------------- //
         //Funzione temporanea per testare i parametri senza passare dal menù

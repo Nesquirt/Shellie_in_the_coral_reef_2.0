@@ -12,7 +12,6 @@ public class MainMenu : MonoBehaviour
     public Button aboutButton;
 
     public GameObject LoadingPanel;
-    private AudioManager audioManager;
     void Start()
     {
         if (GameDirector.Instance == null)
@@ -21,16 +20,15 @@ public class MainMenu : MonoBehaviour
 
         LoadingPanel = GameObject.Find("Canvas/LoadingPanel");
         LoadingPanel.SetActive(false);
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-        audioManager.MenuMusic();
+        GameDirector.Instance.audioManager.MenuMusic();
     }
 
     // Funzione per avviare una nuova partita
     public void StartGame()
     {
         LoadingPanel.SetActive(true);
-        audioManager.ButtonPressed();
-        audioManager.GameMusic();
+        GameDirector.Instance.audioManager.ButtonPressed();
+        GameDirector.Instance.audioManager.GameMusic();
         StartCoroutine(FadeInLoadingScreen());
     }
 
@@ -42,7 +40,7 @@ public class MainMenu : MonoBehaviour
             Debug.Log("La scena è già caricata");
             return;
         }
-        audioManager.ButtonPressed();
+        GameDirector.Instance.audioManager.ButtonPressed();
         SceneManager.LoadScene("Simone_impostazioni", LoadSceneMode.Additive);
     }
     public string CheckIfSceneLoaded()
@@ -53,7 +51,7 @@ public class MainMenu : MonoBehaviour
     // Funzione per chiudere il gioco
     public void QuitGame()
     {
-        audioManager.ButtonPressed();
+        GameDirector.Instance.audioManager.ButtonPressed();
         Application.Quit();
     }
     IEnumerator FadeInLoadingScreen()

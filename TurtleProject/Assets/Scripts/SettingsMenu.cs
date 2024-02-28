@@ -9,7 +9,6 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private Slider SFXVolumeSlider;
     [SerializeField] private AudioMixer myMixer;
     public Button backButton;
-    private AudioManager audioManager;
 
     private void Start()
     {
@@ -26,7 +25,6 @@ public class SettingsMenu : MonoBehaviour
 
         // Aggiungi i listener per gli eventi dei pulsanti
         backButton.onClick.AddListener(BackToMainMenu);
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     private void OnDestroy()
@@ -38,7 +36,7 @@ public class SettingsMenu : MonoBehaviour
     public void BackToMainMenu()
     {
         // Carica la scena del menu principale
-        audioManager.ButtonPressed();
+        GameDirector.Instance.audioManager.ButtonPressed();
         SceneManager.UnloadSceneAsync("Simone_impostazioni");
     }
     public void LoadVolume()

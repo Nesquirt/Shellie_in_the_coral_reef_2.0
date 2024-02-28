@@ -28,8 +28,6 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     //private Button confirmButton, cancelButton;
     //private GameObject canvas;
     private bool run = false;
-
-    private AudioManager audioManager;
     private bool playHorn = true;
 
     private void Awake()
@@ -66,9 +64,6 @@ public class SpawnPrefabsRandomly : MonoBehaviour
         Transform tp = GetComponent<Transform>();
         originepianox = tp.position.x;
         originepianoz = tp.position.z;
-
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-
     }
     public void StartTrashGame()
     {
@@ -89,7 +84,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
             run = true;
             SpawnPrefabs();
 
-            audioManager.MiniGame();
+            GameDirector.Instance.audioManager.MiniGame();
         }
     }
     void FixedUpdate()
@@ -117,7 +112,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
 
             if (currentTime < 10 && playHorn == true)
             {
-                audioManager.ShipHornOrGridClimb(currentTime);
+                GameDirector.Instance.audioManager.ShipHornOrGridClimb(currentTime);
                 playHorn = false;
             }
             if (currentTime <= 0 && a == 0)
@@ -136,7 +131,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                     //img.gameObject.SetActive(false);
                     b = 1;
 
-                    audioManager.ShipHornOrGridClimb(currentTime);
+                    GameDirector.Instance.audioManager.ShipHornOrGridClimb(currentTime);
 
                 }
                 rb.AddForce(Vector3.up * upwardForce, ForceMode.Impulse);
@@ -164,7 +159,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                                  "Livello di inquinamento diminuito del " + rifiutiraccolti * 5 + "%");
                 VictoryInterface.toggleVictoryPanelOn();
 
-                audioManager.MiniGame();
+                GameDirector.Instance.audioManager.MiniGame();
                 run = false;
 
 

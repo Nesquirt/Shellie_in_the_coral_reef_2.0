@@ -149,15 +149,15 @@ public class TargetHandler : MonoBehaviour
 
     // -------------------------------------------------------------------- //
     //Shhhh...
-    /*
     public void summonSpecialTarget()
     {
-        canvas.transform.Find("SpecialTargetPrompt").gameObject.SetActive(true);
+        UImanager.promptInterface.setPromptText("Premi E per cavalcare l'onda");
+        UImanager.promptInterface.togglePrompt(true);
         if(Input.GetKey(KeyCode.E) && !specialTargetActive)
         {
             specialTargetActive = true;
-            canvas.transform.Find("SpecialTargetPrompt").gameObject.SetActive(false);
-            audioManager.ChangeMusic(audioManager.Crush_Spawn, true, 0.5f);
+            UImanager.promptInterface.togglePrompt(false);
+            //audioManager.ChangeMusic(audioManager.Crush_Spawn, true, 0.5f);
             StartCoroutine(summoningRitual());
 
         }
@@ -172,8 +172,7 @@ public class TargetHandler : MonoBehaviour
             Scorza.transform.position = Vector3.MoveTowards(Scorza.transform.position, new Vector3(57, 40, 530), Time.deltaTime * 3f);
             yield return new WaitForFixedUpdate();
         }
-        audioManager.ChangeMusic(audioManager.Crush_Spawn, false, 0.5f);
+        //audioManager.ChangeMusic(audioManager.Crush_Spawn, false, 0.5f);
     }
-    */
 
 }

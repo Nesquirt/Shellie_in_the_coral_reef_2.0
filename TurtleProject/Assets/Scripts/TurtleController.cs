@@ -137,6 +137,9 @@ public class TurtleController : MonoBehaviour
                 case "pesceColorato":
                     UImanager.promptInterface.setPromptText("Premi E per parlare con Dory");
                     break;
+                case "SpecialTarget":
+                    UImanager.promptInterface.setPromptText("Premi E per cavalcare l'onda");
+                    break;
             }
             UImanager.promptInterface.togglePrompt(true);
         }
@@ -178,10 +181,11 @@ public class TurtleController : MonoBehaviour
                         break;
 
                     case "SpecialTarget":
-                        //other.GetComponentInParent<TargetHandler>().summonSpecialTarget();
+                        other.GetComponentInParent<TargetHandler>().summonSpecialTarget();
                         break;
                 }
-                UImanager.dialogueInterface.toggleDialoguePanel(true);
+                if(other.name != "SpecialTarget")
+                    UImanager.dialogueInterface.toggleDialoguePanel(true);
             } else if(other.tag == "Chiave" || other.tag == "Gabbia")
             {
                 posizioni_cageKey.GetComponent<OpenCagesHandler>().TriggerMethod(other);

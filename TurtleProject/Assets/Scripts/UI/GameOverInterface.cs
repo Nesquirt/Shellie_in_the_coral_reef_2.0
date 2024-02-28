@@ -44,13 +44,14 @@ public class GameOverInterface : MonoBehaviour
     //Listener per i bottoni della schermata finale (apri sito web e torna al menu')
     public void OpenURL()
     {
-        //audioManager.PlaySFX(audioManager.selection);
+        GameDirector.Instance.audioManager.ButtonPressed();
         Application.OpenURL("https://coralreefrescueinitiative.org/");
     }
     public void LoadMenu()
     {
         CancelInvoke();
-        //audioManager.PlaySFX(audioManager.selection);
+        GameDirector.Instance.audioManager.ButtonPressed();
+
         SceneManager.LoadScene("Simone_Menu_Iniziale");
     }
 

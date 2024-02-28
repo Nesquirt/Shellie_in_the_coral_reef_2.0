@@ -49,7 +49,11 @@ public class AudioManager : MonoBehaviour
         }
     }
     //Funzioni Music
-    public void MenuMusic() { Play("menu_Music", true, 0.8f); }
+    public void MenuMusic() 
+    { 
+        if(audioSources.Count == 0) Play("menu_Music", true, 0.8f); 
+        else Restart();
+    }
     public void GameMusic()
     {
         StartCoroutine(FadeTwoClips("menu_Music", 0, "freeRoaming_Music", MusicVolume[0], 5));
@@ -181,7 +185,21 @@ public class AudioManager : MonoBehaviour
         }
         return null;
     }
-    
+    /*
+     * La funzione richiama il Fade per tutte le AudioSource che sono in riproduzione e avvia contemporaneamente
+     * il fade per l'AudioSource che sarà associata all'AudioClip del menu
+    */
+    private void Restart()
+    {
+        foreach (AudioSource audioSource in audioSources)
+        {
+            if(audioSource.isPlaying) 
+            {
+                StartCoroutine(Fade(audioSource.name,0,10));
+            }
+        }
+        StartCoroutine(Fade("menu_Music", 0.8f, 10));
+    }
     public IEnumerator FadeTwoClips(String clip1Name, float targetVolume1, String clip2Name, float targetVolume2, float duration)
     {
         StartCoroutine(Fade(clip1Name, targetVolume1, duration));

@@ -201,29 +201,24 @@ public class TurtleController : MonoBehaviour
         UImanager.dialogueInterface.toggleDialoguePanel(false);
     }
     // -------------------------------------------------------------------- //
-
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("spazzatura"))
-        { 
-            float intensity = 2f * (acceleration);
-            Vector3 directionToPlayer = (transform.position - collision.transform.position).normalized;
-            float pushAngle = 3f;  //angolo di spinta
-            Quaternion rotation = Quaternion.Euler(0, pushAngle, 0);
-            //Vector3 force = rotation * directionToPlayer;
-            Vector3 force = directionToPlayer + new Vector3(0, pushAngle, 0);
-            force.Normalize();
-            collision.gameObject.GetComponent<Rigidbody>().AddForce((force * intensity), ForceMode.Force);
-
-            Debug.Log("spinta");
-        }
-    }
-
-    //Funzione per rallentare in caso di collisione, principalmente per prevenire movimenti fuori controllo e passaggi attraverso il terreno
     public void OnCollisionStay(Collision collision)
     {
         if (speed >= maxSpeed / 6)
             speed = maxSpeed / 6;
+
+        if (collision.gameObject.CompareTag("spazzatura"))
+        {
+            float intensity = 2f * (acceleration * 0.2f);
+            Vector3 directionToPlayer = (transform.position - collision.transform.position).normalized;
+            float pushAngle = 3f;  //angolo di spinta
+            Quaternion rotation = Quaternion.Euler(0, pushAngle, 0);
+            //Vector3 force = rotation * directionToPlayer;
+            Vector3 force = directionToPlayer * intensity;
+            //force.Normalize();
+            collision.gameObject.GetComponent<Rigidbody>().AddForce((force), ForceMode.Force);
+
+            Debug.Log("spinta");
+        }
     }
 
     //Funzione per eliminare la velocità generata da collisioni

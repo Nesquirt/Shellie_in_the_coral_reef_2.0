@@ -69,7 +69,7 @@ public class MainMenu : MonoBehaviour
             LoadingTextImage.color = nextTextColor;
             yield return new WaitForSeconds(0.01f);
         }
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("InterfaceScene");
     }
 }
 

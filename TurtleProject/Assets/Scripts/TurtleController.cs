@@ -208,14 +208,14 @@ public class TurtleController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("spazzatura"))
         {
-            float intensity = 2f * (acceleration * 0.2f);
-            Vector3 directionToPlayer = (transform.position - collision.transform.position).normalized;
-            float pushAngle = 3f;  //angolo di spinta
+            float intensity = 2f * (speed * 0.5f);
+            Vector3 directionToPlayer = ( collision.transform.position - transform.position).normalized;
+            float pushAngle = 30f;  //angolo di spinta
             Quaternion rotation = Quaternion.Euler(0, pushAngle, 0);
             //Vector3 force = rotation * directionToPlayer;
             Vector3 force = directionToPlayer * intensity;
             //force.Normalize();
-            collision.gameObject.GetComponent<Rigidbody>().AddForce((force), ForceMode.Force);
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(rotation*force, ForceMode.Force);
 
             Debug.Log("spinta");
         }

@@ -195,10 +195,10 @@ public class AudioManager : MonoBehaviour
         {
             if(audioSource.isPlaying) 
             {
-                StartCoroutine(Fade(audioSource.name,0,10));
+                StartCoroutine(Fade(audioSource.name,0,3));
             }
         }
-        StartCoroutine(Fade("menu_Music", 0.8f, 10));
+        StartCoroutine(Fade("menu_Music", 0.8f, 3));
     }
     public IEnumerator FadeTwoClips(String clip1Name, float targetVolume1, String clip2Name, float targetVolume2, float duration)
     {

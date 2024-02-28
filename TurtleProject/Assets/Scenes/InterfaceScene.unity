@@ -3801,8 +3801,20 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1853527831}
         m_TargetAssemblyTypeName: DialogueInterface, Assembly-CSharp
-        m_MethodName: toggleDialoguePanelOff
-        m_Mode: 1
+        m_MethodName: toggleDialoguePanel
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 474394222}
+        m_TargetAssemblyTypeName: PromptInterface, Assembly-CSharp
+        m_MethodName: togglePrompt
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8067,6 +8079,7 @@ MonoBehaviour:
   activeMaterial: {fileID: 2100000, guid: b1dbbbd332e1f48ffb9b6490be0430ac, type: 2}
   inactiveMaterial: {fileID: 2100000, guid: 57febd4228cc7274d830c18d8b6e62fc, type: 2}
   targetNumber: 0
+  UImanager: {fileID: 1570023807}
 --- !u!54 &445255105
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8550,8 +8563,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.5, y: -338.6}
-  m_SizeDelta: {x: 400, y: 100}
+  m_AnchoredPosition: {x: 0, y: -340}
+  m_SizeDelta: {x: 1000, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &474394222
 MonoBehaviour:
@@ -8565,6 +8578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac234a2ec3f36874c869d263f461a27d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactPrompt: {fileID: 474394223}
 --- !u!114 &474394223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9000,7 +9014,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.6659546, y: 3.331787}
+  m_AnchoredPosition: {x: -1.6660156, y: 3.331787}
   m_SizeDelta: {x: 63.3041, y: 66.6355}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &498398427
@@ -9920,6 +9934,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b78fee54d9b1ad449bbb029d9b5bf04c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minigamePanel: {fileID: 0}
+  timer: {fileID: 0}
+  scoreText: {fileID: 0}
+  minigameIcon: {fileID: 0}
+  keyIcon: {fileID: 0}
+  obstacleCourseSprite: {fileID: 0}
+  trashCollectingSprite: {fileID: 0}
+  mazeExploringSprite: {fileID: 0}
+  keySprite: {fileID: 0}
 --- !u!1 &574082636
 GameObject:
   m_ObjectHideFlags: 0
@@ -12187,6 +12210,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1676256086955676034, guid: 831b33c9bcc7be34192a64054dfa0eff, type: 3}
+      propertyPath: UImanager
+      value: 
+      objectReference: {fileID: 1570023807}
+    - target: {fileID: 1676256086955676034, guid: 831b33c9bcc7be34192a64054dfa0eff, type: 3}
       propertyPath: totalTime
       value: 90
       objectReference: {fileID: 0}
@@ -14414,6 +14441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1760fc1082eea4fb11d6288a9c953f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rewardsText: {fileID: 831120416}
 --- !u!1 &881923769
 GameObject:
   m_ObjectHideFlags: 0
@@ -24740,6 +24768,7 @@ GameObject:
   - component: {fileID: 1570023805}
   - component: {fileID: 1570023804}
   - component: {fileID: 1570023803}
+  - component: {fileID: 1570023807}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -24840,6 +24869,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1570023807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570023801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5b1b9d2026fa894aabe72dbb948dbd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barsInterface: {fileID: 2010259173}
+  coralChoiceInterface: {fileID: 24882199}
+  dialogueInterface: {fileID: 1853527831}
+  gameOverInterface: {fileID: 498398429}
+  minigameInterface: {fileID: 569147933}
+  promptInterface: {fileID: 474394222}
+  victoryInterface: {fileID: 872560286}
 --- !u!4 &1573976904 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9016723695283693466, guid: 353220276fcf54c17ae2f0426a52b18a, type: 3}
@@ -25583,6 +25631,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurtlePlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 7803231290325262265, guid: d2e49869989351f429bdec8d8be2273e, type: 3}
+      propertyPath: UImanager
+      value: 
+      objectReference: {fileID: 1570023807}
     - target: {fileID: 7803231290325262265, guid: d2e49869989351f429bdec8d8be2273e, type: 3}
       propertyPath: turtleanim
       value: 
@@ -28396,6 +28448,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f07e0d4e4a45faa4a8c1e0b76e2c1811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 1853527827}
+  NPCName: {fileID: 166661552}
+  dialogueText: {fileID: 118624829}
+  currentNPC: 
 --- !u!1001 &1857193986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30079,6 +30135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 251c1b015a00d194e9012a16d7feeaf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UImanager: {fileID: 1570023807}
 --- !u!114 &1948517421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31417,6 +31474,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f9e42fb669a664f93cb8a4174f160b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reefHealthSlider: {fileID: 1497219210}
+  pollutionSlider: {fileID: 180795171}
+  biodiversitySlider: {fileID: 301697846}
+  oxygenLevelSlider: {fileID: 1673968176}
+  reefHealthArrow: {fileID: 820233308}
+  pollutionArrow: {fileID: 579592681}
+  biodiversityArrow: {fileID: 1541215177}
+  oxygenLevelArrow: {fileID: 166547763}
+  upArrow: {fileID: 21300000, guid: ee6caa49d12562e45b911b3486b1b90e, type: 3}
+  downArrow: {fileID: 21300000, guid: cec820eccb882f240826ddcc6b74f249, type: 3}
+  pearlsText: {fileID: 2118732752}
 --- !u!4 &2013116095 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2391389443483865935, guid: e3c8963f03898664e874051ca3ad904b, type: 3}
@@ -31447,7 +31515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dc957c8677fecea418cd6a19c641a553, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 57
+      value: 64.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dc957c8677fecea418cd6a19c641a553, type: 3}
       propertyPath: m_LocalPosition.y
@@ -31455,7 +31523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dc957c8677fecea418cd6a19c641a553, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 530
+      value: 517.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dc957c8677fecea418cd6a19c641a553, type: 3}
       propertyPath: m_LocalRotation.w

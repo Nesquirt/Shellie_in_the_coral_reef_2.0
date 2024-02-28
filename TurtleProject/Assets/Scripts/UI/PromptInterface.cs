@@ -4,25 +4,24 @@ using UnityEngine;
 using TMPro;
 public class PromptInterface : MonoBehaviour
 {
-    private static TextMeshProUGUI interactPrompt;
+    [SerializeField] private TextMeshProUGUI interactPrompt;
 
     private void Awake()
     {
-        interactPrompt = GameObject.Find("Canvas/InteractPrompt").GetComponent<TextMeshProUGUI>();
         togglePrompt(false);
         setPromptText("If you see this, something went wrong");
 
     }
-    public static bool isPromptActive()
+    public bool isPromptActive()
     {
         return interactPrompt.IsActive();
     }
-    public static void togglePrompt(bool state)
+    public void togglePrompt(bool state)
     {
         interactPrompt.gameObject.SetActive(state);
     }
 
-    public static void setPromptText(string text)
+    public void setPromptText(string text)
     {
         interactPrompt.SetText(text);
     }

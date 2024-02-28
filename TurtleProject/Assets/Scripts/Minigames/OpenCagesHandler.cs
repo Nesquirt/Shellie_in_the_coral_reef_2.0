@@ -17,6 +17,8 @@ public class OpenCagesHandler : MonoBehaviour
     private int finalFunctionCalled;
 
     private GameObject[] arr_cages;
+    [SerializeField] private UIManager UImanager;
+    private AudioManager audioManager;
 
     void Awake()
     {
@@ -26,7 +28,7 @@ public class OpenCagesHandler : MonoBehaviour
     //Funzione START MazeExploring
     public void restartMazeGame()
     {
-        if (DialogueInterface.getCurrentNPC() == "Dory")
+        if (UImanager.dialogueInterface.getCurrentNPC() == "Dory")
         {
             GameDirector.Instance.setGameState(GameDirector.GameState.MazeExploring);
             this.finalFunctionCalled = 0;
@@ -37,7 +39,7 @@ public class OpenCagesHandler : MonoBehaviour
             this.hasKey = false;
             this.openCages = 0;
 
-            MinigameInterface.setScoreText(0, totCages);
+            UImanager.minigameInterface.setScoreText(0, totCages);
             this.GetComponent<SpawnCages>().restartGame();
 
             GameDirector.Instance.audioManager.MiniGame();
@@ -55,7 +57,7 @@ public class OpenCagesHandler : MonoBehaviour
         {
             this.timeRemaining -= Time.deltaTime;
             this.seconds = Mathf.Round(timeRemaining);
-            MinigameInterface.setTimerText((int)seconds);
+            UImanager.minigameInterface.setTimerText((int)seconds);
         }
         else
         {
@@ -107,22 +109,22 @@ public class OpenCagesHandler : MonoBehaviour
         int gainedPearls = 8 * openCages;
         if (openCages == 0)
         {
-            VictoryInterface.setRewardsText("Purtroppo non sei riuscita a liberare nesssun granchio... \n" +
+            UImanager.victoryInterface.setRewardsText("Purtroppo non sei riuscita a liberare nesssun granchio... \n" +
                                     "Non hai guadagnato nessuna perla...\n" +
                                     "Il livello di biodiversità NON � aumentato...");
         }
         else if (openCages == totCages)
         {
-            VictoryInterface.setRewardsText("Complimenti! Sei riuscita a salvare tutti i granchi! \n" +
+            UImanager.victoryInterface.setRewardsText("Complimenti! Sei riuscita a salvare tutti i granchi! \n" +
                                 "Perle guadagnate: " + gainedPearls + "\n" +
                                 "Livello di biodiversità aumentato del " + gainedPearls + "%");
         }
         else
         {
-            VictoryInterface.setRewardsText("Perle guadagnate: " + gainedPearls + "\n" +
+            UImanager.victoryInterface.setRewardsText("Perle guadagnate: " + gainedPearls + "\n" +
                                 "Livello di biodiversità aumentato del " + gainedPearls + "%");
         }
-        VictoryInterface.toggleVictoryPanelOn();
+        UImanager.victoryInterface.toggleVictoryPanel(true);
 
         GameDirector.Instance.addPearls(gainedPearls);
         GameDirector.Instance.addParameters(0, 0, gainedPearls);
@@ -141,7 +143,7 @@ public class OpenCagesHandler : MonoBehaviour
                 {
                     Destroy(other.gameObject);
                     this.hasKey = true;
-                    MinigameInterface.toggleKeyIcon(true);
+                    UImanager.minigameInterface.toggleKeyIcon(true);
                     Debug.Log("ho la chiave");
                     GameDirector.Instance.audioManager.KeyOrCage(other);
                 }
@@ -159,11 +161,11 @@ public class OpenCagesHandler : MonoBehaviour
                     Debug.Log("apro gabbia");
                     other.GetComponent<CageScript>().OpenCage();
                     this.hasKey = false;
-                    MinigameInterface.toggleKeyIcon(false);
+                    UImanager.minigameInterface.toggleKeyIcon(false);
                     this.openCages++;
                     Debug.Log("GABBIE APERTE: " + this.openCages);
-                    MinigameInterface.setScoreText(openCages, totCages);
                     GameDirector.Instance.audioManager.KeyOrCage(other);
+                    UImanager.minigameInterface.setScoreText(openCages, totCages);
                     if (openCages == totCages && finalFunctionCalled == 0)
                     {
                         callFinalFunction();

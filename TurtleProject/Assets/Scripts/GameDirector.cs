@@ -64,6 +64,7 @@ public class GameDirector : MonoBehaviour
     private Canvas canvas; //TODO: rimuovi
     private GameOverInterface gameOverInterface;
     public AudioManager audioManager;
+    private UIManager UImanager;
     
 
     //private AudioManager audioManager;
@@ -86,7 +87,7 @@ public class GameDirector : MonoBehaviour
         audioManager = GetComponentInChildren<AudioManager>();
         //audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         // -------------------------------------------------------------------- //
-        //Funzione temporanea per testare i parametri senza passare dal menù
+        //Funzione temporanea per testare i parametri senza passare dal menï¿½
         if (SceneManager.GetActiveScene().name == "GameScene")
             LoadGame();
         
@@ -97,6 +98,7 @@ public class GameDirector : MonoBehaviour
            
         //TODO: temporaneo
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        UImanager = GameObject.Find("Canvas").GetComponent<UIManager>();
         /*
         //TODO: cambia/sposta/rimuovi
         StatsPanel = canvas.transform.Find("InfoPanel").gameObject;
@@ -108,8 +110,8 @@ public class GameDirector : MonoBehaviour
         WebsiteButton.gameObject.SetActive(false);
         SettingsButton = canvas.transform.Find("SettingsButton").GetComponent<Button>();
         */
-        gameOverInterface = GameObject.Find("Canvas/GameOverPanel").GetComponent<GameOverInterface>();
-        gameOverInterface.toggleGameOverPanel(false);
+        
+        UImanager.gameOverInterface.toggleGameOverPanel(false);
         // -------------------------------------------------------------------- //
         //Impostazione dei valori iniziali di gioco
         corals = GameObject.FindGameObjectsWithTag("CoralSpot");
@@ -143,12 +145,12 @@ public class GameDirector : MonoBehaviour
         currentState = newState;
         if (newState == GameState.FreeRoaming)
         {
-            MinigameInterface.endMinigame();
+            UImanager.minigameInterface.endMinigame();
         }
         else
         {
-            DialogueInterface.toggleDialoguePanel(false);
-            MinigameInterface.startMinigame();
+            UImanager.dialogueInterface.toggleDialoguePanel(false);
+            UImanager.minigameInterface.startMinigame();
         }
     }
 
@@ -207,17 +209,17 @@ public class GameDirector : MonoBehaviour
         else if (reefHealth >= 100)
         {
             reefHealth = 100;
-            gameOverInterface.GameOver(true);
+            UImanager.gameOverInterface.GameOver(true);
         }
         else if (reefHealth <= 0)
         {
             reefHealth = 0;
-            gameOverInterface.GameOver(false);
+            UImanager.gameOverInterface.GameOver(false);
         }
 
         //Aggiorna l'interfaccia
-        BarsInterface.updateBars();
-        BarsInterface.updateArrows();
+        UImanager.barsInterface.updateBars();
+        UImanager.barsInterface.updateArrows();
     }
     //Coroutine di fade out del loading screen
     IEnumerator FadeOutLoadingScreen()
@@ -243,7 +245,7 @@ public class GameDirector : MonoBehaviour
     public void addPearls(int value)
     {
         currentPearls += value;
-        BarsInterface.updatePearls();
+        UImanager.barsInterface.updatePearls();
     }
     public int getCurrentPearls()
     {
@@ -254,7 +256,7 @@ public class GameDirector : MonoBehaviour
         pollution += sumPollution;
         oxygenLevel += sumOxygen;
         biodiversity += sumBio;
-        BarsInterface.updateBars();
+        UImanager.barsInterface.updateBars();
     }
     public int getPollution()
     {
@@ -282,7 +284,7 @@ public class GameDirector : MonoBehaviour
         biodiversityChange += sumBioChange;
         oxygenLevelChange += sumOxygenChange;
 
-        BarsInterface.updateArrows();
+        UImanager.barsInterface.updateArrows();
     }
     public int getPollutionChange()
     {
@@ -302,4 +304,4 @@ public class GameDirector : MonoBehaviour
 
 /*Dopo i Serial Killer.....
 ora ci sono pure i Parallel Killer, assassini tecnologici che uccidono 8
-persone alla volta… */
+persone alla voltaï¿½ */

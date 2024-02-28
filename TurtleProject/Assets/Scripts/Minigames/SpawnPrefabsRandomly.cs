@@ -28,6 +28,9 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     //private Button confirmButton, cancelButton;
     //private GameObject canvas;
     private bool run = false;
+
+
+    [SerializeField] private UIManager UImanager;
     private bool playHorn = true;
 
     private void Awake()
@@ -67,7 +70,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     }
     public void StartTrashGame()
     {
-        if (DialogueInterface.getCurrentNPC() == "Peppe")
+        if (UImanager.dialogueInterface.getCurrentNPC() == "Peppe")
         {
             GameDirector.Instance.setGameState(GameDirector.GameState.TrashCollecting);
             a = 0;
@@ -96,7 +99,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
             if (currentTime > 0)
             {
                 currentTime -= Time.deltaTime;
-                MinigameInterface.setTimerText((int)Mathf.Round(currentTime));
+                UImanager.minigameInterface.setTimerText((int)Mathf.Round(currentTime));
 
                 //testocronometro.text = Mathf.Round(currentTime).ToString();
                 //testocontatore.text = oggettiNelPiano.ToString();
@@ -105,7 +108,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
             }
             if (currentTime2 > 0)
             {
-                MinigameInterface.setScoreText(oggettiNelPiano, 5);
+                UImanager.minigameInterface.setScoreText(oggettiNelPiano, 5);
                 //testocontatore.text = oggettiNelPiano.ToString();
                 currentTime2 -= Time.deltaTime;
             }
@@ -154,10 +157,10 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                 currentTime2 = 0;
                 sostegno.gameObject.SetActive(true);
 
-                VictoryInterface.setRewardsText("Rifiuti raccolti: " + rifiutiraccolti + "\n" +
+                UImanager.victoryInterface.setRewardsText("Rifiuti raccolti: " + rifiutiraccolti + "\n" +
                                  "Perle guadagnate: " + rifiutiraccolti * 5 + "\n" +
                                  "Livello di inquinamento diminuito del " + rifiutiraccolti * 5 + "%");
-                VictoryInterface.toggleVictoryPanelOn();
+                UImanager.victoryInterface.toggleVictoryPanel(true);
 
                 GameDirector.Instance.audioManager.MiniGame();
                 run = false;

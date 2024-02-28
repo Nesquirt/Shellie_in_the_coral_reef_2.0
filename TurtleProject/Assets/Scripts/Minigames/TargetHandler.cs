@@ -60,7 +60,8 @@ public class TargetHandler : MonoBehaviour
             }
 
             //AUDIO 
-            StartCoroutine(audioManager.FadeTwoClips("freeRoaming_Music", 0f, "obstacleCourse_Music", 1f, 5f));
+            audioManager.ToggleMiniGameState();
+            audioManager.MiniGame();
         }
     }
     // -------------------------------------------------------------------- //
@@ -121,9 +122,10 @@ public class TargetHandler : MonoBehaviour
                 {
                     Victory();
                     StopCoroutine(Timer());
-                    audioManager.Play("raceStart_SFX", false, 1f);
-                    StartCoroutine(audioManager.FadeTwoClips("obstacleCourse_Music", 0f, "freeRoaming_Music", 1f, 5f));
-                    return;
+                    audioManager.Play("endMiniGame_SFX", false, 1f);
+                    audioManager.ToggleMiniGameState();
+                    audioManager.MiniGame();
+                return;
                 }
                 GameObject.Find(nextTargetName).GetComponent<MeshRenderer>().material = activeMaterial;
                 if(targetNumber > 0 && targetNumber < 28)

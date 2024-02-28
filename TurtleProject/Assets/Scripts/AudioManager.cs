@@ -5,6 +5,7 @@ using System.Globalization;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 public class AudioManager : MonoBehaviour
 {
@@ -13,9 +14,13 @@ public class AudioManager : MonoBehaviour
     private AudioMixerGroup Music, SFX;
     private List<AudioSource> audioSources;
     private Dictionary<string, AudioClip> audioClips;
+    private Boolean isInMiniGame;
+    private String miniGame_musicName;
 
     public void Awake()
     {
+        isInMiniGame = false;
+        miniGame_musicName = null;
         SFX = myMixer.FindMatchingGroups("SFX")[0];
         Music = myMixer.FindMatchingGroups("Music")[0];
         audioSources = new();
@@ -53,6 +58,39 @@ public class AudioManager : MonoBehaviour
         Play("water_SFX", true, 1f);
         Play("bubble_SFX", true, 1f);
     }
+    public void ToggleMiniGameState()
+    {
+        isInMiniGame = !isInMiniGame;
+    }
+    public void MiniGame()
+    {
+        float volumeMiniGame = isInMiniGame ? 1f : 0f;  // Se flag è true, volumeClip1 sarà 1, altrimenti sarà 0
+        float volumeFreeRoaming = isInMiniGame ? 0f : 1f;  // Se flag è true, volumeClip2 sarà 0, altrimenti sarà 1
+        
+        if (isInMiniGame == true)
+        {
+            switch (GameDirector.Instance.getGameState())
+            {
+                case GameDirector.GameState.ObstacleCourse:
+                    {
+                        miniGame_musicName = "obstacleCourse_Music";
+                        break;
+                    }
+                case GameDirector.GameState.TrashCollecting:
+                    {
+                        miniGame_musicName = "trashCollectin_Music";
+                        break;
+                    }
+                case GameDirector.GameState.MazeExploring:
+                    {
+                        miniGame_musicName = "mazeExploring_Music";
+                        break;
+                    }
+            }
+        }
+        StartCoroutine(FadeTwoClips(miniGame_musicName, volumeMiniGame, "freeRoaming_Music", volumeFreeRoaming, 5));
+    }
+
     private AudioSource GetAvailableSource(String clipName)
     {
         foreach (AudioSource source in audioSources)
@@ -116,7 +154,6 @@ public class AudioManager : MonoBehaviour
     {
         StartCoroutine(Fade(clip1Name, targetVolume1, duration));
         StartCoroutine(Fade(clip2Name, targetVolume2, duration));
-
         yield return new WaitForSeconds(duration);
     }
     public IEnumerator Fade(String clipName, float targetVolume, float duration)

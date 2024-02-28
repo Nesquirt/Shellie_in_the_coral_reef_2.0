@@ -11,11 +11,9 @@ public class CoralHandler : MonoBehaviour
     private bool isGrowing;
 
     private CoralChoiceInterface coralChoiceInterface;
-    private Canvas canvas;
     private void Awake()
     {
         coralChoiceInterface = GameObject.Find("Canvas/CoralChoicePanel").GetComponent<CoralChoiceInterface>();
-        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         isGrowing = false;
         spawnPoints = new Vector3[5];
         //Creo i vettori con le posizioni in cui deve instanziare i nuovi coralli relativi alla roccia
@@ -62,7 +60,7 @@ public class CoralHandler : MonoBehaviour
         if (isGrowing)
         {
             PromptInterface.togglePrompt(false);
-            canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(false);
+            coralChoiceInterface.toggleCoralChoicePanel(false);
             return;
         }
         if (collider.gameObject.tag == "Player" &&
@@ -82,17 +80,13 @@ public class CoralHandler : MonoBehaviour
             if (Input.GetKey(KeyCode.E))
             {
                 GameDirector.Instance.currentCoralSpot = this.gameObject;
-                canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(true);
-                canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(false);
+                coralChoiceInterface.toggleCoralChoicePanel(true);
+                PromptInterface.togglePrompt(false);
             }
             if (Input.GetKey(KeyCode.Escape))
             {
-                canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(false);
-            }
-            if (!canvas.transform.Find("CoralChoicePanel").gameObject.activeSelf)
-            {
-                //canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(true);
-
+                coralChoiceInterface.toggleCoralChoicePanel(false);
+                PromptInterface.togglePrompt(true);
             }
         }
         else if (isGrowing && PromptInterface.isPromptActive())
@@ -105,16 +99,7 @@ public class CoralHandler : MonoBehaviour
             GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
         {
             PromptInterface.togglePrompt(false);
-
-            //Uscito dalla zona del CoralSpot, chiude gli elementi dell'UI
-            if (canvas.transform.Find("CoralSpotPrompt").gameObject.activeSelf)
-            {
-                canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(false);
-            }
-            if (canvas.transform.Find("CoralChoicePanel").gameObject.activeSelf)
-            {
-                canvas.transform.Find("CoralChoicePanel").gameObject.SetActive(false);
-            }
+            coralChoiceInterface.toggleCoralChoicePanel(false);
         }
     }
 

@@ -6,3 +6,6 @@ public class CoralStats : MonoBehaviour
 {
     public CoralSO coral;
 }
+
+
+//

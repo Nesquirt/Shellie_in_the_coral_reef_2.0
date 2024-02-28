@@ -29,7 +29,7 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         LoadingPanel.SetActive(true);
-        audioManager.Play("selection_SFX", false, 1f);
+        audioManager.ButtonPressed();
         audioManager.GameMusic();
         StartCoroutine(FadeInLoadingScreen());
     }
@@ -42,7 +42,7 @@ public class MainMenu : MonoBehaviour
             Debug.Log("La scena è già caricata");
             return;
         }
-        audioManager.Play("selection_SFX", false, 1f);
+        audioManager.ButtonPressed();
         SceneManager.LoadScene("Simone_impostazioni", LoadSceneMode.Additive);
     }
     public string CheckIfSceneLoaded()
@@ -53,7 +53,7 @@ public class MainMenu : MonoBehaviour
     // Funzione per chiudere il gioco
     public void QuitGame()
     {
-        audioManager.Play("selection_SFX", false, 1f);
+        audioManager.ButtonPressed();
         Application.Quit();
     }
     IEnumerator FadeInLoadingScreen()

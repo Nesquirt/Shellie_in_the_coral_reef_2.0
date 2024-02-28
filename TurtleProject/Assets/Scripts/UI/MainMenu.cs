@@ -6,18 +6,9 @@ using UnityEngine.UI;
 using TMPro;
 public class MainMenu : MonoBehaviour
 {
-    public Button startGameButton;
-    public Button optionsButton;
-    public Button quitButton;
-    public Button aboutButton;
-
     public GameObject LoadingPanel;
     void Start()
     {
-        if (GameDirector.Instance == null)
-        {
-        }
-
         LoadingPanel = GameObject.Find("Canvas/LoadingPanel");
         LoadingPanel.SetActive(false);
         GameDirector.Instance.audioManager.MenuMusic();
@@ -30,6 +21,12 @@ public class MainMenu : MonoBehaviour
         GameDirector.Instance.audioManager.ButtonPressed();
         GameDirector.Instance.audioManager.GameMusic();
         StartCoroutine(FadeInLoadingScreen());
+    }
+
+    public void AboutButton()
+    {
+        GameDirector.Instance.audioManager.ButtonPressed();
+        Application.OpenURL("https://coralreefrescueinitiative.org/");
     }
 
     // Funzione per aprire il menu delle impostazioni (la scena SettingsMenu)

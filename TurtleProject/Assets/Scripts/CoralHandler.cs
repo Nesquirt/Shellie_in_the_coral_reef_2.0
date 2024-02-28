@@ -9,6 +9,7 @@ public class CoralHandler : MonoBehaviour
     private int growthCounter;
     private bool isGrowing;
     private UIManager UImanager;
+    private Outline outlineComp;
     private void Awake()
     {
         UImanager = GameObject.Find("Canvas").GetComponent<UIManager>();
@@ -22,11 +23,14 @@ public class CoralHandler : MonoBehaviour
         spawnPoints[4] = new Vector3(this.transform.position.x - 7.6f, this.transform.position.y + 4.2f, this.transform.position.z - 8);
 
         growthCounter = 0;
+        outlineComp = GetComponent<Outline>();
+        outlineComp.enabled = true;
     }
 
     public void SpawnCorals(CoralSO coral)
     {
         isGrowing = true;
+        outlineComp.enabled = false;
         for (int i = 0; i < spawnPoints.Length; i++)
         {
             var newCoral = Instantiate(coral.getcoralPrefab(), spawnPoints[i], Quaternion.identity);
@@ -97,5 +101,13 @@ public class CoralHandler : MonoBehaviour
                 UImanager.promptInterface.togglePrompt(false);
                 UImanager.coralChoiceInterface.toggleCoralChoicePanel(false);
             }
+        }
+
+        public void toggleOutline(bool state)
+        {
+            if (!isGrowing)
+            this.GetComponent<Outline>().enabled = state;
+            else
+                this.GetComponent<Outline>().enabled = false;
         }
 }

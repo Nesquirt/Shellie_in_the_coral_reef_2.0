@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class InfoPanelInterface : MonoBehaviour
-{
-    /*
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
+public class UtilitiesInterface : MonoBehaviour
+{   
     public void OpenSettings()
     {
         //audioManager.PlaySFX(audioManager.selection);
@@ -16,5 +17,5 @@ public class InfoPanelInterface : MonoBehaviour
         //audioManager.PlaySFX(audioManager.selection);
         obj.SetActive(!obj.activeSelf);
     }
-    */
+    
 }

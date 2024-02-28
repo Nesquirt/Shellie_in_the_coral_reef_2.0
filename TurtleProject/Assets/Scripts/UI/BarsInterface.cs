@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class BarsInterface : MonoBehaviour
 {
     private static Slider reefHealthSlider, pollutionSlider, biodiversitySlider, oxygenLevelSlider;
     private static Image reefHealthArrow, pollutionArrow, biodiversityArrow, oxygenLevelArrow;  //TODO: aggiungi un'immagine per quando il cambiamento di parametri e' 0
     private static Sprite upArrow, downArrow;
-
+    private static TextMeshProUGUI pearlsText;
     private void Awake()
     {
         GameObject canvas = GameObject.Find("Canvas");
@@ -23,6 +24,12 @@ public class BarsInterface : MonoBehaviour
 
         upArrow = Resources.Load<Sprite>("Sprites/UpArrow");
         downArrow = Resources.Load<Sprite>("Sprites/DownArrow");
+
+        pearlsText = canvas.transform.Find("BarsPanel/PearlsText").GetComponent<TextMeshProUGUI>();
+    }
+    public static void updatePearls()
+    {
+        pearlsText.SetText("Perle: " + GameDirector.Instance.getCurrentPearls());
     }
     
     public static void updateBars()

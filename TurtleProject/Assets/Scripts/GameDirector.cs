@@ -320,7 +320,7 @@ public class GameDirector : MonoBehaviour
     public void addPearls(int value)
     {
         currentPearls += value;
-        //GameObject.Find("Canvas/PearlsText").gameObject.GetComponent<TextMeshProUGUI>().SetText("Perle: " + getCurrentPearls());
+        BarsInterface.updatePearls();
     }
     public int getCurrentPearls()
     {

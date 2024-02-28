@@ -99,18 +99,6 @@ public class GameDirector : MonoBehaviour
         //TODO: temporaneo
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         UImanager = GameObject.Find("Canvas").GetComponent<UIManager>();
-        /*
-        //TODO: cambia/sposta/rimuovi
-        StatsPanel = canvas.transform.Find("InfoPanel").gameObject;
-        StatsPanel.SetActive(false);
-
-        ReturnToMenuButton = GameOverPanel.transform.Find("ReturnToMenuButton").GetComponent<Button>();
-        WebsiteButton = GameOverPanel.transform.Find("WebsiteButton").GetComponent<Button>();
-        ReturnToMenuButton.gameObject.SetActive(false);
-        WebsiteButton.gameObject.SetActive(false);
-        SettingsButton = canvas.transform.Find("SettingsButton").GetComponent<Button>();
-        */
-        
         UImanager.gameOverInterface.toggleGameOverPanel(false);
         // -------------------------------------------------------------------- //
         //Impostazione dei valori iniziali di gioco
@@ -145,13 +133,24 @@ public class GameDirector : MonoBehaviour
         currentState = newState;
         if (newState == GameState.FreeRoaming)
         {
+            //Riattiva l'outline dei coralSpots
+            foreach (GameObject coralSpot in corals)
+            {
+                coralSpot.GetComponent<CoralHandler>().toggleOutline(true);
+            }
             UImanager.minigameInterface.endMinigame();
         }
         else
         {
+            //Disattiva l'outline dei coralSpots mentre si è in un minigioco
+            foreach (GameObject coralSpot in corals)
+            {
+                coralSpot.GetComponent<CoralHandler>().toggleOutline(false);
+            }
             UImanager.dialogueInterface.toggleDialoguePanel(false);
             UImanager.minigameInterface.startMinigame();
         }
+
     }
 
     public GameState getGameState()

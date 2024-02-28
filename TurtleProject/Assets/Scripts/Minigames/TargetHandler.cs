@@ -112,19 +112,24 @@ public class TargetHandler : MonoBehaviour
 
                 if (targetNumber == 0)
                 {
-                    Debug.Log("Attraversato primo anello");
+                Debug.Log("Attraversato primo anello");
                     StartCoroutine(Timer());
+                    audioManager.Play("raceStart_SFX",false,2f);
+                
                 }
                 if(targetNumber >= 28)
                 {
                     Victory();
                     StopCoroutine(Timer());
                     audioManager.MiniGame();
-                    return;
+                return;
                 }
                 GameObject.Find(nextTargetName).GetComponent<MeshRenderer>().material = activeMaterial;
+                if(targetNumber > 0 && targetNumber < 28)
+                {
+                    audioManager.Play("ringCross_SFX", false, 1f);
+                }
 
-                audioManager.CrossRing(targetNumber);
                 targetNumber++;
                 
             }

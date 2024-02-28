@@ -192,7 +192,7 @@ public class OpenCagesHandler : MonoBehaviour
                     this.hasKey = true;
                     MinigameInterface.toggleKeyIcon(true);
                     Debug.Log("ho la chiave");
-                    audioManager.KeyOrCage(other);
+                    audioManager.Play("keyTaken_SFX", false, 1f);
                 }
                 else
                     return;
@@ -212,7 +212,7 @@ public class OpenCagesHandler : MonoBehaviour
                     this.openCages++;
                     Debug.Log("GABBIE APERTE: " + this.openCages);
                     MinigameInterface.setScoreText(openCages, totCages);
-                    audioManager.KeyOrCage(other);
+                    audioManager.Play("cageOpen_SFX", false, 1f);
                     if (openCages == totCages && finalFunctionCalled == 0)
                     {
                         callFinalFunction();

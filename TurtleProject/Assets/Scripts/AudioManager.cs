@@ -9,11 +9,10 @@ public class AudioManager : MonoBehaviour
 {
 
     [SerializeField] private AudioMixer myMixer;
-
     private AudioMixerGroup Music, SFX;
     private List<AudioSource> audioSources;
     private Dictionary<string, AudioClip> audioClips;
-    private readonly float[] MusicVolume = {0.7f, 0.5f, 0.6f, 1}; 
+    private float[] musicVolume = {0.7f, 0.5f, 0.6f, 1}; 
     private bool isInMiniGame;
     private string miniGame_musicName;
 
@@ -54,7 +53,7 @@ public class AudioManager : MonoBehaviour
     }
     public void GameMusic()
     {
-        StartCoroutine(FadeTwoClips("menu_Music", 0, "freeRoaming_Music", MusicVolume[0], 5));
+        StartCoroutine(FadeTwoClips("menu_Music", 0, "freeRoaming_Music", musicVolume[0], 5));
         Play("water_SFX", true, 1f);
         Play("bubble_SFX", true, 1f);
     }
@@ -63,7 +62,7 @@ public class AudioManager : MonoBehaviour
         isInMiniGame = !isInMiniGame;
 
         float volumeMiniGame = 0f;
-        float volumeFreeRoaming = isInMiniGame ? 0 : MusicVolume[0]; 
+        float volumeFreeRoaming = isInMiniGame ? 0 : musicVolume[0]; 
         
         if (isInMiniGame == true)
         {
@@ -72,20 +71,20 @@ public class AudioManager : MonoBehaviour
                 case GameDirector.GameState.ObstacleCourse:
                     {
                         miniGame_musicName = "obstacleCourse_Music";
-                        volumeMiniGame = MusicVolume[1];
+                        volumeMiniGame = musicVolume[1];
                         break;
                     }
                 case GameDirector.GameState.TrashCollecting:
                     {
                         Play("gridDrop_SFX", false, 1f);
                         miniGame_musicName = "trashCollecting_Music";
-                        volumeMiniGame = MusicVolume[2];
+                        volumeMiniGame = musicVolume[2];
                         break;
                     }
                 case GameDirector.GameState.MazeExploring:
                     {
                         miniGame_musicName = "mazeExploring_Music";
-                        volumeMiniGame = MusicVolume[3];
+                        volumeMiniGame = musicVolume[3];
                         break;
                     }
             }
@@ -95,11 +94,29 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(FadeTwoClips(miniGame_musicName, volumeMiniGame, "freeRoaming_Music", volumeFreeRoaming, 7));
     }
 
-    public void ButtonPressed() { Play("selection_SFX", false, 1f); }
-    public void ShipHornOrGridClimb(float currentTime) { Play(currentTime > 0 ? "shipHorn_SFX" : "gridClimb_SFX", false, 1); }
-    public void CrossRing(int targetNumber) { Play(targetNumber == 0 ? "raceStart_SFX" : "ringCross_SFX", false, targetNumber == 0 ? 1 : 0.6f); }
-    public void RaceStart() { Play("raceStart_SFX", false, 2f); }
-    public void KeyOrCage(Collider collider) { Play(collider.CompareTag("Chiave") ? "keyTaken_SFX" : "cageOpen_SFX", false, collider.CompareTag("Chiave") ? 0.6f : 0.7f); }
+    public void ButtonPressed()
+    {
+
+    }
+    public void ShipHorn()
+    {
+
+    }
+    public void CrossRing()
+    {
+
+    }
+    public void KeyTaken()
+    {
+
+    }
+    public void CageOpen()
+    {
+
+    }
+
+
+
     private AudioSource GetAvailableSource(String clipName)
     {
         foreach (AudioSource source in audioSources)

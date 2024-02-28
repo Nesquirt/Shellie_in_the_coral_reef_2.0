@@ -119,7 +119,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
 
             if (currentTime < 10 && playHorn == true)
             {
-                audioManager.ShipHornOrGridClimb(currentTime);
+                audioManager.Play("shipHorn_SFX", false, 1f);
                 playHorn = false;
             }
             if (currentTime <= 0 && a == 0)
@@ -138,7 +138,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                     //img.gameObject.SetActive(false);
                     b = 1;
 
-                    audioManager.ShipHornOrGridClimb(currentTime);
+                    audioManager.Play("gridClimb_SFX", false, 1f);
 
                 }
                 rb.AddForce(Vector3.up * upwardForce, ForceMode.Impulse);

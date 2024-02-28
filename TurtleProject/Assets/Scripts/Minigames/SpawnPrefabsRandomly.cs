@@ -15,12 +15,10 @@ public class SpawnPrefabsRandomly : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float totalTime;
 
-    private float spawnAreaWidth = 50f;
     private float spawnAreaLength = 50f;
     private int numerosacchettidaspawnare = 5;
     private float originepianox, originepianoz, totalTime2, currentTime, currentTime2;
     private float lunghezzapiano = 30f;
-    private float larghezzapiano = 30f;
     private int oggettiNelPiano, a, b, d, rifiutiraccolti;
     private List<GameObject> spazzature = new List<GameObject>();
     private float upwardForce = 2f;

@@ -18,7 +18,6 @@ public class SpawnCages : MonoBehaviour
     private float posy;
     private float posz;
 
-    private int min;
     private int max;
     private int num;
 
@@ -57,7 +56,6 @@ public class SpawnCages : MonoBehaviour
 
     private void Spawn()
     {
-        this.min = 0;
         this.max = mazeSpawnPoints.Count;
 
         for (int i = 0; i < totalCages * 2; i++)

@@ -8,13 +8,6 @@ using UnityEngine.UI;
 
 public class OpenCagesHandler : MonoBehaviour
 {
-    /*
-    private GameObject canvas;
-    private TextMeshProUGUI timer_text, crab_text, NPCName, dialogueText, victoryText;
-    private Transform MazePrompt;
-    private Image crab_icon, key_icon;
-    private Button confirmMazeButton, cancelMazeButton;
-    */
     private float timeRemaining;
     private float seconds;
 
@@ -30,30 +23,6 @@ public class OpenCagesHandler : MonoBehaviour
     void Awake()
     {
         this.totCages = this.GetComponent<SpawnCages>().totalCages;  //prendo il numero di casse
-        /*
-        this.canvas = GameObject.Find("Canvas");
-
-        this.timer_text = canvas.transform.Find("MazeContainer/TimerText").gameObject.GetComponent<TextMeshProUGUI>();
-        this.crab_icon = canvas.transform.Find("MazeContainer/CrabIcon").gameObject.GetComponent<Image>();
-        this.key_icon = canvas.transform.Find("MazeContainer/KeyIcon").gameObject.GetComponent<Image>();
-        this.crab_text = canvas.transform.Find("MazeContainer/FreedCrab").gameObject.GetComponent<TextMeshProUGUI>();
-
-        //Elementi finestra di dialogo
-        this.MazePrompt = canvas.transform.Find("MazeContainer/MazePrompt");
-        MazePrompt.gameObject.SetActive(false);
-        this.NPCName = canvas.transform.Find("DialoguePanel/TitlePanel/NPCName").gameObject.GetComponent<TextMeshProUGUI>();
-        this.dialogueText = canvas.transform.Find("DialoguePanel/DialogueText").gameObject.GetComponent<TextMeshProUGUI>();
-        canvas.transform.Find("DialoguePanel").gameObject.SetActive(false);
-
-        //Bottoni 
-        confirmMazeButton = canvas.transform.Find("DialoguePanel/ConfirmMazeButton").gameObject.GetComponent<Button>();
-        cancelMazeButton = canvas.transform.Find("DialoguePanel/CancelMazeButton").gameObject.GetComponent<Button>();
-
-        timer_text.enabled = false;
-        crab_icon.enabled = false;
-        key_icon.enabled = false;
-        crab_text.enabled = false;
-        */
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
@@ -72,13 +41,6 @@ public class OpenCagesHandler : MonoBehaviour
             this.openCages = 0;
 
             MinigameInterface.setScoreText(0, totCages);
-            /*
-            crab_icon.enabled = true;
-            key_icon.enabled = false;
-
-            crab_text.enabled = true;
-            crab_text.SetText(openCages.ToString() + "/" + totCages.ToString());
-            */
             this.GetComponent<SpawnCages>().restartGame();
 
             audioManager.MiniGame();
@@ -87,8 +49,6 @@ public class OpenCagesHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if (GameObject.Find("Director").GetComponent<GameDirector>().getGameState() != GameDirector.GameState.MazeExploring)
-        //    return;
 
         if (GameDirector.Instance.getGameState() != GameDirector.GameState.MazeExploring)
             return;
@@ -135,12 +95,6 @@ public class OpenCagesHandler : MonoBehaviour
                 if (arr_cages[i] != null)
                 {
                     arr_cages[i].GetComponent<CageScript>().GoUp();
-                    //if (arr_cages[i].transform.position.y > 100f)
-                    //{
-                        //arr_cages[i].GetComponent<Rigidbody>().isKinematic = true;      //ho gi� disabilitato la fisica per l'oggetto
-                        //Destroy(arr_cages[i]);
-                        //Debug.Log("gabbia distrutta");
-                    //}
                 }
 
             }

@@ -62,6 +62,7 @@ public class CoralHandler : MonoBehaviour
             if (collider.gameObject.tag == "Player" &&
                 GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
             {
+                GameDirector.Instance.currentCoralSpot = this.gameObject;
                 PromptInterface.setPromptText("Premi E per piantare un corallo");
                 PromptInterface.togglePrompt(true);
             }
@@ -74,7 +75,7 @@ public class CoralHandler : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.E))
                 {
-                    GameDirector.Instance.currentCoralSpot = this.gameObject;
+                    
                     coralChoiceInterface.toggleCoralChoicePanel(true);
                     PromptInterface.togglePrompt(false);
                 }

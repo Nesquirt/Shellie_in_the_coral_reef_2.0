@@ -1,11 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
-using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
+
 
 public class AudioManager : MonoBehaviour
 {
@@ -14,8 +12,9 @@ public class AudioManager : MonoBehaviour
     private AudioMixerGroup Music, SFX;
     private List<AudioSource> audioSources;
     private Dictionary<string, AudioClip> audioClips;
-    private Boolean isInMiniGame;
-    private String miniGame_musicName;
+    private float[] musicVolume = {0.7f, 0.5f, 0.6f, 1}; 
+    private bool isInMiniGame;
+    private string miniGame_musicName;
 
     public void Awake()
     {
@@ -50,11 +49,11 @@ public class AudioManager : MonoBehaviour
     }
     public void MenuMusic()
     {
-        Play("menu_Music", true, 1f);
+        Play("menu_Music", true, 0.8f);
     }
     public void GameMusic()
     {
-        StartCoroutine(FadeTwoClips("menu_Music", 0f, "freeRoaming_Music", 1f, 3f));
+        StartCoroutine(FadeTwoClips("menu_Music", 0, "freeRoaming_Music", musicVolume[0], 5));
         Play("water_SFX", true, 1f);
         Play("bubble_SFX", true, 1f);
     }
@@ -64,8 +63,8 @@ public class AudioManager : MonoBehaviour
     }
     public void MiniGame()
     {
-        float volumeMiniGame = isInMiniGame ? 1f : 0f;  // Se flag è true, volumeClip1 sarà 1, altrimenti sarà 0
-        float volumeFreeRoaming = isInMiniGame ? 0f : 1f;  // Se flag è true, volumeClip2 sarà 0, altrimenti sarà 1
+        float volumeMiniGame = 0f;
+        float volumeFreeRoaming = isInMiniGame ? 0 : musicVolume[0]; 
         
         if (isInMiniGame == true)
         {
@@ -74,21 +73,25 @@ public class AudioManager : MonoBehaviour
                 case GameDirector.GameState.ObstacleCourse:
                     {
                         miniGame_musicName = "obstacleCourse_Music";
+                        volumeMiniGame = musicVolume[1];
                         break;
                     }
                 case GameDirector.GameState.TrashCollecting:
                     {
                         miniGame_musicName = "trashCollectin_Music";
+                        volumeMiniGame = musicVolume[2];
                         break;
                     }
                 case GameDirector.GameState.MazeExploring:
                     {
                         miniGame_musicName = "mazeExploring_Music";
+                        volumeMiniGame = musicVolume[3];
                         break;
                     }
             }
         }
-        StartCoroutine(FadeTwoClips(miniGame_musicName, volumeMiniGame, "freeRoaming_Music", volumeFreeRoaming, 5));
+
+        StartCoroutine(FadeTwoClips(miniGame_musicName, volumeMiniGame, "freeRoaming_Music", volumeFreeRoaming, 7));
     }
 
     private AudioSource GetAvailableSource(String clipName)

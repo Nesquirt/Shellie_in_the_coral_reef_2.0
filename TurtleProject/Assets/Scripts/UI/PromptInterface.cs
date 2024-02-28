@@ -13,6 +13,10 @@ public class PromptInterface : MonoBehaviour
         setPromptText("If you see this, something went wrong");
 
     }
+    public static bool isPromptActive()
+    {
+        return interactPrompt.IsActive();
+    }
     public static void togglePrompt(bool state)
     {
         interactPrompt.gameObject.SetActive(state);

@@ -75,11 +75,9 @@ public class CoralHandler : MonoBehaviour
     public void OnTriggerStay(Collider collider)
     {
         if (collider.gameObject.tag == "Player" &&
-            GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
+            GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming
+            && !isGrowing)
         {
-            if (isGrowing)
-                return;
-
             if (Input.GetKey(KeyCode.E))
             {
                 GameDirector.Instance.currentCoralSpot = this.gameObject;
@@ -92,16 +90,20 @@ public class CoralHandler : MonoBehaviour
             }
             if (!canvas.transform.Find("CoralChoicePanel").gameObject.activeSelf)
             {
-                canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(true);
+                //canvas.transform.Find("CoralSpotPrompt").gameObject.SetActive(true);
+
             }
         }
+        else if (isGrowing && PromptInterface.isPromptActive())
+            PromptInterface.togglePrompt(false);
+
     }
     public void OnTriggerExit(Collider collider)
     {
         if (collider.gameObject.tag == "Player" &&
             GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
         {
-
+            PromptInterface.togglePrompt(false);
             //Uscito dalla zona del CoralSpot, chiude gli elementi dell'UI
             if (canvas.transform.Find("CoralSpotPrompt").gameObject.activeSelf)
             {

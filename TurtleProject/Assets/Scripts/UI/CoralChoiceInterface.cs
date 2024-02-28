@@ -93,4 +93,9 @@ public class CoralChoiceInterface : MonoBehaviour
         }
 
     }
+
+    public void toggleCoralChoicePanel(bool state)
+    {
+        transform.gameObject.SetActive(state);
+    }
 }

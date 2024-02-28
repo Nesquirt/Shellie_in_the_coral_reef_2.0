@@ -211,7 +211,7 @@ public class TurtleController : MonoBehaviour
             float intensity = 2f * (speed * 0.5f);
             Vector3 directionToPlayer = ( collision.transform.position - transform.position).normalized;
             float pushAngle = 30f;  //angolo di spinta
-            Quaternion rotation = Quaternion.Euler(0, pushAngle, 0);
+            Quaternion rotation = Quaternion.Euler(0, 0, pushAngle);
             //Vector3 force = rotation * directionToPlayer;
             Vector3 force = directionToPlayer * intensity;
             //force.Normalize();

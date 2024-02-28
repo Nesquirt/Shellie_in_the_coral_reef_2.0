@@ -2,10 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-// -------------------------------------------------------------------------- //
-//Questo script si occupa sia del prompt di dialogo (premi E per parlare con...)
-//che del pannello di avvio del minigioco.
-// -------------------------------------------------------------------------- //
 
 public class DialogueInterface : MonoBehaviour
 {

@@ -22,10 +22,6 @@ public class AudioManager : MonoBehaviour
         isInMiniGame = false;
         miniGame_musicName = null;
         LoadAudioClips("Sounds");
-
-
-        //Simulo l'inizio del gioco
-        GameMusic();
     }
     //Disattivo il GameObject se la sua AudioSource non e' in riproduzione
     public void Update()

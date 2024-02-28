@@ -25640,11 +25640,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7803231290325262265, guid: d2e49869989351f429bdec8d8be2273e, type: 3}
       propertyPath: acceleration
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7803231290325262265, guid: d2e49869989351f429bdec8d8be2273e, type: 3}
       propertyPath: maxRotationSpeed
-      value: 150
+      value: 170
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 284972076, guid: d2e49869989351f429bdec8d8be2273e, type: 3}

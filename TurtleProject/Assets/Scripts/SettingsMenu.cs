@@ -38,7 +38,7 @@ public class SettingsMenu : MonoBehaviour
     public void BackToMainMenu()
     {
         // Carica la scena del menu principale
-        audioManager.Play("selection_SFX",false, 1f);
+        audioManager.ButtonPressed();
         SceneManager.UnloadSceneAsync("Simone_impostazioni");
     }
     public void LoadVolume()

@@ -59,8 +59,7 @@ public class TargetHandler : MonoBehaviour
                     GameObject.Find(targetName).GetComponent<MeshRenderer>().material = inactiveMaterial;
             }
 
-            //AUDIO 
-            audioManager.ToggleMiniGameState();
+            //AUDIO
             audioManager.MiniGame();
         }
     }
@@ -122,8 +121,6 @@ public class TargetHandler : MonoBehaviour
                 {
                     Victory();
                     StopCoroutine(Timer());
-                    audioManager.Play("endMiniGame_SFX", false, 1f);
-                    audioManager.ToggleMiniGameState();
                     audioManager.MiniGame();
                 return;
                 }

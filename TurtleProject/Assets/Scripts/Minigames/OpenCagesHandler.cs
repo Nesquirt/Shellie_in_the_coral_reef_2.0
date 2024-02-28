@@ -80,7 +80,8 @@ public class OpenCagesHandler : MonoBehaviour
             crab_text.SetText(openCages.ToString() + "/" + totCages.ToString());
             */
             this.GetComponent<SpawnCages>().restartGame();
-            StartCoroutine(audioManager.FadeTwoClips("freeRoaming_Music", 0f, "mazeExploring_Music", 1f, 5f));
+
+            audioManager.MiniGame();
         }
     }
 
@@ -153,8 +154,6 @@ public class OpenCagesHandler : MonoBehaviour
     private void checkEnd()
     {
         int gainedPearls = 8 * openCages;
-        audioManager.Play("endMiniGame_SFX", false, 1f);
-        StartCoroutine(audioManager.FadeTwoClips("mazeExploring_Music", 0f, "freeRoaming_Music", 1f, 5f));
         if (openCages == 0)
         {
             VictoryInterface.setRewardsText("Purtroppo non sei riuscita a liberare nesssun granchio... \n" +
@@ -176,6 +175,8 @@ public class OpenCagesHandler : MonoBehaviour
 
         GameDirector.Instance.addPearls(gainedPearls);
         GameDirector.Instance.addParameters(0, 0, gainedPearls);
+
+        audioManager.MiniGame();
     }
 
     //metodo chiamato da TurtleController

@@ -90,8 +90,8 @@ public class SpawnPrefabsRandomly : MonoBehaviour
             currentTime2 = totalTime2;
             run = true;
             SpawnPrefabs();
-            audioManager.Play("gridDrop_SFX", false, 1f);
-            StartCoroutine(audioManager.FadeTwoClips("freeRoaming_Music", 0f, "trashCollecting_Music", 1f, 5f));
+
+            audioManager.MiniGame();
         }
     }
     void FixedUpdate()
@@ -166,8 +166,7 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                                  "Livello di inquinamento diminuito del " + rifiutiraccolti * 5 + "%");
                 VictoryInterface.toggleVictoryPanelOn();
 
-                audioManager.Play("endMiniGame_SFX", false, 1f);
-                StartCoroutine(audioManager.FadeTwoClips("freeRoaming_Music", 1f, "trashCollecting_Music", 0f, 5f));
+                audioManager.MiniGame();
                 run = false;
 
 

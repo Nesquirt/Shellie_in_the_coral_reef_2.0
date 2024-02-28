@@ -57,12 +57,10 @@ public class AudioManager : MonoBehaviour
         Play("water_SFX", true, 1f);
         Play("bubble_SFX", true, 1f);
     }
-    public void ToggleMiniGameState()
-    {
-        isInMiniGame = !isInMiniGame;
-    }
     public void MiniGame()
     {
+        isInMiniGame = !isInMiniGame;
+
         float volumeMiniGame = 0f;
         float volumeFreeRoaming = isInMiniGame ? 0 : musicVolume[0]; 
         
@@ -78,7 +76,8 @@ public class AudioManager : MonoBehaviour
                     }
                 case GameDirector.GameState.TrashCollecting:
                     {
-                        miniGame_musicName = "trashCollectin_Music";
+                        Play("gridDrop_SFX", false, 1f);
+                        miniGame_musicName = "trashCollecting_Music";
                         volumeMiniGame = musicVolume[2];
                         break;
                     }
@@ -90,9 +89,33 @@ public class AudioManager : MonoBehaviour
                     }
             }
         }
+        else Play("endMiniGame_SFX", false, 1f);
 
         StartCoroutine(FadeTwoClips(miniGame_musicName, volumeMiniGame, "freeRoaming_Music", volumeFreeRoaming, 7));
     }
+
+    public void ButtonPressed()
+    {
+
+    }
+    public void ShipHorn()
+    {
+
+    }
+    public void CrossRing()
+    {
+
+    }
+    public void KeyTaken()
+    {
+
+    }
+    public void CageOpen()
+    {
+
+    }
+
+
 
     private AudioSource GetAvailableSource(String clipName)
     {

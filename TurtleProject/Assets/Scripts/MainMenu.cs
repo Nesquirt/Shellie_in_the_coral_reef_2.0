@@ -17,8 +17,14 @@ public class MainMenu : MonoBehaviour
     {
         if (GameDirector.Instance == null)
         {
+            //Non deve fare nulla; questo if è chiamato solo per inizializzare il director nella scena
         }
 
+        /* Associa le funzioni ai pulsanti
+        startGameButton.onClick.AddListener(StartGame);
+        optionsButton.onClick.AddListener(OpenOptions);
+        quitButton.onClick.AddListener(QuitGame);
+        aboutButton.onClick.AddListener(GameDirector.Instance.OpenURL); */
         LoadingPanel = GameObject.Find("Canvas/LoadingPanel");
         LoadingPanel.SetActive(false);
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();

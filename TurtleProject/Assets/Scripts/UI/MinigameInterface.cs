@@ -35,7 +35,6 @@ public class MinigameInterface : MonoBehaviour
     public static void startMinigame()
     {
         minigamePanel.SetActive(true);
-        timer.SetText("0:00:00");
         toggleKeyIcon(false);
         switch(GameDirector.Instance.getGameState())
         {
@@ -53,7 +52,6 @@ public class MinigameInterface : MonoBehaviour
                 minigameIcon.sprite = mazeExploringSprite;
                 setScoreText(0, 4);
                 break;
-
         }
     }
 

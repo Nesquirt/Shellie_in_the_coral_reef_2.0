@@ -6,14 +6,15 @@ using UnityEngine;
 public class CoralHandler : MonoBehaviour
 {
     [SerializeField] private GameObject PillarCoral, FireCoral, SoftCoral, ElkhornCoral;
-    private Vector3 spawnPoint1, spawnPoint2, spawnPoint3, spawnPoint4, spawnPoint5;
     private Vector3[] spawnPoints;
     private int growthCounter;
     private bool isGrowing;
 
+    private CoralChoiceInterface coralChoiceInterface;
     private Canvas canvas;
     private void Awake()
     {
+        coralChoiceInterface = GameObject.Find("Canvas/CoralChoicePanel").GetComponent<CoralChoiceInterface>();
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         isGrowing = false;
         spawnPoints = new Vector3[5];
@@ -104,6 +105,7 @@ public class CoralHandler : MonoBehaviour
             GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
         {
             PromptInterface.togglePrompt(false);
+
             //Uscito dalla zona del CoralSpot, chiude gli elementi dell'UI
             if (canvas.transform.Find("CoralSpotPrompt").gameObject.activeSelf)
             {

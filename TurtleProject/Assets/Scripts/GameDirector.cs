@@ -147,7 +147,9 @@ public class GameDirector : MonoBehaviour
     //Metodi per interagire con il GameState; usati dai minigiochi
     public void setGameState(GameState newState)
     {
-        if(newState == GameState.FreeRoaming)
+        Debug.Log("Changed GameState to: " + newState);
+        currentState = newState;
+        if (newState == GameState.FreeRoaming)
         {
             MinigameInterface.endMinigame();
         }
@@ -156,8 +158,6 @@ public class GameDirector : MonoBehaviour
             DialogueInterface.toggleDialoguePanel(false);
             MinigameInterface.startMinigame();
         }
-        Debug.Log("Changed GameState to: " + newState);
-        currentState = newState;
     }
 
     public GameState getGameState()

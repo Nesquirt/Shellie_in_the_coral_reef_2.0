@@ -62,6 +62,8 @@ public class GameDirector : MonoBehaviour
     private GameObject[] corals;
 
     private Canvas canvas; //TODO: rimuovi
+    private GameOverInterface gameOverInterface;
+    public AudioManager audioManager;
     private UIManager UImanager;
     
 
@@ -82,10 +84,10 @@ public class GameDirector : MonoBehaviour
         {
             Destroy(gameObject); //Se esiste gia' un'altra istanza, distrugge questo oggetto per evitare duplicati dell'istanza
         }
-        //audioManager = GetComponentInChildren<AudioManager>();
+        audioManager = GetComponentInChildren<AudioManager>();
         //audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         // -------------------------------------------------------------------- //
-        //Funzione temporanea per testare i parametri senza passare dal menù
+        //Funzione temporanea per testare i parametri senza passare dal menï¿½
         if (SceneManager.GetActiveScene().name == "GameScene")
             LoadGame();
         
@@ -302,4 +304,4 @@ public class GameDirector : MonoBehaviour
 
 /*Dopo i Serial Killer.....
 ora ci sono pure i Parallel Killer, assassini tecnologici che uccidono 8
-persone alla volta… */
+persone alla voltaï¿½ */

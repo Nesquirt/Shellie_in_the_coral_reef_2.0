@@ -23,7 +23,6 @@ public class OpenCagesHandler : MonoBehaviour
     void Awake()
     {
         this.totCages = this.GetComponent<SpawnCages>().totalCages;  //prendo il numero di casse
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     //Funzione START MazeExploring
@@ -43,7 +42,7 @@ public class OpenCagesHandler : MonoBehaviour
             UImanager.minigameInterface.setScoreText(0, totCages);
             this.GetComponent<SpawnCages>().restartGame();
 
-            audioManager.MiniGame();
+            GameDirector.Instance.audioManager.MiniGame();
         }
     }
 
@@ -130,7 +129,7 @@ public class OpenCagesHandler : MonoBehaviour
         GameDirector.Instance.addPearls(gainedPearls);
         GameDirector.Instance.addParameters(0, 0, gainedPearls);
 
-        audioManager.MiniGame();
+        GameDirector.Instance.audioManager.MiniGame();
     }
 
     //metodo chiamato da TurtleController
@@ -146,7 +145,7 @@ public class OpenCagesHandler : MonoBehaviour
                     this.hasKey = true;
                     UImanager.minigameInterface.toggleKeyIcon(true);
                     Debug.Log("ho la chiave");
-                    audioManager.KeyOrCage(other);
+                    GameDirector.Instance.audioManager.KeyOrCage(other);
                 }
                 else
                     return;
@@ -165,8 +164,8 @@ public class OpenCagesHandler : MonoBehaviour
                     UImanager.minigameInterface.toggleKeyIcon(false);
                     this.openCages++;
                     Debug.Log("GABBIE APERTE: " + this.openCages);
+                    GameDirector.Instance.audioManager.KeyOrCage(other);
                     UImanager.minigameInterface.setScoreText(openCages, totCages);
-                    audioManager.KeyOrCage(other);
                     if (openCages == totCages && finalFunctionCalled == 0)
                     {
                         callFinalFunction();

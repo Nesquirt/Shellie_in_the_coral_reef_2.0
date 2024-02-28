@@ -16,11 +16,10 @@ public class TargetHandler : MonoBehaviour
 
     private Rigidbody rb;
     [SerializeField] private UIManager UImanager;
-    private AudioManager audioManager;
+
 
     private void Awake()
     {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         specialTargetActive = false;   
     }
     // -------------------------------------------------------------------- //
@@ -61,7 +60,7 @@ public class TargetHandler : MonoBehaviour
             }
 
             //AUDIO
-            audioManager.MiniGame();
+            GameDirector.Instance.audioManager.MiniGame();
         }
     }
     // -------------------------------------------------------------------- //
@@ -120,12 +119,12 @@ public class TargetHandler : MonoBehaviour
                 {
                     Victory();
                     StopCoroutine(Timer());
-                    audioManager.MiniGame();
+                    GameDirector.Instance.audioManager.MiniGame();
                     return;
                 }
                 GameObject.Find(nextTargetName).GetComponent<MeshRenderer>().material = activeMaterial;
 
-                audioManager.CrossRing(targetNumber);
+                GameDirector.Instance.audioManager.CrossRing(targetNumber);
                 targetNumber++;
                 
             }

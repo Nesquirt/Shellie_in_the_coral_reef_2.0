@@ -3995,7 +3995,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc9404316dda7e45939ce10544d4d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coral: {fileID: 11400000, guid: 15ec3b61695c4a74d9cbe83bec0f59fa, type: 2}
 --- !u!114 &171478555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10642,7 +10641,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc9404316dda7e45939ce10544d4d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coral: {fileID: 11400000, guid: fe0cf995df1dd634b854e3d6bc017ca5, type: 2}
 --- !u!114 &618357454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24276,7 +24274,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc9404316dda7e45939ce10544d4d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coral: {fileID: 11400000, guid: 15ec3b61695c4a74d9cbe83bec0f59fa, type: 2}
 --- !u!114 &1523733630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25539,6 +25536,14 @@ PrefabInstance:
     - target: {fileID: 7803231290325262265, guid: d2e49869989351f429bdec8d8be2273e, type: 3}
       propertyPath: turtleanim
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803231290325262265, guid: d2e49869989351f429bdec8d8be2273e, type: 3}
+      propertyPath: acceleration
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803231290325262265, guid: d2e49869989351f429bdec8d8be2273e, type: 3}
+      propertyPath: maxRotationSpeed
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 284972076, guid: d2e49869989351f429bdec8d8be2273e, type: 3}
@@ -32442,7 +32447,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc9404316dda7e45939ce10544d4d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coral: {fileID: 11400000, guid: 15ec3b61695c4a74d9cbe83bec0f59fa, type: 2}
 --- !u!114 &2077957348
 MonoBehaviour:
   m_ObjectHideFlags: 0

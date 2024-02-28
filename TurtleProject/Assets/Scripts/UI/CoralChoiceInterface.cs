@@ -75,11 +75,10 @@ public class CoralChoiceInterface : MonoBehaviour
         coralTitle.SetText(corals[index].coralName);
         coralDesc.SetText(corals[index].coralDesc);
         coralStats.SetText("Caratteristiche:" +
-                           "\nBiodiversit�: " + corals[index].getBiodiversityChange() +
+                           "\nBiodiversita': " + corals[index].getBiodiversityChange() +
                            "\nInquinamento: " + corals[index].getPollutionChange() +
                            "\nLivello di ossigeno: " + corals[index].getOxygenLevelChange());
         coralCost.SetText("Costo: " + corals[index].getCost() + " perle");
-
         selectedCoral = index;
     }
     public void Confirm_onClick()
@@ -97,5 +96,6 @@ public class CoralChoiceInterface : MonoBehaviour
     public void toggleCoralChoicePanel(bool state)
     {
         transform.gameObject.SetActive(state);
+        currentPearls.SetText("Perle disponibili: " + GameDirector.Instance.getCurrentPearls());
     }
 }

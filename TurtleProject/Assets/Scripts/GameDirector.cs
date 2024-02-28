@@ -60,10 +60,11 @@ public class GameDirector : MonoBehaviour
     private int pollutionChange, biodiversityChange, oxygenLevelChange, reefHealthChange;
 
     private GameObject[] corals;
-
-    private Canvas canvas; //TODO: rimuovi
-    private GameOverInterface gameOverInterface;
+    private Canvas canvas;
     
+    private GameObject GameOverPanel, StatsPanel;
+    private TextMeshProUGUI TitleText, CentralText, BottomText;
+    private Button ReturnToMenuButton, WebsiteButton, SettingsButton;
 
     //private AudioManager audioManager;
 
@@ -93,10 +94,19 @@ public class GameDirector : MonoBehaviour
     public void LoadGame()
     {
         currentState = GameState.FreeRoaming;
-           
+
         //TODO: temporaneo
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-        /*
+
+        GameOverPanel = canvas.transform.Find("GameOverPanel").gameObject;
+        TitleText = GameOverPanel.transform.Find("TitleText").GetComponent<TextMeshProUGUI>();
+        CentralText = GameOverPanel.transform.Find("CentralText").GetComponent<TextMeshProUGUI>();
+        BottomText = GameOverPanel.transform.Find("BottomText").GetComponent<TextMeshProUGUI>();
+        GameOverPanel.SetActive(false);
+        TitleText.gameObject.SetActive(false);
+        CentralText.gameObject.SetActive(false);
+        BottomText.gameObject.SetActive(false);
+
         //TODO: cambia/sposta/rimuovi
         StatsPanel = canvas.transform.Find("InfoPanel").gameObject;
         StatsPanel.SetActive(false);
@@ -106,9 +116,11 @@ public class GameDirector : MonoBehaviour
         ReturnToMenuButton.gameObject.SetActive(false);
         WebsiteButton.gameObject.SetActive(false);
         SettingsButton = canvas.transform.Find("SettingsButton").GetComponent<Button>();
-        */
-        gameOverInterface = GameObject.Find("Canvas/GameOverPanel").GetComponent<GameOverInterface>();
-        gameOverInterface.toggleGameOverPanel(false);
+
+        //SettingsButton.onClick.AddListener(OpenSettings);
+        //ReturnToMenuButton.onClick.AddListener(LoadMenu);
+        //WebsiteButton.onClick.AddListener(OpenURL);
+
         // -------------------------------------------------------------------- //
         //Impostazione dei valori iniziali di gioco
         corals = GameObject.FindGameObjectsWithTag("CoralSpot");
@@ -118,9 +130,6 @@ public class GameDirector : MonoBehaviour
         StartCoroutine(FadeOutLoadingScreen());
         //Metodo che fa partire il ciclo di cambiamento dei parametri
         InvokeRepeating("tick", 0, 60);
-
-        //TEMPORANEO; PER TESTING DELLA SCHERMATA DI GAMEOVER
-        //gameOverInterface.GameOver(true);
     }
 
     public void tick()  //Funzione che viene chiamata una volta ogni minuto, e aggiorna i valori delle statistiche di gioco
@@ -206,12 +215,12 @@ public class GameDirector : MonoBehaviour
         else if (reefHealth >= 100)
         {
             reefHealth = 100;
-            gameOverInterface.GameOver(true);
+            Victory();
         }
         else if (reefHealth <= 0)
         {
             reefHealth = 0;
-            gameOverInterface.GameOver(false);
+            GameOver();
         }
 
         //Aggiorna l'interfaccia
@@ -236,6 +245,75 @@ public class GameDirector : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         LoadingPanelImage.gameObject.SetActive(false);
+    }
+    // -------------------------------------------------------------------- //
+    //Metodi di GameOver e Victory
+    public void GameOver()
+    {
+        TitleText.SetText("GAME OVER!");
+        CentralText.SetText("Le condizioni dell'ambiente si sono deteriorate, e i coralli stanno iniziando a perdere colore... " +
+            "Dovremo riprovare da un'altra parte.");
+        GameOverPanel.SetActive(true);
+        StartCoroutine(FadeIn(GameOverPanel.GetComponent<Image>()));
+    }
+    public void Victory()
+    {
+        TitleText.SetText("VITTORIA!");
+        CentralText.SetText("Grazie ai tuoi sforzi, le condizioni dell'ambiente sono stabili e in grado di prosperare." +
+            "Questa barriera corallina e' salva!");
+        GameOverPanel.SetActive(true);
+        StartCoroutine(FadeIn(GameOverPanel.GetComponent<Image>()));
+    }
+    // -------------------------------------------------------------------- //
+    //Coroutine per la comparsa del pannello e delle scritte
+    IEnumerator FadeIn(Image GameOverPanel)
+    {
+        float fadeAmount;
+        Color nextFrameColor;
+        while (GameOverPanel.color.a < 1)
+        {
+            fadeAmount = GameOverPanel.color.a + ( Time.deltaTime);
+            nextFrameColor = new Color(GameOverPanel.color.r, GameOverPanel.color.g, GameOverPanel.color.b, fadeAmount);
+            GameOverPanel.color = nextFrameColor;
+            yield return new WaitForSeconds(0.1f);
+        }
+        yield return new WaitForSeconds(1);
+        TitleText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1);
+        CentralText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1);
+        BottomText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1);
+        WebsiteButton.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        ReturnToMenuButton.gameObject.SetActive(true);
+        
+
+    }
+    // -------------------------------------------------------------------- //
+    //Listener per i bottoni della schermata finale (apri sito web e torna al menu')
+    public void OpenURL()
+    {
+        //audioManager.PlaySFX(audioManager.selection);
+        Application.OpenURL("https://coralreefrescueinitiative.org/");
+    }
+    public void LoadMenu()
+    {
+        CancelInvoke();
+        //audioManager.PlaySFX(audioManager.selection);
+        SceneManager.LoadScene("Simone_Menu_Iniziale");
+    }
+
+    public void OpenSettings()
+    {
+        //audioManager.PlaySFX(audioManager.selection);
+        SceneManager.LoadScene("Simone_Impostazioni", LoadSceneMode.Additive);
+    }
+
+    public void StatsOpenAndClose(GameObject obj)
+    {
+        //audioManager.PlaySFX(audioManager.selection);
+        obj.SetActive(!obj.activeSelf);
     }
     // -------------------------------------------------------------------- //
     //Metodi get e set per i parametri

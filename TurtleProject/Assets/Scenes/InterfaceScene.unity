@@ -8970,7 +8970,6 @@ GameObject:
   - component: {fileID: 498398426}
   - component: {fileID: 498398428}
   - component: {fileID: 498398427}
-  - component: {fileID: 498398429}
   m_Layer: 5
   m_Name: GameOverPanel
   m_TagString: Untagged
@@ -9041,23 +9040,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498398425}
   m_CullTransparentMesh: 1
---- !u!114 &498398429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 498398425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dfa1b6ff4a5f1941a3df9784facf1e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  titleText: {fileID: 1603698906}
-  centralText: {fileID: 1848779643}
-  bottomText: {fileID: 1957666291}
-  websiteButton: {fileID: 1761363525}
-  returnToMenuButton: {fileID: 1832843066}
 --- !u!1001 &501059718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26781,8 +26763,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 498398429}
-        m_TargetAssemblyTypeName: GameOverInterface, Assembly-CSharp
+      - m_Target: {fileID: 5423279242834183883, guid: 2e652ec4cf5ca4641981055f3ecc69c9, type: 3}
+        m_TargetAssemblyTypeName: GameDirector, Assembly-CSharp
         m_MethodName: OpenURL
         m_Mode: 1
         m_Arguments:
@@ -27993,8 +27975,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 498398429}
-        m_TargetAssemblyTypeName: GameOverInterface, Assembly-CSharp
+      - m_Target: {fileID: 5423279242834183883, guid: 2e652ec4cf5ca4641981055f3ecc69c9, type: 3}
+        m_TargetAssemblyTypeName: GameDirector, Assembly-CSharp
         m_MethodName: LoadMenu
         m_Mode: 1
         m_Arguments:
@@ -30119,10 +30101,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ricordati che la vita della barriera corallina \xE8 fragile anche nel
-    mondo reale. Puoi fare la differenza: visita il sito web Coral Reef Rescue per
-    scoprire come puoi contribuire a preservare e proteggere questo tesoro subacqueo
-    unico."
+  m_text: "Nel frattempo, ricordati che la vita della barriera corallina \xE8 fragile
+    anche nel mondo reale. Puoi fare la differenza: visita il sito web Coral Reef
+    Rescue per scoprire come puoi contribuire a preservare e proteggere questo tesoro
+    subacqueo unico."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

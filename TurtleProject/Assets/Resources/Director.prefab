@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myMixer: {fileID: 24100000, guid: 20f47a371bd9d8440b19a835d193be0e, type: 2}
+  Music: {fileID: 9172264188924490655, guid: 20f47a371bd9d8440b19a835d193be0e, type: 2}
+  SFX: {fileID: 7648067307709126329, guid: 20f47a371bd9d8440b19a835d193be0e, type: 2}
 --- !u!1 &5484819720868319447
 GameObject:
   m_ObjectHideFlags: 0

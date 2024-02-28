@@ -8,27 +8,26 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
 
-    [SerializeField] private AudioMixer myMixer;
-
-    private AudioMixerGroup Music, SFX;
-    private List<AudioSource> audioSources;
-    private Dictionary<string, AudioClip> audioClips;
-    private readonly float[] MusicVolume = {0.7f, 0.5f, 0.6f, 1}; 
-    private bool isInMiniGame;
-    private string miniGame_musicName;
+    [SerializeField] private AudioMixerGroup Music, SFX;  //Riferimento al Group Music e Group SFX del Mixer  
+    private List<AudioSource> audioSources; //Lista di AudioSource 
+    private Dictionary<string, AudioClip> audioClips;//Key,Value = Nome della clip, ClipAudio
+    private readonly float[] MusicVolume = {0.7f, 0.5f, 0.6f, 1};  //Volumi delle AudioClip di tipo "Music"
+    private bool isInMiniGame; //Controllo se sono all'interno di un MiniGame
+    private string miniGame_musicName; //Usata per settare l'AudioClip a seconda del MiniGame
 
     public void Awake()
     {
-        isInMiniGame = false;
-        miniGame_musicName = null;
-        SFX = myMixer.FindMatchingGroups("SFX")[0];
-        Music = myMixer.FindMatchingGroups("Music")[0];
         audioSources = new();
         audioClips = new();
+        isInMiniGame = false;
+        miniGame_musicName = null;
         LoadAudioClips("Sounds");
+
+
         //Simulo l'inizio del gioco
         GameMusic();
     }
+    //Disattivo il GameObject se la sua AudioSource non e' in riproduzione
     public void Update()
     {
         foreach (AudioSource source in audioSources)
@@ -39,6 +38,7 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
+    //Funzione per il salvataggio delle AudioClip (contenute in una cartella) all'interno del Dictonary  
     public void LoadAudioClips(String folderPath)
     {
         AudioClip[] temp = Resources.LoadAll<AudioClip>(folderPath);
@@ -48,16 +48,20 @@ public class AudioManager : MonoBehaviour
             audioClips.Add(clip.name, clip);
         }
     }
-    public void MenuMusic()
-    {
-        Play("menu_Music", true, 0.8f);
-    }
+    //Funzioni Music
+    public void MenuMusic() { Play("menu_Music", true, 0.8f); }
     public void GameMusic()
     {
         StartCoroutine(FadeTwoClips("menu_Music", 0, "freeRoaming_Music", MusicVolume[0], 5));
-        Play("water_SFX", true, 1f);
-        Play("bubble_SFX", true, 1f);
+        Play("water_SFX", true, 0.5f);
+        Play("bubble_SFX", true, 0.5f);
     }
+    /*
+     * La funzione viene chiamata all'inizio e alla fine di ogni MiniGame. Se isInMiniGame = true
+     * ho appena cominciato un MiniGame, setto quindi il nome dell'AudioClip e avvio il fade con la
+     * traccia dello stato FreeRoaming. Se isInMiniGame = false ho completato il MiniGame, avvio quindi
+     * il fade opposto
+    */
     public void MiniGame()
     {
         isInMiniGame = !isInMiniGame;
@@ -95,11 +99,40 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(FadeTwoClips(miniGame_musicName, volumeMiniGame, "freeRoaming_Music", volumeFreeRoaming, 7));
     }
 
+    //Funzioni per la riproduzione audio (SFX)
     public void ButtonPressed() { Play("selection_SFX", false, 1f); }
     public void ShipHornOrGridClimb(float currentTime) { Play(currentTime > 0 ? "shipHorn_SFX" : "gridClimb_SFX", false, 1); }
     public void CrossRing(int targetNumber) { Play(targetNumber == 0 ? "raceStart_SFX" : "ringCross_SFX", false, targetNumber == 0 ? 1 : 0.6f); }
     public void RaceStart() { Play("raceStart_SFX", false, 2f); }
     public void KeyOrCage(Collider collider) { Play(collider.CompareTag("Chiave") ? "keyTaken_SFX" : "cageOpen_SFX", false, collider.CompareTag("Chiave") ? 0.6f : 0.7f); }
+
+    //Tramite il clipName ottengo l'AudioClip dal Dictionary, se 
+    public void Play(String clipName, bool loop, float volume)
+    {
+        if (!audioClips.ContainsKey(clipName))
+        {
+            Debug.LogWarning("Clip audio non trovata: " + clipName);
+            return;
+        }
+        else
+        {
+            AudioClip audioClip = audioClips[clipName];
+            AudioSource source = GetAvailableSource(clipName);
+            if (source != null)
+            {
+                source.gameObject.SetActive(true);
+                source.clip = audioClip;
+                SetMixerGroup(source, clipName);
+                source.loop = loop;
+                source.volume = volume;
+                source.Play();
+            }
+            else
+            {
+                Debug.LogWarning("Audiosource nullo!");
+            }
+        }
+    }
     private AudioSource GetAvailableSource(String clipName)
     {
         foreach (AudioSource source in audioSources)
@@ -132,32 +165,6 @@ public class AudioManager : MonoBehaviour
             }
         }
         return null;
-    }
-    public void Play(String clipName, bool loop, float volume)
-    {
-        if (!audioClips.ContainsKey(clipName))
-        {
-            Debug.LogWarning("Clip audio non trovata: " + clipName);
-            return;
-        }
-        else
-        {
-            AudioClip audioClip = audioClips[clipName];
-            AudioSource source = GetAvailableSource(clipName);
-            if (source != null)
-            {
-                source.gameObject.SetActive(true);
-                source.clip = audioClip;
-                SetMixerGroup(source, clipName);
-                source.loop = loop;
-                source.volume = volume;
-                source.Play();
-            }
-            else
-            {
-                Debug.LogWarning("Audiosource nullo!");
-            }
-        }
     }
     public IEnumerator FadeTwoClips(String clip1Name, float targetVolume1, String clip2Name, float targetVolume2, float duration)
     {

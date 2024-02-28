@@ -24,10 +24,10 @@ public class MinigameInterface : MonoBehaviour
         minigameIcon = minigamePanel.transform.Find("MinigameIcon").gameObject.GetComponent<Image>();
         keyIcon = minigamePanel.transform.Find("KeyIcon").gameObject.GetComponent<Image>();
 
-        obstacleCourseSprite = Resources.Load("Sprites/ObstacleCourseSprite") as Sprite;
-        trashCollectingSprite = Resources.Load("Sprites/TrashCollectingSprite") as Sprite;
-        mazeExploringSprite = Resources.Load("Sprites/MazeExploringSprite") as Sprite;
-        keySprite = Resources.Load("Sprites/KeySprite") as Sprite;
+        obstacleCourseSprite = Resources.Load<Sprite>("Sprites/ObstacleCourseSprite");
+        trashCollectingSprite = Resources.Load<Sprite>("Sprites/TrashCollectingSprite");
+        mazeExploringSprite = Resources.Load<Sprite>("Sprites/MazeExploringSprite");
+        keySprite = Resources.Load<Sprite>("Sprites/KeySprite");
         keyIcon.sprite = keySprite;
 
     }

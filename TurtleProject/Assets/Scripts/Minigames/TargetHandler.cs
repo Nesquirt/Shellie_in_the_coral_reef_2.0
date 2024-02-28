@@ -15,6 +15,7 @@ public class TargetHandler : MonoBehaviour
     private bool specialTargetActive;
 
     private Rigidbody rb;
+    [SerializeField] private UIManager UImanager;
     private AudioManager audioManager;
 
     private void Awake()
@@ -28,7 +29,7 @@ public class TargetHandler : MonoBehaviour
     {
         
         //Check per vedere se un altro minigioco � attivo
-        if (DialogueInterface.getCurrentNPC() == "Anguilla")
+        if (UImanager.dialogueInterface.getCurrentNPC() == "Anguilla")
         {
             // -------------------------------------------------------------------- //
             //GAMESTATE
@@ -72,7 +73,7 @@ public class TargetHandler : MonoBehaviour
         while(currentTenths<=18000)
         {
             currentTenths++;
-            MinigameInterface.setTimerText(currentTenths);
+            UImanager.minigameInterface.setTimerText(currentTenths);
             if (GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
                 break;
             yield return new WaitForSeconds(.1f);
@@ -100,7 +101,7 @@ public class TargetHandler : MonoBehaviour
             return;
 
         //Imposta il target successivo come attivo
-        MinigameInterface.setScoreText(targetNumber + 1, 29);
+        UImanager.minigameInterface.setScoreText(targetNumber + 1, 29);
         if (targetNumber <= 28)
             {
                 if (targetName != "Target" + targetNumber)
@@ -139,11 +140,11 @@ public class TargetHandler : MonoBehaviour
         //current range di perle: 20 max, 13 min
         GameDirector.Instance.addPearls(earnedPearls);
         GameDirector.Instance.addParameters(0, 25, 0);
-        VictoryInterface.setRewardsText("Tempo impiegato: " + currentTenths + "\n" +
+        UImanager.victoryInterface.setRewardsText("Tempo impiegato: " + currentTenths + "\n" +
                             "Perle guadagnate: " + earnedPearls + "\n" +
                             "Livello di ossigeno aumentato del 20%");
         Debug.Log("TestVittoria");
-        VictoryInterface.toggleVictoryPanelOn();
+        UImanager.victoryInterface.toggleVictoryPanel(true);
     }
 
     // -------------------------------------------------------------------- //

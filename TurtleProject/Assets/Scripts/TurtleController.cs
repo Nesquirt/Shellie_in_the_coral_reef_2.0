@@ -8,8 +8,8 @@ public class TurtleController : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float maxRotationSpeed;
     [SerializeField] private float maxTopHeight;
+    [SerializeField] private UIManager UImanager;
     private Animator turtleanim;
-    private GameObject oggettoscriptTrash;
 
     private Rigidbody rb;
     private float speed, verticalRotationSpeed, lateralRotationSpeed;
@@ -128,17 +128,17 @@ public class TurtleController : MonoBehaviour
             switch (other.name)
             {
                 case "Anguilla_collider":
-                    PromptInterface.setPromptText("Premi E per parlare con l'anguilla");
+                    UImanager.promptInterface.setPromptText("Premi E per parlare con l'anguilla");
                     break;
 
                 case "PesceRosso_collider":
-                    PromptInterface.setPromptText("Premi E per parlare con Peppe");
+                    UImanager.promptInterface.setPromptText("Premi E per parlare con Peppe");
                     break;
                 case "pesceColorato":
-                    PromptInterface.setPromptText("Premi E per parlare con Dory");
+                    UImanager.promptInterface.setPromptText("Premi E per parlare con Dory");
                     break;
             }
-            PromptInterface.togglePrompt(true);
+            UImanager.promptInterface.togglePrompt(true);
         }
 
     }
@@ -148,40 +148,40 @@ public class TurtleController : MonoBehaviour
         {
             if (GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
             {
-                PromptInterface.togglePrompt(false);
+                UImanager.promptInterface.togglePrompt(false);
                 switch (other.name)
                 {
                     case "Anguilla_collider":
-                        DialogueInterface.setNPCName("Anguilla");
-                        DialogueInterface.setDialogueText("Hey, tu! Sembri una tipa molto in forma. Ti andrebbe di aiutarmi con una faccenda?\n" +
+                        UImanager.dialogueInterface.setNPCName("Anguilla");
+                        UImanager.dialogueInterface.setDialogueText("Hey, tu! Sembri una tipa molto in forma. Ti andrebbe di aiutarmi con una faccenda?\n" +
                                      "Le alghe in questo canyon sono in acqua stagnante... Svegliale attraversando tutti gli anelli rocciosi!\n" +
                                      "Sono sicura che il livello di ossigeno aumentera'... E se vai abbastanza veloce, ti daro' anche qualche perla in piu'. Ci stai?");
-                        DialogueInterface.setCurrentNPC("Anguilla");
+                        UImanager.dialogueInterface.setCurrentNPC("Anguilla");
                         //TODO: lascia solo setCurrentNPC, e sposta setNPCName e setDialogueText in DialogueInterface;
                         //In questo modo standardizziamo i testi e li rimuoviamo da turtleController.
                         break;
 
                     case "PesceRosso_collider":
-                        DialogueInterface.setNPCName("Peppe il pesce");
-                        DialogueInterface.setDialogueText("Hey sembrerebbe che ci siano dei sacchetti della spazzatura\n " +
+                        UImanager.dialogueInterface.setNPCName("Peppe il pesce");
+                        UImanager.dialogueInterface.setDialogueText("Hey sembrerebbe che ci siano dei sacchetti della spazzatura\n " +
                                     "ad inquinare l'oceano! Ti va di aiutarmi a metterli tutti nella rete? \n" +
                                     "Attenta! hai solo un minuto di tempo prima che risalga la rete");
-                        DialogueInterface.setCurrentNPC("Peppe");
+                        UImanager.dialogueInterface.setCurrentNPC("Peppe");
                         break;
 
                     case "pesceColorato":
-                        DialogueInterface.setNPCName("Dory");
-                        DialogueInterface.setDialogueText("Hey Shellie! Ci sono dei granchi che hanno bisogno di essere liberati! \n" +
+                        UImanager.dialogueInterface.setNPCName("Dory");
+                        UImanager.dialogueInterface.setDialogueText("Hey Shellie! Ci sono dei granchi che hanno bisogno di essere liberati! \n" +
                                     "Ti va di aiutarmi?" + " Nel labirinto troverai delle chiavi con cui poter aprire le gabbie \n" +
                                     "Attenta! Puoi prendere solo una chiave alla volta ed hai 3 minuti di tempo per liberarli tutti!");
-                        DialogueInterface.setCurrentNPC("Dory");
+                        UImanager.dialogueInterface.setCurrentNPC("Dory");
                         break;
 
                     case "SpecialTarget":
                         //other.GetComponentInParent<TargetHandler>().summonSpecialTarget();
                         break;
                 }
-                DialogueInterface.toggleDialoguePanel(true);
+                UImanager.dialogueInterface.toggleDialoguePanel(true);
             } else if(other.tag == "Chiave" || other.tag == "Gabbia")
             {
                 posizioni_cageKey.GetComponent<OpenCagesHandler>().TriggerMethod(other);
@@ -191,8 +191,8 @@ public class TurtleController : MonoBehaviour
     }
     public void OnTriggerExit(Collider other)
     {
-        PromptInterface.togglePrompt(false);
-        DialogueInterface.toggleDialoguePanel(false);
+        UImanager.promptInterface.togglePrompt(false);
+        UImanager.dialogueInterface.toggleDialoguePanel(false);
     }
     // -------------------------------------------------------------------- //
 

@@ -6,10 +6,10 @@ using TMPro;
 
 public class MinigameInterface : MonoBehaviour
 {
-    private static GameObject minigamePanel;
-    private static TextMeshProUGUI timer, scoreText;
-    private static Image minigameIcon, keyIcon;
-    private static Sprite obstacleCourseSprite, trashCollectingSprite, mazeExploringSprite, keySprite;
+    [SerializeField] private GameObject minigamePanel;
+    [SerializeField] private TextMeshProUGUI timer, scoreText;
+    [SerializeField] private Image minigameIcon, keyIcon;
+    [SerializeField] private Sprite obstacleCourseSprite, trashCollectingSprite, mazeExploringSprite, keySprite;
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class MinigameInterface : MonoBehaviour
 
     }
 
-    public static void startMinigame()
+    public void startMinigame()
     {
         minigamePanel.SetActive(true);
         toggleKeyIcon(false);
@@ -55,21 +55,21 @@ public class MinigameInterface : MonoBehaviour
         }
     }
 
-    public static void endMinigame()
+    public void endMinigame()
     {
             minigamePanel.SetActive(false);
     }
 
     //Imposta il testo del timer; chiamato nelle funzioni dei minigiochi.
     //Nota: il parametro time è attualmente in decimi di secondo.
-    public static void setTimerText(int time)
+    public void setTimerText(int time)
     {
         timer.SetText(TimeToString(time));
     }
 
     //Metodo che ritorna una stringa in formato x:xx:xx;
     //prende in input un numero di decimi di secondo.
-    private  static string TimeToString(int currentTime)
+    private string TimeToString(int currentTime)
     {
         int minutes, seconds, tenths;
         switch(GameDirector.Instance.getGameState())
@@ -98,12 +98,12 @@ public class MinigameInterface : MonoBehaviour
 
         }
     }
-    public static void setScoreText(int current, int max)
+    public void setScoreText(int current, int max)
     {
         scoreText.SetText(current + "/" + max);
     }
 
-    public static void toggleKeyIcon(bool state)
+    public void toggleKeyIcon(bool state)
     { 
         keyIcon.gameObject.SetActive(state);
     }

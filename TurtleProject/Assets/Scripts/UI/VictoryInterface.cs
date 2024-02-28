@@ -4,23 +4,19 @@ using UnityEngine;
 using TMPro;
 public class VictoryInterface : MonoBehaviour
 {
-    private static GameObject victoryPanel;
-    private static TextMeshProUGUI rewardsText;
-
+    [SerializeField] private TextMeshProUGUI rewardsText;
     private void Awake()
     {
-        victoryPanel = GameObject.Find("Canvas/VictoryPanel");
-        victoryPanel.SetActive(false);
-        rewardsText = victoryPanel.transform.Find("RewardsPanel/RewardsText").GetComponent<TextMeshProUGUI>();
+        this.toggleVictoryPanel(false);
     }
 
-    public static void setRewardsText(string text)
+    public void setRewardsText(string text)
     {
         rewardsText.SetText(text);
     }
-    public static void toggleVictoryPanelOn()
+    public void toggleVictoryPanel(bool state)
     {
-        victoryPanel.SetActive(true);
+        this.gameObject.SetActive(state);
     }
 
 }

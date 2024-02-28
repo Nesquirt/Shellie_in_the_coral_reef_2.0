@@ -8,11 +8,11 @@ public class CoralHandler : MonoBehaviour
     private Vector3[] spawnPoints;
     private int growthCounter;
     private bool isGrowing;
-
-    private CoralChoiceInterface coralChoiceInterface;
+    private UIManager UImanager;
     private void Awake()
     {
-        coralChoiceInterface = GameObject.Find("Canvas/CoralChoicePanel").GetComponent<CoralChoiceInterface>();
+        UImanager = GameObject.Find("Canvas").GetComponent<UIManager>();
+
         isGrowing = false;
         spawnPoints = new Vector3[5];
         spawnPoints[0] = new Vector3(this.transform.position.x + 1.9f, this.transform.position.y + 5.7f, this.transform.position.z + 2.5f);
@@ -55,16 +55,16 @@ public class CoralHandler : MonoBehaviour
         {
             if (isGrowing)
             {
-                PromptInterface.togglePrompt(false);
-                coralChoiceInterface.toggleCoralChoicePanel(false);
+                UImanager.promptInterface.togglePrompt(false);
+                UImanager.coralChoiceInterface.toggleCoralChoicePanel(false);
                 return;
             }
             if (collider.gameObject.tag == "Player" &&
                 GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
             {
                 GameDirector.Instance.currentCoralSpot = this.gameObject;
-                PromptInterface.setPromptText("Premi E per piantare un corallo");
-                PromptInterface.togglePrompt(true);
+                UImanager.promptInterface.setPromptText("Premi E per piantare un corallo");
+                UImanager.promptInterface.togglePrompt(true);
             }
         }
         public void OnTriggerStay(Collider collider)
@@ -76,17 +76,17 @@ public class CoralHandler : MonoBehaviour
                 if (Input.GetKey(KeyCode.E))
                 {
                     
-                    coralChoiceInterface.toggleCoralChoicePanel(true);
-                    PromptInterface.togglePrompt(false);
+                    UImanager.coralChoiceInterface.toggleCoralChoicePanel(true);
+                    UImanager.promptInterface.togglePrompt(false);
                 }
                 if (Input.GetKey(KeyCode.Escape))
                 {
-                    coralChoiceInterface.toggleCoralChoicePanel(false);
-                    PromptInterface.togglePrompt(true);
+                    UImanager.coralChoiceInterface.toggleCoralChoicePanel(false);
+                    UImanager.promptInterface.togglePrompt(true);
                 }
             }
-            else if (isGrowing && PromptInterface.isPromptActive())
-                PromptInterface.togglePrompt(false);
+            else if (isGrowing && UImanager.promptInterface.isPromptActive())
+                UImanager.promptInterface.togglePrompt(false);
 
         }
         public void OnTriggerExit(Collider collider)
@@ -94,8 +94,8 @@ public class CoralHandler : MonoBehaviour
             if (collider.gameObject.tag == "Player" &&
                 GameDirector.Instance.getGameState() == GameDirector.GameState.FreeRoaming)
             {
-                PromptInterface.togglePrompt(false);
-                coralChoiceInterface.toggleCoralChoicePanel(false);
+                UImanager.promptInterface.togglePrompt(false);
+                UImanager.coralChoiceInterface.toggleCoralChoicePanel(false);
             }
         }
 }

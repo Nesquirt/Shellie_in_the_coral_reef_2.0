@@ -182,10 +182,12 @@ public class TurtleController : MonoBehaviour
 
                     case "SpecialTarget":
                         other.GetComponentInParent<TargetHandler>().summonSpecialTarget();
+                        UImanager.promptInterface.togglePrompt(false);
                         break;
                 }
                 if(other.name != "SpecialTarget")
                     UImanager.dialogueInterface.toggleDialoguePanel(true);
+
             } else if(other.tag == "Chiave" || other.tag == "Gabbia")
             {
                 posizioni_cageKey.GetComponent<OpenCagesHandler>().TriggerMethod(other);

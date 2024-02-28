@@ -168,7 +168,7 @@ public class TargetHandler : MonoBehaviour
         Scorza.GetComponentInChildren<MeshRenderer>().enabled = true;
         while (Scorza.transform.position.y>40)
         {
-            Scorza.transform.position = Vector3.MoveTowards(Scorza.transform.position, new Vector3(57, 40, 530), Time.deltaTime * 3f);
+            Scorza.transform.position = Vector3.MoveTowards(Scorza.transform.position, new Vector3(80, 40, 500), Time.deltaTime * 3f);
             yield return new WaitForFixedUpdate();
         }
         //audioManager.ChangeMusic(audioManager.Crush_Spawn, false, 0.5f);

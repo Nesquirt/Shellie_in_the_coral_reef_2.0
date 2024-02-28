@@ -106,7 +106,11 @@ public class AudioManager : MonoBehaviour
     public void RaceStart() { Play("raceStart_SFX", false, 2f); }
     public void KeyOrCage(Collider collider) { Play(collider.CompareTag("Chiave") ? "keyTaken_SFX" : "cageOpen_SFX", false, collider.CompareTag("Chiave") ? 0.6f : 0.7f); }
 
-    //Tramite il clipName ottengo l'AudioClip dal Dictionary, se 
+    /*
+     * Dopo aver ottenuto (se esiste) l'AudioClip dal Dictionary tramite la key "clipName", la associo
+     * all'AudioSource ottenuta dalla funzione GetAvailableSource(). Dopo aver settato i parametri di 
+     * loop, output e volume, riproduco l'AudioClip.
+    */
     public void Play(String clipName, bool loop, float volume)
     {
         if (!audioClips.ContainsKey(clipName))
@@ -133,6 +137,16 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
+    //Associa il corretto output all'AudioSource a seconda del nome dell'AudioClip 
+    private void SetMixerGroup(AudioSource source, String clipName)
+    {
+        if (clipName.EndsWith("_SFX")) source.outputAudioMixerGroup = SFX;
+        else source.outputAudioMixerGroup = Music;
+    }
+    /*
+     * La funzione restituisce la prima AudioSource inattiva collegata ad un GameObject (child di AudioManager) gia' instanziato. 
+     * Se tutte le AudioSource sono in riproduzione, crea un nuovo GameObject e restituisce la nuova AudioSource a lui collegata. 
+    */
     private AudioSource GetAvailableSource(String clipName)
     {
         foreach (AudioSource source in audioSources)
@@ -150,11 +164,7 @@ public class AudioManager : MonoBehaviour
         audioSources.Add(newSource);
         return newSource;
     }
-    private void SetMixerGroup(AudioSource source, String clipName)
-    {
-        if (clipName.EndsWith("_SFX")) source.outputAudioMixerGroup = SFX;
-        else source.outputAudioMixerGroup = Music;
-    }
+    //La funzione restituisce null o l'AudioSource a cui è associata la clip passata come parametro
     private AudioSource GetAudioSourceFromClip(AudioClip clip)
     {
         foreach (AudioSource audioSource in audioSources)
@@ -166,6 +176,7 @@ public class AudioManager : MonoBehaviour
         }
         return null;
     }
+    
     public IEnumerator FadeTwoClips(String clip1Name, float targetVolume1, String clip2Name, float targetVolume2, float duration)
     {
         StartCoroutine(Fade(clip1Name, targetVolume1, duration));

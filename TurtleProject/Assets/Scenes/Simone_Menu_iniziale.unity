@@ -1215,10 +1215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 319beef375392844e9cea63e552c2afa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startGameButton: {fileID: 941068161}
-  optionsButton: {fileID: 833384086}
-  quitButton: {fileID: 729694806}
-  aboutButton: {fileID: 1025770335}
   LoadingPanel: {fileID: 0}
 --- !u!4 &1001055052
 Transform:
@@ -1319,9 +1315,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8447793620668918140, guid: 5416bb493336d044c9741429efcc40b9, type: 3}
-        m_TargetAssemblyTypeName: GameDirector, Assembly-CSharp
-        m_MethodName: OpenURL
+      - m_Target: {fileID: 1001055051}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: AboutButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

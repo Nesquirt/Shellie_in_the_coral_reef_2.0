@@ -49,7 +49,8 @@ public class GameDirector : MonoBehaviour
         FreeRoaming,        //Non attualmente in un minigioco
         ObstacleCourse,     //Percorso ad ostacoli
         TrashCollecting,    //Raccolta della spazzatura nella rete
-        MazeExploring       //Esplorazione del labirinto per liberare i granchi
+        MazeExploring,      //Esplorazione del labirinto per liberare i granchi
+        SummoningRitual     //Rituale d'evocazione
     }
     // -------------------------------------------------------------------- //
     //Dichiarazione iniziale delle variabili

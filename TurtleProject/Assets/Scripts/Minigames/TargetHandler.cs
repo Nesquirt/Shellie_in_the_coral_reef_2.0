@@ -150,13 +150,14 @@ public class TargetHandler : MonoBehaviour
     //Shhhh...
     public void summonSpecialTarget()
     {
+        GameDirector.Instance.setGameState(GameDirector.GameState.SummoningRitual);
         UImanager.promptInterface.setPromptText("Premi E per cavalcare l'onda");
         UImanager.promptInterface.togglePrompt(true);
         if(Input.GetKey(KeyCode.E) && !specialTargetActive)
         {
             specialTargetActive = true;
             UImanager.promptInterface.togglePrompt(false);
-            //audioManager.ChangeMusic(audioManager.Crush_Spawn, true, 0.5f);
+            GameDirector.Instance.audioManager.MiniGame();
             StartCoroutine(summoningRitual());
 
         }
@@ -171,7 +172,8 @@ public class TargetHandler : MonoBehaviour
             Scorza.transform.position = Vector3.MoveTowards(Scorza.transform.position, new Vector3(80, 40, 500), Time.deltaTime * 3f);
             yield return new WaitForFixedUpdate();
         }
-        //audioManager.ChangeMusic(audioManager.Crush_Spawn, false, 0.5f);
+        GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
+        GameDirector.Instance.audioManager.MiniGame();
     }
 
 }

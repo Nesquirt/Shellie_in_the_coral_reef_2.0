@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioMixerGroup Music, SFX;  //Riferimento al Group Music e Group SFX del Mixer  
     private List<AudioSource> audioSources; //Lista di AudioSource 
     private Dictionary<string, AudioClip> audioClips;//Key,Value = Nome della clip, ClipAudio
-    private readonly float[] MusicVolume = {0.7f, 0.5f, 0.6f, 1};  //Volumi delle AudioClip di tipo "Music"
+    private readonly float[] MusicVolume = {0.7f, 0.5f, 0.6f, 1, 0.4f};  //Volumi delle AudioClip di tipo "Music"
     private bool isInMiniGame; //Controllo se sono all'interno di un MiniGame
     private string miniGame_musicName; //Usata per settare l'AudioClip a seconda del MiniGame
 
@@ -67,8 +67,8 @@ public class AudioManager : MonoBehaviour
         isInMiniGame = !isInMiniGame;
 
         float volumeMiniGame = 0f;
-        float volumeFreeRoaming = isInMiniGame ? 0 : MusicVolume[0]; 
-        
+        float volumeFreeRoaming = isInMiniGame ? 0 : MusicVolume[0];
+
         if (isInMiniGame == true)
         {
             switch (GameDirector.Instance.getGameState())
@@ -92,9 +92,15 @@ public class AudioManager : MonoBehaviour
                         volumeMiniGame = MusicVolume[3];
                         break;
                     }
+                case GameDirector.GameState.SummoningRitual:
+                    {
+                        miniGame_musicName = "summoningRitual_Music";
+                        volumeMiniGame = MusicVolume[4];
+                        break;
+                    }
             }
         }
-        else Play("endMiniGame_SFX", false, 1f);
+        else if (miniGame_musicName != "summoningRitual_Music") Play("endMiniGame_SFX", false, 1f);
 
         StartCoroutine(FadeTwoClips(miniGame_musicName, volumeMiniGame, "freeRoaming_Music", volumeFreeRoaming, 7));
     }
@@ -105,7 +111,6 @@ public class AudioManager : MonoBehaviour
     public void CrossRing(int targetNumber) { Play(targetNumber == 0 ? "raceStart_SFX" : "ringCross_SFX", false, targetNumber == 0 ? 1 : 0.6f); }
     public void RaceStart() { Play("raceStart_SFX", false, 2f); }
     public void KeyOrCage(Collider collider) { Play(collider.CompareTag("Chiave") ? "keyTaken_SFX" : "cageOpen_SFX", false, collider.CompareTag("Chiave") ? 0.6f : 0.7f); }
-
     /*
      * Dopo aver ottenuto (se esiste) l'AudioClip dal Dictionary tramite la key "clipName", la associo
      * all'AudioSource ottenuta dalla funzione GetAvailableSource(). Dopo aver settato i parametri di 

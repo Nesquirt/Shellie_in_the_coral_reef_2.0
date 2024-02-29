@@ -7,8 +7,10 @@ using UnityEngine.UI;
 
 public class GameOverInterface : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI titleText, centralText, bottomText;
+    [SerializeField] private TextMeshProUGUI titleText, centralText, bottomText, LoadingTextImage;
     [SerializeField] private GameObject websiteButton, returnToMenuButton;
+    [SerializeField] private Image LoadingPanelImage;
+
 
     private void Awake()
     {
@@ -83,7 +85,32 @@ public class GameOverInterface : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         returnToMenuButton.gameObject.SetActive(true);
+    }
 
+    public void fadeOutLoadingScreen()
+    {
+        StartCoroutine(FadeOutLoadingScreen());
+    }
 
+    //Coroutine di fade out del loading screen
+    IEnumerator FadeOutLoadingScreen()
+    {
+        //Image LoadingPanelImage = GameObject.Find("Canvas/LoadingPanel").GetComponent<Image>();
+        //TextMeshProUGUI LoadingTextImage = GameObject.Find("Canvas/LoadingPanel/LoadingText").GetComponent<TextMeshProUGUI>();
+        float fadeAmount;
+        Color nextPanelColor, nextTextColor;
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("Coroutine test");
+        while (LoadingPanelImage.color.a > 0)
+        {
+            fadeAmount = LoadingPanelImage.color.a - (Time.deltaTime * 0.5f);
+            nextPanelColor = new Color(LoadingPanelImage.color.r, LoadingPanelImage.color.g, LoadingPanelImage.color.b, fadeAmount);
+            nextTextColor = new Color(LoadingTextImage.color.r, LoadingTextImage.color.g, LoadingTextImage.color.b, fadeAmount);
+            LoadingPanelImage.color = nextPanelColor;
+            LoadingTextImage.color = nextTextColor;
+            yield return new WaitForSeconds(0.01f);
+        }
+        LoadingPanelImage.gameObject.SetActive(false);
+        toggleGameOverPanel(false);
     }
 }

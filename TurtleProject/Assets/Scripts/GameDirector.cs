@@ -60,10 +60,7 @@ public class GameDirector : MonoBehaviour
     private int reefHealth, pollution, biodiversity, oxygenLevel;
     private int pollutionChange, biodiversityChange, oxygenLevelChange, reefHealthChange;
 
-    private GameObject[] corals;
 
-    private Canvas canvas; //TODO: rimuovi
-    private GameOverInterface gameOverInterface;
     public AudioManager audioManager;
     private UIManager UImanager;
     
@@ -96,18 +93,14 @@ public class GameDirector : MonoBehaviour
     public void LoadGame()
     {
         currentState = GameState.FreeRoaming;
-           
-        //TODO: temporaneo
-        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+
         UImanager = GameObject.Find("Canvas").GetComponent<UIManager>();
-        UImanager.gameOverInterface.toggleGameOverPanel(false);
         // -------------------------------------------------------------------- //
         //Impostazione dei valori iniziali di gioco
-        corals = GameObject.FindGameObjectsWithTag("CoralSpot");
         setStartValues();
         // -------------------------------------------------------------------- //
         //Coroutine di fade out del loading screen
-        StartCoroutine(FadeOutLoadingScreen());
+        UImanager.gameOverInterface.fadeOutLoadingScreen();
         //Metodo che fa partire il ciclo di cambiamento dei parametri
         InvokeRepeating("tick", 0, 60);
 
@@ -118,13 +111,6 @@ public class GameDirector : MonoBehaviour
     public void tick()  //Funzione che viene chiamata una volta ogni minuto, e aggiorna i valori delle statistiche di gioco
     {
         updateValues();
-        // -------------------------------------------------------------------- //
-        //Controlla tutti gli oggetti con tag "Corallo", e li mette nell'array
-
-        if (corals.Length != 0)
-            Array.Clear(corals, 0, corals.Length);
-
-        corals = GameObject.FindGameObjectsWithTag("CoralSpot");
     }
     // -------------------------------------------------------------------- //
     //Metodi per interagire con il GameState; usati dai minigiochi
@@ -135,19 +121,13 @@ public class GameDirector : MonoBehaviour
         if (newState == GameState.FreeRoaming || newState == GameState.SummoningRitual)
         {
             //Riattiva l'outline dei coralSpots
-            foreach (GameObject coralSpot in corals)
-            {
-                coralSpot.GetComponent<CoralHandler>().toggleOutline(true);
-            }
+            UImanager.toggleOutline(true);
             UImanager.minigameInterface.endMinigame();
         }
         else
         {
             //Disattiva l'outline dei coralSpots mentre si è in un minigioco
-            foreach (GameObject coralSpot in corals)
-            {
-                coralSpot.GetComponent<CoralHandler>().toggleOutline(false);
-            }
+            UImanager.toggleOutline(false);
             UImanager.dialogueInterface.toggleDialoguePanel(false);
             UImanager.minigameInterface.startMinigame();
         }
@@ -221,25 +201,7 @@ public class GameDirector : MonoBehaviour
         UImanager.barsInterface.updateBars();
         UImanager.barsInterface.updateArrows();
     }
-    //Coroutine di fade out del loading screen
-    IEnumerator FadeOutLoadingScreen()
-    {
-        Image LoadingPanelImage = canvas.transform.Find("LoadingPanel").GetComponent<Image>();
-        TextMeshProUGUI LoadingTextImage = canvas.transform.Find("LoadingPanel/LoadingText").GetComponent<TextMeshProUGUI>();
-        float fadeAmount;
-        Color nextPanelColor, nextTextColor;
-        yield return new WaitForSeconds(1);
-        while (LoadingPanelImage.color.a > 0)
-        {
-            fadeAmount = LoadingPanelImage.color.a - (Time.deltaTime * 0.5f);
-            nextPanelColor = new Color(LoadingPanelImage.color.r, LoadingPanelImage.color.g, LoadingPanelImage.color.b, fadeAmount);
-            nextTextColor = new Color(LoadingTextImage.color.r, LoadingTextImage.color.g, LoadingTextImage.color.b, fadeAmount);
-            LoadingPanelImage.color = nextPanelColor;
-            LoadingTextImage.color = nextTextColor;
-            yield return new WaitForSeconds(0.01f);
-        }
-        LoadingPanelImage.gameObject.SetActive(false);
-    }
+
     // -------------------------------------------------------------------- //
     //Metodi get e set per i parametri
     public void addPearls(int value)

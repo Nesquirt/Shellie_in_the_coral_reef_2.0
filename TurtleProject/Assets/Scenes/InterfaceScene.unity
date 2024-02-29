@@ -8947,8 +8947,10 @@ MonoBehaviour:
   titleText: {fileID: 1603698906}
   centralText: {fileID: 1848779643}
   bottomText: {fileID: 1957666291}
+  LoadingTextImage: {fileID: 321710019}
   websiteButton: {fileID: 1761363525}
   returnToMenuButton: {fileID: 1832843066}
+  LoadingPanelImage: {fileID: 1141272112}
 --- !u!1001 &501059718
 PrefabInstance:
   m_ObjectHideFlags: 0

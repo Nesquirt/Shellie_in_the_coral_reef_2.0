@@ -182,7 +182,6 @@ public class TurtleController : MonoBehaviour
 
                     case "SpecialTarget":
                         other.GetComponentInParent<TargetHandler>().summonSpecialTarget();
-                        UImanager.promptInterface.togglePrompt(false);
                         break;
                 }
                 if(other.name != "SpecialTarget")

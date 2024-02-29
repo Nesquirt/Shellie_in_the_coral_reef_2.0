@@ -132,7 +132,7 @@ public class GameDirector : MonoBehaviour
     {
         Debug.Log("Changed GameState to: " + newState);
         currentState = newState;
-        if (newState == GameState.FreeRoaming)
+        if (newState == GameState.FreeRoaming || newState == GameState.SummoningRitual)
         {
             //Riattiva l'outline dei coralSpots
             foreach (GameObject coralSpot in corals)

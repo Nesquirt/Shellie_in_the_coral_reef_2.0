@@ -127,15 +127,12 @@ public class SpawnPrefabsRandomly : MonoBehaviour
                     GameDirector.Instance.addPearls(earnedPearls);
                     GameDirector.Instance.addParameters((-rifiutiraccolti * 5), 0, 0);
                     GameDirector.Instance.setGameState(GameDirector.GameState.FreeRoaming);
-
+                    GameDirector.Instance.audioManager.ShipHornOrGridClimb(currentTime);
                     //testocronometro.gameObject.SetActive(false);
                     //testocontatore.gameObject.SetActive(false);
                     //testo5.gameObject.SetActive(false);
                     //img.gameObject.SetActive(false);
                     b = 1;
-
-                    GameDirector.Instance.audioManager.ShipHornOrGridClimb(currentTime);
-
                 }
                 rb.AddForce(Vector3.up * upwardForce, ForceMode.Impulse);
 

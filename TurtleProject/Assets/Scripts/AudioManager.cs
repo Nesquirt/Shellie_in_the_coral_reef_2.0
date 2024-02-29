@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioMixerGroup Music, SFX;  //Riferimento al Group Music e Group SFX del Mixer  
     private List<AudioSource> audioSources; //Lista di AudioSource 
     private Dictionary<string, AudioClip> audioClips;//Key,Value = Nome della clip, ClipAudio
-    private readonly float[] MusicVolume = {0.7f, 0.5f, 0.6f, 1, 0.4f};  //Volumi delle AudioClip di tipo "Music"
+    private readonly float[] MusicVolume = {0.2f, 0.1f, 0.2f, 0.3f, 0.4f};  //Volumi delle AudioClip di tipo "Music"
     private bool isInMiniGame; //Controllo se sono all'interno di un MiniGame
     private string miniGame_musicName; //Usata per settare l'AudioClip a seconda del MiniGame
 
@@ -47,14 +47,14 @@ public class AudioManager : MonoBehaviour
     //Funzioni Music
     public void MenuMusic() 
     { 
-        if(audioSources.Count == 0) Play("menu_Music", true, 0.8f); 
+        if(audioSources.Count == 0) Play("menu_Music", true, 0.9f); 
         else Restart();
     }
     public void GameMusic()
     {
         StartCoroutine(FadeTwoClips("menu_Music", 0, "freeRoaming_Music", MusicVolume[0], 5));
-        Play("water_SFX", true, 0.5f);
-        Play("bubble_SFX", true, 0.5f);
+        Play("water_SFX", true, 0.3f);
+        Play("bubble_SFX", true, 0.3f);
     }
     /*
      * La funzione viene chiamata all'inizio e alla fine di ogni MiniGame. Se isInMiniGame = true
@@ -81,7 +81,7 @@ public class AudioManager : MonoBehaviour
                     }
                 case GameDirector.GameState.TrashCollecting:
                     {
-                        Play("gridDrop_SFX", false, 1f);
+                        Play("gridDrop_SFX", false, 0.4f);
                         miniGame_musicName = "trashCollecting_Music";
                         volumeMiniGame = MusicVolume[2];
                         break;
@@ -100,17 +100,17 @@ public class AudioManager : MonoBehaviour
                     }
             }
         }
-        else if (miniGame_musicName != "summoningRitual_Music") Play("endMiniGame_SFX", false, 1f);
+        else if (miniGame_musicName != "summoningRitual_Music") Play("endMiniGame_SFX", false, 0.15f);
 
         StartCoroutine(FadeTwoClips(miniGame_musicName, volumeMiniGame, "freeRoaming_Music", volumeFreeRoaming, 7));
     }
 
     //Funzioni per la riproduzione audio (SFX)
-    public void ButtonPressed() { Play("selection_SFX", false, 1f); }
-    public void ShipHornOrGridClimb(float currentTime) { Play(currentTime > 0 ? "shipHorn_SFX" : "gridClimb_SFX", false, 1); }
-    public void CrossRing(int targetNumber) { Play(targetNumber == 0 ? "raceStart_SFX" : "ringCross_SFX", false, targetNumber == 0 ? 1 : 0.6f); }
+    public void ButtonPressed() { Play("selection_SFX", false, 0.3f); }
+    public void ShipHornOrGridClimb(float currentTime) { Play(currentTime >= 0 ? "shipHorn_SFX" : "gridClimb_SFX", false, 0.25f); }
+    public void CrossRing(int targetNumber) { Play(targetNumber == 0 ? "raceStart_SFX" : "ringCross_SFX", false, targetNumber == 0 ? 0.2f : 0.1f); }
     public void RaceStart() { Play("raceStart_SFX", false, 2f); }
-    public void KeyOrCage(Collider collider) { Play(collider.CompareTag("Chiave") ? "keyTaken_SFX" : "cageOpen_SFX", false, collider.CompareTag("Chiave") ? 0.6f : 0.7f); }
+    public void KeyOrCage(Collider collider) { Play(collider.CompareTag("Chiave") ? "keyTaken_SFX" : "cageOpen_SFX", false, collider.CompareTag("Chiave") ? 0.15f : 0.25f); }
     /*
      * Dopo aver ottenuto (se esiste) l'AudioClip dal Dictionary tramite la key "clipName", la associo
      * all'AudioSource ottenuta dalla funzione GetAvailableSource(). Dopo aver settato i parametri di 

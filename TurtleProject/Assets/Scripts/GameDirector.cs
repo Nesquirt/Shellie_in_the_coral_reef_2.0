@@ -60,12 +60,8 @@ public class GameDirector : MonoBehaviour
     private int reefHealth, pollution, biodiversity, oxygenLevel;
     private int pollutionChange, biodiversityChange, oxygenLevelChange, reefHealthChange;
 
-
     public AudioManager audioManager;
     private UIManager UImanager;
-    
-
-    //private AudioManager audioManager;
 
     public GameObject currentCoralSpot;  //Questa variabile comunica con CoralHandler per ricordare su quale roccia si sta piantando i coralli
     // -------------------------------------------------------------------- //
